@@ -1,0 +1,107 @@
+name: 🐾 Thọ Remind
+
+on:
+  schedule:
+    # Chạy mỗi tiếng (UTC) — VN = UTC+7
+    # 23h UTC = 6h VN, 1h UTC = 8h VN, ... etc
+    - cron: '0 * * * *'
+  workflow_dispatch:  # cho phép chạy tay để test
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🐾 Check & Remind Thọ
+        env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          CHAT_AN:  ${{ secrets.CHAT_AN }}
+          CHAT_HIEN: ${{ secrets.CHAT_HIEN }}
+          SHEET_ID: ${{ secrets.SHEET_ID }}
+        run: |
+          python3 << 'PYEOF'
+          import requests, json
+          from datetime import datetime, timezone, timedelta
+
+          TZ_VN = timezone(timedelta(hours=7))
+          now   = datetime.now(TZ_VN)
+          h     = now.hour
+          date  = now.strftime("%Y-%m-%d")
+
+          import os
+          TG_TOKEN  = os.environ["TG_TOKEN"]
+          CHAT_AN   = os.environ.get("CHAT_AN", "")
+          CHAT_HIEN = os.environ.get("CHAT_HIEN", "")
+          SHEET_ID  = os.environ.get("SHEET_ID", "")
+
+          def send(chat_id, msg):
+              if not chat_id: return
+              requests.post(
+                  f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage",
+                  json={"chat_id": chat_id, "text": msg},
+                  timeout=10
+              )
+              print(f"Sent to {chat_id}: {msg[:50]}")
+
+          def send_both(msg):
+              send(CHAT_AN, msg)
+              send(CHAT_HIEN, msg)
+
+          # ── Đọc trạng thái checkin từ Google Sheet ──
+          done = set()
+          if SHEET_ID:
+              try:
+                  url = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=checkins"
+                  r = requests.get(url, timeout=10)
+                  for line in r.text.strip().split("\n")[1:]:
+                      parts = line.strip().strip('"').split('","')
+                      if len(parts) >= 2 and parts[0] == date:
+                          done.add(parts[1])  # slot column
+              except Exception as e:
+                  print(f"Sheet read error: {e}")
+
+          print(f"VN time: {now.strftime('%H:%M')} | Done slots: {done}")
+
+          # ── Remind logic ──
+          windows = [
+              ("morning",   6,  12, [
+                  "🌅 Thọ đói sáng rồi! Checkin ảnh để cho Thọ ăn nào 🐾",
+                  "🌅 Ơ kìa! Thọ nhịn sáng tới giờ rồi đó 😢",
+                  "🌅 Bụng Thọ đang kêu réo đây này... 🥺 Sáng chưa ăn gì hết!",
+                  "🌅 Thọ ngồi chờ từ sáng đến giờ... 🐾💔",
+                  "🌅 Gần trưa rồi mà Thọ vẫn nhịn sáng nè 😭",
+              ]),
+              ("afternoon", 12, 18, [
+                  "☀️ Trưa rồi! Thọ chờ ăn chiều nãy giờ 🐾",
+                  "☀️ Nắng to lắm mà Thọ vẫn chưa có ăn chiều 😢",
+                  "☀️ Thọ đang nằm dài vì đói chiều... 🥺 Checkin đi!",
+                  "☀️ Thọ thấy mình đang ăn mà Thọ chưa được ăn... 🐾💔",
+                  "☀️ Gần tối rồi mà bữa chiều chưa checkin 😭",
+              ]),
+              ("evening",   18, 24, [
+                  "🌙 Tối rồi! Cho Thọ ăn tối với nào 🐾",
+                  "🌙 Thọ buồn ngủ mà chưa được ăn tối... 😢",
+                  "🌙 Đêm xuống rồi Thọ vẫn đói 🥺 Checkin ảnh tối đi!",
+                  "🌙 Thọ sắp ngủ mà bụng trống không... 🐾💔",
+              ]),
+              ("place",     19, 24, [
+                  "📍 Hôm nay đi đâu ăn gì chưa note cho Thọ biết với? 🗺️",
+                  "📍 Thọ muốn biết hôm nay đi đâu! Note địa điểm điiiii 🐾",
+                  "📍 Địa điểm hôm nay đâu rồi? Thọ đói bữa địa điểm lắm! 🥺",
+              ]),
+          ]
+
+          reminded = False
+          for slot, start_h, end_h, msgs in windows:
+              if slot in done:
+                  print(f"✅ {slot} already done, skip")
+                  continue
+              if h < start_h or h >= end_h:
+                  continue
+              offset = min(h - start_h, len(msgs) - 1)
+              msg = msgs[max(0, offset)]
+              send_both(msg)
+              reminded = True
+
+          if not reminded:
+              print("😴 Ngoài giờ remind hoặc đã checkin hết — không gửi gì")
+          PYEOF
