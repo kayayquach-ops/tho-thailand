@@ -30,7 +30,7 @@ jobs:
           import os
           TG_TOKEN  = os.environ["TG_TOKEN"]
           CHAT_AN   = os.environ.get("CHAT_AN", "")
-          CHAT_HIEN = os.environ.get("CHAT_HIEN", "")
+          CHAT_HIEN = os.environ.get("CHAT_HIEN", "7237573793")
           SHEET_ID  = os.environ.get("SHEET_ID", "")
 
           def send(chat_id, msg):
