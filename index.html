@@ -2,269 +2,208 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>🐾 Thọ & Thailand</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-:root {
-  --p1:#fff0f7; --p2:#ffd6ee; --p3:#ffadd8; --p4:#ff7bbf; --p5:#ff4da6; --p6:#d4006e;
-  --gold:#ffdd00; --white:#fff;
-  --font: 'Quicksand', 'Baloo 2', system-ui, sans-serif;
-  --font-title: 'Baloo 2', 'Quicksand', system-ui, sans-serif;
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --p1:#fff0f7;--p2:#ffd6ee;--p3:#ffadd8;--p4:#ff7bbf;--p5:#ff4da6;--p6:#d4006e;
+  --gold:#ffdd00;
+  --font:'Quicksand','Baloo 2',system-ui,sans-serif;
+  --font-title:'Baloo 2','Quicksand',system-ui,sans-serif;
 }
-body { font-family: var(--font); background:var(--p1); min-height:100vh; overflow-x:hidden; }
+body{font-family:var(--font);background:var(--p1);min-height:100vh;overflow-x:hidden}
 
-/* ── SPARKLE BG ── */
-.sparkle-bg { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
-@keyframes spFloat { 0%{transform:translateY(100vh) scale(0);opacity:0} 10%{opacity:1} 90%{opacity:.8} 100%{transform:translateY(-20vh) scale(1.5) rotate(360deg);opacity:0} }
-@keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
-@keyframes heartbeat { 0%,100%{transform:scale(1)} 15%{transform:scale(1.15)} 30%{transform:scale(1)} 45%{transform:scale(1.08)} }
-@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-@keyframes shimmer { 0%{background-position:-200% center} 100%{background-position:200% center} }
-@keyframes wag { 0%,100%{transform:rotate(-8deg)} 50%{transform:rotate(8deg)} }
-@keyframes paw { 0%,100%{transform:translateY(0) rotate(-10deg)} 50%{transform:translateY(-6px) rotate(10deg)} }
-@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
-@keyframes bounce { 0%,100%{transform:translateY(0)} 40%{transform:translateY(-14px)} 60%{transform:translateY(-6px)} }
-@keyframes ripple { 0%{transform:scale(1);opacity:.6} 100%{transform:scale(2.8);opacity:0} }
-@keyframes scratch { 0%{transform:rotate(0) scale(1)} 25%{transform:rotate(-15deg) scale(1.1)} 50%{transform:rotate(10deg) scale(.95)} 75%{transform:rotate(-5deg) scale(1.05)} 100%{transform:rotate(0) scale(1)} }
-@keyframes spin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
-@keyframes popIn { 0%{transform:scale(0) rotate(-10deg);opacity:0} 70%{transform:scale(1.15) rotate(3deg)} 100%{transform:scale(1) rotate(0);opacity:1} }
-@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px) rotate(-3deg)} 75%{transform:translateX(6px) rotate(3deg)} }
+@keyframes spFloat{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:.8}100%{transform:translateY(-20vh) scale(1.5) rotate(360deg);opacity:0}}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+@keyframes heartbeat{0%,100%{transform:scale(1)}15%{transform:scale(1.15)}30%{transform:scale(1)}45%{transform:scale(1.08)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes wag{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+@keyframes paw{0%,100%{transform:translateY(0) rotate(-10deg)}50%{transform:translateY(-6px) rotate(10deg)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}40%{transform:translateY(-14px)}60%{transform:translateY(-6px)}}
+@keyframes scratch{0%{transform:rotate(0) scale(1)}25%{transform:rotate(-15deg) scale(1.1)}50%{transform:rotate(10deg) scale(.95)}75%{transform:rotate(-5deg) scale(1.05)}100%{transform:rotate(0) scale(1)}}
+@keyframes floatHeart{0%{transform:translateY(0) scale(0);opacity:1}100%{transform:translateY(-80px) scale(1.2);opacity:0}}
+@keyframes popIn{0%{transform:scale(0) rotate(-10deg);opacity:0}70%{transform:scale(1.15) rotate(3deg)}100%{transform:scale(1) rotate(0);opacity:1}}
+@keyframes feedCelebrate{0%{transform:scale(1)}20%{transform:scale(1.2) rotate(-3deg)}40%{transform:scale(.95) rotate(3deg)}60%{transform:scale(1.1)}80%{transform:scale(.98)}100%{transform:scale(1)}}
+@keyframes ripple{0%{transform:scale(1);opacity:.6}100%{transform:scale(2.8);opacity:0}}
 
-/* ── LOGIN SCREEN ── */
-.login-screen {
-  position:fixed; inset:0; z-index:999;
-  background:linear-gradient(145deg,#ff4da6,#ffadd8,#ff85c2,#ff4da6);
-  background-size:400% 400%; animation:shimmer 4s linear infinite;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  padding:32px;
-}
-.login-logo { font-size:80px; animation:float 3s ease-in-out infinite; margin-bottom:8px; }
-.login-title { font-family:var(--font-title); font-size:32px; font-weight:800; color:#fff; text-shadow:0 2px 12px rgba(140,0,86,.4); margin-bottom:4px; }
-.login-sub { font-size:14px; color:rgba(255,255,255,.85); font-weight:600; margin-bottom:32px; }
-.login-card { background:#fff; border-radius:28px; padding:24px; width:100%; max-width:320px; box-shadow:0 12px 40px rgba(255,77,166,.35); }
-.login-card h3 { font-family:var(--font-title); font-size:18px; font-weight:800; color:var(--p6); margin-bottom:16px; text-align:center; }
-.login-input { width:100%; padding:13px 16px; border-radius:14px; border:2px solid var(--p2); font-family:var(--font); font-size:14px; color:#333; background:var(--p1); margin-bottom:10px; outline:none; transition:border-color .2s; }
-.login-input:focus { border-color:var(--p4); background:#fff; }
-.login-btn { width:100%; padding:14px; border-radius:50px; border:none; background:linear-gradient(135deg,#ff4da6,#ff85c2); color:#fff; font-family:var(--font-title); font-size:16px; font-weight:800; cursor:pointer; box-shadow:0 6px 20px rgba(255,77,166,.4); transition:transform .1s; margin-top:4px; }
-.login-btn:active { transform:scale(.96); }
-.login-err { color:#e00; font-size:13px; text-align:center; margin-top:8px; font-weight:700; min-height:20px; }
+/* PICK SCREEN */
+.pick-screen{position:fixed;inset:0;z-index:999;background:linear-gradient(145deg,#ff4da6,#ffadd8,#ff85c2,#ff4da6);background-size:400% 400%;animation:shimmer 4s linear infinite;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px}
+.pick-logo{font-size:80px;animation:float 3s ease-in-out infinite;margin-bottom:8px}
+.pick-title{font-family:var(--font-title);font-size:32px;font-weight:800;color:#fff;text-shadow:0 2px 12px rgba(140,0,86,.4);margin-bottom:4px}
+.pick-sub{font-size:14px;color:rgba(255,255,255,.85);font-weight:600;margin-bottom:8px}
+.pick-hint{font-size:13px;color:rgba(255,255,255,.75);font-weight:600;margin-bottom:28px}
+.pick-btn{width:100%;max-width:300px;padding:18px 24px;border-radius:20px;border:none;background:rgba(255,255,255,.2);color:#fff;font-family:var(--font-title);font-size:17px;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.15);transition:transform .15s;display:flex;align-items:center;gap:14px;margin-bottom:14px;backdrop-filter:blur(8px);border:2px solid rgba(255,255,255,.4)}
+.pick-btn:active{transform:scale(.96)}
+.pick-btn-hien{background:rgba(168,85,247,.35);border-color:rgba(168,85,247,.5)}
 
-/* ── HEADER ── */
-.header {
-  position:relative; z-index:10;
-  background:linear-gradient(135deg,#ff4da6,#ff85c2,#ffb3d9,#ff4da6);
-  background-size:400% 400%; animation:shimmer 4s linear infinite;
-  padding:16px 16px 24px; text-align:center;
-  border-radius:0 0 32px 32px;
-  box-shadow:0 8px 30px rgba(255,77,166,.45);
-}
-.header-user { position:absolute; top:16px; right:16px; display:flex; align-items:center; gap:6px; }
-.user-badge { background:rgba(255,255,255,.25); color:#fff; font-size:12px; font-weight:700; padding:5px 12px; border-radius:50px; backdrop-filter:blur(4px); }
-.logout-btn { background:rgba(0,0,0,.2); color:#fff; border:none; width:28px; height:28px; border-radius:50%; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; }
-.header-title { font-family:var(--font-title); font-size:34px; font-weight:800; color:#fff; text-shadow:0 2px 12px rgba(140,0,86,.4); animation:heartbeat 2.5s ease-in-out infinite; }
-.header-sub { font-family:var(--font); font-size:15px; color:#ffe0f0; margin-top:2px; font-weight:600; }
+/* HEADER */
+.header{position:relative;z-index:10;background:linear-gradient(135deg,#ff4da6,#ff85c2,#ffb3d9,#ff4da6);background-size:400% 400%;animation:shimmer 4s linear infinite;padding:16px 16px 24px;text-align:center;border-radius:0 0 32px 32px;box-shadow:0 8px 30px rgba(255,77,166,.45)}
+.header-user{position:absolute;top:16px;right:16px;display:flex;align-items:center;gap:6px}
+.user-badge{background:rgba(255,255,255,.25);color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:50px;backdrop-filter:blur(4px)}
+.logout-btn{background:rgba(0,0,0,.2);color:#fff;border:none;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center}
+.header-title{font-family:var(--font-title);font-size:34px;font-weight:800;color:#fff;text-shadow:0 2px 12px rgba(140,0,86,.4);animation:heartbeat 2.5s ease-in-out infinite}
+.header-sub{font-size:15px;color:#ffe0f0;margin-top:2px;font-weight:600}
+.stars-row{display:flex;justify-content:center;gap:6px;margin:6px 0}
+.star{font-size:16px;animation:blink 1.5s ease-in-out infinite}
+.star:nth-child(2){animation-delay:.3s}.star:nth-child(3){animation-delay:.6s}
 
-/* ── COUNTDOWN ── */
-.countdown-wrap { position:relative; z-index:5; margin:-16px 16px 0; background:#fff; border-radius:24px; padding:16px; box-shadow:0 4px 24px rgba(255,77,166,.2); animation:fadeUp .6s ease both; }
-.countdown-label { text-align:center; font-size:12px; color:var(--p5); font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:10px; }
-.countdown-boxes { display:flex; gap:8px; justify-content:center; }
-.cd-box { flex:1; text-align:center; background:linear-gradient(145deg,#fff0f7,#ffd6ee); border-radius:16px; padding:10px 4px; border:2px solid var(--p3); position:relative; overflow:hidden; }
-.cd-num { font-family:var(--font-title); font-size:30px; font-weight:800; color:var(--p5); line-height:1; }
-.cd-unit { font-size:10px; color:var(--p6); font-weight:700; text-transform:uppercase; }
+/* COUNTDOWN */
+.countdown-wrap{position:relative;z-index:5;margin:-16px 16px 0;background:#fff;border-radius:24px;padding:16px;box-shadow:0 4px 24px rgba(255,77,166,.2);animation:fadeUp .6s ease both}
+.countdown-label{text-align:center;font-size:12px;color:var(--p5);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
+.countdown-boxes{display:flex;gap:8px;justify-content:center}
+.cd-box{flex:1;text-align:center;background:linear-gradient(145deg,#fff0f7,#ffd6ee);border-radius:16px;padding:10px 4px;border:2px solid var(--p3)}
+.cd-num{font-family:var(--font-title);font-size:30px;font-weight:800;color:var(--p5);line-height:1}
+.cd-unit{font-size:10px;color:var(--p6);font-weight:700;text-transform:uppercase}
 
-/* ── NAV ── */
-.nav { position:relative; z-index:5; display:flex; gap:8px; padding:16px; overflow-x:auto; scrollbar-width:none; }
-.nav::-webkit-scrollbar { display:none; }
-.nav-btn { flex:none; padding:10px 16px; border-radius:50px; border:2px solid var(--p3); background:#fff; color:var(--p5); font-family:var(--font-title); font-size:13px; font-weight:700; cursor:pointer; transition:all .2s; white-space:nowrap; display:flex; align-items:center; gap:5px; }
-.nav-btn.active { background:linear-gradient(135deg,#ff4da6,#ff85c2); color:#fff; border-color:transparent; box-shadow:0 4px 16px rgba(255,77,166,.4); transform:translateY(-2px); }
+/* NAV */
+.nav{position:relative;z-index:5;display:flex;gap:8px;padding:16px;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-btn{flex:none;padding:10px 16px;border-radius:50px;border:2px solid var(--p3);background:#fff;color:var(--p5);font-family:var(--font-title);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
+.nav-btn.active{background:linear-gradient(135deg,#ff4da6,#ff85c2);color:#fff;border-color:transparent;box-shadow:0 4px 16px rgba(255,77,166,.4);transform:translateY(-2px)}
 
-/* ── SECTIONS ── */
-.section { display:none; padding:0 16px 100px; position:relative; z-index:5; animation:fadeUp .4s ease both; }
-.section.active { display:block; }
-.sec-title { font-family:var(--font-title); font-size:20px; font-weight:800; background:linear-gradient(135deg,#ff4da6,#c8266f); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:14px; margin-top:16px; }
+/* SECTIONS */
+.section{display:none;padding:0 16px 100px;position:relative;z-index:5;animation:fadeUp .4s ease both}
+.section.active{display:block}
+.sec-title{font-family:var(--font-title);font-size:20px;font-weight:800;background:linear-gradient(135deg,#ff4da6,#c8266f);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px;margin-top:16px}
 
-/* ── THỌ CARD ── */
-.tho-card { background:#fff; border-radius:28px; padding:20px; box-shadow:0 6px 32px rgba(255,77,166,.18); text-align:center; margin-bottom:16px; }
-.tho-stage-label { font-size:12px; color:var(--p4); font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; }
-.tho-canvas { width:200px; height:200px; margin:0 auto 12px; animation:float 3s ease-in-out infinite; cursor:pointer; position:relative; }
-.tho-canvas:active { animation:scratch .4s ease; }
-.tho-name { font-family:var(--font-title); font-size:26px; font-weight:800; background:linear-gradient(135deg,#ff4da6,#c8266f); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-.tho-mood { font-size:14px; font-weight:700; color:var(--p6); margin-top:4px; }
-.hunger-bar-wrap { margin:8px 16px; background:var(--p2); border-radius:50px; height:12px; overflow:hidden; }
-.hunger-bar { height:100%; border-radius:50px; background:linear-gradient(90deg,#ff4da6,#ffadd8,#ff4da6); background-size:200% 100%; animation:shimmer 2s linear infinite; transition:width .8s ease; }
-.tho-hunger { display:flex; gap:8px; justify-content:center; margin:12px 0; }
-.meal-dot { width:38px; height:38px; border-radius:50%; border:3px solid var(--p3); display:flex; align-items:center; justify-content:center; font-size:18px; background:#fff; transition:all .3s; cursor:default; }
-.meal-dot.fed { background:linear-gradient(135deg,#ff4da6,#ffadd8); border-color:var(--p5); box-shadow:0 0 12px rgba(255,77,166,.4); animation:bounce .6s ease; }
+/* THỌ */
+.tho-card{background:#fff;border-radius:28px;padding:20px;box-shadow:0 6px 32px rgba(255,77,166,.18);text-align:center;margin-bottom:16px}
+.tho-stage-label{font-size:12px;color:var(--p4);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.tho-canvas{width:200px;height:200px;margin:0 auto 12px;animation:float 3s ease-in-out infinite;cursor:pointer;position:relative;display:block}
+.tho-name{font-family:var(--font-title);font-size:26px;font-weight:800;background:linear-gradient(135deg,#ff4da6,#c8266f);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.tho-mood{font-size:14px;font-weight:700;color:var(--p6);margin-top:4px}
+.hunger-bar-wrap{margin:8px 16px;background:var(--p2);border-radius:50px;height:12px;overflow:hidden}
+.hunger-bar{height:100%;border-radius:50px;background:linear-gradient(90deg,#ff4da6,#ffadd8,#ff4da6);background-size:200% 100%;animation:shimmer 2s linear infinite;transition:width .8s ease}
+.tho-hunger{display:flex;gap:8px;justify-content:center;margin:12px 0}
+.meal-dot{width:38px;height:38px;border-radius:50%;border:3px solid var(--p3);display:flex;align-items:center;justify-content:center;font-size:16px;background:#fff;transition:all .4s;position:relative}
+.meal-dot.fed{background:linear-gradient(135deg,#ff4da6,#ffadd8);border-color:var(--p5);box-shadow:0 0 16px rgba(255,77,166,.5);animation:bounce .6s ease}
+.meal-dot.half{opacity:.5;border-color:var(--p4)}
 
-/* ── LOCKET CAMERA ── */
-.locket-overlay { display:none; position:fixed; inset:0; z-index:500; background:#000; flex-direction:column; }
-.locket-overlay.open { display:flex; }
-.locket-viewfinder { flex:1; position:relative; overflow:hidden; background:#111; }
-.locket-viewfinder video { width:100%; height:100%; object-fit:cover; }
-.locket-viewfinder canvas { display:none; }
-.locket-topbar { position:absolute; top:0; left:0; right:0; padding:52px 20px 16px; display:flex; align-items:center; justify-content:space-between; background:linear-gradient(to bottom,rgba(0,0,0,.55),transparent); z-index:2; }
-.locket-slot-badge { background:rgba(255,77,166,.85); color:#fff; font-weight:800; font-size:13px; padding:6px 14px; border-radius:50px; }
-.locket-close { width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,.35); border:none; color:#fff; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
-.locket-shutter-wrap { position:absolute; bottom:32px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:32px; }
-.locket-shutter { width:74px; height:74px; border-radius:50%; background:#fff; border:4px solid rgba(255,255,255,.4); box-shadow:0 0 0 3px #fff,0 0 0 6px rgba(255,255,255,.3); cursor:pointer; transition:transform .1s; }
-.locket-shutter:active { transform:scale(.9); }
-.locket-flip { width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,.18); border:2px solid rgba(255,255,255,.35); display:flex; align-items:center; justify-content:center; font-size:20px; cursor:pointer; color:#fff; }
-.locket-gallery-pick { width:44px; height:44px; border-radius:12px; background:rgba(255,255,255,.18); border:2px solid rgba(255,255,255,.35); display:flex; align-items:center; justify-content:center; font-size:20px; cursor:pointer; color:#fff; overflow:hidden; }
-.locket-preview { display:none; position:absolute; inset:0; z-index:10; background:#000; flex-direction:column; }
-.locket-preview.show { display:flex; }
-.locket-preview img { flex:1; width:100%; object-fit:cover; }
-.locket-preview-bar { padding:20px 24px 40px; background:linear-gradient(to top,rgba(0,0,0,.8),transparent); position:absolute; bottom:0; left:0; right:0; display:flex; gap:12px; }
-.btn-confirm { flex:1; padding:14px; border-radius:50px; border:none; background:linear-gradient(135deg,#ff4da6,#ff85c2); color:#fff; font-family:var(--font-title); font-size:15px; font-weight:800; cursor:pointer; }
-.btn-retake { flex:1; padding:14px; border-radius:50px; border:2px solid rgba(255,255,255,.5); background:transparent; color:#fff; font-family:var(--font-title); font-size:15px; font-weight:800; cursor:pointer; }
+/* CELEBRATE OVERLAY */
+.celebrate-overlay{display:none;position:fixed;inset:0;z-index:800;pointer-events:none;align-items:center;justify-content:center;flex-direction:column}
+.celebrate-overlay.show{display:flex}
+.celebrate-msg{background:linear-gradient(135deg,#ff4da6,#ff85c2);color:#fff;font-family:var(--font-title);font-size:22px;font-weight:800;padding:20px 32px;border-radius:28px;text-align:center;box-shadow:0 12px 40px rgba(255,77,166,.5);animation:popIn .4s ease both}
 
-/* ── CHECKIN TRIGGER ── */
-.locket-trigger-area { position:relative; overflow:hidden; border-radius:28px; background:linear-gradient(145deg,#ff4da6,#ffadd8,#ff85c2); background-size:200% 200%; animation:shimmer 3s linear infinite; padding:28px 20px; text-align:center; cursor:pointer; margin-bottom:16px; box-shadow:0 8px 32px rgba(255,77,166,.4); }
-.locket-trigger-ring { width:80px; height:80px; border-radius:50%; background:rgba(255,255,255,.25); border:3px solid rgba(255,255,255,.6); margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-size:38px; box-shadow:0 0 0 8px rgba(255,255,255,.12),0 0 0 16px rgba(255,255,255,.06); animation:heartbeat 2s ease-in-out infinite; }
-.locket-trigger-label { font-family:var(--font-title); font-size:20px; font-weight:800; color:#fff; }
-.locket-trigger-sub { font-size:13px; color:rgba(255,255,255,.85); font-weight:600; margin-top:4px; }
-.locket-slot-pills { display:flex; gap:8px; justify-content:center; margin-top:14px; }
-.slot-pill { padding:6px 14px; border-radius:50px; font-size:12px; font-weight:700; background:rgba(255,255,255,.2); color:#fff; border:1.5px solid rgba(255,255,255,.4); cursor:pointer; transition:all .2s; }
-.slot-pill.done { background:rgba(255,255,255,.9); color:var(--p5); border-color:transparent; }
-.slot-pill.active { background:#fff; color:var(--p6); border-color:transparent; box-shadow:0 2px 10px rgba(0,0,0,.15); }
+/* CAMERA */
+.locket-overlay{display:none;position:fixed;inset:0;z-index:500;background:#000;flex-direction:column}
+.locket-overlay.open{display:flex}
+.locket-viewfinder{flex:1;position:relative;overflow:hidden;background:#111}
+.locket-viewfinder video{width:100%;height:100%;object-fit:cover}
+.locket-viewfinder canvas{display:none}
+.locket-topbar{position:absolute;top:0;left:0;right:0;padding:52px 20px 16px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(0,0,0,.55),transparent);z-index:2}
+.locket-slot-badge{background:rgba(255,77,166,.85);color:#fff;font-weight:800;font-size:13px;padding:6px 14px;border-radius:50px}
+.locket-close{width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.35);border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.locket-shutter-wrap{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:32px}
+.locket-shutter{width:74px;height:74px;border-radius:50%;background:#fff;border:4px solid rgba(255,255,255,.4);box-shadow:0 0 0 3px #fff,0 0 0 6px rgba(255,255,255,.3);cursor:pointer;transition:transform .1s}
+.locket-shutter:active{transform:scale(.9)}
+.locket-flip,.locket-gallery-pick{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;color:#fff}
+.locket-gallery-pick{border-radius:12px}
+.locket-preview{display:none;position:absolute;inset:0;z-index:10;background:#000;flex-direction:column}
+.locket-preview.show{display:flex}
+.locket-preview img{flex:1;width:100%;object-fit:cover}
+.locket-preview-bar{padding:20px 24px 40px;background:linear-gradient(to top,rgba(0,0,0,.8),transparent);position:absolute;bottom:0;left:0;right:0;display:flex;gap:12px}
+.btn-confirm{flex:1;padding:14px;border-radius:50px;border:none;background:linear-gradient(135deg,#ff4da6,#ff85c2);color:#fff;font-family:var(--font-title);font-size:15px;font-weight:800;cursor:pointer}
+.btn-retake{flex:1;padding:14px;border-radius:50px;border:2px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-family:var(--font-title);font-size:15px;font-weight:800;cursor:pointer}
 
-/* ── FEED ── */
-.feed-section { background:#fff; border-radius:28px; margin-bottom:16px; overflow:hidden; box-shadow:0 4px 20px rgba(255,77,166,.1); }
-.feed-date-header { padding:14px 16px 6px; font-family:var(--font-title); font-size:17px; font-weight:800; color:var(--p6); display:flex; align-items:center; gap:8px; }
-.feed-row { display:flex; gap:3px; padding:0 3px 3px; }
-.feed-photo { flex:1; aspect-ratio:1; border-radius:16px; overflow:hidden; background:var(--p2); position:relative; cursor:pointer; transition:transform .15s; }
-.feed-photo:active { transform:scale(.97); }
-.feed-photo img { width:100%; height:100%; object-fit:cover; }
-.feed-photo-empty { width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:28px; gap:4px; }
-.feed-photo-empty span { font-size:11px; color:var(--p4); font-weight:700; }
-.feed-user-tag { position:absolute; bottom:6px; right:6px; background:rgba(0,0,0,.45); color:#fff; font-size:10px; font-weight:700; padding:3px 8px; border-radius:50px; }
-.slot-tag { position:absolute; top:6px; left:6px; background:rgba(255,77,166,.85); color:#fff; font-size:10px; font-weight:800; padding:3px 8px; border-radius:50px; }
+/* CHECKIN TRIGGER */
+.locket-trigger-area{position:relative;overflow:hidden;border-radius:28px;background:linear-gradient(145deg,#ff4da6,#ffadd8,#ff85c2);background-size:200% 200%;animation:shimmer 3s linear infinite;padding:28px 20px;text-align:center;cursor:pointer;margin-bottom:16px;box-shadow:0 8px 32px rgba(255,77,166,.4)}
+.locket-trigger-ring{width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.25);border:3px solid rgba(255,255,255,.6);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:38px;box-shadow:0 0 0 8px rgba(255,255,255,.12),0 0 0 16px rgba(255,255,255,.06);animation:heartbeat 2s ease-in-out infinite}
+.locket-trigger-label{font-family:var(--font-title);font-size:20px;font-weight:800;color:#fff}
+.locket-trigger-sub{font-size:13px;color:rgba(255,255,255,.85);font-weight:600;margin-top:4px}
+.locket-slot-pills{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.slot-pill{padding:6px 14px;border-radius:50px;font-size:12px;font-weight:700;background:rgba(255,255,255,.2);color:#fff;border:1.5px solid rgba(255,255,255,.4);cursor:pointer;transition:all .2s}
+.slot-pill.done{background:rgba(255,255,255,.9);color:var(--p5);border-color:transparent}
+.slot-pill.half{background:rgba(255,255,255,.5);color:#fff;border-color:rgba(255,255,255,.6)}
+.slot-pill.active{background:#fff;color:var(--p6);border-color:transparent;box-shadow:0 2px 10px rgba(0,0,0,.15)}
 
-/* ── PLACES ── */
-.place-form { background:#fff; border-radius:24px; padding:20px; box-shadow:0 4px 20px rgba(255,77,166,.12); margin-bottom:16px; }
-.place-form h3 { font-family:var(--font-title); font-size:18px; font-weight:800; color:var(--p6); margin-bottom:14px; }
-.form-label { font-size:12px; font-weight:700; color:var(--p5); text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; display:block; }
-.form-input,.form-textarea,.form-select { width:100%; padding:12px 14px; border-radius:14px; border:2px solid var(--p2); font-family:var(--font); font-size:14px; color:#333; background:var(--p1); margin-bottom:12px; outline:none; transition:border-color .2s; }
-.form-input:focus,.form-textarea:focus,.form-select:focus { border-color:var(--p4); background:#fff; }
-.form-textarea { min-height:80px; resize:none; }
-.place-item { background:#fff; border-radius:18px; padding:14px 16px; margin-bottom:10px; box-shadow:0 3px 14px rgba(255,77,166,.1); display:flex; gap:12px; align-items:flex-start; }
-.place-emoji { width:44px; height:44px; border-radius:14px; background:linear-gradient(135deg,var(--p2),var(--p3)); display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
-.place-info-name { font-size:15px; font-weight:700; color:#2d1b36; }
-.place-info-note { font-size:12px; color:#888; margin-top:2px; }
-.place-info-meta { font-size:11px; color:var(--p4); font-weight:700; margin-top:4px; }
+/* FEED */
+.feed-section{background:#fff;border-radius:28px;margin-bottom:16px;overflow:hidden;box-shadow:0 4px 20px rgba(255,77,166,.1)}
+.feed-date-header{padding:14px 16px 6px;font-family:var(--font-title);font-size:17px;font-weight:800;color:var(--p6);display:flex;align-items:center;gap:8px}
+.feed-row{display:flex;gap:3px;padding:0 3px 3px}
+.feed-photo{flex:1;aspect-ratio:1;border-radius:16px;overflow:hidden;background:var(--p2);position:relative;cursor:pointer;transition:transform .15s}
+.feed-photo:active{transform:scale(.97)}
+.feed-photo img{width:100%;height:100%;object-fit:cover}
+.feed-photo-empty{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:28px;gap:4px}
+.feed-photo-empty span{font-size:11px;color:var(--p4);font-weight:700}
+.feed-user-tag{position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,.45);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:50px}
+.slot-tag{position:absolute;top:6px;left:6px;background:rgba(255,77,166,.85);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:50px}
 
-/* ── BUTTONS ── */
-.btn-pink { width:100%; padding:14px; border-radius:50px; border:none; background:linear-gradient(135deg,#ff4da6,#ff85c2); color:#fff; font-family:var(--font-title); font-size:15px; font-weight:800; cursor:pointer; box-shadow:0 6px 20px rgba(255,77,166,.4); transition:all .2s; display:flex; align-items:center; justify-content:center; gap:8px; }
-.btn-pink:active { transform:scale(.97); box-shadow:0 2px 10px rgba(255,77,166,.3); }
-.btn-outline { width:100%; padding:12px; border-radius:50px; border:2px solid var(--p4); background:#fff; color:var(--p5); font-family:var(--font-title); font-size:14px; font-weight:700; cursor:pointer; transition:all .2s; margin-top:8px; }
+/* PLACES */
+.place-form{background:#fff;border-radius:24px;padding:20px;box-shadow:0 4px 20px rgba(255,77,166,.12);margin-bottom:16px}
+.place-form h3{font-family:var(--font-title);font-size:18px;font-weight:800;color:var(--p6);margin-bottom:14px}
+.form-label{font-size:12px;font-weight:700;color:var(--p5);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;display:block}
+.form-input,.form-textarea,.form-select{width:100%;padding:12px 14px;border-radius:14px;border:2px solid var(--p2);font-family:var(--font);font-size:14px;color:#333;background:var(--p1);margin-bottom:12px;outline:none;transition:border-color .2s}
+.form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--p4);background:#fff}
+.form-textarea{min-height:80px;resize:none}
+.place-item{background:#fff;border-radius:18px;padding:14px 16px;margin-bottom:10px;box-shadow:0 3px 14px rgba(255,77,166,.1);display:flex;gap:12px;align-items:flex-start}
+.place-emoji{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--p2),var(--p3));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
 
-/* ── SETUP ── */
-.setup-card { background:#fff; border-radius:24px; padding:20px; box-shadow:0 4px 20px rgba(255,77,166,.12); margin-bottom:16px; }
-.setup-card h3 { font-family:var(--font-title); font-size:18px; font-weight:800; color:var(--p6); margin-bottom:12px; }
-.setup-card p { font-size:13px; color:#666; line-height:1.6; margin-bottom:8px; }
-.tag { display:inline-block; padding:3px 10px; border-radius:50px; font-size:11px; font-weight:700; background:var(--p2); color:var(--p6); margin:2px; }
+/* ALBUM */
+.album-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:20px}
+.album-item{aspect-ratio:1;border-radius:10px;overflow:hidden;position:relative;cursor:pointer;background:var(--p2);transition:transform .15s}
+.album-item:active{transform:scale(.96)}
+.album-item img{width:100%;height:100%;object-fit:cover;display:block}
+.album-item-badge{position:absolute;top:4px;left:4px;background:rgba(0,0,0,.45);color:#fff;font-size:9px;font-weight:800;padding:2px 6px;border-radius:50px}
+.album-item-user{position:absolute;bottom:4px;right:4px;font-size:14px}
+.album-empty{grid-column:1/-1;text-align:center;padding:40px 20px;color:var(--p4);font-weight:700;font-size:14px}
+.stat-box{flex:1;background:#fff;border-radius:16px;padding:12px;text-align:center;box-shadow:0 3px 14px rgba(255,77,166,.1)}
+.stat-num{font-family:var(--font-title);font-size:26px;font-weight:800;color:var(--p5)}
+.stat-label{font-size:11px;color:#999;font-weight:700}
+.filter-btn{padding:6px 14px;border-radius:50px;border:2px solid var(--p3);background:#fff;color:var(--p5);font-family:var(--font-title);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
+.filter-btn.active{background:linear-gradient(135deg,#ff4da6,#ff85c2);color:#fff;border-color:transparent}
 
-/* ── TOAST ── */
-.toast { position:fixed; bottom:100px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#ff4da6,#ff85c2); color:#fff; padding:12px 24px; border-radius:50px; font-weight:800; font-size:14px; z-index:999; opacity:0; pointer-events:none; transition:opacity .3s; white-space:nowrap; box-shadow:0 6px 24px rgba(255,77,166,.5); max-width:90vw; text-align:center; }
-.toast.show { opacity:1; }
+/* BUTTONS */
+.btn-pink{width:100%;padding:14px;border-radius:50px;border:none;background:linear-gradient(135deg,#ff4da6,#ff85c2);color:#fff;font-family:var(--font-title);font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 6px 20px rgba(255,77,166,.4);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-pink:active{transform:scale(.97)}
+.btn-outline{width:100%;padding:12px;border-radius:50px;border:2px solid var(--p4);background:#fff;color:var(--p5);font-family:var(--font-title);font-size:14px;font-weight:700;cursor:pointer;margin-top:8px}
 
-/* ── PHOTO VIEWER ── */
-.photo-viewer { display:none; position:fixed; inset:0; z-index:600; background:rgba(0,0,0,.95); align-items:center; justify-content:center; flex-direction:column; }
-.photo-viewer.open { display:flex; }
-.photo-viewer img { max-width:100%; max-height:80vh; border-radius:20px; object-fit:contain; }
-.photo-viewer-close { position:absolute; top:52px; right:20px; width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,.15); border:none; color:#fff; font-size:22px; cursor:pointer; }
-.photo-viewer-meta { margin-top:16px; text-align:center; color:rgba(255,255,255,.7); font-size:13px; font-weight:700; }
+/* SETUP */
+.setup-card{background:#fff;border-radius:24px;padding:20px;box-shadow:0 4px 20px rgba(255,77,166,.12);margin-bottom:16px}
+.setup-card h3{font-family:var(--font-title);font-size:18px;font-weight:800;color:var(--p6);margin-bottom:12px}
+.setup-card p{font-size:13px;color:#666;line-height:1.6;margin-bottom:8px}
+.tag{display:inline-block;padding:3px 10px;border-radius:50px;font-size:11px;font-weight:700;background:var(--p2);color:var(--p6);margin:2px}
 
-/* ── RIPPLE ── */
-.ripple-container { position:relative; overflow:hidden; }
-.ripple { position:absolute; border-radius:50%; background:rgba(255,255,255,.4); animation:ripple .6s ease-out forwards; pointer-events:none; }
+/* TOAST */
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#ff4da6,#ff85c2);color:#fff;padding:12px 24px;border-radius:50px;font-weight:800;font-size:14px;z-index:999;opacity:0;pointer-events:none;transition:opacity .3s;white-space:nowrap;box-shadow:0 6px 24px rgba(255,77,166,.5);max-width:90vw;text-align:center}
+.toast.show{opacity:1}
 
-/* ── STARS ROW ── */
-.stars-row { display:flex; justify-content:center; gap:6px; margin:6px 0; }
-.star { font-size:16px; animation:blink 1.5s ease-in-out infinite; }
-.star:nth-child(2) { animation-delay:.3s; }
-.star:nth-child(3) { animation-delay:.6s; }
+/* PHOTO VIEWER */
+.photo-viewer{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.95);align-items:center;justify-content:center;flex-direction:column}
+.photo-viewer.open{display:flex}
+.photo-viewer img{max-width:100%;max-height:80vh;border-radius:20px;object-fit:contain}
+.photo-viewer-close{position:absolute;top:52px;right:20px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:22px;cursor:pointer}
+.photo-viewer-meta{margin-top:16px;text-align:center;color:rgba(255,255,255,.7);font-size:13px;font-weight:700}
 
-/* ── THO SCRATCH EFFECT ── */
-.scratch-hearts { position:absolute; pointer-events:none; z-index:20; }
-.scratch-heart { position:absolute; font-size:20px; animation:floatHeart 1.2s ease-out forwards; }
-@keyframes floatHeart { 0%{transform:translateY(0) scale(0);opacity:1} 100%{transform:translateY(-80px) scale(1.2);opacity:0} }
-
-/* ── ALBUM ── */
-.album-header {
-  display:flex; align-items:center; justify-content:space-between;
-  margin-bottom:12px; margin-top:16px;
-}
-.album-filter {
-  display:flex; gap:6px;
-}
-.filter-btn {
-  padding:6px 14px; border-radius:50px; border:2px solid var(--p3);
-  background:#fff; color:var(--p5); font-family:var(--font-title);
-  font-size:12px; font-weight:700; cursor:pointer; transition:all .2s;
-}
-.filter-btn.active {
-  background:linear-gradient(135deg,#ff4da6,#ff85c2);
-  color:#fff; border-color:transparent;
-}
-.album-grid {
-  display:grid; grid-template-columns:repeat(3,1fr); gap:3px;
-  margin-bottom:20px;
-}
-.album-item {
-  aspect-ratio:1; border-radius:10px; overflow:hidden;
-  position:relative; cursor:pointer; background:var(--p2);
-  transition:transform .15s;
-}
-.album-item:active { transform:scale(.96); }
-.album-item img { width:100%; height:100%; object-fit:cover; display:block; }
-.album-item-badge {
-  position:absolute; top:4px; left:4px;
-  background:rgba(0,0,0,.45); color:#fff;
-  font-size:9px; font-weight:800; padding:2px 6px;
-  border-radius:50px; backdrop-filter:blur(4px);
-}
-.album-item-user {
-  position:absolute; bottom:4px; right:4px;
-  font-size:14px;
-}
-.album-empty {
-  grid-column:1/-1; text-align:center;
-  padding:40px 20px; color:var(--p4);
-  font-weight:700; font-size:14px;
-}
-.album-stats {
-  display:flex; gap:8px; margin-bottom:16px;
-}
-.stat-box {
-  flex:1; background:#fff; border-radius:16px;
-  padding:12px; text-align:center;
-  box-shadow:0 3px 14px rgba(255,77,166,.1);
-}
-.stat-num {
-  font-family:var(--font-title); font-size:26px; font-weight:800;
-  color:var(--p5);
-}
-.stat-label { font-size:11px; color:#999; font-weight:700; }
+/* SPARKLE BG */
+.sparkle-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 </style>
 </head>
 <body>
 
-<!-- LOGIN SCREEN -->
-<div class="login-screen" id="loginScreen">
-  <div class="login-logo">🐾</div>
-  <div class="login-title">Thọ & Thailand</div>
-  <div class="login-sub">An × Hiền · Bangkok × Pattaya 🇹🇭</div>
-  <div class="login-card">
-    <h3>Đăng nhập nào! 💗</h3>
-    <input class="login-input" id="loginId" placeholder="Tên đăng nhập" type="text" autocomplete="username">
-    <input class="login-input" id="loginPass" placeholder="Mật khẩu" type="password" autocomplete="current-password">
-    <button class="login-btn" onclick="doLogin()">Vào thôi! 🐾</button>
-    <div class="login-err" id="loginErr"></div>
-  </div>
+<!-- PICK SCREEN -->
+<div class="pick-screen" id="pickScreen">
+  <div class="pick-logo">🐾</div>
+  <div class="pick-title">Thọ & Thailand</div>
+  <div class="pick-sub">An x Hiền · Bangkok x Pattaya 🇹🇭</div>
+  <div class="pick-hint">Bạn là ai? Chọn 1 lần thôi nhé! 💗</div>
+  <button class="pick-btn" onclick="pickUser('An')">
+    <span style="font-size:40px">🐻</span>
+    <div style="text-align:left">
+      <div>Khánh An</div>
+      <div style="font-size:12px;opacity:.8;font-weight:600">@khanhanka · 🇰🇷 Hàn Quốc</div>
+    </div>
+  </button>
+  <button class="pick-btn pick-btn-hien" onclick="pickUser('Hiền')">
+    <span style="font-size:40px">🐰</span>
+    <div style="text-align:left">
+      <div>Thúy Hiền</div>
+      <div style="font-size:12px;opacity:.8;font-weight:600">@lalabeo · 🇻🇳 Việt Nam</div>
+    </div>
+  </button>
 </div>
 
 <!-- SPARKLE BG -->
@@ -274,7 +213,7 @@ body { font-family: var(--font); background:var(--p1); min-height:100vh; overflo
 <div class="header">
   <div class="header-user">
     <div class="user-badge" id="userBadge">...</div>
-    <button class="logout-btn" onclick="doLogout()" title="Đăng xuất">↩</button>
+    <button class="logout-btn" onclick="doLogout()" title="Đổi người">🔄</button>
   </div>
   <div class="header-title">🐾 Thọ & Thailand ✈️</div>
   <div class="header-sub">An × Hiền · Bangkok × Pattaya</div>
@@ -301,7 +240,7 @@ body { font-family: var(--font); background:var(--p1); min-height:100vh; overflo
   <button class="nav-btn" onclick="showSection('setup',this)">⚙️</button>
 </div>
 
-<!-- ── THỌ ── -->
+<!-- THỌ -->
 <div class="section active" id="sec-tho">
   <div class="tho-card">
     <div class="tho-stage-label" id="thoStageLabel">🌱 Puppy bé xíu</div>
@@ -309,34 +248,32 @@ body { font-family: var(--font); background:var(--p1); min-height:100vh; overflo
       <svg id="thoSvg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="200" height="200"></svg>
     </div>
     <div class="tho-name">🐾 Thọ</div>
-    <div class="tho-mood" id="thoMood">Đang chờ ăn sáng... 🥺</div>
+    <div class="tho-mood" id="thoMood">Đang chờ cả 2 checkin... 🥺</div>
     <div class="hunger-bar-wrap"><div class="hunger-bar" id="hungerBar" style="width:0%"></div></div>
     <div class="tho-hunger">
-      <div class="meal-dot" id="dot-morning">🌅</div>
-      <div class="meal-dot" id="dot-afternoon">☀️</div>
-      <div class="meal-dot" id="dot-evening">🌙</div>
-      <div class="meal-dot" id="dot-place-an">🍜</div>
-      <div class="meal-dot" id="dot-place-hien">🍜</div>
+      <div class="meal-dot" id="dot-morning" title="Sáng">🌅</div>
+      <div class="meal-dot" id="dot-afternoon" title="Chiều">☀️</div>
+      <div class="meal-dot" id="dot-evening" title="Tối">🌙</div>
+      <div class="meal-dot" id="dot-place" title="Địa điểm">📍</div>
     </div>
-    <p style="font-size:11px;color:#bbb;margin-top:4px;">Sáng · Chiều · Tối · 📍An · 📍Hiền</p>
-    <p style="font-size:10px;color:#dbb;margin-top:2px;">(Địa điểm: cả 2 note mới tính 1 bữa cho Thọ)</p>
+    <p style="font-size:10px;color:#ccc;margin-top:2px">Cả 2 checkin mới tính 1 bữa cho Thọ 🐾</p>
   </div>
-  <div class="tho-card" style="padding:14px 16px;">
-    <div style="display:flex;gap:12px;align-items:center;">
-      <div style="font-size:32px;">📅</div>
+  <div class="tho-card" style="padding:14px 16px">
+    <div style="display:flex;gap:12px;align-items:center">
+      <div style="font-size:32px">📅</div>
       <div>
-        <div style="font-size:13px;font-weight:700;color:#2d1b36;">Hôm nay ngày thứ</div>
-        <div style="font-family:var(--font-title);font-size:28px;font-weight:800;color:var(--p5);" id="dayCount">--</div>
+        <div style="font-size:13px;font-weight:700;color:#2d1b36">Ngày của chuyến đi</div>
+        <div style="font-family:var(--font-title);font-size:24px;font-weight:800;color:var(--p5)" id="dayCount">--</div>
       </div>
-      <div style="margin-left:auto;text-align:right;">
-        <div style="font-size:13px;font-weight:700;color:#2d1b36;">Tổng bữa ăn</div>
-        <div style="font-family:var(--font-title);font-size:28px;font-weight:800;color:var(--p5);" id="totalMeals">0</div>
+      <div style="margin-left:auto;text-align:right">
+        <div style="font-size:13px;font-weight:700;color:#2d1b36">Tổng bữa ăn</div>
+        <div style="font-family:var(--font-title);font-size:24px;font-weight:800;color:var(--p5)" id="totalMeals">0</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ── CHECKIN ── -->
+<!-- CHECKIN -->
 <div class="section" id="sec-checkin">
   <div class="locket-trigger-area" onclick="openCamera(null)">
     <div class="locket-trigger-ring">📸</div>
@@ -352,21 +289,22 @@ body { font-family: var(--font); background:var(--p1); min-height:100vh; overflo
   <div id="locketFeed"></div>
 </div>
 
-<!-- ── PLACES ── -->
+<!-- PLACES -->
 <div class="section" id="sec-places">
   <div class="sec-title">📍 Địa điểm hôm nay</div>
   <div class="place-form">
     <h3 id="placeFormTitle">Cho Thọ ăn bữa địa điểm 🗺️</h3>
-    <div id="placeAlreadyDone" style="display:none;background:var(--p1);border-radius:12px;padding:12px;margin-bottom:12px;font-size:13px;color:var(--p6);font-weight:700;text-align:center;">✅ Bạn đã note địa điểm hôm nay rồi!<br>Thọ đã được ăn bữa này 🐾</div>
+    <div id="placeStatusBanner"></div>
+    <div id="placeAlreadyDone" style="display:none;background:var(--p1);border-radius:12px;padding:12px;margin-bottom:12px;font-size:13px;color:var(--p6);font-weight:700;text-align:center">✅ Bạn đã note rồi! Chờ người kia note nữa nhé 🐾</div>
     <label class="form-label">Tên quán / địa điểm *</label>
     <input class="form-input" id="placeName" placeholder="VD: Chatuchak Weekend Market" type="text">
     <label class="form-label">Loại</label>
     <select class="form-select" id="placeType">
       <option value="food">🍜 Quán ăn / Nhà hàng</option>
-      <option value="activity">🎡 Địa điểm vui chơi</option>
+      <option value="activity">🎡 Vui chơi</option>
       <option value="cafe">☕ Café</option>
       <option value="shopping">🛍️ Shopping</option>
-      <option value="beach">🏖️ Biển / Thiên nhiên</option>
+      <option value="beach">🏖️ Biển</option>
     </select>
     <label class="form-label">Thành phố</label>
     <select class="form-select" id="placeCity">
@@ -374,33 +312,21 @@ body { font-family: var(--font); background:var(--p1); min-height:100vh; overflo
       <option value="Pattaya">🌊 Pattaya</option>
     </select>
     <label class="form-label">Ghi chú</label>
-    <textarea class="form-textarea" id="placeNote" placeholder="Ăn ngon không? Làm gì ở đó? Rating?"></textarea>
+    <textarea class="form-textarea" id="placeNote" placeholder="Ăn ngon không? Rating?"></textarea>
     <button class="btn-pink" onclick="savePlace()">📍 Lưu & cho Thọ ăn!</button>
   </div>
   <div class="sec-title" style="margin-top:8px">🗺️ Đã ghé qua</div>
   <div id="placesList"></div>
 </div>
 
-<!-- ── ALBUM ── -->
+<!-- ALBUM -->
 <div class="section" id="sec-album">
-  <div class="album-header">
-    <div class="sec-title" style="margin:0">🖼️ Album An × Hiền</div>
+  <div style="display:flex;gap:8px;margin-bottom:16px;margin-top:16px">
+    <div class="stat-box"><div class="stat-num" id="albumCountAn">0</div><div class="stat-label">🐻 An</div></div>
+    <div class="stat-box"><div class="stat-num" id="albumCountHien">0</div><div class="stat-label">🐰 Hiền</div></div>
+    <div class="stat-box"><div class="stat-num" id="albumCountAll">0</div><div class="stat-label">💗 Tổng</div></div>
   </div>
-  <div class="album-stats">
-    <div class="stat-box">
-      <div class="stat-num" id="albumCountAn">0</div>
-      <div class="stat-label">🐻 Ảnh của An</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-num" id="albumCountHien">0</div>
-      <div class="stat-label">🐰 Ảnh của Hiền</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-num" id="albumCountAll">0</div>
-      <div class="stat-label">💗 Tổng cộng</div>
-    </div>
-  </div>
-  <div class="album-filter" style="margin-bottom:14px;">
+  <div style="display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px">
     <button class="filter-btn active" onclick="filterAlbum('all',this)">Tất cả</button>
     <button class="filter-btn" onclick="filterAlbum('An',this)">🐻 An</button>
     <button class="filter-btn" onclick="filterAlbum('Hiền',this)">🐰 Hiền</button>
@@ -409,42 +335,33 @@ body { font-family: var(--font); background:var(--p1); min-height:100vh; overflo
     <button class="filter-btn" onclick="filterAlbum('evening',this)">🌙</button>
   </div>
   <div class="album-grid" id="albumGrid">
-    <div class="album-empty">📸 Chưa có ảnh nào.<br>Checkin để điền vào album nhé!</div>
+    <div class="album-empty">📸 Chưa có ảnh nào</div>
   </div>
 </div>
 
-<!-- ── SETUP ── -->
+<!-- SETUP -->
 <div class="section" id="sec-setup">
   <div class="sec-title">⚙️ Cài đặt</div>
   <div class="setup-card">
-    <h3>🗂️ Google Sheet Sync</h3>
-    <p>Paste Apps Script URL vào đây để 2 máy thấy ảnh của nhau:</p>
-    <input class="form-input" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/..." type="text" style="font-size:11px;">
+    <h3>🔄 Sync ảnh giữa 2 máy</h3>
+    <p>Paste Apps Script URL để 2 máy thấy ảnh nhau:</p>
+    <input class="form-input" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/..." type="text" style="font-size:11px">
     <button class="btn-pink" onclick="saveScriptUrl()">💾 Lưu URL</button>
-    <p style="font-size:11px;color:#aaa;margin-top:8px;">Xem hướng dẫn tạo Apps Script bên dưới ⬇️</p>
-  </div>
-  <div class="setup-card">
-    <h3>📋 Cách setup sync</h3>
-    <p>1. Mở Google Sheet → Extensions → Apps Script</p>
-    <p>2. Paste code từ file <b>apps_script.js</b> vào</p>
-    <p>3. Deploy → Web App → Anyone → Copy URL</p>
-    <p>4. Paste URL vào ô trên → Lưu</p>
-    <p>5. Cả 2 máy paste cùng 1 URL là thấy ảnh nhau! 🐾</p>
   </div>
   <div class="setup-card">
     <h3>💗 Chuyến đi</h3>
-    <p><b>An:</b> Khánh An (@khanhanka)</p>
-    <p><b>Hiền:</b> Thúy Hiền (@lalabeo)</p>
-    <p><b>Bay:</b> 17/06/2026 🇹🇭</p>
+    <p>🐻 Khánh An · @khanhanka · 🇰🇷 Hàn Quốc</p>
+    <p>🐰 Thúy Hiền · @lalabeo · 🇻🇳 Việt Nam</p>
+    <p>✈️ Bay: 17/06/2026 · Bangkok & Pattaya 🇹🇭</p>
+    <p>🕐 Remind theo giờ Việt Nam (UTC+7)</p>
   </div>
   <div class="setup-card">
     <h3>🗑️ Reset dữ liệu</h3>
-    <p>Xóa toàn bộ ảnh và checkin để bắt đầu lại.</p>
-    <button class="btn-pink" onclick="resetAllData()" style="background:linear-gradient(135deg,#ff6b6b,#ff4444);">🗑️ Reset tất cả</button>
+    <button class="btn-pink" onclick="resetAllData()" style="background:linear-gradient(135deg,#ff6b6b,#ff4444)">🗑️ Reset tất cả</button>
   </div>
 </div>
 
-<!-- CAMERA OVERLAY -->
+<!-- CAMERA -->
 <div class="locket-overlay" id="locketOverlay">
   <div class="locket-viewfinder">
     <video id="cameraVideo" autoplay playsinline muted></video>
@@ -476,6 +393,11 @@ body { font-family: var(--font); background:var(--p1); min-height:100vh; overflo
   <div class="photo-viewer-meta" id="viewerMeta"></div>
 </div>
 
+<!-- CELEBRATE -->
+<div class="celebrate-overlay" id="celebrateOverlay">
+  <div class="celebrate-msg" id="celebrateMsg"></div>
+</div>
+
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
@@ -485,270 +407,185 @@ body { font-family: var(--font); background:var(--p1); min-height:100vh; overflo
 </audio>
 
 <script>
-// ── ACCOUNTS ──
-const ACCOUNTS = {
-  'chongemhien': { pass:'19011011', name:'Khánh An', user:'An', tg:'@khanhanka' },
-  'voanhan':     { pass:'19011011', name:'Thúy Hiền', user:'Hiền', tg:'@lalabeo' },
+// ══════════════════════════════════════
+// CONFIG
+// ══════════════════════════════════════
+const TG_TOKEN     = '8670770445:AAFDRK7Di0s-WZP3JhGFmPp5UjAWVYjoh08';
+const TG_CHAT_AN   = '8683665534';
+const TG_CHAT_HIEN = '7237573793';
+const SHEET_ID     = '1IlpRaWnhjfKiY6xQFlXjOJmGngt33jsaKbB5S_-Bka8';
+const START_DATE   = '2026-05-17'; // bắt đầu từ ngày này
+const TRIP_DATE    = '2026-06-17'; // ngày bay
+
+const USERS = {
+  'An':   { name:'Khánh An',  emoji:'🐻', chat: TG_CHAT_AN   },
+  'Hiền': { name:'Thúy Hiền', emoji:'🐰', chat: TG_CHAT_HIEN },
 };
 
-let currentUser = null; // 'An' or 'Hiền'
-let currentAcc  = null;
+let currentUser = null;
+let APPS_SCRIPT_URL = localStorage.getItem('tho_script_url') || '';
 
-// ── AUTH ──
-function doLogin() {
-  const id   = document.getElementById('loginId').value.trim();
-  const pass = document.getElementById('loginPass').value;
-  const acc  = ACCOUNTS[id];
-  if (!acc || acc.pass !== pass) {
-    document.getElementById('loginErr').textContent = '❌ Sai tài khoản hoặc mật khẩu!';
-    playSfx('error');
-    return;
-  }
-  currentUser = acc.user;
-  currentAcc  = acc;
-  localStorage.setItem('tho_user', id);
-  document.getElementById('loginScreen').style.display = 'none';
-  document.getElementById('userBadge').textContent = acc.name + ' 💗';
+// ══════════════════════════════════════
+// TIMEZONE VN (UTC+7) — dùng cho mọi thứ
+// ══════════════════════════════════════
+function getVNDate() {
+  const now = new Date();
+  return new Date(now.getTime() + (7*60 + now.getTimezoneOffset()) * 60000);
+}
+function getVNHour()   { return getVNDate().getHours(); }
+function getVNDateStr(){ return getVNDate().toISOString().split('T')[0]; }
+
+let todayKey = getVNDateStr();
+
+// ══════════════════════════════════════
+// STATE
+// ══════════════════════════════════════
+function loadState() {
+  try {
+    const s = JSON.parse(localStorage.getItem('tho_v3') || '{}');
+    return Object.assign({checkins:{},places:[],photos:[],totalMeals:0}, s);
+  } catch(e) { return {checkins:{},places:[],photos:[],totalMeals:0}; }
+}
+function saveState() { localStorage.setItem('tho_v3', JSON.stringify(state)); }
+
+let state = loadState();
+
+// Clear data before START_DATE
+(function(){
+  let changed = false;
+  if (state.photos) { const f = state.photos.filter(p=>p.date>=START_DATE); if(f.length!==state.photos.length){state.photos=f;changed=true;} }
+  if (state.places) { const f = state.places.filter(p=>p.date>=START_DATE); if(f.length!==state.places.length){state.places=f;changed=true;} }
+  if (state.checkins) { Object.keys(state.checkins).forEach(d=>{if(d<START_DATE){delete state.checkins[d];changed=true;}}); }
+  if (changed) saveState();
+})();
+
+// ══════════════════════════════════════
+// AUTH
+// ══════════════════════════════════════
+function pickUser(user) {
+  currentUser = user;
+  localStorage.setItem('tho_who', user);
+  document.getElementById('pickScreen').style.display = 'none';
+  const u = USERS[user];
+  document.getElementById('userBadge').textContent = u.emoji + ' ' + u.name;
   playSfx('login');
   initApp();
 }
-function saveScriptUrl() {
-  const url = document.getElementById('scriptUrlInput').value.trim();
-  if (!url) { showToast('❌ Nhập URL trước nha!'); return; }
-  APPS_SCRIPT_URL = url;
-  localStorage.setItem('tho_script_url', url);
-  showToast('✅ Đã lưu! Bắt đầu sync...');
-  playSfx('login');
-  startSync();
-}
 function doLogout() {
-  playSfx('click');
-  localStorage.removeItem('tho_user');
-  currentUser = null; currentAcc = null;
-  document.getElementById('loginScreen').style.display = 'flex';
-  document.getElementById('loginId').value = '';
-  document.getElementById('loginPass').value = '';
-  document.getElementById('loginErr').textContent = '';
+  if (!confirm('Đổi người dùng? Máy này sẽ hỏi lại.')) return;
+  localStorage.removeItem('tho_who');
+  currentUser = null;
+  document.getElementById('pickScreen').style.display = 'flex';
 }
 function tryAutoLogin() {
-  const saved = localStorage.getItem('tho_user');
-  if (saved && ACCOUNTS[saved]) {
-    document.getElementById('loginId').value = saved;
-    const acc = ACCOUNTS[saved];
-    currentUser = acc.user;
-    currentAcc  = acc;
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('userBadge').textContent = acc.name + ' 💗';
+  const saved = localStorage.getItem('tho_who');
+  if (saved && USERS[saved]) {
+    currentUser = saved;
+    document.getElementById('pickScreen').style.display = 'none';
+    document.getElementById('userBadge').textContent = USERS[saved].emoji + ' ' + USERS[saved].name;
     initApp();
   }
 }
 
-// ── CONFIG ──
-const SHEET_ID  = '1IlpRaWnhjfKiY6xQFlXjOJmGngt33jsaKbB5S_-Bka8';
-const TG_TOKEN  = '8670770445:AAFDRK7Di0s-WZP3JhGFmPp5UjAWVYjoh08';
-const TG_CHAT_AN   = '8683665534';
-const TG_CHAT_HIEN = '7237573793';
-
-// ── GOOGLE APPS SCRIPT WEB APP URL ──
-// Sau khi deploy Apps Script, paste URL vào đây
-let APPS_SCRIPT_URL = localStorage.getItem('tho_script_url') || '';
-
-// ── STATE ──
-let todayKey = new Date().toISOString().split('T')[0];
-let state    = loadState();
-
-// ── INIT ──
+// ══════════════════════════════════════
+// INIT
+// ══════════════════════════════════════
 function initApp() {
-  // Ngày đầu tiên (16/5) bỏ qua sáng + chiều vì đã qua rồi
-  const FIRST_DAY = '2026-05-16';
-  const todayStr = new Date().toISOString().split('T')[0];
-  if (todayStr === FIRST_DAY) {
-    if (!state.checkins[FIRST_DAY]) state.checkins[FIRST_DAY] = {};
-    // Đánh dấu sáng + chiều là skip (không tính bữa ăn, chỉ tắt remind)
-    // Skip sáng + chiều cho cả 2 users ngày đầu
-    ['morning','afternoon'].forEach(slot => {
-      ['An','Hiền'].forEach(u => {
-        const k = slot+'_'+u;
-        if (!state.checkins[FIRST_DAY][k]) state.checkins[FIRST_DAY][k] = {skip:true, time:'skip'};
-      });
-    });
-    saveState();
-  }
   generateSparkles();
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-  renderTho();
-  updateThoMood();
-  renderLocketFeed();
-  updatePills();
-  renderPlaces();
-  updatePlaceForm();
-  renderAlbum();
-  startSync(); // bắt đầu sync với Sheet
+  updateCountdown(); setInterval(updateCountdown, 1000);
+  // Refresh todayKey lúc 0h VN
+  setInterval(()=>{ const k=getVNDateStr(); if(k!==todayKey){todayKey=k;renderAll();} }, 60000);
+  renderAll();
+  startSync();
   setInterval(checkRemind, 60000);
-  setTimeout(checkRemind, 3000);
-  // Auto-play music
-  setTimeout(() => {
-    const audio = document.getElementById('bgMusic');
-    audio.volume = 0.35;
-    audio.play().catch(() => {
-      document.addEventListener('touchstart', () => audio.play(), { once: true });
-    });
+  setTimeout(checkRemind, 5000);
+  // Auto music
+  setTimeout(()=>{
+    const a=document.getElementById('bgMusic'); a.volume=0.3;
+    a.play().catch(()=>document.addEventListener('touchstart',()=>a.play(),{once:true}));
   }, 800);
+  if (APPS_SCRIPT_URL) document.getElementById('scriptUrlInput').value = APPS_SCRIPT_URL;
+}
+function renderAll() {
+  renderTho(); updateThoMood(); renderLocketFeed(); updatePills(); renderPlaces(); updatePlaceForm(); renderAlbum();
 }
 
-// ── SPARKLES ──
+// ══════════════════════════════════════
+// SPARKLES
+// ══════════════════════════════════════
 function generateSparkles() {
-  const bg = document.getElementById('sparkleBg');
-  if (bg.children.length > 5) return;
-  const colors = ['#ff4da6','#ffadd8','#ff85c2','#fff','#ffdd00'];
-  for (let i=0;i<30;i++) {
-    const sp = document.createElement('div');
-    const size = Math.random()*10+4;
-    sp.style.cssText = `position:absolute;width:${size}px;height:${size}px;left:${Math.random()*100}%;border-radius:50%;background:${colors[Math.floor(Math.random()*colors.length)]};animation:spFloat ${Math.random()*8+6}s linear ${Math.random()*8}s infinite;opacity:0;`;
-    bg.appendChild(sp);
-  }
-  for (let i=0;i<15;i++) {
-    const s = document.createElement('div');
-    s.style.cssText = `position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;font-size:${Math.random()*14+8}px;animation:blink ${Math.random()*2+1.5}s ${Math.random()*3}s ease-in-out infinite;pointer-events:none;`;
-    s.textContent = ['✨','💫','⭐','🌟','💗'][Math.floor(Math.random()*5)];
-    bg.appendChild(s);
-  }
+  const bg=document.getElementById('sparkleBg');
+  if (bg.children.length>5) return;
+  const cols=['#ff4da6','#ffadd8','#ff85c2','#fff','#ffdd00'];
+  for(let i=0;i<30;i++){const d=document.createElement('div');const sz=Math.random()*10+4;d.style.cssText=`position:absolute;width:${sz}px;height:${sz}px;left:${Math.random()*100}%;border-radius:50%;background:${cols[~~(Math.random()*5)]};animation:spFloat ${Math.random()*8+6}s linear ${Math.random()*8}s infinite;opacity:0`;bg.appendChild(d);}
+  for(let i=0;i<15;i++){const s=document.createElement('div');s.style.cssText=`position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;font-size:${Math.random()*14+8}px;animation:blink ${Math.random()*2+1.5}s ${Math.random()*3}s ease-in-out infinite;pointer-events:none`;s.textContent=['✨','💫','⭐','🌟','💗'][~~(Math.random()*5)];bg.appendChild(s);}
 }
 
-// ── COUNTDOWN ──
+// ══════════════════════════════════════
+// COUNTDOWN
+// ══════════════════════════════════════
 function updateCountdown() {
-  const target = new Date('2026-06-17T00:00:00+07:00');
-  let diff = target - new Date();
-  if (diff < 0) { ['cdDays','cdHours','cdMins','cdSecs'].forEach((id,i) => document.getElementById(id).textContent = i===0?'🎉':'0'); return; }
-  const d = Math.floor(diff/86400000); diff %= 86400000;
-  const h = Math.floor(diff/3600000);  diff %= 3600000;
-  const m = Math.floor(diff/60000);
-  const s = Math.floor((diff%60000)/1000);
-  document.getElementById('cdDays').textContent  = String(d).padStart(2,'0');
-  document.getElementById('cdHours').textContent = String(h).padStart(2,'0');
-  document.getElementById('cdMins').textContent  = String(m).padStart(2,'0');
-  document.getElementById('cdSecs').textContent  = String(s).padStart(2,'0');
+  let diff = new Date(TRIP_DATE+'T00:00:00+07:00') - new Date();
+  if (diff<0) { document.getElementById('cdDays').textContent='🎉';['cdHours','cdMins','cdSecs'].forEach(id=>document.getElementById(id).textContent='0'); return; }
+  const d=Math.floor(diff/86400000); diff%=86400000;
+  const h=Math.floor(diff/3600000);  diff%=3600000;
+  const m=Math.floor(diff/60000);
+  const s=Math.floor((diff%60000)/1000);
+  document.getElementById('cdDays').textContent =String(d).padStart(2,'0');
+  document.getElementById('cdHours').textContent=String(h).padStart(2,'0');
+  document.getElementById('cdMins').textContent =String(m).padStart(2,'0');
+  document.getElementById('cdSecs').textContent =String(s).padStart(2,'0');
 }
 
-// ── STATE ──
-function loadState() {
-  try { return JSON.parse(localStorage.getItem('tho_state_v2')||'{"checkins":{},"places":[],"photos":[],"totalMeals":0}'); }
-  catch(e) { return {checkins:{},places:[],photos:[],totalMeals:0}; }
-}
-function saveState() { localStorage.setItem('tho_state_v2', JSON.stringify(state)); }
-
-function resetAllData() {
-  if (!confirm('Reset toàn bộ ảnh và checkin? Không hoàn tác được nhé!')) return;
-  state = {checkins:{},places:[],photos:[],totalMeals:0};
-  saveState();
-  renderTho(); updateThoMood(); renderLocketFeed(); updatePills(); renderPlaces();
-  showToast('✅ Đã reset! Bắt đầu mới nào 🐾');
-  playSfx('reset');
-}
-
-// ── SOUND EFFECTS ──
-let audioCtx = null;
-function getCtx() {
-  if (!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)();
-  return audioCtx;
-}
-function playSfx(type) {
-  try {
-    const ctx = getCtx();
-    if (ctx.state === 'suspended') ctx.resume();
-    const now = ctx.currentTime;
-    const sfx = {
-      click:   [[440,0.08],[550,0.06]],
-      feed:    [[523,0.15],[659,0.15],[784,0.15],[1047,0.12]],
-      login:   [[523,0.1],[659,0.1],[784,0.1],[1047,0.1],[1319,0.1]],
-      error:   [[220,0.15],[196,0.15]],
-      scratch: [[800,0.08],[600,0.06],[900,0.05]],
-      place:   [[659,0.12],[880,0.12],[1109,0.1]],
-      reset:   [[440,0.08],[330,0.08]],
-      nav:     [[660,0.06],[880,0.05]],
-    };
-    const notes = sfx[type] || sfx.click;
-    notes.forEach(([freq,vol],i) => {
-      const osc  = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain); gain.connect(ctx.destination);
-      osc.frequency.value = freq;
-      osc.type = type==='error' ? 'sawtooth' : 'sine';
-      const t = now + i*0.13;
-      gain.gain.setValueAtTime(vol, t);
-      gain.gain.exponentialRampToValueAtTime(0.001, t+0.25);
-      osc.start(t); osc.stop(t+0.3);
-    });
-  } catch(e) {}
-}
-
-// ── THO SCRATCH ──
-function scratchTho(e) {
-  playSfx('scratch');
-  const canvas = document.getElementById('thoCanvas');
-  const rect   = canvas.getBoundingClientRect();
-  const cx = e.clientX - rect.left;
-  const cy = e.clientY - rect.top;
-  const emojis = ['💗','✨','🌟','💕','⭐','🎀'];
-  for (let i=0; i<5; i++) {
-    setTimeout(() => {
-      const h = document.createElement('div');
-      h.style.cssText = `position:fixed;left:${e.clientX + (Math.random()-0.5)*40}px;top:${e.clientY}px;font-size:${16+Math.random()*12}px;pointer-events:none;z-index:9999;animation:floatHeart 1.2s ease-out forwards;`;
-      h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-      document.body.appendChild(h);
-      setTimeout(() => h.remove(), 1200);
-    }, i*80);
-  }
-  // Jiggle tho
-  const svg = document.getElementById('thoCanvas');
-  svg.style.animation = 'scratch .4s ease';
-  setTimeout(() => svg.style.animation = 'float 3s ease-in-out infinite', 400);
-  showToast('Thọ: "gãi nữa đi! 🥺💗"', 1500);
-}
-
-// ── THO RENDER ──
-function getThoStage() {
-  const start = new Date('2026-06-17');
-  const days  = Math.max(0, Math.floor((new Date()-start)/86400000));
-  if (days < 6)  return 'baby';
-  if (days < 12) return 'teen';
-  return 'adult';
+// ══════════════════════════════════════
+// MEAL LOGIC — cả 2 mới tính
+// ══════════════════════════════════════
+function bothDoneForSlot(slot, day) {
+  day = day || (state.checkins[todayKey]||{});
+  const an   = day[slot+'_An'];
+  const hien = day[slot+'_Hiền'];
+  return !!(an && hien && !an.skip && !hien.skip);
 }
 function getTodayMeals() {
-  const today = state.checkins[todayKey]||{};
-  let count = 0;
-  // Photo slots: cần cả An + Hiền mới tính 1 bữa
-  ['morning','afternoon','evening'].forEach(slot => {
-    const an   = today[slot+'_An'];
-    const hien = today[slot+'_Hiền'];
-    if (an && hien && !an.skip && !hien.skip) count++;
+  const day = state.checkins[todayKey]||{};
+  let n = 0;
+  ['morning','afternoon','evening'].forEach(s=>{ if(bothDoneForSlot(s,day)) n++; });
+  if (day['place-an'] && day['place-hien']) n++;
+  return n;
+}
+function recalcTotalMeals() {
+  let total = 0;
+  Object.keys(state.checkins).forEach(date=>{
+    const day = state.checkins[date];
+    ['morning','afternoon','evening'].forEach(s=>{ if(bothDoneForSlot(s,day)) total++; });
+    if (day['place-an']&&day['place-hien']) total++;
   });
-  // Place: cần cả An + Hiền mới tính 1 bữa
-  if (today['place-an'] && today['place-hien']) count++;
-  return count;
+  state.totalMeals = total;
+}
+
+// ══════════════════════════════════════
+// THỌ RENDER
+// ══════════════════════════════════════
+function getThoStage() {
+  const days = Math.max(0, Math.floor((new Date()-new Date(TRIP_DATE))/86400000));
+  return days<6?'baby':days<12?'teen':'adult';
 }
 function renderTho() {
-  const stage  = getThoStage();
-  const meals  = getTodayMeals();
-  const hungry = meals===0, happy = meals>=3;
-  const labels = {baby:'🌱 Puppy bé xíu',teen:'🌸 Puppy đang lớn',adult:'👑 Cún trưởng thành'};
-  document.getElementById('thoStageLabel').textContent = labels[stage];
-  const s  = stage==='baby'?.65:stage==='teen'?.82:1.0;
-  const cx = 100, cy = 108;
-  const bR = 52*s, hR = 42*s;
-  const blink2 = hungry ? `<path d="M ${cx-hR*.48} ${cy-hR*.32} Q ${cx-hR*.35} ${cy-hR*.42} ${cx-hR*.22} ${cy-hR*.32}" fill="none" stroke="#c8935a" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M ${cx+hR*.22} ${cy-hR*.32} Q ${cx+hR*.35} ${cy-hR*.42} ${cx+hR*.48} ${cy-hR*.32}" fill="none" stroke="#c8935a" stroke-width="1.5" stroke-linecap="round"/>` : '';
-  const mouth = happy
-    ? `<path d="M ${cx-9*s} ${cy+hR*.38} Q ${cx} ${cy+hR*.58} ${cx+9*s} ${cy+hR*.38}" fill="none" stroke="#9b4c2a" stroke-width="${2*s}" stroke-linecap="round"/>`
-    : hungry
-    ? `<path d="M ${cx-9*s} ${cy+hR*.48} Q ${cx} ${cy+hR*.38} ${cx+9*s} ${cy+hR*.48}" fill="none" stroke="#9b4c2a" stroke-width="${2*s}" stroke-linecap="round"/>`
-    : `<path d="M ${cx-8*s} ${cy+hR*.42} Q ${cx} ${cy+hR*.54} ${cx+8*s} ${cy+hR*.42}" fill="none" stroke="#9b4c2a" stroke-width="${2*s}" stroke-linecap="round"/>`;
-  const blush = hungry ? 'rgba(180,180,180,0.5)' : 'rgba(255,107,160,0.55)';
-  const paw = meals>0 ? `<ellipse cx="${cx-bR*.82}" cy="${cy-bR*.05}" rx="${14*s}" ry="${12*s}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8" style="animation:paw 1s ease-in-out infinite"/>
-  <circle cx="${cx-bR*.88}" cy="${cy-bR*.16}" r="${4*s}" fill="#f4c9a0"/><circle cx="${cx-bR*.76}" cy="${cy-bR*.17}" r="${4*s}" fill="#f4c9a0"/>` : '';
-  const tear = hungry ? `<path d="M ${cx-hR*.32} ${cy-hR*.05} Q ${cx-hR*.36} ${cy+hR*.08} ${cx-hR*.3} ${cy+hR*.16}" fill="#a0c8ff" opacity="0.7"/>` : '';
-  document.getElementById('thoSvg').innerHTML = `
+  const stage=getThoStage(), meals=getTodayMeals();
+  const hungry=meals===0, happy=meals>=3;
+  const labels={baby:'🌱 Puppy bé xíu',teen:'🌸 Puppy đang lớn',adult:'👑 Cún trưởng thành'};
+  document.getElementById('thoStageLabel').textContent=labels[stage];
+  const s=stage==='baby'?.65:stage==='teen'?.82:1, cx=100, cy=108, bR=52*s, hR=42*s;
+  const blush=hungry?'rgba(180,180,180,0.5)':'rgba(255,107,160,0.55)';
+  const mouth=happy
+    ?`<path d="M ${cx-9*s} ${cy+hR*.38} Q ${cx} ${cy+hR*.58} ${cx+9*s} ${cy+hR*.38}" fill="none" stroke="#9b4c2a" stroke-width="${2*s}" stroke-linecap="round"/>`
+    :hungry
+    ?`<path d="M ${cx-9*s} ${cy+hR*.48} Q ${cx} ${cy+hR*.38} ${cx+9*s} ${cy+hR*.48}" fill="none" stroke="#9b4c2a" stroke-width="${2*s}" stroke-linecap="round"/>`
+    :`<path d="M ${cx-8*s} ${cy+hR*.42} Q ${cx} ${cy+hR*.54} ${cx+8*s} ${cy+hR*.42}" fill="none" stroke="#9b4c2a" stroke-width="${2*s}" stroke-linecap="round"/>`;
+  const brow=hungry?`<path d="M ${cx-hR*.48} ${cy-hR*.32} Q ${cx-hR*.35} ${cy-hR*.42} ${cx-hR*.22} ${cy-hR*.32}" fill="none" stroke="#c8935a" stroke-width="1.5" stroke-linecap="round"/><path d="M ${cx+hR*.22} ${cy-hR*.32} Q ${cx+hR*.35} ${cy-hR*.42} ${cx+hR*.48} ${cy-hR*.32}" fill="none" stroke="#c8935a" stroke-width="1.5" stroke-linecap="round"/>`:'';
+  const tear=hungry?`<path d="M ${cx-hR*.32} ${cy-hR*.05} Q ${cx-hR*.36} ${cy+hR*.08} ${cx-hR*.3} ${cy+hR*.16}" fill="#a0c8ff" opacity="0.7"/>`:'';
+  const paw=meals>0?`<ellipse cx="${cx-bR*.82}" cy="${cy-bR*.05}" rx="${14*s}" ry="${12*s}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8" style="animation:paw 1s ease-in-out infinite"/><circle cx="${cx-bR*.88}" cy="${cy-bR*.16}" r="${4*s}" fill="#f4c9a0"/><circle cx="${cx-bR*.76}" cy="${cy-bR*.17}" r="${4*s}" fill="#f4c9a0"/>`:'';
+  document.getElementById('thoSvg').innerHTML=`
   <defs>
     <radialGradient id="bodyG" cx="38%" cy="30%" r="65%"><stop offset="0" stop-color="#fff8ee"/><stop offset=".7" stop-color="#fff5e0"/><stop offset="1" stop-color="#e8c49a"/></radialGradient>
     <radialGradient id="earG" cx="40%" cy="25%" r="70%"><stop offset="0" stop-color="#f4c9a0"/><stop offset="1" stop-color="#c8935a"/></radialGradient>
@@ -769,7 +606,7 @@ function renderTho() {
   <circle cx="${cx+hR*.35}" cy="${cy-hR*.12}" r="${7*s}" fill="#1a0a04"/>
   <circle cx="${cx-hR*.28}" cy="${cy-hR*.2}" r="${2.5*s}" fill="#fff"/>
   <circle cx="${cx+hR*.42}" cy="${cy-hR*.2}" r="${2.5*s}" fill="#fff"/>
-  ${blink2}
+  ${brow}
   <ellipse cx="${cx}" cy="${cy+hR*.2}" rx="${10*s}" ry="${7*s}" fill="#2a1a0e"/>
   <ellipse cx="${cx-3*s}" cy="${cy+hR*.16}" rx="${2.5*s}" ry="${1.5*s}" fill="rgba(255,255,255,.35)"/>
   ${mouth}
@@ -780,510 +617,465 @@ function renderTho() {
   ${paw}${tear}`;
 }
 function updateThoMood() {
-  const meals = getTodayMeals();
-  const moods = ['Bụng đói lắm... 🥺 Cho Thọ ăn với!','Được 1 bữa rồi... cảm ơn cậu 🥺💗','No được 50%! Hạnh phúc lắm 🐾','Ăn 3 bữa rồi! Thọ béo dần 🐾💗','Bốn bữa đủ cả! Thọ no căng và hạnh phúc tột đỉnh ✨🐾💗'];
-  document.getElementById('thoMood').textContent = moods[Math.min(meals,5)];
-  document.getElementById('hungerBar').style.width = Math.min(meals/4*100,100)+'%';
-  document.getElementById('totalMeals').textContent = state.totalMeals||0;
-  const today = state.checkins[todayKey]||{};
-  ['morning','afternoon','evening'].forEach(slot => {
-    const dot = document.getElementById('dot-'+slot);
-    if (!dot) return;
-    const an   = today[slot+'_An'];
-    const hien = today[slot+'_Hiền'];
-    const bothDone = an && hien && !an.skip && !hien.skip;
-    dot.classList.toggle('fed', !!bothDone);
-    // Half-fed style: one done, not both
-    dot.style.opacity = (an || hien) && !bothDone ? '0.5' : '1';
+  const meals=getTodayMeals();
+  const moods=['Đang đói lắm... 🥺 Cả 2 checkin đi nào!','Được 1 bữa rồi! Cảm ơn cả 2 🥺💗','No được 50%! Hạnh phúc lắm 🐾','Ăn 3 bữa rồi! Thọ béo dần 🐾💗','Bốn bữa đủ! Thọ no căng và hạnh phúc ✨🐾💗'];
+  document.getElementById('thoMood').textContent=moods[Math.min(meals,4)];
+  document.getElementById('hungerBar').style.width=Math.min(meals/4*100,100)+'%';
+  document.getElementById('totalMeals').textContent=state.totalMeals||0;
+  const start=new Date(TRIP_DATE), days=Math.floor((new Date()-start)/86400000);
+  document.getElementById('dayCount').textContent=days>=0?(days+1)+' / 17':'--';
+  // Update dots
+  const day=state.checkins[todayKey]||{};
+  ['morning','afternoon','evening'].forEach(slot=>{
+    const dot=document.getElementById('dot-'+slot); if(!dot) return;
+    const an=day[slot+'_An'], hien=day[slot+'_Hiền'];
+    const both=an&&hien&&!an.skip&&!hien.skip;
+    const one=(an||hien)&&!both;
+    dot.classList.toggle('fed',!!both);
+    dot.classList.toggle('half',!!one);
   });
-  // Place dot: fed only when BOTH An and Hiền have noted
-  const dotAn   = document.getElementById('dot-place-an');
-  const dotHien = document.getElementById('dot-place-hien');
-  const anDone   = !!today['place-an'];
-  const hienDone = !!today['place-hien'];
-  if (dotAn)   dotAn.classList.toggle('fed', anDone);
-  if (dotHien) dotHien.classList.toggle('fed', hienDone);
-  const start = new Date('2026-06-17');
-  const days  = Math.floor((new Date()-start)/86400000);
-  document.getElementById('dayCount').textContent = days>=0 ? `${days+1} / 17` : '--';
+  const dotP=document.getElementById('dot-place');
+  if(dotP){
+    const bothP=day['place-an']&&day['place-hien'];
+    const oneP=(day['place-an']||day['place-hien'])&&!bothP;
+    dotP.classList.toggle('fed',!!bothP);
+    dotP.classList.toggle('half',!!oneP);
+  }
 }
 
-// ── CAMERA ──
-let cameraStream=null, facingMode='user', currentSlot=null, capturedDataUrl=null;
-const SLOT_INFO = {
-  morning:   {label:'🌅 Bữa sáng',   emoji:'🌅'},
-  afternoon: {label:'☀️ Bữa chiều',  emoji:'☀️'},
-  evening:   {label:'🌙 Bữa tối',    emoji:'🌙'},
-};
-function getActiveSlot() {
-  const h = new Date().getHours();
-  if (h>=6 && h<12) return 'morning';
-  if (h>=12 && h<18) return 'afternoon';
-  return 'evening';
+// ══════════════════════════════════════
+// SCRATCH THỌ
+// ══════════════════════════════════════
+function scratchTho(e) {
+  playSfx('scratch');
+  const emojis=['💗','✨','🌟','💕','⭐','🎀'];
+  for(let i=0;i<5;i++) setTimeout(()=>{
+    const h=document.createElement('div');
+    h.style.cssText=`position:fixed;left:${e.clientX+(Math.random()-.5)*40}px;top:${e.clientY}px;font-size:${16+Math.random()*12}px;pointer-events:none;z-index:9999;animation:floatHeart 1.2s ease-out forwards`;
+    h.textContent=emojis[~~(Math.random()*emojis.length)];
+    document.body.appendChild(h); setTimeout(()=>h.remove(),1200);
+  },i*80);
+  const c=document.getElementById('thoCanvas');
+  c.style.animation='scratch .4s ease';
+  setTimeout(()=>c.style.animation='float 3s ease-in-out infinite',400);
+  showToast('Thọ: "gãi nữa đi! 🥺💗"',1500);
 }
-async function openCamera(slot) {
-  currentSlot = slot || getActiveSlot();
-  document.getElementById('overlaySlotBadge').textContent = SLOT_INFO[currentSlot].label;
+
+// ══════════════════════════════════════
+// CAMERA
+// ══════════════════════════════════════
+let cameraStream=null, facingMode='user', currentSlot=null, capturedDataUrl=null;
+const SLOT_INFO={morning:{label:'🌅 Bữa sáng'},afternoon:{label:'☀️ Bữa chiều'},evening:{label:'🌙 Bữa tối'}};
+function getActiveSlot(){const h=getVNHour();return h>=6&&h<12?'morning':h>=12&&h<18?'afternoon':'evening';}
+async function openCamera(slot){
+  currentSlot=slot||getActiveSlot();
+  document.getElementById('overlaySlotBadge').textContent=SLOT_INFO[currentSlot].label;
   document.getElementById('locketOverlay').classList.add('open');
   document.getElementById('locketPreview').classList.remove('show');
   playSfx('click');
   await startCameraStream();
 }
-async function startCameraStream() {
-  if (cameraStream) { cameraStream.getTracks().forEach(t=>t.stop()); cameraStream=null; }
-  try {
-    cameraStream = await navigator.mediaDevices.getUserMedia({video:{facingMode,width:{ideal:1080},height:{ideal:1080}},audio:false});
-    document.getElementById('cameraVideo').srcObject = cameraStream;
-  } catch(e) { showToast('📷 Không mở được camera. Thử chọn ảnh từ album!'); closeCamera(); }
+async function startCameraStream(){
+  if(cameraStream){cameraStream.getTracks().forEach(t=>t.stop());cameraStream=null;}
+  try{cameraStream=await navigator.mediaDevices.getUserMedia({video:{facingMode,width:{ideal:1080},height:{ideal:1080}},audio:false});document.getElementById('cameraVideo').srcObject=cameraStream;}
+  catch(e){showToast('📷 Không mở được camera. Thử chọn từ album!');closeCamera();}
 }
-function flipCamera() { facingMode = facingMode==='user'?'environment':'user'; playSfx('click'); startCameraStream(); }
-function capturePhoto() {
+function flipCamera(){facingMode=facingMode==='user'?'environment':'user';playSfx('click');startCameraStream();}
+function capturePhoto(){
   playSfx('feed');
-  const video=document.getElementById('cameraVideo'), canvas=document.getElementById('cameraCanvas');
-  const size = Math.min(video.videoWidth,video.videoHeight);
-  canvas.width=canvas.height=size;
-  const ctx=canvas.getContext('2d');
-  const ox=(video.videoWidth-size)/2, oy=(video.videoHeight-size)/2;
-  ctx.drawImage(video,ox,oy,size,size,0,0,size,size);
-  capturedDataUrl = canvas.toDataURL('image/jpeg',0.82);
+  const v=document.getElementById('cameraVideo'),c=document.getElementById('cameraCanvas');
+  const sz=Math.min(v.videoWidth,v.videoHeight);c.width=c.height=sz;
+  const ctx=c.getContext('2d');
+  ctx.drawImage(v,(v.videoWidth-sz)/2,(v.videoHeight-sz)/2,sz,sz,0,0,sz,sz);
+  capturedDataUrl=c.toDataURL('image/jpeg',.82);
   showPreview(capturedDataUrl);
 }
-function showPreview(dataUrl) { document.getElementById('previewImg').src=dataUrl; document.getElementById('locketPreview').classList.add('show'); }
-function retakePhoto() { playSfx('click'); document.getElementById('locketPreview').classList.remove('show'); capturedDataUrl=null; }
-function confirmPhoto() { if(!capturedDataUrl) return; finalSaveMeal(currentSlot,capturedDataUrl); closeCamera(); }
-function triggerGalleryPick() { playSfx('click'); document.getElementById('galleryFileInput').click(); }
-function handleGalleryPick(e) {
-  const file=e.target.files[0]; if(!file) return;
-  const reader=new FileReader();
-  reader.onload=ev=>{ capturedDataUrl=ev.target.result; showPreview(capturedDataUrl); };
-  reader.readAsDataURL(file); e.target.value='';
-}
-function closeCamera() {
-  document.getElementById('locketOverlay').classList.remove('open');
-  if (cameraStream) { cameraStream.getTracks().forEach(t=>t.stop()); cameraStream=null; }
-  capturedDataUrl=null;
-}
+function showPreview(d){document.getElementById('previewImg').src=d;document.getElementById('locketPreview').classList.add('show');}
+function retakePhoto(){playSfx('click');document.getElementById('locketPreview').classList.remove('show');capturedDataUrl=null;}
+function confirmPhoto(){if(!capturedDataUrl) return;finalSaveMeal(currentSlot,capturedDataUrl);closeCamera();}
+function triggerGalleryPick(){playSfx('click');document.getElementById('galleryFileInput').click();}
+function handleGalleryPick(e){const f=e.target.files[0];if(!f) return;const r=new FileReader();r.onload=ev=>{capturedDataUrl=ev.target.result;showPreview(capturedDataUrl);};r.readAsDataURL(f);e.target.value='';}
+function closeCamera(){document.getElementById('locketOverlay').classList.remove('open');if(cameraStream){cameraStream.getTracks().forEach(t=>t.stop());cameraStream=null;}capturedDataUrl=null;}
 
-// ── SAVE MEAL ──
-function finalSaveMeal(slot, photoDataUrl) {
-  if (!state.checkins[todayKey]) state.checkins[todayKey]={};
-  const userKey = slot+'_'+currentUser; // e.g. 'morning_An', 'evening_Hiền'
-  state.checkins[todayKey][userKey] = {photo:photoDataUrl, time:new Date().toISOString(), user:currentUser};
+// ══════════════════════════════════════
+// SAVE MEAL
+// ══════════════════════════════════════
+function finalSaveMeal(slot, photo) {
+  if(!state.checkins[todayKey]) state.checkins[todayKey]={};
+  const day=state.checkins[todayKey];
+  const key=slot+'_'+currentUser;
+  day[key]={photo,time:new Date().toISOString(),user:currentUser};
+  if(!state.photos) state.photos=[];
+  const idx=state.photos.findIndex(p=>p.date===todayKey&&p.slot===slot&&p.user===currentUser);
+  const entry={slot,date:todayKey,photo,time:new Date().toISOString(),user:currentUser};
+  if(idx>=0) state.photos[idx]=entry; else state.photos.push(entry);
 
-  // Check if both now done → count meal
-  const anKey   = slot+'_An';
-  const hienKey = slot+'_Hiền';
-  const wasAnDone   = !!state.checkins[todayKey][anKey];
-  const wasHienDone = !!state.checkins[todayKey][hienKey];
-  const bothDone = wasAnDone && wasHienDone;
+  const wasBoth=bothDoneForSlot(slot);
+  // Check if NOW both done (after saving)
+  const anKey=slot+'_An', hienKey=slot+'_Hiền';
+  const nowBoth=!!(day[anKey]&&day[hienKey]);
 
-  if (!state.photos) state.photos=[];
-  const idx = state.photos.findIndex(p=>p.date===todayKey&&p.slot===slot&&p.user===currentUser);
-  const entry = {slot,date:todayKey,photo:photoDataUrl,time:new Date().toISOString(),user:currentUser};
-  if (idx>=0) state.photos[idx]=entry; else state.photos.push(entry);
-
-  saveState();
-  // Sync ảnh lên Sheet để người kia thấy
-  syncUpload({type:'photo', date:todayKey, slot, user:currentUser, photo:photoDataUrl, time:new Date().toISOString()});
-  renderTho(); updateThoMood(); renderLocketFeed(); updatePills();
-  playSfx(bothDone ? 'feed' : 'place');
-
-  const slotName = {morning:'sáng',afternoon:'chiều',evening:'tối'};
-  const other = currentUser==='An' ? 'Hiền' : 'An';
-  if (bothDone) {
-    // Count meal only first time both done
-    const prevCount = state.totalMeals||0;
-    state.totalMeals = prevCount + 1;
-    saveState(); updateThoMood();
-    showToast(`🎉 Cả 2 đã checkin bữa ${slotName[slot]}! Thọ được ăn 🐾💗`);
+  if(nowBoth&&!wasBoth) {
+    // First time both done — count meal + celebrate
+    recalcTotalMeals();
+    saveState();
+    const slotLabel={morning:'bữa sáng',afternoon:'bữa chiều',evening:'bữa tối'};
+    showCelebrate('🎉 Thọ được ăn ' + slotLabel[slot] + '! 🐾💗');
+    playSfx('feed');
+    notifyTg(USERS[currentUser==='An'?'Hiền':'An'].chat,
+      USERS[currentUser].emoji+' '+currentUser+' vừa checkin! Cả 2 xong '+slotLabel[slot]+', Thọ được ăn rồi 🐾💗');
+    notifyTg(USERS[currentUser].chat, '✅ Cả 2 đã checkin '+slotLabel[slot]+'! Thọ no bụng rồi 🐾💗');
   } else {
-    showToast(`📸 ${currentUser} đã checkin! Chờ ${other} checkin bữa ${slotName[slot]} nữa nhé 🐾`);
+    saveState();
+    const other=currentUser==='An'?'Hiền':'An';
+    const slotLabel={morning:'sáng',afternoon:'chiều',evening:'tối'};
+    playSfx('place');
+    showToast('📸 '+currentUser+' đã checkin! Chờ '+other+' checkin bữa '+slotLabel[slot]+' nhé 🐾');
+    notifyTg(USERS[other].chat,
+      USERS[currentUser].emoji+' '+currentUser+' vừa checkin bữa '+slotLabel[slot]+'! Đến lượt '+other+' nè 📸');
   }
+  renderTho(); updateThoMood(); renderLocketFeed(); updatePills(); renderAlbum();
+  syncUpload({type:'photo',date:todayKey,slot,user:currentUser,photo,time:new Date().toISOString()});
 }
 
-// ── PILLS ──
-function updatePills() {
-  const today=state.checkins[todayKey]||{}, cur=getActiveSlot();
+// ══════════════════════════════════════
+// CELEBRATE ANIMATION
+// ══════════════════════════════════════
+function showCelebrate(msg) {
+  const el=document.getElementById('celebrateOverlay');
+  document.getElementById('celebrateMsg').textContent=msg;
+  el.classList.add('show');
+  // Shower of hearts
+  for(let i=0;i<12;i++) setTimeout(()=>{
+    const h=document.createElement('div');
+    h.style.cssText=`position:fixed;left:${Math.random()*100}vw;top:${Math.random()*50+20}vh;font-size:${20+Math.random()*20}px;pointer-events:none;z-index:9999;animation:floatHeart ${1+Math.random()}s ease-out forwards`;
+    h.textContent=['💗','✨','🌟','💕','🎉','🐾'][~~(Math.random()*6)];
+    document.body.appendChild(h); setTimeout(()=>h.remove(),2000);
+  },i*100);
+  // Animate Thọ
+  const c=document.getElementById('thoCanvas');
+  c.style.animation='feedCelebrate .6s ease';
+  setTimeout(()=>c.style.animation='float 3s ease-in-out infinite',700);
+  setTimeout(()=>el.classList.remove('show'),3000);
+}
+
+// ══════════════════════════════════════
+// PILLS
+// ══════════════════════════════════════
+function updatePills(){
+  const day=state.checkins[todayKey]||{}, cur=getActiveSlot();
   ['morning','afternoon','evening'].forEach(slot=>{
     const pill=document.getElementById('pill-'+slot); if(!pill) return;
-    pill.classList.remove('done','active');
-    const myKey = slot+'_'+currentUser;
-    if (today[myKey]) pill.classList.add('done');
-    else if (slot===cur) pill.classList.add('active');
+    pill.classList.remove('done','half','active');
+    const myKey=slot+'_'+currentUser;
+    const otherKey=slot+'_'+(currentUser==='An'?'Hiền':'An');
+    if(day[myKey]&&day[otherKey]&&!day[myKey].skip) pill.classList.add('done');
+    else if(day[myKey]&&!day[myKey].skip) pill.classList.add('half');
+    else if(slot===cur) pill.classList.add('active');
   });
+  const day2=state.checkins[todayKey]||{};
+  const cur2=getActiveSlot();
+  const myKey=cur2+'_'+currentUser;
+  const otherKey=cur2+'_'+(currentUser==='An'?'Hiền':'An');
   const sub=document.getElementById('triggerSub');
-  if (sub) {
-    const myKey = cur+'_'+currentUser;
-    const iDone = !!today[myKey];
-    const other = currentUser==='An'?'Hiền':'An';
-    const otherKey = cur+'_'+other;
-    const otherDone = !!today[otherKey];
-    if (iDone && otherDone) sub.textContent = `✅ Cả 2 đã checkin ${SLOT_INFO[cur].label}! 🐾`;
-    else if (iDone) sub.textContent = `✅ ${currentUser} xong! Chờ ${other} checkin 📸`;
-    else sub.textContent = `⏰ Đến giờ ${SLOT_INFO[cur].label.toLowerCase()}! Checkin nào 📸`;
+  if(sub){
+    if(day2[myKey]&&!day2[myKey].skip&&day2[otherKey]) sub.textContent='✅ Cả 2 đã checkin! Thọ no 🐾';
+    else if(day2[myKey]&&!day2[myKey].skip) sub.textContent='✅ '+currentUser+' xong! Chờ '+(currentUser==='An'?'Hiền':'An')+' checkin 📸';
+    else sub.textContent='⏰ Đến giờ '+SLOT_INFO[cur2].label.toLowerCase()+'! 📸';
   }
 }
 
-// ── FEED ──
-function renderLocketFeed() {
+// ══════════════════════════════════════
+// FEED
+// ══════════════════════════════════════
+function renderLocketFeed(){
   const feed=document.getElementById('locketFeed'); if(!feed) return;
   const photos=state.photos||[];
   const byDate={};
-  photos.forEach(p=>{ if(!byDate[p.date]) byDate[p.date]={}; byDate[p.date][p.slot+'_'+p.user]=p; });
-  if (!byDate[todayKey]) byDate[todayKey]={};
+  photos.forEach(p=>{if(!byDate[p.date]) byDate[p.date]={};byDate[p.date][p.slot+'_'+p.user]=p;});
+  if(!byDate[todayKey]) byDate[todayKey]={};
   const dates=Object.keys(byDate).sort((a,b)=>b.localeCompare(a));
-  const slotOrder=['morning','afternoon','evening'];
-  const slotEmoji={morning:'🌅',afternoon:'☀️',evening:'🌙'};
-  const slotLabel={morning:'Sáng',afternoon:'Chiều',evening:'Tối'};
-  const dateLabel=d=>{ if(d===todayKey) return '🌸 Hôm nay'; const dt=new Date(d); return dt.toLocaleDateString('vi-VN',{weekday:'short',day:'2-digit',month:'2-digit'}); };
-  feed.innerHTML = dates.map(date=>{
+  const SE={morning:'🌅',afternoon:'☀️',evening:'🌙'}, SL={morning:'Sáng',afternoon:'Chiều',evening:'Tối'};
+  const dl=d=>d===todayKey?'🌸 Hôm nay':new Date(d).toLocaleDateString('vi-VN',{weekday:'short',day:'2-digit',month:'2-digit'});
+  feed.innerHTML=dates.map(date=>{
     const dd=byDate[date];
-    const rows=slotOrder.map(slot=>{
+    const rows=['morning','afternoon','evening'].map(slot=>{
       const anP=dd[slot+'_An'], hienP=dd[slot+'_Hiền'];
-      // An cell — only An can tap to open camera
-      const anTap = currentUser==='An' ? `onclick="openCamera('${slot}')"` : `onclick="showToast('📸 Đây là ảnh của An!')"`;
-      const hienTap = currentUser==='Hiền' ? `onclick="openCamera('${slot}')"` : `onclick="showToast('📸 Đây là ảnh của Hiền!')"`;
-      // Cả 2 đều XEM được ảnh nhau, chỉ không up thay nhau thôi
-      const anCell = anP
-        ? `<div class="feed-photo" onclick="openViewer('${anP.photo}','${slotLabel[slot]} · An · ${date}')">`+
-          `<img src="${anP.photo}" alt=""><div class="slot-tag">${slotEmoji[slot]}</div><div class="feed-user-tag">An 💗</div></div>`
-        : `<div class="feed-photo" style="border:2px dashed var(--p3)" onclick="${currentUser==='An'?`openCamera('${slot}')`:`showToast('📸 Chờ An upload ảnh nhé!')`}">`+
-          `<div class="feed-photo-empty">${slotEmoji[slot]}<span>An · ${slotLabel[slot]}</span>${currentUser!=='An'?'<span style=\'font-size:9px;color:#ccc;\'>chờ An... ⏳</span>':''}</div></div>`;
-      const hienCell = hienP
-        ? `<div class="feed-photo" onclick="openViewer('${hienP.photo}','${slotLabel[slot]} · Hiền · ${date}')">`+
-          `<img src="${hienP.photo}" alt=""><div class="slot-tag">${slotEmoji[slot]}</div><div class="feed-user-tag">Hiền 💗</div></div>`
-        : `<div class="feed-photo" style="border:2px dashed var(--p3)" onclick="${currentUser==='Hiền'?`openCamera('${slot}')`:`showToast('📸 Chờ Hiền upload ảnh nhé!')`}">`+
-          `<div class="feed-photo-empty">${slotEmoji[slot]}<span>Hiền · ${slotLabel[slot]}</span>${currentUser!=='Hiền'?'<span style=\'font-size:9px;color:#ccc;\'>chờ Hiền... ⏳</span>':''}</div></div>`;
+      const anCell=anP
+        ?`<div class="feed-photo" onclick="openViewer('${anP.photo}','${SL[slot]} · An · ${date}')"><img src="${anP.photo}" alt=""><div class="slot-tag">${SE[slot]}</div><div class="feed-user-tag">🐻 An</div></div>`
+        :`<div class="feed-photo" style="border:2px dashed var(--p3)" onclick="${currentUser==='An'?`openCamera('${slot}')`:''}" ><div class="feed-photo-empty">${SE[slot]}<span>An${currentUser!=='An'?' ⏳':''}</span></div></div>`;
+      const hienCell=hienP
+        ?`<div class="feed-photo" onclick="openViewer('${hienP.photo}','${SL[slot]} · Hiền · ${date}')"><img src="${hienP.photo}" alt=""><div class="slot-tag">${SE[slot]}</div><div class="feed-user-tag">🐰 Hiền</div></div>`
+        :`<div class="feed-photo" style="border:2px dashed var(--p3)" onclick="${currentUser==='Hiền'?`openCamera('${slot}')`:''}" ><div class="feed-photo-empty">${SE[slot]}<span>Hiền${currentUser!=='Hiền'?' ⏳':''}</span></div></div>`;
       return `<div class="feed-row">${anCell}${hienCell}</div>`;
     }).join('');
-    return `<div class="feed-section"><div class="feed-date-header">${dateLabel(date)}</div>${rows}</div>`;
+    return `<div class="feed-section"><div class="feed-date-header">${dl(date)}</div>${rows}</div>`;
   }).join('');
 }
 
-// ── PLACES ──
-function updatePlaceForm() {
-  const today=state.checkins[todayKey]||{};
-  const mySlot = currentUser==='An' ? 'place-an' : 'place-hien';
-  const myDone   = !!today['place-an'];
-  const hienDone = !!today['place-hien'];
-  const iDone = !!today[mySlot];
-
-  // Show/hide already done notice
-  document.getElementById('placeAlreadyDone').style.display = iDone ? 'block' : 'none';
-
-  // Update title
-  document.getElementById('placeFormTitle').textContent = iDone
-    ? `✅ ${currentUser} đã note rồi!`
-    : `📍 ${currentUser} note địa điểm nào!`;
-
-  // Update status banner
-  let statusHtml = '<div style="display:flex;gap:8px;margin-bottom:12px;">';
-  statusHtml += `<div style="flex:1;padding:8px 12px;border-radius:12px;background:${myDone?'#fff0f7':'#f5f5f5'};border:2px solid ${myDone?'var(--p4)':'#ddd'};text-align:center;">`;
-  statusHtml += `<div style="font-size:18px;">${myDone?'✅':'⏳'}</div>`;
-  statusHtml += `<div style="font-size:11px;font-weight:700;color:${myDone?'var(--p5)':'#999'};">An</div>`;
-  if (today['place-an']) statusHtml += `<div style="font-size:10px;color:#aaa;">${today['place-an'].name||''}</div>`;
-  statusHtml += '</div>';
-  statusHtml += `<div style="flex:1;padding:8px 12px;border-radius:12px;background:${hienDone?'#f5f0ff':'#f5f5f5'};border:2px solid ${hienDone?'#a855f7':'#ddd'};text-align:center;">`;
-  statusHtml += `<div style="font-size:18px;">${hienDone?'✅':'⏳'}</div>`;
-  statusHtml += `<div style="font-size:11px;font-weight:700;color:${hienDone?'#a855f7':'#999'};">Hiền</div>`;
-  if (today['place-hien']) statusHtml += `<div style="font-size:10px;color:#aaa;">${today['place-hien'].name||''}</div>`;
-  statusHtml += '</div></div>';
-
-  // Inject status into form
-  let statusEl = document.getElementById('placeStatusBanner');
-  if (!statusEl) {
-    statusEl = document.createElement('div');
-    statusEl.id = 'placeStatusBanner';
-    const form = document.querySelector('.place-form');
-    form.insertBefore(statusEl, form.querySelector('label'));
-  }
-  statusEl.innerHTML = statusHtml;
-
-  // Both done = Thọ được ăn!
-  const bothDone = myDone && hienDone;
-  const dot = document.getElementById('dot-place-an');
-  if (dot) dot.classList.toggle('fed', bothDone);
+// ══════════════════════════════════════
+// PLACES
+// ══════════════════════════════════════
+function updatePlaceForm(){
+  const day=state.checkins[todayKey]||{};
+  const mySlot=currentUser==='An'?'place-an':'place-hien';
+  const anDone=!!day['place-an'], hienDone=!!day['place-hien'], iDone=!!day[mySlot];
+  document.getElementById('placeAlreadyDone').style.display=iDone?'block':'none';
+  document.getElementById('placeFormTitle').textContent=iDone?'✅ '+currentUser+' đã note rồi!':'📍 Note địa điểm nào!';
+  let html='<div style="display:flex;gap:8px;margin-bottom:12px">';
+  html+=`<div style="flex:1;padding:8px;border-radius:12px;background:${anDone?'#fff0f7':'#f5f5f5'};border:2px solid ${anDone?'var(--p4)':'#ddd'};text-align:center"><div style="font-size:18px">${anDone?'✅':'⏳'}</div><div style="font-size:11px;font-weight:700;color:${anDone?'var(--p5)':'#999'}">🐻 An</div>${day['place-an']?`<div style="font-size:10px;color:#aaa">${day['place-an'].name||''}</div>`:''}</div>`;
+  html+=`<div style="flex:1;padding:8px;border-radius:12px;background:${hienDone?'#f5f0ff':'#f5f5f5'};border:2px solid ${hienDone?'#a855f7':'#ddd'};text-align:center"><div style="font-size:18px">${hienDone?'✅':'⏳'}</div><div style="font-size:11px;font-weight:700;color:${hienDone?'#a855f7':'#999'}">🐰 Hiền</div>${day['place-hien']?`<div style="font-size:10px;color:#aaa">${day['place-hien'].name||''}</div>`:''}</div>`;
+  html+='</div>';
+  document.getElementById('placeStatusBanner').innerHTML=html;
 }
-function savePlace() {
+function savePlace(){
   const name=document.getElementById('placeName').value.trim();
-  if (!name) { showToast('📍 Nhập tên địa điểm trước nha!'); playSfx('error'); return; }
+  if(!name){showToast('📍 Nhập tên địa điểm trước nha!');playSfx('error');return;}
   const type=document.getElementById('placeType').value;
   const city=document.getElementById('placeCity').value;
   const note=document.getElementById('placeNote').value.trim();
-  const userSlot = currentUser==='An' ? 'place-an' : 'place-hien';
-  if (!state.checkins[todayKey]) state.checkins[todayKey]={};
-
-  const wasAnDone   = !!state.checkins[todayKey]['place-an'];
-  const wasHienDone = !!state.checkins[todayKey]['place-hien'];
-  const wasBothDone = wasAnDone && wasHienDone;
-
-  const place = {name,type,city,note,date:todayKey,time:new Date().toISOString(),user:currentUser};
-  state.places.push(place);
-  state.checkins[todayKey][userSlot] = {name,time:new Date().toISOString()};
-
-  const nowAnDone   = !!state.checkins[todayKey]['place-an'];
-  const nowHienDone = !!state.checkins[todayKey]['place-hien'];
-  const nowBothDone = nowAnDone && nowHienDone;
-
-  // Count meal only when BOTH done for the first time
-  if (nowBothDone && !wasBothDone) {
-    state.totalMeals = (state.totalMeals||0)+1;
-    showToast(`🎉 Cả An và Hiền đều note rồi! Thọ được ăn bữa địa điểm 🐾💗`);
+  const mySlot=currentUser==='An'?'place-an':'place-hien';
+  if(!state.checkins[todayKey]) state.checkins[todayKey]={};
+  const day=state.checkins[todayKey];
+  const wasAnDone=!!day['place-an'], wasHienDone=!!day['place-hien'];
+  day[mySlot]={name,time:new Date().toISOString()};
+  state.places=state.places||[];
+  state.places.push({name,type,city,note,date:todayKey,time:new Date().toISOString(),user:currentUser});
+  const nowBoth=!!day['place-an']&&!!day['place-hien'];
+  const wasBoth=wasAnDone&&wasHienDone;
+  if(nowBoth&&!wasBoth){
+    recalcTotalMeals();
+    saveState();
+    showCelebrate('🎉 Cả 2 note địa điểm! Thọ được ăn 🐾🗺️');
     playSfx('feed');
-  } else if (!wasBothDone) {
-    const other = currentUser==='An' ? 'Hiền' : 'An';
-    showToast(`📍 ${currentUser} đã note! Chờ ${other} note nữa là Thọ ăn 🐾`);
-    playSfx('place');
+    const other=currentUser==='An'?'Hiền':'An';
+    notifyTg(USERS[other].chat, USERS[currentUser].emoji+' '+currentUser+' vừa note địa điểm! Cả 2 xong rồi, Thọ được ăn bữa địa điểm 🐾🗺️');
+    notifyTg(USERS[currentUser].chat,'✅ Cả 2 đã note địa điểm! Thọ no bụng 🐾💗');
   } else {
-    showToast(`📍 Đã lưu thêm địa điểm của ${currentUser}!`);
+    saveState();
+    const other=currentUser==='An'?'Hiền':'An';
+    showToast('📍 '+currentUser+' đã note! Chờ '+other+' note nữa là Thọ ăn 🐾');
     playSfx('place');
+    notifyTg(USERS[other].chat, USERS[currentUser].emoji+' '+currentUser+' vừa note "'+name+'"! '+other+' note nữa là Thọ ăn nha 📍');
   }
-
-  saveState();
-  syncUpload({type:'place', date:todayKey, user:currentUser, place_name:name, place_type:type, city, note, time:new Date().toISOString()});
   renderTho(); updateThoMood(); renderPlaces(); updatePlaceForm();
-  document.getElementById('placeName').value=''; document.getElementById('placeNote').value='';
+  syncUpload({type:'place',date:todayKey,user:currentUser,place_name:name,place_type:type,city,note,time:new Date().toISOString()});
+  document.getElementById('placeName').value='';
+  document.getElementById('placeNote').value='';
 }
-function renderPlaces() {
+function renderPlaces(){
   const list=document.getElementById('placesList');
-  if (!state.places||!state.places.length) { list.innerHTML='<p style="text-align:center;color:#bbb;padding:20px;font-size:14px;">Chưa có địa điểm nào 🗺️</p>'; return; }
+  if(!state.places||!state.places.length){list.innerHTML='<p style="text-align:center;color:#bbb;padding:20px;font-size:14px">Chưa có địa điểm nào 🗺️</p>';return;}
   const icons={food:'🍜',activity:'🎡',cafe:'☕',shopping:'🛍️',beach:'🏖️'};
-  const userColor={An:'#ff4da6',Hiền:'#a855f7'};
+  const uc={An:'#ff4da6',Hiền:'#a855f7'};
   list.innerHTML=[...state.places].reverse().map(p=>`
     <div class="place-item">
       <div class="place-emoji">${icons[p.type]||'📍'}</div>
-      <div style="flex:1">
-        <div class="place-info-name">${p.name}</div>
-        <div class="place-info-note">${p.city}${p.note?' · '+p.note:''}</div>
-        <div class="place-info-meta">${p.date} · <span style="color:${userColor[p.user]||'#ff4da6'};font-weight:800;">${p.user}</span></div>
-      </div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:700;color:#2d1b36">${p.name}</div>
+      <div style="font-size:12px;color:#888">${p.city}${p.note?' · '+p.note:''}</div>
+      <div style="font-size:11px;color:${uc[p.user]||'var(--p4)'};font-weight:700;margin-top:4px">${p.date} · ${USERS[p.user]?USERS[p.user].emoji:''} ${p.user}</div></div>
     </div>`).join('');
 }
 
-// ── PHOTO VIEWER ──
-function openViewer(src,meta) { playSfx('click'); document.getElementById('viewerImg').src=src; document.getElementById('viewerMeta').textContent=meta; document.getElementById('photoViewer').classList.add('open'); }
-function closeViewer() { playSfx('click'); document.getElementById('photoViewer').classList.remove('open'); }
+// ══════════════════════════════════════
+// ALBUM
+// ══════════════════════════════════════
+let albumFilter='all', viewerIdx=0;
+function renderAlbum(){
+  const grid=document.getElementById('albumGrid'); if(!grid) return;
+  const photos=state.photos||[];
+  const anC=photos.filter(p=>p.user==='An').length;
+  const hC=photos.filter(p=>p.user==='Hiền').length;
+  document.getElementById('albumCountAn').textContent=anC;
+  document.getElementById('albumCountHien').textContent=hC;
+  document.getElementById('albumCountAll').textContent=photos.length;
+  let filtered=[...photos];
+  if(albumFilter==='An'||albumFilter==='Hiền') filtered=photos.filter(p=>p.user===albumFilter);
+  else if(['morning','afternoon','evening'].includes(albumFilter)) filtered=photos.filter(p=>p.slot===albumFilter);
+  filtered.sort((a,b)=>b.time.localeCompare(a.time));
+  window._albumFiltered=filtered;
+  if(!filtered.length){grid.innerHTML='<div class="album-empty">📸 Chưa có ảnh nào</div>';return;}
+  const SE={morning:'🌅',afternoon:'☀️',evening:'🌙'};
+  const UE={An:'🐻',Hiền:'🐰'};
+  grid.innerHTML=filtered.map((p,i)=>`
+    <div class="album-item" onclick="openAlbumPhoto(${i})">
+      <img src="${p.photo}" alt="" loading="lazy">
+      <div class="album-item-badge">${SE[p.slot]||''} ${p.date.slice(5)}</div>
+      <div class="album-item-user">${UE[p.user]||'📸'}</div>
+    </div>`).join('');
+}
+function filterAlbum(f,btn){
+  albumFilter=f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  playSfx('nav'); renderAlbum();
+}
+function openAlbumPhoto(i){viewerIdx=i;showViewerPhoto(i);document.getElementById('photoViewer').classList.add('open');}
+function showViewerPhoto(i){
+  const photos=window._albumFiltered||[]; if(!photos[i]) return;
+  const p=photos[i];
+  document.getElementById('viewerImg').src=p.photo;
+  document.getElementById('viewerMeta').textContent=(USERS[p.user]?USERS[p.user].emoji:'')+ ' '+p.user+' · '+{morning:'Sáng',afternoon:'Chiều',evening:'Tối'}[p.slot]+' · '+p.date+' ('+( i+1)+'/'+(photos.length)+')';
+}
+function openViewer(src,meta){playSfx('click');document.getElementById('viewerImg').src=src;document.getElementById('viewerMeta').textContent=meta;document.getElementById('photoViewer').classList.add('open');}
+function closeViewer(){playSfx('click');document.getElementById('photoViewer').classList.remove('open');}
+// Swipe viewer
+let _swipeX=0;
+document.addEventListener('touchstart',e=>{_swipeX=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',e=>{
+  if(!document.getElementById('photoViewer').classList.contains('open')) return;
+  const dx=e.changedTouches[0].clientX-_swipeX;
+  if(Math.abs(dx)<50) return;
+  const photos=window._albumFiltered||[];
+  if(dx<0&&viewerIdx<photos.length-1){viewerIdx++;showViewerPhoto(viewerIdx);playSfx('nav');}
+  else if(dx>0&&viewerIdx>0){viewerIdx--;showViewerPhoto(viewerIdx);playSfx('nav');}
+},{passive:true});
 
-// ── TOAST ──
-function showToast(msg,dur=3000) {
+// ══════════════════════════════════════
+// REMIND — giờ VN, 1 tiếng/lần checkin, 2 tiếng/lần địa điểm
+// ══════════════════════════════════════
+const _remindFired={};
+function checkRemind(){
+  if(!currentUser) return;
+  const day=state.checkins[todayKey]||{}, h=getVNHour(), dateH=todayKey+'_'+h;
+
+  // Checkin slots — remind mỗi tiếng nếu chưa xong
+  const photoSlots=[
+    {start:6,end:12,slot:'morning'},
+    {start:12,end:18,slot:'afternoon'},
+    {start:18,end:24,slot:'evening'},
+  ];
+  photoSlots.forEach(w=>{
+    if(h<w.start||h>=w.end) return;
+    const myKey=w.slot+'_'+currentUser;
+    if(day[myKey]&&!day[myKey].skip) return; // đã checkin rồi
+    const fKey='photo_'+w.slot+'_'+dateH;
+    if(_remindFired[fKey]) return;
+    _remindFired[fKey]=true;
+    const offset=Math.min(h-w.start,2);
+    const msgs={morning:['🌅 Thọ đói sáng rồi! Checkin ảnh nào 🐾','🌅 Ơ kìa! Thọ nhịn sáng tới giờ rồi 😢','🌅 Bụng Thọ kêu réo... Sáng chưa ăn gì! 🥺'],afternoon:['☀️ Trưa rồi! Thọ chờ ăn chiều 🐾','☀️ Nắng to mà Thọ chưa ăn chiều 😢','☀️ Thọ nằm dài vì đói chiều... 🥺'],evening:['🌙 Tối rồi! Cho Thọ ăn tối với 🐾','🌙 Thọ buồn ngủ mà chưa được ăn 😢','🌙 Đêm xuống rồi Thọ vẫn đói 🥺']};
+    showToast(msgs[w.slot][offset],5000); playSfx('error');
+  });
+
+  // Địa điểm — remind mỗi 2 tiếng từ 19h nếu chưa xong
+  if(h>=19&&h<24){
+    const myPlaceKey=currentUser==='An'?'place-an':'place-hien';
+    if(!day[myPlaceKey]){
+      const even2h=h%2===1; // chạy ở giờ lẻ (19,21,23)
+      const fKey='place_'+dateH;
+      if(even2h&&!_remindFired[fKey]){
+        _remindFired[fKey]=true;
+        const pMsgs=['📍 Note địa điểm hôm nay chưa? Thọ cần cả 2 mới ăn đc 🗺️','📍 Thọ muốn biết đi đâu! Note địa điểm điiiii 🐾','📍 Địa điểm đâu rồi? Thọ đói bữa này lắm 🥺'];
+        const pm=pMsgs[Math.min(Math.floor((h-19)/2),2)];
+        showToast(pm,5000); playSfx('error');
+      }
+    }
+  }
+}
+
+// ══════════════════════════════════════
+// TELEGRAM
+// ══════════════════════════════════════
+async function notifyTg(chatId,msg){
+  if(!chatId||!TG_TOKEN) return;
+  try{await fetch('https://api.telegram.org/bot'+TG_TOKEN+'/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:chatId,text:msg})});}
+  catch(e){}
+}
+
+// ══════════════════════════════════════
+// SYNC (Google Apps Script)
+// ══════════════════════════════════════
+async function syncUpload(entry){
+  if(!APPS_SCRIPT_URL) return;
+  try{await fetch(APPS_SCRIPT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'write',...entry}),mode:'no-cors'});}
+  catch(e){}
+}
+async function syncDownload(){
+  if(!APPS_SCRIPT_URL) return;
+  try{
+    const res=await fetch(APPS_SCRIPT_URL+'?action=read',{cache:'no-store'});
+    const rows=await res.json();
+    if(!rows||!rows.length) return;
+    let changed=false;
+    rows.forEach(row=>{
+      if(!row.photo||!row.slot||!row.user||row.date<START_DATE) return;
+      if(!state.checkins[row.date]) state.checkins[row.date]={};
+      if(row.type==='photo'){
+        const key=row.slot+'_'+row.user;
+        if(!state.photos) state.photos=[];
+        const exists=state.photos.find(p=>p.date===row.date&&p.slot===row.slot&&p.user===row.user);
+        if(!exists){state.photos.push({slot:row.slot,date:row.date,photo:row.photo,time:row.time,user:row.user});state.checkins[row.date][key]={photo:row.photo,time:row.time,user:row.user};changed=true;}
+      } else if(row.type==='place'){
+        const key=row.user==='An'?'place-an':'place-hien';
+        if(!state.checkins[row.date][key]){state.checkins[row.date][key]={name:row.place_name||'',time:row.time};state.places=state.places||[];if(!state.places.find(p=>p.date===row.date&&p.user===row.user&&p.name===row.place_name))state.places.push({name:row.place_name||'',type:row.place_type||'food',city:row.city||'Bangkok',note:row.note||'',date:row.date,time:row.time,user:row.user});changed=true;}
+      }
+    });
+    if(changed){recalcTotalMeals();saveState();renderAll();console.log('Synced!');}
+  }catch(e){}
+}
+let _syncInterval=null;
+function startSync(){syncDownload();if(_syncInterval) clearInterval(_syncInterval);_syncInterval=setInterval(syncDownload,30000);}
+
+// ══════════════════════════════════════
+// SETUP
+// ══════════════════════════════════════
+function saveScriptUrl(){
+  const url=document.getElementById('scriptUrlInput').value.trim();
+  if(!url){showToast('❌ Nhập URL trước nha!');return;}
+  APPS_SCRIPT_URL=url; localStorage.setItem('tho_script_url',url);
+  showToast('✅ Đã lưu! Bắt đầu sync...');playSfx('login');startSync();
+}
+function resetAllData(){
+  if(!confirm('Reset toàn bộ? Không hoàn tác được!')) return;
+  state={checkins:{},places:[],photos:[],totalMeals:0}; saveState();
+  renderAll(); showToast('✅ Đã reset! 🐾'); playSfx('reset');
+}
+
+// ══════════════════════════════════════
+// SOUND
+// ══════════════════════════════════════
+let _audioCtx=null;
+function getCtx(){if(!_audioCtx) _audioCtx=new(window.AudioContext||window.webkitAudioContext)();return _audioCtx;}
+function playSfx(type){
+  try{
+    const ctx=getCtx(); if(ctx.state==='suspended') ctx.resume();
+    const now=ctx.currentTime;
+    const sfxMap={click:[[440,.08],[550,.06]],feed:[[523,.15],[659,.15],[784,.15],[1047,.12]],login:[[523,.1],[659,.1],[784,.1],[1047,.1],[1319,.1]],error:[[220,.15],[196,.15]],scratch:[[800,.08],[600,.06],[900,.05]],place:[[659,.12],[880,.12],[1109,.1]],reset:[[440,.08],[330,.08]],nav:[[660,.06],[880,.05]]};
+    const notes=sfxMap[type]||sfxMap.click;
+    notes.forEach(([freq,vol],i)=>{
+      const osc=ctx.createOscillator(), gain=ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.frequency.value=freq; osc.type=type==='error'?'sawtooth':'sine';
+      const t=now+i*.13;
+      gain.gain.setValueAtTime(vol,t); gain.gain.exponentialRampToValueAtTime(.001,t+.25);
+      osc.start(t); osc.stop(t+.3);
+    });
+  }catch(e){}
+}
+
+// ══════════════════════════════════════
+// MISC UI
+// ══════════════════════════════════════
+function showToast(msg,dur=3000){
   const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
   clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),dur);
 }
-
-// ── NAV ──
-function showSection(id,btn) {
+function showSection(id,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('sec-'+id).classList.add('active');
   if(btn) btn.classList.add('active');
   playSfx('nav');
-  if(id==='tho') { renderTho(); updateThoMood(); }
-  if(id==='checkin') { renderLocketFeed(); updatePills(); }
-  if(id==='places') { renderPlaces(); updatePlaceForm(); }
   if(id==='album') renderAlbum();
+  if(id==='tho'){renderTho();updateThoMood();}
+  if(id==='checkin'){renderLocketFeed();updatePills();}
+  if(id==='places'){renderPlaces();updatePlaceForm();}
 }
 
-// ── REMIND ──
-function checkRemind() {
-  if (!currentUser) return;
-  const today=state.checkins[todayKey]||{}, h=new Date().getHours();
-  const windows=[
-    {start:6,end:12,slot:'morning',msgs:['🌅 Thọ đói sáng rồi! Checkin ảnh nào 🐾','🌅 Thọ nhịn sáng tới giờ rồi đó 😢','🌅 Bụng Thọ kêu réo... Sáng chưa ăn gì! 🥺']},
-    {start:12,end:18,slot:'afternoon',msgs:['☀️ Trưa rồi! Thọ chờ ăn chiều 🐾','☀️ Nắng to mà Thọ chưa ăn chiều 😢','☀️ Thọ nằm dài vì đói chiều... 🥺']},
-    {start:18,end:24,slot:'evening',msgs:['🌙 Tối rồi! Cho Thọ ăn tối với 🐾','🌙 Thọ buồn ngủ mà chưa được ăn 😢','🌙 Đêm xuống rồi Thọ vẫn đói 🥺']},
-    {start:19,end:24,slot:'place-'+(currentUser==='An'?'an':'hien'),msgs:['📍 Note địa điểm hôm nay chưa? Thọ cần cả 2 người note mới ăn đc 🗺️','📍 Thọ muốn biết đi đâu! Note địa điểm điiiii 🐾','📍 Địa điểm đâu rồi? Thọ đói bữa này lắm 🥺']},
-  ];
-  windows.forEach(w=>{
-    const myCheckinKey = w.slot.startsWith('place') ? w.slot : w.slot+'_'+currentUser;
-    const myDone = today[myCheckinKey];
-    if ((myDone&&!myDone.skip)||h<w.start||h>=w.end) return;
-    const msg=w.msgs[Math.min(h-w.start,w.msgs.length-1)];
-    showToast(msg,5000); playSfx('error');
-  });
-}
-
-// ── BOOT ──
-document.addEventListener('DOMContentLoaded', ()=>{
-  // Add ripple to all buttons
-  document.querySelectorAll('button,.btn-pink,.btn-outline,.nav-btn,.login-btn').forEach(btn=>{
-    btn.addEventListener('click', e=>{
-      const r=document.createElement('span'); r.className='ripple';
-      const rect=btn.getBoundingClientRect();
-      const size=Math.max(rect.width,rect.height);
-      r.style.cssText=`width:${size}px;height:${size}px;left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px;`;
-      btn.style.position='relative'; btn.style.overflow='hidden';
-      btn.appendChild(r); setTimeout(()=>r.remove(),600);
-    });
-  });
-  tryAutoLogin();
-});
-
-// ── ALBUM ──
-let albumFilter = 'all';
-
-function renderAlbum() {
-  const photos = state.photos || [];
-  const grid   = document.getElementById('albumGrid');
-  if (!grid) return;
-
-  // Stats
-  const anCount   = photos.filter(p=>p.user==='An').length;
-  const hienCount = photos.filter(p=>p.user==='Hiền').length;
-  document.getElementById('albumCountAn').textContent   = anCount;
-  document.getElementById('albumCountHien').textContent = hienCount;
-  document.getElementById('albumCountAll').textContent  = photos.length;
-
-  // Filter
-  let filtered = [...photos];
-  if (albumFilter === 'An' || albumFilter === 'Hiền') {
-    filtered = photos.filter(p => p.user === albumFilter);
-  } else if (['morning','afternoon','evening'].includes(albumFilter)) {
-    filtered = photos.filter(p => p.slot === albumFilter);
-  }
-
-  if (!filtered.length) {
-    grid.innerHTML = '<div class="album-empty">📸 Chưa có ảnh nào.<br>Checkin để điền vào album nhé!</div>';
-    return;
-  }
-
-  // Sort newest first
-  filtered.sort((a,b) => b.time.localeCompare(a.time));
-
-  const slotEmoji = {morning:'🌅',afternoon:'☀️',evening:'🌙'};
-  const userEmoji = {An:'🐻',Hiền:'🐰'};
-
-  grid.innerHTML = filtered.map((p,i) => `
-    <div class="album-item" onclick="openAlbumViewer(${i},filtered_${albumFilter.replace('/','_')})">
-      <img src="${p.photo}" alt="" loading="lazy">
-      <div class="album-item-badge">${slotEmoji[p.slot]||''} ${p.date.slice(5)}</div>
-      <div class="album-item-user">${userEmoji[p.user]||'📸'}</div>
-    </div>
-  `).join('');
-
-  // Store filtered for viewer navigation — attach to window
-  window._albumFiltered = filtered;
-
-  // Re-attach onclick properly
-  grid.querySelectorAll('.album-item').forEach((el,i) => {
-    el.onclick = () => openAlbumViewer(i);
-  });
-}
-
-function filterAlbum(filter, btn) {
-  albumFilter = filter;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  playSfx('nav');
-  renderAlbum();
-}
-
-// Album viewer with prev/next swipe
-let viewerIndex = 0;
-function openAlbumViewer(idx) {
-  viewerIndex = idx;
-  showAlbumPhoto(idx);
-  document.getElementById('photoViewer').classList.add('open');
-}
-function showAlbumPhoto(idx) {
-  const photos = window._albumFiltered || [];
-  if (!photos[idx]) return;
-  const p = photos[idx];
-  const slotLabel = {morning:'Sáng',afternoon:'Chiều',evening:'Tối'};
-  document.getElementById('viewerImg').src = p.photo;
-  document.getElementById('viewerMeta').textContent =
-    `${p.user==='An'?'🐻':'🐰'} ${p.user} · ${slotLabel[p.slot]||''} · ${p.date} (${idx+1}/${photos.length})`;
-}
-// Swipe left/right in viewer
-(function() {
-  let startX = 0;
-  document.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
-  document.addEventListener('touchend', e => {
-    if (!document.getElementById('photoViewer').classList.contains('open')) return;
-    const dx = e.changedTouches[0].clientX - startX;
-    if (Math.abs(dx) < 50) return;
-    const photos = window._albumFiltered || [];
-    if (dx < 0 && viewerIndex < photos.length-1) { viewerIndex++; showAlbumPhoto(viewerIndex); playSfx('nav'); }
-    else if (dx > 0 && viewerIndex > 0) { viewerIndex--; showAlbumPhoto(viewerIndex); playSfx('nav'); }
-  }, {passive:true});
-})();
-
-
-// ── SYNC VIA GOOGLE APPS SCRIPT ──
-
-// Upload 1 entry lên Sheet
-async function syncUpload(entry) {
-  if (!APPS_SCRIPT_URL) return;
-  try {
-    await fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({action:'write', ...entry}),
-      mode: 'no-cors'
-    });
-  } catch(e) { console.log('Sync upload error:', e); }
-}
-
-// Đọc toàn bộ ảnh từ Sheet về
-async function syncDownload() {
-  if (!APPS_SCRIPT_URL) return;
-  try {
-    const res = await fetch(APPS_SCRIPT_URL + '?action=read', {cache:'no-store'});
-    const rows = await res.json();
-    if (!rows || !rows.length) return;
-
-    let changed = false;
-    rows.forEach(row => {
-      // row: {date, slot, user, photo, time, type}
-      if (!row.photo || !row.slot || !row.user) return;
-      if (!state.photos) state.photos = [];
-      if (!state.checkins[row.date]) state.checkins[row.date] = {};
-
-      if (row.type === 'photo') {
-        const key = row.slot + '_' + row.user;
-        const exists = state.photos.find(p => p.date===row.date && p.slot===row.slot && p.user===row.user);
-        if (!exists) {
-          state.photos.push({slot:row.slot, date:row.date, photo:row.photo, time:row.time, user:row.user});
-          state.checkins[row.date][key] = {photo:row.photo, time:row.time, user:row.user};
-          changed = true;
-        }
-      } else if (row.type === 'place') {
-        const key = 'place-' + (row.user==='An'?'an':'hien');
-        if (!state.checkins[row.date][key]) {
-          state.checkins[row.date][key] = {name:row.place_name||'', time:row.time};
-          state.places = state.places || [];
-          const exists = state.places.find(p=>p.date===row.date&&p.user===row.user&&p.name===row.place_name);
-          if (!exists) state.places.push({name:row.place_name||'',type:row.place_type||'food',city:row.city||'Bangkok',note:row.note||'',date:row.date,time:row.time,user:row.user});
-          changed = true;
-        }
-      }
-    });
-
-    if (changed) {
-      // Recalculate totalMeals
-      let total = 0;
-      Object.keys(state.checkins).forEach(date => {
-        const day = state.checkins[date];
-        ['morning','afternoon','evening'].forEach(slot => {
-          if (day[slot+'_An'] && day[slot+'_Hiền'] && !day[slot+'_An'].skip) total++;
-        });
-        if (day['place-an'] && day['place-hien']) total++;
-      });
-      state.totalMeals = total;
-      saveState();
-      renderTho(); updateThoMood(); renderLocketFeed(); updatePills(); renderAlbum();
-      console.log('✅ Synced from Sheet!');
-    }
-  } catch(e) { console.log('Sync download error:', e); }
-}
-
-// Auto sync mỗi 30 giây
-let syncInterval = null;
-function startSync() {
-  syncDownload(); // sync ngay lần đầu
-  if (syncInterval) clearInterval(syncInterval);
-  syncInterval = setInterval(syncDownload, 30000);
-}
-
+// ══════════════════════════════════════
+// BOOT
+// ══════════════════════════════════════
+document.addEventListener('DOMContentLoaded',()=>{tryAutoLogin();});
 </script>
 </body>
 </html>
