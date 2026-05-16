@@ -417,9 +417,19 @@ body { font-family: var(--font); background:var(--p1); min-height:100vh; overflo
 <div class="section" id="sec-setup">
   <div class="sec-title">⚙️ Cài đặt</div>
   <div class="setup-card">
-    <h3>🗂️ Google Sheet</h3>
-    <p>Sheet ID đã được cài sẵn.</p>
-    <span class="tag">checkins</span><span class="tag">places</span><span class="tag">stats</span>
+    <h3>🗂️ Google Sheet Sync</h3>
+    <p>Paste Apps Script URL vào đây để 2 máy thấy ảnh của nhau:</p>
+    <input class="form-input" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/..." type="text" style="font-size:11px;">
+    <button class="btn-pink" onclick="saveScriptUrl()">💾 Lưu URL</button>
+    <p style="font-size:11px;color:#aaa;margin-top:8px;">Xem hướng dẫn tạo Apps Script bên dưới ⬇️</p>
+  </div>
+  <div class="setup-card">
+    <h3>📋 Cách setup sync</h3>
+    <p>1. Mở Google Sheet → Extensions → Apps Script</p>
+    <p>2. Paste code từ file <b>apps_script.js</b> vào</p>
+    <p>3. Deploy → Web App → Anyone → Copy URL</p>
+    <p>4. Paste URL vào ô trên → Lưu</p>
+    <p>5. Cả 2 máy paste cùng 1 URL là thấy ảnh nhau! 🐾</p>
   </div>
   <div class="setup-card">
     <h3>💗 Chuyến đi</h3>
@@ -502,6 +512,15 @@ function doLogin() {
   playSfx('login');
   initApp();
 }
+function saveScriptUrl() {
+  const url = document.getElementById('scriptUrlInput').value.trim();
+  if (!url) { showToast('❌ Nhập URL trước nha!'); return; }
+  APPS_SCRIPT_URL = url;
+  localStorage.setItem('tho_script_url', url);
+  showToast('✅ Đã lưu! Bắt đầu sync...');
+  playSfx('login');
+  startSync();
+}
 function doLogout() {
   playSfx('click');
   localStorage.removeItem('tho_user');
@@ -529,6 +548,10 @@ const SHEET_ID  = '1IlpRaWnhjfKiY6xQFlXjOJmGngt33jsaKbB5S_-Bka8';
 const TG_TOKEN  = '8670770445:AAFDRK7Di0s-WZP3JhGFmPp5UjAWVYjoh08';
 const TG_CHAT_AN   = '8683665534';
 const TG_CHAT_HIEN = '7237573793';
+
+// ── GOOGLE APPS SCRIPT WEB APP URL ──
+// Sau khi deploy Apps Script, paste URL vào đây
+let APPS_SCRIPT_URL = localStorage.getItem('tho_script_url') || '';
 
 // ── STATE ──
 let todayKey = new Date().toISOString().split('T')[0];
@@ -561,6 +584,7 @@ function initApp() {
   renderPlaces();
   updatePlaceForm();
   renderAlbum();
+  startSync(); // bắt đầu sync với Sheet
   setInterval(checkRemind, 60000);
   setTimeout(checkRemind, 3000);
   // Auto-play music
@@ -859,6 +883,8 @@ function finalSaveMeal(slot, photoDataUrl) {
   if (idx>=0) state.photos[idx]=entry; else state.photos.push(entry);
 
   saveState();
+  // Sync ảnh lên Sheet để người kia thấy
+  syncUpload({type:'photo', date:todayKey, slot, user:currentUser, photo:photoDataUrl, time:new Date().toISOString()});
   renderTho(); updateThoMood(); renderLocketFeed(); updatePills();
   playSfx(bothDone ? 'feed' : 'place');
 
@@ -1013,7 +1039,9 @@ function savePlace() {
     playSfx('place');
   }
 
-  saveState(); renderTho(); updateThoMood(); renderPlaces(); updatePlaceForm();
+  saveState();
+  syncUpload({type:'place', date:todayKey, user:currentUser, place_name:name, place_type:type, city, note, time:new Date().toISOString()});
+  renderTho(); updateThoMood(); renderPlaces(); updatePlaceForm();
   document.getElementById('placeName').value=''; document.getElementById('placeNote').value='';
 }
 function renderPlaces() {
@@ -1178,6 +1206,83 @@ function showAlbumPhoto(idx) {
     else if (dx > 0 && viewerIndex > 0) { viewerIndex--; showAlbumPhoto(viewerIndex); playSfx('nav'); }
   }, {passive:true});
 })();
+
+
+// ── SYNC VIA GOOGLE APPS SCRIPT ──
+
+// Upload 1 entry lên Sheet
+async function syncUpload(entry) {
+  if (!APPS_SCRIPT_URL) return;
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({action:'write', ...entry}),
+      mode: 'no-cors'
+    });
+  } catch(e) { console.log('Sync upload error:', e); }
+}
+
+// Đọc toàn bộ ảnh từ Sheet về
+async function syncDownload() {
+  if (!APPS_SCRIPT_URL) return;
+  try {
+    const res = await fetch(APPS_SCRIPT_URL + '?action=read', {cache:'no-store'});
+    const rows = await res.json();
+    if (!rows || !rows.length) return;
+
+    let changed = false;
+    rows.forEach(row => {
+      // row: {date, slot, user, photo, time, type}
+      if (!row.photo || !row.slot || !row.user) return;
+      if (!state.photos) state.photos = [];
+      if (!state.checkins[row.date]) state.checkins[row.date] = {};
+
+      if (row.type === 'photo') {
+        const key = row.slot + '_' + row.user;
+        const exists = state.photos.find(p => p.date===row.date && p.slot===row.slot && p.user===row.user);
+        if (!exists) {
+          state.photos.push({slot:row.slot, date:row.date, photo:row.photo, time:row.time, user:row.user});
+          state.checkins[row.date][key] = {photo:row.photo, time:row.time, user:row.user};
+          changed = true;
+        }
+      } else if (row.type === 'place') {
+        const key = 'place-' + (row.user==='An'?'an':'hien');
+        if (!state.checkins[row.date][key]) {
+          state.checkins[row.date][key] = {name:row.place_name||'', time:row.time};
+          state.places = state.places || [];
+          const exists = state.places.find(p=>p.date===row.date&&p.user===row.user&&p.name===row.place_name);
+          if (!exists) state.places.push({name:row.place_name||'',type:row.place_type||'food',city:row.city||'Bangkok',note:row.note||'',date:row.date,time:row.time,user:row.user});
+          changed = true;
+        }
+      }
+    });
+
+    if (changed) {
+      // Recalculate totalMeals
+      let total = 0;
+      Object.keys(state.checkins).forEach(date => {
+        const day = state.checkins[date];
+        ['morning','afternoon','evening'].forEach(slot => {
+          if (day[slot+'_An'] && day[slot+'_Hiền'] && !day[slot+'_An'].skip) total++;
+        });
+        if (day['place-an'] && day['place-hien']) total++;
+      });
+      state.totalMeals = total;
+      saveState();
+      renderTho(); updateThoMood(); renderLocketFeed(); updatePills(); renderAlbum();
+      console.log('✅ Synced from Sheet!');
+    }
+  } catch(e) { console.log('Sync download error:', e); }
+}
+
+// Auto sync mỗi 30 giây
+let syncInterval = null;
+function startSync() {
+  syncDownload(); // sync ngay lần đầu
+  if (syncInterval) clearInterval(syncInterval);
+  syncInterval = setInterval(syncDownload, 30000);
+}
 
 </script>
 </body>
