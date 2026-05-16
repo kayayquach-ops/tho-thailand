@@ -668,8 +668,29 @@ let cameraStream=null, facingMode='user', currentSlot=null, capturedDataUrl=null
 const SLOT_INFO={morning:{label:'🌅 Bữa sáng'},afternoon:{label:'☀️ Bữa chiều'},evening:{label:'🌙 Bữa tối'}};
 function getActiveSlot(){const h=getVNHour();return h>=6&&h<12?'morning':h>=12&&h<18?'afternoon':'evening';}
 async function openCamera(slot){
-  currentSlot=slot||getActiveSlot();
-  document.getElementById('overlaySlotBadge').textContent=SLOT_INFO[currentSlot].label;
+  const activeSlot = getActiveSlot();
+  const requestedSlot = slot || activeSlot;
+
+  // Kiểm tra slot hợp lệ
+  const slotWindows = {morning:[6,12], afternoon:[12,18], evening:[18,24]};
+  const [start, end] = slotWindows[requestedSlot];
+  const h = getVNHour();
+  const isCurrentSlot = h >= start && h < end;
+  const day = state.checkins[todayKey] || {};
+  const myKey = requestedSlot + '_' + currentUser;
+  const alreadyDone = day[myKey] && !day[myKey].skip;
+
+  // Không phải giờ này VÀ chưa checkin lần nào → không cho up
+  if (!isCurrentSlot && !alreadyDone) {
+    const slotLabel = {morning:'sáng (6h-12h)', afternoon:'chiều (12h-18h)', evening:'tối (18h-24h)'};
+    showToast('⏰ Chưa đến giờ bữa ' + slotLabel[requestedSlot] + ' nha!', 3000);
+    playSfx('error');
+    return;
+  }
+
+  currentSlot = requestedSlot;
+  document.getElementById('overlaySlotBadge').textContent = SLOT_INFO[currentSlot].label +
+    (alreadyDone && !isCurrentSlot ? ' (up bù)' : '');
   document.getElementById('locketOverlay').classList.add('open');
   document.getElementById('locketPreview').classList.remove('show');
   playSfx('click');
@@ -764,14 +785,28 @@ function showCelebrate(msg) {
 // ══════════════════════════════════════
 function updatePills(){
   const day=state.checkins[todayKey]||{}, cur=getActiveSlot();
+  const h=getVNHour();
+  const slotWindows={morning:[6,12],afternoon:[12,18],evening:[18,24]};
   ['morning','afternoon','evening'].forEach(slot=>{
     const pill=document.getElementById('pill-'+slot); if(!pill) return;
     pill.classList.remove('done','half','active');
+    pill.style.opacity='1'; pill.style.cursor='pointer';
     const myKey=slot+'_'+currentUser;
     const otherKey=slot+'_'+(currentUser==='An'?'Hiền':'An');
-    if(day[myKey]&&day[otherKey]&&!day[myKey].skip) pill.classList.add('done');
-    else if(day[myKey]&&!day[myKey].skip) pill.classList.add('half');
+    const iDone=day[myKey]&&!day[myKey].skip;
+    const bothDone=day[myKey]&&day[otherKey]&&!day[myKey].skip;
+    const [s,e]=slotWindows[slot];
+    const isTime=h>=s&&h<e;
+
+    if(bothDone) pill.classList.add('done');
+    else if(iDone) pill.classList.add('half');
     else if(slot===cur) pill.classList.add('active');
+
+    // Dim pill nếu chưa đến giờ VÀ chưa có ảnh (không cho up trước)
+    if(!isTime&&!iDone) {
+      pill.style.opacity='0.35';
+      pill.style.cursor='not-allowed';
+    }
   });
   const day2=state.checkins[todayKey]||{};
   const cur2=getActiveSlot();
@@ -779,9 +814,10 @@ function updatePills(){
   const otherKey=cur2+'_'+(currentUser==='An'?'Hiền':'An');
   const sub=document.getElementById('triggerSub');
   if(sub){
+    const slotTimes={morning:'6h-12h',afternoon:'12h-18h',evening:'18h-24h'};
     if(day2[myKey]&&!day2[myKey].skip&&day2[otherKey]) sub.textContent='✅ Cả 2 đã checkin! Thọ no 🐾';
     else if(day2[myKey]&&!day2[myKey].skip) sub.textContent='✅ '+currentUser+' xong! Chờ '+(currentUser==='An'?'Hiền':'An')+' checkin 📸';
-    else sub.textContent='⏰ Đến giờ '+SLOT_INFO[cur2].label.toLowerCase()+'! 📸';
+    else sub.textContent='⏰ '+SLOT_INFO[cur2].label+' ('+slotTimes[cur2]+') · Tap để checkin!';
   }
 }
 
@@ -803,10 +839,10 @@ function renderLocketFeed(){
       const anP=dd[slot+'_An'], hienP=dd[slot+'_Hiền'];
       const anCell=anP
         ?`<div class="feed-photo" onclick="openViewer('${anP.photo}','${SL[slot]} · An · ${date}')"><img src="${anP.photo}" alt=""><div class="slot-tag">${SE[slot]}</div><div class="feed-user-tag">🐻 An</div></div>`
-        :`<div class="feed-photo" style="border:2px dashed var(--p3)" onclick="${currentUser==='An'?`openCamera('${slot}')`:''}" ><div class="feed-photo-empty">${SE[slot]}<span>An${currentUser!=='An'?' ⏳':''}</span></div></div>`;
+        :`<div class="feed-photo" style="border:2px dashed var(--p3)" onclick="${currentUser==='An'?`openCamera('${slot}')`:''}" ><div class="feed-photo-empty">${SE[slot]}<span>An${currentUser!=='An'?' ⏳':''}</span>${currentUser==='An'?'<span style=\'font-size:9px;color:rgba(255,255,255,.7)\'>tap để checkin</span>':''}</div></div>`;
       const hienCell=hienP
         ?`<div class="feed-photo" onclick="openViewer('${hienP.photo}','${SL[slot]} · Hiền · ${date}')"><img src="${hienP.photo}" alt=""><div class="slot-tag">${SE[slot]}</div><div class="feed-user-tag">🐰 Hiền</div></div>`
-        :`<div class="feed-photo" style="border:2px dashed var(--p3)" onclick="${currentUser==='Hiền'?`openCamera('${slot}')`:''}" ><div class="feed-photo-empty">${SE[slot]}<span>Hiền${currentUser!=='Hiền'?' ⏳':''}</span></div></div>`;
+        :`<div class="feed-photo" style="border:2px dashed var(--p3)" onclick="${currentUser==='Hiền'?`openCamera('${slot}')`:''}" ><div class="feed-photo-empty">${SE[slot]}<span>Hiền${currentUser!=='Hiền'?' ⏳':''}</span>${currentUser==='Hiền'?'<span style=\'font-size:9px;color:rgba(255,255,255,.7)\'>tap để checkin</span>':''}</div></div>`;
       return `<div class="feed-row">${anCell}${hienCell}</div>`;
     }).join('');
     return `<div class="feed-section"><div class="feed-date-header">${dl(date)}</div>${rows}</div>`;
