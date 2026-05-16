@@ -192,6 +192,63 @@ body { font-family: var(--font); background:var(--p1); min-height:100vh; overflo
 .scratch-hearts { position:absolute; pointer-events:none; z-index:20; }
 .scratch-heart { position:absolute; font-size:20px; animation:floatHeart 1.2s ease-out forwards; }
 @keyframes floatHeart { 0%{transform:translateY(0) scale(0);opacity:1} 100%{transform:translateY(-80px) scale(1.2);opacity:0} }
+
+/* ── ALBUM ── */
+.album-header {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:12px; margin-top:16px;
+}
+.album-filter {
+  display:flex; gap:6px;
+}
+.filter-btn {
+  padding:6px 14px; border-radius:50px; border:2px solid var(--p3);
+  background:#fff; color:var(--p5); font-family:var(--font-title);
+  font-size:12px; font-weight:700; cursor:pointer; transition:all .2s;
+}
+.filter-btn.active {
+  background:linear-gradient(135deg,#ff4da6,#ff85c2);
+  color:#fff; border-color:transparent;
+}
+.album-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:3px;
+  margin-bottom:20px;
+}
+.album-item {
+  aspect-ratio:1; border-radius:10px; overflow:hidden;
+  position:relative; cursor:pointer; background:var(--p2);
+  transition:transform .15s;
+}
+.album-item:active { transform:scale(.96); }
+.album-item img { width:100%; height:100%; object-fit:cover; display:block; }
+.album-item-badge {
+  position:absolute; top:4px; left:4px;
+  background:rgba(0,0,0,.45); color:#fff;
+  font-size:9px; font-weight:800; padding:2px 6px;
+  border-radius:50px; backdrop-filter:blur(4px);
+}
+.album-item-user {
+  position:absolute; bottom:4px; right:4px;
+  font-size:14px;
+}
+.album-empty {
+  grid-column:1/-1; text-align:center;
+  padding:40px 20px; color:var(--p4);
+  font-weight:700; font-size:14px;
+}
+.album-stats {
+  display:flex; gap:8px; margin-bottom:16px;
+}
+.stat-box {
+  flex:1; background:#fff; border-radius:16px;
+  padding:12px; text-align:center;
+  box-shadow:0 3px 14px rgba(255,77,166,.1);
+}
+.stat-num {
+  font-family:var(--font-title); font-size:26px; font-weight:800;
+  color:var(--p5);
+}
+.stat-label { font-size:11px; color:#999; font-weight:700; }
 </style>
 </head>
 <body>
@@ -240,6 +297,7 @@ body { font-family: var(--font); background:var(--p1); min-height:100vh; overflo
   <button class="nav-btn active" onclick="showSection('tho',this)">🐾 Thọ</button>
   <button class="nav-btn" onclick="showSection('checkin',this)">📸 Checkin</button>
   <button class="nav-btn" onclick="showSection('places',this)">📍 Địa điểm</button>
+  <button class="nav-btn" onclick="showSection('album',this)">🖼️ Album</button>
   <button class="nav-btn" onclick="showSection('setup',this)">⚙️</button>
 </div>
 
@@ -321,6 +379,38 @@ body { font-family: var(--font); background:var(--p1); min-height:100vh; overflo
   </div>
   <div class="sec-title" style="margin-top:8px">🗺️ Đã ghé qua</div>
   <div id="placesList"></div>
+</div>
+
+<!-- ── ALBUM ── -->
+<div class="section" id="sec-album">
+  <div class="album-header">
+    <div class="sec-title" style="margin:0">🖼️ Album An × Hiền</div>
+  </div>
+  <div class="album-stats">
+    <div class="stat-box">
+      <div class="stat-num" id="albumCountAn">0</div>
+      <div class="stat-label">🐻 Ảnh của An</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num" id="albumCountHien">0</div>
+      <div class="stat-label">🐰 Ảnh của Hiền</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num" id="albumCountAll">0</div>
+      <div class="stat-label">💗 Tổng cộng</div>
+    </div>
+  </div>
+  <div class="album-filter" style="margin-bottom:14px;">
+    <button class="filter-btn active" onclick="filterAlbum('all',this)">Tất cả</button>
+    <button class="filter-btn" onclick="filterAlbum('An',this)">🐻 An</button>
+    <button class="filter-btn" onclick="filterAlbum('Hiền',this)">🐰 Hiền</button>
+    <button class="filter-btn" onclick="filterAlbum('morning',this)">🌅</button>
+    <button class="filter-btn" onclick="filterAlbum('afternoon',this)">☀️</button>
+    <button class="filter-btn" onclick="filterAlbum('evening',this)">🌙</button>
+  </div>
+  <div class="album-grid" id="albumGrid">
+    <div class="album-empty">📸 Chưa có ảnh nào.<br>Checkin để điền vào album nhé!</div>
+  </div>
 </div>
 
 <!-- ── SETUP ── -->
@@ -470,6 +560,7 @@ function initApp() {
   updatePills();
   renderPlaces();
   updatePlaceForm();
+  renderAlbum();
   setInterval(checkRemind, 60000);
   setTimeout(checkRemind, 3000);
   // Auto-play music
@@ -826,16 +917,17 @@ function renderLocketFeed() {
       // An cell — only An can tap to open camera
       const anTap = currentUser==='An' ? `onclick="openCamera('${slot}')"` : `onclick="showToast('📸 Đây là ảnh của An!')"`;
       const hienTap = currentUser==='Hiền' ? `onclick="openCamera('${slot}')"` : `onclick="showToast('📸 Đây là ảnh của Hiền!')"`;
+      // Cả 2 đều XEM được ảnh nhau, chỉ không up thay nhau thôi
       const anCell = anP
         ? `<div class="feed-photo" onclick="openViewer('${anP.photo}','${slotLabel[slot]} · An · ${date}')">`+
           `<img src="${anP.photo}" alt=""><div class="slot-tag">${slotEmoji[slot]}</div><div class="feed-user-tag">An 💗</div></div>`
-        : `<div class="feed-photo" style="border:2px dashed var(--p3)" ${currentUser==='An'?`onclick="openCamera('${slot}')"`:''}>`+
-          `<div class="feed-photo-empty">${slotEmoji[slot]}<span>An · ${slotLabel[slot]}</span></div></div>`;
+        : `<div class="feed-photo" style="border:2px dashed var(--p3)" onclick="${currentUser==='An'?`openCamera('${slot}')`:`showToast('📸 Chờ An upload ảnh nhé!')`}">`+
+          `<div class="feed-photo-empty">${slotEmoji[slot]}<span>An · ${slotLabel[slot]}</span>${currentUser!=='An'?'<span style=\'font-size:9px;color:#ccc;\'>chờ An... ⏳</span>':''}</div></div>`;
       const hienCell = hienP
         ? `<div class="feed-photo" onclick="openViewer('${hienP.photo}','${slotLabel[slot]} · Hiền · ${date}')">`+
           `<img src="${hienP.photo}" alt=""><div class="slot-tag">${slotEmoji[slot]}</div><div class="feed-user-tag">Hiền 💗</div></div>`
-        : `<div class="feed-photo" style="border:2px dashed var(--p3)" ${currentUser==='Hiền'?`onclick="openCamera('${slot}')"`:''}>`+
-          `<div class="feed-photo-empty">${slotEmoji[slot]}<span>Hiền · ${slotLabel[slot]}</span></div></div>`;
+        : `<div class="feed-photo" style="border:2px dashed var(--p3)" onclick="${currentUser==='Hiền'?`openCamera('${slot}')`:`showToast('📸 Chờ Hiền upload ảnh nhé!')`}">`+
+          `<div class="feed-photo-empty">${slotEmoji[slot]}<span>Hiền · ${slotLabel[slot]}</span>${currentUser!=='Hiền'?'<span style=\'font-size:9px;color:#ccc;\'>chờ Hiền... ⏳</span>':''}</div></div>`;
       return `<div class="feed-row">${anCell}${hienCell}</div>`;
     }).join('');
     return `<div class="feed-section"><div class="feed-date-header">${dateLabel(date)}</div>${rows}</div>`;
@@ -960,6 +1052,7 @@ function showSection(id,btn) {
   if(id==='tho') { renderTho(); updateThoMood(); }
   if(id==='checkin') { renderLocketFeed(); updatePills(); }
   if(id==='places') { renderPlaces(); updatePlaceForm(); }
+  if(id==='album') renderAlbum();
 }
 
 // ── REMIND ──
@@ -996,6 +1089,96 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
   tryAutoLogin();
 });
+
+// ── ALBUM ──
+let albumFilter = 'all';
+
+function renderAlbum() {
+  const photos = state.photos || [];
+  const grid   = document.getElementById('albumGrid');
+  if (!grid) return;
+
+  // Stats
+  const anCount   = photos.filter(p=>p.user==='An').length;
+  const hienCount = photos.filter(p=>p.user==='Hiền').length;
+  document.getElementById('albumCountAn').textContent   = anCount;
+  document.getElementById('albumCountHien').textContent = hienCount;
+  document.getElementById('albumCountAll').textContent  = photos.length;
+
+  // Filter
+  let filtered = [...photos];
+  if (albumFilter === 'An' || albumFilter === 'Hiền') {
+    filtered = photos.filter(p => p.user === albumFilter);
+  } else if (['morning','afternoon','evening'].includes(albumFilter)) {
+    filtered = photos.filter(p => p.slot === albumFilter);
+  }
+
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="album-empty">📸 Chưa có ảnh nào.<br>Checkin để điền vào album nhé!</div>';
+    return;
+  }
+
+  // Sort newest first
+  filtered.sort((a,b) => b.time.localeCompare(a.time));
+
+  const slotEmoji = {morning:'🌅',afternoon:'☀️',evening:'🌙'};
+  const userEmoji = {An:'🐻',Hiền:'🐰'};
+
+  grid.innerHTML = filtered.map((p,i) => `
+    <div class="album-item" onclick="openAlbumViewer(${i},filtered_${albumFilter.replace('/','_')})">
+      <img src="${p.photo}" alt="" loading="lazy">
+      <div class="album-item-badge">${slotEmoji[p.slot]||''} ${p.date.slice(5)}</div>
+      <div class="album-item-user">${userEmoji[p.user]||'📸'}</div>
+    </div>
+  `).join('');
+
+  // Store filtered for viewer navigation — attach to window
+  window._albumFiltered = filtered;
+
+  // Re-attach onclick properly
+  grid.querySelectorAll('.album-item').forEach((el,i) => {
+    el.onclick = () => openAlbumViewer(i);
+  });
+}
+
+function filterAlbum(filter, btn) {
+  albumFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  playSfx('nav');
+  renderAlbum();
+}
+
+// Album viewer with prev/next swipe
+let viewerIndex = 0;
+function openAlbumViewer(idx) {
+  viewerIndex = idx;
+  showAlbumPhoto(idx);
+  document.getElementById('photoViewer').classList.add('open');
+}
+function showAlbumPhoto(idx) {
+  const photos = window._albumFiltered || [];
+  if (!photos[idx]) return;
+  const p = photos[idx];
+  const slotLabel = {morning:'Sáng',afternoon:'Chiều',evening:'Tối'};
+  document.getElementById('viewerImg').src = p.photo;
+  document.getElementById('viewerMeta').textContent =
+    `${p.user==='An'?'🐻':'🐰'} ${p.user} · ${slotLabel[p.slot]||''} · ${p.date} (${idx+1}/${photos.length})`;
+}
+// Swipe left/right in viewer
+(function() {
+  let startX = 0;
+  document.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+  document.addEventListener('touchend', e => {
+    if (!document.getElementById('photoViewer').classList.contains('open')) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) < 50) return;
+    const photos = window._albumFiltered || [];
+    if (dx < 0 && viewerIndex < photos.length-1) { viewerIndex++; showAlbumPhoto(viewerIndex); playSfx('nav'); }
+    else if (dx > 0 && viewerIndex > 0) { viewerIndex--; showAlbumPhoto(viewerIndex); playSfx('nav'); }
+  }, {passive:true});
+})();
+
 </script>
 </body>
 </html>
