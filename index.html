@@ -438,7 +438,7 @@ function tryAutoLogin() {
 const SHEET_ID  = '1IlpRaWnhjfKiY6xQFlXjOJmGngt33jsaKbB5S_-Bka8';
 const TG_TOKEN  = '8670770445:AAFDRK7Di0s-WZP3JhGFmPp5UjAWVYjoh08';
 const TG_CHAT_AN   = '8683665534';
-const TG_CHAT_HIEN = '';
+const TG_CHAT_HIEN = '7237573793';
 
 // ── STATE ──
 let todayKey = new Date().toISOString().split('T')[0];
@@ -446,6 +446,16 @@ let state    = loadState();
 
 // ── INIT ──
 function initApp() {
+  // Ngày đầu tiên (16/5) bỏ qua sáng + chiều vì đã qua rồi
+  const FIRST_DAY = '2026-05-16';
+  const todayStr = new Date().toISOString().split('T')[0];
+  if (todayStr === FIRST_DAY) {
+    if (!state.checkins[FIRST_DAY]) state.checkins[FIRST_DAY] = {};
+    // Đánh dấu sáng + chiều là skip (không tính bữa ăn, chỉ tắt remind)
+    if (!state.checkins[FIRST_DAY]['morning'])   state.checkins[FIRST_DAY]['morning']   = {skip:true, time:'skip'};
+    if (!state.checkins[FIRST_DAY]['afternoon']) state.checkins[FIRST_DAY]['afternoon'] = {skip:true, time:'skip'};
+    saveState();
+  }
   generateSparkles();
   updateCountdown();
   setInterval(updateCountdown, 1000);
@@ -587,7 +597,7 @@ function getThoStage() {
 }
 function getTodayMeals() {
   const today = state.checkins[todayKey]||{};
-  let count = ['morning','afternoon','evening'].filter(s=>today[s]).length;
+  let count = ['morning','afternoon','evening'].filter(s=>today[s]&&!today[s].skip).length;
   // Place counts as 1 only when BOTH An and Hiền have noted
   if (today['place-an'] && today['place-hien']) count += 1;
   return count;
@@ -652,7 +662,7 @@ function updateThoMood() {
   const today = state.checkins[todayKey]||{};
   ['morning','afternoon','evening'].forEach(slot => {
     const dot = document.getElementById('dot-'+slot);
-    if (dot) dot.classList.toggle('fed', !!today[slot]);
+    if (dot) dot.classList.toggle('fed', !!(today[slot] && !today[slot].skip));
   });
   // Place dot: fed only when BOTH An and Hiền have noted
   const dotAn   = document.getElementById('dot-place-an');
@@ -921,7 +931,7 @@ function checkRemind() {
     {start:19,end:24,slot:'place-'+(currentUser==='An'?'an':'hien'),msgs:['📍 Note địa điểm hôm nay chưa? Thọ cần cả 2 người note mới ăn đc 🗺️','📍 Thọ muốn biết đi đâu! Note địa điểm điiiii 🐾','📍 Địa điểm đâu rồi? Thọ đói bữa này lắm 🥺']},
   ];
   windows.forEach(w=>{
-    if (today[w.slot]||h<w.start||h>=w.end) return;
+    if ((today[w.slot]&&!today[w.slot].skip)||h<w.start||h>=w.end) return;
     const msg=w.msgs[Math.min(h-w.start,w.msgs.length-1)];
     showToast(msg,5000); playSfx('error');
   });
