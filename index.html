@@ -452,8 +452,13 @@ function initApp() {
   if (todayStr === FIRST_DAY) {
     if (!state.checkins[FIRST_DAY]) state.checkins[FIRST_DAY] = {};
     // Đánh dấu sáng + chiều là skip (không tính bữa ăn, chỉ tắt remind)
-    if (!state.checkins[FIRST_DAY]['morning'])   state.checkins[FIRST_DAY]['morning']   = {skip:true, time:'skip'};
-    if (!state.checkins[FIRST_DAY]['afternoon']) state.checkins[FIRST_DAY]['afternoon'] = {skip:true, time:'skip'};
+    // Skip sáng + chiều cho cả 2 users ngày đầu
+    ['morning','afternoon'].forEach(slot => {
+      ['An','Hiền'].forEach(u => {
+        const k = slot+'_'+u;
+        if (!state.checkins[FIRST_DAY][k]) state.checkins[FIRST_DAY][k] = {skip:true, time:'skip'};
+      });
+    });
     saveState();
   }
   generateSparkles();
@@ -597,9 +602,15 @@ function getThoStage() {
 }
 function getTodayMeals() {
   const today = state.checkins[todayKey]||{};
-  let count = ['morning','afternoon','evening'].filter(s=>today[s]&&!today[s].skip).length;
-  // Place counts as 1 only when BOTH An and Hiền have noted
-  if (today['place-an'] && today['place-hien']) count += 1;
+  let count = 0;
+  // Photo slots: cần cả An + Hiền mới tính 1 bữa
+  ['morning','afternoon','evening'].forEach(slot => {
+    const an   = today[slot+'_An'];
+    const hien = today[slot+'_Hiền'];
+    if (an && hien && !an.skip && !hien.skip) count++;
+  });
+  // Place: cần cả An + Hiền mới tính 1 bữa
+  if (today['place-an'] && today['place-hien']) count++;
   return count;
 }
 function renderTho() {
@@ -662,7 +673,13 @@ function updateThoMood() {
   const today = state.checkins[todayKey]||{};
   ['morning','afternoon','evening'].forEach(slot => {
     const dot = document.getElementById('dot-'+slot);
-    if (dot) dot.classList.toggle('fed', !!(today[slot] && !today[slot].skip));
+    if (!dot) return;
+    const an   = today[slot+'_An'];
+    const hien = today[slot+'_Hiền'];
+    const bothDone = an && hien && !an.skip && !hien.skip;
+    dot.classList.toggle('fed', !!bothDone);
+    // Half-fed style: one done, not both
+    dot.style.opacity = (an || hien) && !bothDone ? '0.5' : '1';
   });
   // Place dot: fed only when BOTH An and Hiền have noted
   const dotAn   = document.getElementById('dot-place-an');
@@ -735,18 +752,36 @@ function closeCamera() {
 // ── SAVE MEAL ──
 function finalSaveMeal(slot, photoDataUrl) {
   if (!state.checkins[todayKey]) state.checkins[todayKey]={};
-  const isNew = !state.checkins[todayKey][slot];
-  state.checkins[todayKey][slot] = {photo:photoDataUrl, time:new Date().toISOString(), user:currentUser};
-  if (isNew) state.totalMeals = (state.totalMeals||0)+1;
+  const userKey = slot+'_'+currentUser; // e.g. 'morning_An', 'evening_Hiền'
+  state.checkins[todayKey][userKey] = {photo:photoDataUrl, time:new Date().toISOString(), user:currentUser};
+
+  // Check if both now done → count meal
+  const anKey   = slot+'_An';
+  const hienKey = slot+'_Hiền';
+  const wasAnDone   = !!state.checkins[todayKey][anKey];
+  const wasHienDone = !!state.checkins[todayKey][hienKey];
+  const bothDone = wasAnDone && wasHienDone;
+
   if (!state.photos) state.photos=[];
   const idx = state.photos.findIndex(p=>p.date===todayKey&&p.slot===slot&&p.user===currentUser);
   const entry = {slot,date:todayKey,photo:photoDataUrl,time:new Date().toISOString(),user:currentUser};
   if (idx>=0) state.photos[idx]=entry; else state.photos.push(entry);
+
   saveState();
   renderTho(); updateThoMood(); renderLocketFeed(); updatePills();
-  playSfx('feed');
-  const msgs={morning:'🌅 Thọ ăn sáng rồi!',afternoon:'☀️ Thọ ăn chiều rồi!',evening:'🌙 Thọ no bữa tối!'};
-  showToast((msgs[slot]||'🐾 Cho Thọ ăn!') + ' +1 bữa 💗');
+  playSfx(bothDone ? 'feed' : 'place');
+
+  const slotName = {morning:'sáng',afternoon:'chiều',evening:'tối'};
+  const other = currentUser==='An' ? 'Hiền' : 'An';
+  if (bothDone) {
+    // Count meal only first time both done
+    const prevCount = state.totalMeals||0;
+    state.totalMeals = prevCount + 1;
+    saveState(); updateThoMood();
+    showToast(`🎉 Cả 2 đã checkin bữa ${slotName[slot]}! Thọ được ăn 🐾💗`);
+  } else {
+    showToast(`📸 ${currentUser} đã checkin! Chờ ${other} checkin bữa ${slotName[slot]} nữa nhé 🐾`);
+  }
 }
 
 // ── PILLS ──
@@ -755,13 +790,20 @@ function updatePills() {
   ['morning','afternoon','evening'].forEach(slot=>{
     const pill=document.getElementById('pill-'+slot); if(!pill) return;
     pill.classList.remove('done','active');
-    if (today[slot]) pill.classList.add('done');
+    const myKey = slot+'_'+currentUser;
+    if (today[myKey]) pill.classList.add('done');
     else if (slot===cur) pill.classList.add('active');
   });
   const sub=document.getElementById('triggerSub');
   if (sub) {
-    const meals=['morning','afternoon','evening'].filter(s=>today[s]).length;
-    sub.textContent = today[cur] ? `✅ ${SLOT_INFO[cur].label} xong rồi · ${meals}/3 bữa` : `⏰ Đến giờ ${SLOT_INFO[cur].label.toLowerCase()}!`;
+    const myKey = cur+'_'+currentUser;
+    const iDone = !!today[myKey];
+    const other = currentUser==='An'?'Hiền':'An';
+    const otherKey = cur+'_'+other;
+    const otherDone = !!today[otherKey];
+    if (iDone && otherDone) sub.textContent = `✅ Cả 2 đã checkin ${SLOT_INFO[cur].label}! 🐾`;
+    else if (iDone) sub.textContent = `✅ ${currentUser} xong! Chờ ${other} checkin 📸`;
+    else sub.textContent = `⏰ Đến giờ ${SLOT_INFO[cur].label.toLowerCase()}! Checkin nào 📸`;
   }
 }
 
@@ -931,7 +973,9 @@ function checkRemind() {
     {start:19,end:24,slot:'place-'+(currentUser==='An'?'an':'hien'),msgs:['📍 Note địa điểm hôm nay chưa? Thọ cần cả 2 người note mới ăn đc 🗺️','📍 Thọ muốn biết đi đâu! Note địa điểm điiiii 🐾','📍 Địa điểm đâu rồi? Thọ đói bữa này lắm 🥺']},
   ];
   windows.forEach(w=>{
-    if ((today[w.slot]&&!today[w.slot].skip)||h<w.start||h>=w.end) return;
+    const myCheckinKey = w.slot.startsWith('place') ? w.slot : w.slot+'_'+currentUser;
+    const myDone = today[myCheckinKey];
+    if ((myDone&&!myDone.skip)||h<w.start||h>=w.end) return;
     const msg=w.msgs[Math.min(h-w.start,w.msgs.length-1)];
     showToast(msg,5000); playSfx('error');
   });
