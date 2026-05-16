@@ -2,10 +2,8 @@ name: 🐾 Thọ Remind
 
 on:
   schedule:
-    # Chạy mỗi tiếng (UTC) — VN = UTC+7
-    # 23h UTC = 6h VN, 1h UTC = 8h VN, ... etc
-    - cron: '0 * * * *'
-  workflow_dispatch:  # cho phép chạy tay để test
+    - cron: '0 * * * *'   # mỗi tiếng — GitHub chạy theo UTC
+  workflow_dispatch:
 
 jobs:
   remind:
@@ -13,95 +11,133 @@ jobs:
     steps:
       - name: 🐾 Check & Remind Thọ
         env:
-          TG_TOKEN: ${{ secrets.TG_TOKEN }}
-          CHAT_AN:  ${{ secrets.CHAT_AN }}
+          TG_TOKEN:  ${{ secrets.TG_TOKEN }}
+          CHAT_AN:   ${{ secrets.CHAT_AN }}
           CHAT_HIEN: ${{ secrets.CHAT_HIEN }}
-          SHEET_ID: ${{ secrets.SHEET_ID }}
+          SHEET_ID:  ${{ secrets.SHEET_ID }}
         run: |
           python3 << 'PYEOF'
-          import requests, json
-          from datetime import datetime, timezone, timedelta
+import os, requests
+from datetime import datetime, timezone, timedelta
 
-          TZ_VN = timezone(timedelta(hours=7))
-          now   = datetime.now(TZ_VN)
-          h     = now.hour
-          date  = now.strftime("%Y-%m-%d")
+TG_TOKEN  = os.environ.get("TG_TOKEN",  "8670770445:AAFDRK7Di0s-WZP3JhGFmPp5UjAWVYjoh08")
+CHAT_AN   = os.environ.get("CHAT_AN",   "8683665534")
+CHAT_HIEN = os.environ.get("CHAT_HIEN", "7237573793")
+SHEET_ID  = os.environ.get("SHEET_ID",  "1IlpRaWnhjfKiY6xQFlXjOJmGngt33jsaKbB5S_-Bka8")
+START_DATE = "2026-05-17"
 
-          import os
-          TG_TOKEN  = os.environ["TG_TOKEN"]
-          CHAT_AN   = os.environ.get("CHAT_AN", "")
-          CHAT_HIEN = os.environ.get("CHAT_HIEN", "7237573793")
-          SHEET_ID  = os.environ.get("SHEET_ID", "")
+TZ_VN = timezone(timedelta(hours=7))
+now   = datetime.now(TZ_VN)
+h     = now.hour
+date  = now.strftime("%Y-%m-%d")
 
-          def send(chat_id, msg):
-              if not chat_id: return
-              requests.post(
-                  f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage",
-                  json={"chat_id": chat_id, "text": msg},
-                  timeout=10
-              )
-              print(f"Sent to {chat_id}: {msg[:50]}")
+print(f"VN time: {now.strftime('%H:%M')} | Date: {date}")
 
-          def send_both(msg):
-              send(CHAT_AN, msg)
-              send(CHAT_HIEN, msg)
+if date < START_DATE:
+    print("Before start date, skip")
+    exit()
 
-          # ── Đọc trạng thái checkin từ Google Sheet ──
-          done = set()
-          if SHEET_ID:
-              try:
-                  url = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=checkins"
-                  r = requests.get(url, timeout=10)
-                  for line in r.text.strip().split("\n")[1:]:
-                      parts = line.strip().strip('"').split('","')
-                      if len(parts) >= 2 and parts[0] == date:
-                          done.add(parts[1])  # slot column
-              except Exception as e:
-                  print(f"Sheet read error: {e}")
+def send(chat_id, msg):
+    if not chat_id: return
+    try:
+        r = requests.post(
+            f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage",
+            json={"chat_id": chat_id, "text": msg}, timeout=10
+        )
+        print(f"Sent to {chat_id[:6]}***: {msg[:60]}")
+    except Exception as e:
+        print(f"TG error: {e}")
 
-          print(f"VN time: {now.strftime('%H:%M')} | Done slots: {done}")
+# ── Đọc checkin từ Google Sheet ──
+done_an   = set()  # slots An đã checkin hôm nay
+done_hien = set()  # slots Hiền đã checkin hôm nay
 
-          # ── Remind logic ──
-          windows = [
-              ("morning",   6,  12, [
-                  "🌅 Thọ đói sáng rồi! Checkin ảnh để cho Thọ ăn nào 🐾",
-                  "🌅 Ơ kìa! Thọ nhịn sáng tới giờ rồi đó 😢",
-                  "🌅 Bụng Thọ đang kêu réo đây này... 🥺 Sáng chưa ăn gì hết!",
-                  "🌅 Thọ ngồi chờ từ sáng đến giờ... 🐾💔",
-                  "🌅 Gần trưa rồi mà Thọ vẫn nhịn sáng nè 😭",
-              ]),
-              ("afternoon", 12, 18, [
-                  "☀️ Trưa rồi! Thọ chờ ăn chiều nãy giờ 🐾",
-                  "☀️ Nắng to lắm mà Thọ vẫn chưa có ăn chiều 😢",
-                  "☀️ Thọ đang nằm dài vì đói chiều... 🥺 Checkin đi!",
-                  "☀️ Thọ thấy mình đang ăn mà Thọ chưa được ăn... 🐾💔",
-                  "☀️ Gần tối rồi mà bữa chiều chưa checkin 😭",
-              ]),
-              ("evening",   18, 24, [
-                  "🌙 Tối rồi! Cho Thọ ăn tối với nào 🐾",
-                  "🌙 Thọ buồn ngủ mà chưa được ăn tối... 😢",
-                  "🌙 Đêm xuống rồi Thọ vẫn đói 🥺 Checkin ảnh tối đi!",
-                  "🌙 Thọ sắp ngủ mà bụng trống không... 🐾💔",
-              ]),
-              ("place",     19, 24, [
-                  "📍 Hôm nay đi đâu ăn gì chưa note cho Thọ biết với? 🗺️",
-                  "📍 Thọ muốn biết hôm nay đi đâu! Note địa điểm điiiii 🐾",
-                  "📍 Địa điểm hôm nay đâu rồi? Thọ đói bữa địa điểm lắm! 🥺",
-              ]),
-          ]
+try:
+    url = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=sync"
+    r = requests.get(url, timeout=10)
+    lines = r.text.strip().split("\n")
+    if len(lines) > 1:
+        headers = [h.strip().strip('"') for h in lines[0].split(",")]
+        type_i = headers.index("type") if "type" in headers else 0
+        date_i = headers.index("date") if "date" in headers else 1
+        slot_i = headers.index("slot") if "slot" in headers else 2
+        user_i = headers.index("user") if "user" in headers else 3
 
-          reminded = False
-          for slot, start_h, end_h, msgs in windows:
-              if slot in done:
-                  print(f"✅ {slot} already done, skip")
-                  continue
-              if h < start_h or h >= end_h:
-                  continue
-              offset = min(h - start_h, len(msgs) - 1)
-              msg = msgs[max(0, offset)]
-              send_both(msg)
-              reminded = True
+        for line in lines[1:]:
+            parts = [p.strip().strip('"') for p in line.split(",")]
+            if len(parts) <= max(type_i, date_i, slot_i, user_i): continue
+            if parts[date_i] != date: continue
+            row_type = parts[type_i]
+            row_slot = parts[slot_i]
+            row_user = parts[user_i]
+            if row_type == "photo":
+                if row_user == "An":   done_an.add(row_slot)
+                if row_user == "Hiền": done_hien.add(row_slot)
+            elif row_type == "place":
+                if row_user == "An":   done_an.add("place")
+                if row_user == "Hiền": done_hien.add("place")
+    print(f"Done An: {done_an} | Done Hiền: {done_hien}")
+except Exception as e:
+    print(f"Sheet read error: {e}")
 
-          if not reminded:
-              print("😴 Ngoài giờ remind hoặc đã checkin hết — không gửi gì")
-          PYEOF
+# ── Remind logic ──
+# Checkin ảnh: mỗi tiếng (GitHub chạy mỗi tiếng = 1 lần/tiếng tự động)
+photo_slots = [
+    ("morning",   6,  12),
+    ("afternoon", 12, 18),
+    ("evening",   18, 24),
+]
+
+for slot, start_h, end_h in photo_slots:
+    if h < start_h or h >= end_h: continue
+    offset = min(h - start_h, 2)
+
+    msgs = {
+        "morning": [
+            "🌅 Thọ đói sáng rồi! Checkin ảnh để cho Thọ ăn nào 🐾",
+            "🌅 Ơ kìa! Thọ nhịn sáng tới giờ rồi đó 😢",
+            "🌅 Bụng Thọ đang kêu réo... Sáng chưa ăn gì hết! 🥺",
+        ],
+        "afternoon": [
+            "☀️ Trưa rồi! Thọ chờ ăn chiều nãy giờ 🐾",
+            "☀️ Nắng to lắm mà Thọ vẫn chưa có ăn chiều 😢",
+            "☀️ Thọ đang nằm dài vì đói chiều... 🥺",
+        ],
+        "evening": [
+            "🌙 Tối rồi! Cho Thọ ăn tối với nào 🐾",
+            "🌙 Thọ buồn ngủ mà chưa được ăn tối... 😢",
+            "🌙 Đêm xuống rồi Thọ vẫn đói 🥺",
+        ],
+    }
+    msg = msgs[slot][offset]
+
+    # Chỉ nhắn người chưa checkin
+    if slot not in done_an:
+        send(CHAT_AN, msg)
+    else:
+        print(f"An done {slot}, skip")
+
+    if slot not in done_hien:
+        send(CHAT_HIEN, msg)
+    else:
+        print(f"Hiền done {slot}, skip")
+
+# Địa điểm: mỗi 2 tiếng từ 19h (chỉ fire giờ lẻ: 19, 21, 23)
+if h >= 19 and h < 24 and h % 2 == 1:
+    place_msgs = [
+        "📍 Hôm nay đi đâu ăn gì chưa note cho Thọ? Cả 2 note mới ăn đc 🗺️",
+        "📍 Thọ muốn biết hôm nay đi đâu! Note địa điểm điiiii 🐾",
+        "📍 Địa điểm đâu rồi? Thọ đói bữa địa điểm lắm 🥺",
+    ]
+    pmsg = place_msgs[min((h - 19) // 2, 2)]
+    if "place" not in done_an:
+        send(CHAT_AN, pmsg)
+    else:
+        print("An done place, skip")
+    if "place" not in done_hien:
+        send(CHAT_HIEN, pmsg)
+    else:
+        print("Hiền done place, skip")
+
+print("Done!")
+PYEOF
