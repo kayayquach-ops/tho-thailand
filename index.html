@@ -4,799 +4,224 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>🐾 Thọ &amp; Trip Thailand · An × Hiền</title>
+<title>🐾 Thọ & Thailand</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&family=Fredoka+One&family=Caveat:wght@600;700&subset=vietnamese&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root {
-  --font-vn: 'Nunito', 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
-  --pink1: #fff0f7;
-  --pink2: #ffd6ee;
-  --pink3: #ffadd8;
-  --pink4: #ff7bbf;
-  --pink5: #ff4da6;
-  --pink6: #e0178a;
-  --deep: #8c0056;
-  --gold: #ffdd00;
-  --sparkle1: #fff;
-  --sparkle2: #ffe0f0;
-  --r: 20px;
-}
-
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-
-body {
-  font-family: 'Nunito', 'Be Vietnam Pro', sans-serif;
-  background: var(--pink1);
-  min-height: 100vh;
-  overflow-x: hidden;
-  position: relative;
+:root {
+  --p1:#fff0f7; --p2:#ffd6ee; --p3:#ffadd8; --p4:#ff7bbf; --p5:#ff4da6; --p6:#d4006e;
+  --gold:#ffdd00; --white:#fff;
+  --font: 'Quicksand', 'Baloo 2', system-ui, sans-serif;
+  --font-title: 'Baloo 2', 'Quicksand', system-ui, sans-serif;
 }
+body { font-family: var(--font); background:var(--p1); min-height:100vh; overflow-x:hidden; }
 
 /* ── SPARKLE BG ── */
-.sparkle-bg {
-  position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+.sparkle-bg { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+@keyframes spFloat { 0%{transform:translateY(100vh) scale(0);opacity:0} 10%{opacity:1} 90%{opacity:.8} 100%{transform:translateY(-20vh) scale(1.5) rotate(360deg);opacity:0} }
+@keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+@keyframes heartbeat { 0%,100%{transform:scale(1)} 15%{transform:scale(1.15)} 30%{transform:scale(1)} 45%{transform:scale(1.08)} }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes shimmer { 0%{background-position:-200% center} 100%{background-position:200% center} }
+@keyframes wag { 0%,100%{transform:rotate(-8deg)} 50%{transform:rotate(8deg)} }
+@keyframes paw { 0%,100%{transform:translateY(0) rotate(-10deg)} 50%{transform:translateY(-6px) rotate(10deg)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 40%{transform:translateY(-14px)} 60%{transform:translateY(-6px)} }
+@keyframes ripple { 0%{transform:scale(1);opacity:.6} 100%{transform:scale(2.8);opacity:0} }
+@keyframes scratch { 0%{transform:rotate(0) scale(1)} 25%{transform:rotate(-15deg) scale(1.1)} 50%{transform:rotate(10deg) scale(.95)} 75%{transform:rotate(-5deg) scale(1.05)} 100%{transform:rotate(0) scale(1)} }
+@keyframes spin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+@keyframes popIn { 0%{transform:scale(0) rotate(-10deg);opacity:0} 70%{transform:scale(1.15) rotate(3deg)} 100%{transform:scale(1) rotate(0);opacity:1} }
+@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px) rotate(-3deg)} 75%{transform:translateX(6px) rotate(3deg)} }
+
+/* ── LOGIN SCREEN ── */
+.login-screen {
+  position:fixed; inset:0; z-index:999;
+  background:linear-gradient(145deg,#ff4da6,#ffadd8,#ff85c2,#ff4da6);
+  background-size:400% 400%; animation:shimmer 4s linear infinite;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:32px;
 }
-.sp {
-  position: absolute; border-radius: 50%;
-  animation: spFloat linear infinite;
-  opacity: 0;
-}
-@keyframes spFloat {
-  0%   { transform: translateY(100vh) scale(0); opacity: 0; }
-  10%  { opacity: 1; }
-  90%  { opacity: 0.8; }
-  100% { transform: translateY(-20vh) scale(1.5) rotate(360deg); opacity: 0; }
-}
-@keyframes blink {
-  0%,100% { opacity:1; transform:scale(1); }
-  50%      { opacity:0.4; transform:scale(0.7); }
-}
-@keyframes heartbeat {
-  0%,100% { transform:scale(1); }
-  15%      { transform:scale(1.15); }
-  30%      { transform:scale(1); }
-  45%      { transform:scale(1.08); }
-}
-@keyframes float {
-  0%,100% { transform:translateY(0); }
-  50%      { transform:translateY(-8px); }
-}
-@keyframes shimmer {
-  0%   { background-position: -200% center; }
-  100% { background-position:  200% center; }
-}
-@keyframes wag {
-  0%,100% { transform: rotate(-5deg); }
-  50%      { transform: rotate(5deg); }
-}
-@keyframes paw {
-  0%,100% { transform: translateY(0) rotate(-10deg); }
-  50%      { transform: translateY(-4px) rotate(10deg); }
-}
-@keyframes fadeSlideUp {
-  from { opacity:0; transform:translateY(30px); }
-  to   { opacity:1; transform:translateY(0); }
-}
-@keyframes ripple {
-  0%   { transform:scale(1); opacity:0.6; }
-  100% { transform:scale(2.5); opacity:0; }
-}
-@keyframes bounce {
-  0%,100% { transform:translateY(0); }
-  40%      { transform:translateY(-12px); }
-  60%      { transform:translateY(-6px); }
-}
+.login-logo { font-size:80px; animation:float 3s ease-in-out infinite; margin-bottom:8px; }
+.login-title { font-family:var(--font-title); font-size:32px; font-weight:800; color:#fff; text-shadow:0 2px 12px rgba(140,0,86,.4); margin-bottom:4px; }
+.login-sub { font-size:14px; color:rgba(255,255,255,.85); font-weight:600; margin-bottom:32px; }
+.login-card { background:#fff; border-radius:28px; padding:24px; width:100%; max-width:320px; box-shadow:0 12px 40px rgba(255,77,166,.35); }
+.login-card h3 { font-family:var(--font-title); font-size:18px; font-weight:800; color:var(--p6); margin-bottom:16px; text-align:center; }
+.login-input { width:100%; padding:13px 16px; border-radius:14px; border:2px solid var(--p2); font-family:var(--font); font-size:14px; color:#333; background:var(--p1); margin-bottom:10px; outline:none; transition:border-color .2s; }
+.login-input:focus { border-color:var(--p4); background:#fff; }
+.login-btn { width:100%; padding:14px; border-radius:50px; border:none; background:linear-gradient(135deg,#ff4da6,#ff85c2); color:#fff; font-family:var(--font-title); font-size:16px; font-weight:800; cursor:pointer; box-shadow:0 6px 20px rgba(255,77,166,.4); transition:transform .1s; margin-top:4px; }
+.login-btn:active { transform:scale(.96); }
+.login-err { color:#e00; font-size:13px; text-align:center; margin-top:8px; font-weight:700; min-height:20px; }
 
 /* ── HEADER ── */
 .header {
-  position: relative; z-index: 10;
-  background: linear-gradient(135deg, #ff4da6, #ff85c2, #ffb3d9, #ff4da6);
-  background-size: 400% 400%;
-  animation: shimmer 4s linear infinite;
-  padding: 20px 16px 28px;
-  text-align: center;
-  border-radius: 0 0 32px 32px;
-  box-shadow: 0 8px 30px rgba(255,77,166,0.45);
+  position:relative; z-index:10;
+  background:linear-gradient(135deg,#ff4da6,#ff85c2,#ffb3d9,#ff4da6);
+  background-size:400% 400%; animation:shimmer 4s linear infinite;
+  padding:16px 16px 24px; text-align:center;
+  border-radius:0 0 32px 32px;
+  box-shadow:0 8px 30px rgba(255,77,166,.45);
 }
-.header-title {
-  font-family: 'Nunito', 'Be Vietnam Pro', sans-serif; font-weight: 900;
-  font-size: 38px;
-  color: #fff;
-  text-shadow: 0 2px 12px rgba(140,0,86,0.4), 0 0 30px rgba(255,255,255,0.5);
-  letter-spacing: 1px;
-  animation: heartbeat 2.5s ease-in-out infinite;
-}
-.header-sub {
-  font-family: 'Caveat', cursive;
-  font-size: 20px;
-  color: #ffe0f0;
-  margin-top: 2px;
-}
-.header-date {
-  font-size: 13px;
-  color: rgba(255,255,255,0.85);
-  margin-top: 4px;
-  font-weight: 600;
-}
+.header-user { position:absolute; top:16px; right:16px; display:flex; align-items:center; gap:6px; }
+.user-badge { background:rgba(255,255,255,.25); color:#fff; font-size:12px; font-weight:700; padding:5px 12px; border-radius:50px; backdrop-filter:blur(4px); }
+.logout-btn { background:rgba(0,0,0,.2); color:#fff; border:none; width:28px; height:28px; border-radius:50%; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; }
+.header-title { font-family:var(--font-title); font-size:34px; font-weight:800; color:#fff; text-shadow:0 2px 12px rgba(140,0,86,.4); animation:heartbeat 2.5s ease-in-out infinite; }
+.header-sub { font-family:var(--font); font-size:15px; color:#ffe0f0; margin-top:2px; font-weight:600; }
 
 /* ── COUNTDOWN ── */
-.countdown-wrap {
-  position: relative; z-index: 5;
-  margin: -16px 16px 0;
-  background: #fff;
-  border-radius: 24px;
-  padding: 18px 16px;
-  box-shadow: 0 4px 24px rgba(255,77,166,0.2);
-  animation: fadeSlideUp 0.6s ease both;
-}
-.countdown-label {
-  text-align: center;
-  font-size: 13px;
-  color: var(--pink5);
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-.countdown-boxes {
-  display: flex; gap: 8px; justify-content: center;
-}
-.cd-box {
-  flex: 1; text-align: center;
-  background: linear-gradient(145deg, #fff0f7, #ffd6ee);
-  border-radius: 16px;
-  padding: 10px 4px;
-  border: 2px solid var(--pink3);
-  position: relative; overflow: hidden;
-}
-.cd-box::before {
-  content: '';
-  position: absolute; inset: -50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 60%);
-  animation: blink 2s ease-in-out infinite;
-}
-.cd-num {
-  font-family: 'Nunito', 'Be Vietnam Pro', sans-serif; font-weight: 900;
-  font-size: 32px;
-  color: var(--pink5);
-  line-height: 1;
-  text-shadow: 0 2px 8px rgba(255,77,166,0.3);
-}
-.cd-unit {
-  font-size: 10px;
-  color: var(--pink6);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
+.countdown-wrap { position:relative; z-index:5; margin:-16px 16px 0; background:#fff; border-radius:24px; padding:16px; box-shadow:0 4px 24px rgba(255,77,166,.2); animation:fadeUp .6s ease both; }
+.countdown-label { text-align:center; font-size:12px; color:var(--p5); font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:10px; }
+.countdown-boxes { display:flex; gap:8px; justify-content:center; }
+.cd-box { flex:1; text-align:center; background:linear-gradient(145deg,#fff0f7,#ffd6ee); border-radius:16px; padding:10px 4px; border:2px solid var(--p3); position:relative; overflow:hidden; }
+.cd-num { font-family:var(--font-title); font-size:30px; font-weight:800; color:var(--p5); line-height:1; }
+.cd-unit { font-size:10px; color:var(--p6); font-weight:700; text-transform:uppercase; }
 
 /* ── NAV ── */
-.nav {
-  position: relative; z-index: 5;
-  display: flex; gap: 8px;
-  padding: 16px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.nav::-webkit-scrollbar { display: none; }
-.nav-btn {
-  flex: none;
-  padding: 10px 18px;
-  border-radius: 50px;
-  border: 2px solid var(--pink3);
-  background: #fff;
-  color: var(--pink5);
-  font-family: 'Nunito', 'Be Vietnam Pro', sans-serif;
-  font-size: 13px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.2s;
-  white-space: nowrap;
-  display: flex; align-items: center; gap: 6px;
-}
-.nav-btn.active, .nav-btn:active {
-  background: linear-gradient(135deg, #ff4da6, #ff85c2);
-  color: #fff;
-  border-color: transparent;
-  box-shadow: 0 4px 16px rgba(255,77,166,0.4);
-  transform: translateY(-2px);
-}
+.nav { position:relative; z-index:5; display:flex; gap:8px; padding:16px; overflow-x:auto; scrollbar-width:none; }
+.nav::-webkit-scrollbar { display:none; }
+.nav-btn { flex:none; padding:10px 16px; border-radius:50px; border:2px solid var(--p3); background:#fff; color:var(--p5); font-family:var(--font-title); font-size:13px; font-weight:700; cursor:pointer; transition:all .2s; white-space:nowrap; display:flex; align-items:center; gap:5px; }
+.nav-btn.active { background:linear-gradient(135deg,#ff4da6,#ff85c2); color:#fff; border-color:transparent; box-shadow:0 4px 16px rgba(255,77,166,.4); transform:translateY(-2px); }
 
 /* ── SECTIONS ── */
-.section {
-  display: none;
-  padding: 0 16px 100px;
-  position: relative; z-index: 5;
-  animation: fadeSlideUp 0.4s ease both;
-}
-.section.active { display: block; }
+.section { display:none; padding:0 16px 100px; position:relative; z-index:5; animation:fadeUp .4s ease both; }
+.section.active { display:block; }
+.sec-title { font-family:var(--font-title); font-size:20px; font-weight:800; background:linear-gradient(135deg,#ff4da6,#c8266f); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:14px; margin-top:16px; }
 
-/* ── THỌ SECTION ── */
-.tho-card {
-  background: #fff;
-  border-radius: 28px;
-  padding: 20px;
-  box-shadow: 0 6px 32px rgba(255,77,166,0.18);
-  text-align: center;
-  margin-bottom: 16px;
-}
-.tho-name {
-  font-family: 'Fredoka One', cursive;
-  font-size: 28px;
-  background: linear-gradient(135deg, #ff4da6, #c8266f);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.tho-stage-label {
-  font-size: 12px;
-  color: var(--pink4);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
-/* The dog SVG canvas */
-.tho-canvas {
-  width: 200px; height: 200px;
-  margin: 0 auto 12px;
-  animation: float 3s ease-in-out infinite;
-  position: relative;
-}
-.tho-hunger {
-  display: flex; gap: 8px; justify-content: center; margin: 12px 0;
-}
-.meal-dot {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  border: 3px solid var(--pink3);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-  background: #fff;
-  transition: all 0.3s;
-}
-.meal-dot.fed {
-  background: linear-gradient(135deg, #ff4da6, #ffadd8);
-  border-color: var(--pink5);
-  box-shadow: 0 0 12px rgba(255,77,166,0.4);
-  animation: bounce 1s ease;
-}
-.tho-mood {
-  font-size: 14px; font-weight: 700;
-  color: var(--pink6);
-  margin-top: 4px;
-}
-.hunger-bar-wrap {
-  margin: 8px 16px;
-  background: var(--pink2);
-  border-radius: 50px;
-  height: 12px;
-  overflow: hidden;
-}
-.hunger-bar {
-  height: 100%;
-  border-radius: 50px;
-  background: linear-gradient(90deg, #ff4da6, #ffadd8, #ff4da6);
-  background-size: 200% 100%;
-  animation: shimmer 2s linear infinite;
-  transition: width 0.8s ease;
-}
+/* ── THỌ CARD ── */
+.tho-card { background:#fff; border-radius:28px; padding:20px; box-shadow:0 6px 32px rgba(255,77,166,.18); text-align:center; margin-bottom:16px; }
+.tho-stage-label { font-size:12px; color:var(--p4); font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; }
+.tho-canvas { width:200px; height:200px; margin:0 auto 12px; animation:float 3s ease-in-out infinite; cursor:pointer; position:relative; }
+.tho-canvas:active { animation:scratch .4s ease; }
+.tho-name { font-family:var(--font-title); font-size:26px; font-weight:800; background:linear-gradient(135deg,#ff4da6,#c8266f); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.tho-mood { font-size:14px; font-weight:700; color:var(--p6); margin-top:4px; }
+.hunger-bar-wrap { margin:8px 16px; background:var(--p2); border-radius:50px; height:12px; overflow:hidden; }
+.hunger-bar { height:100%; border-radius:50px; background:linear-gradient(90deg,#ff4da6,#ffadd8,#ff4da6); background-size:200% 100%; animation:shimmer 2s linear infinite; transition:width .8s ease; }
+.tho-hunger { display:flex; gap:8px; justify-content:center; margin:12px 0; }
+.meal-dot { width:38px; height:38px; border-radius:50%; border:3px solid var(--p3); display:flex; align-items:center; justify-content:center; font-size:18px; background:#fff; transition:all .3s; cursor:default; }
+.meal-dot.fed { background:linear-gradient(135deg,#ff4da6,#ffadd8); border-color:var(--p5); box-shadow:0 0 12px rgba(255,77,166,.4); animation:bounce .6s ease; }
 
-/* ── CHECKIN ── */
-.slot-card {
-  background: #fff;
-  border-radius: 24px;
-  padding: 16px;
-  box-shadow: 0 4px 20px rgba(255,77,166,0.12);
-  margin-bottom: 12px;
-  border: 2px solid transparent;
-  transition: all 0.3s;
-}
-.slot-card.done {
-  border-color: var(--pink4);
-  background: linear-gradient(145deg, #fff, #fff5fa);
-}
-.slot-header {
-  display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
-}
-.slot-icon {
-  width: 42px; height: 42px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px;
-  flex-shrink: 0;
-}
-.slot-title { font-size: 16px; font-weight: 800; color: #2d1b36; }
-.slot-time { font-size: 11px; color: #999; font-weight: 600; }
-.slot-status {
-  margin-left: auto;
-  font-size: 11px; font-weight: 800;
-  padding: 4px 10px; border-radius: 50px;
-}
-.status-done { background: #fff0f7; color: var(--pink5); }
-.status-waiting { background: #f5f5f5; color: #999; }
-.status-active { background: #fff0f7; color: var(--pink5); animation: blink 1.5s infinite; }
+/* ── LOCKET CAMERA ── */
+.locket-overlay { display:none; position:fixed; inset:0; z-index:500; background:#000; flex-direction:column; }
+.locket-overlay.open { display:flex; }
+.locket-viewfinder { flex:1; position:relative; overflow:hidden; background:#111; }
+.locket-viewfinder video { width:100%; height:100%; object-fit:cover; }
+.locket-viewfinder canvas { display:none; }
+.locket-topbar { position:absolute; top:0; left:0; right:0; padding:52px 20px 16px; display:flex; align-items:center; justify-content:space-between; background:linear-gradient(to bottom,rgba(0,0,0,.55),transparent); z-index:2; }
+.locket-slot-badge { background:rgba(255,77,166,.85); color:#fff; font-weight:800; font-size:13px; padding:6px 14px; border-radius:50px; }
+.locket-close { width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,.35); border:none; color:#fff; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.locket-shutter-wrap { position:absolute; bottom:32px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:32px; }
+.locket-shutter { width:74px; height:74px; border-radius:50%; background:#fff; border:4px solid rgba(255,255,255,.4); box-shadow:0 0 0 3px #fff,0 0 0 6px rgba(255,255,255,.3); cursor:pointer; transition:transform .1s; }
+.locket-shutter:active { transform:scale(.9); }
+.locket-flip { width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,.18); border:2px solid rgba(255,255,255,.35); display:flex; align-items:center; justify-content:center; font-size:20px; cursor:pointer; color:#fff; }
+.locket-gallery-pick { width:44px; height:44px; border-radius:12px; background:rgba(255,255,255,.18); border:2px solid rgba(255,255,255,.35); display:flex; align-items:center; justify-content:center; font-size:20px; cursor:pointer; color:#fff; overflow:hidden; }
+.locket-preview { display:none; position:absolute; inset:0; z-index:10; background:#000; flex-direction:column; }
+.locket-preview.show { display:flex; }
+.locket-preview img { flex:1; width:100%; object-fit:cover; }
+.locket-preview-bar { padding:20px 24px 40px; background:linear-gradient(to top,rgba(0,0,0,.8),transparent); position:absolute; bottom:0; left:0; right:0; display:flex; gap:12px; }
+.btn-confirm { flex:1; padding:14px; border-radius:50px; border:none; background:linear-gradient(135deg,#ff4da6,#ff85c2); color:#fff; font-family:var(--font-title); font-size:15px; font-weight:800; cursor:pointer; }
+.btn-retake { flex:1; padding:14px; border-radius:50px; border:2px solid rgba(255,255,255,.5); background:transparent; color:#fff; font-family:var(--font-title); font-size:15px; font-weight:800; cursor:pointer; }
 
-/* ── PHOTO PREVIEW ── */
-.photo-area {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1;
-  border-radius: 20px;
-  overflow: hidden;
-  background: linear-gradient(145deg, var(--pink1), var(--pink2));
-  border: 2px dashed var(--pink3);
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-.photo-area img {
-  width: 100%; height: 100%; object-fit: cover; border-radius: 18px;
-}
-.photo-placeholder {
-  text-align: center;
-}
-.photo-placeholder .cam-icon { font-size: 48px; margin-bottom: 8px; }
-.photo-placeholder p { font-size: 13px; color: var(--pink4); font-weight: 700; }
-.photo-input { display: none; }
+/* ── CHECKIN TRIGGER ── */
+.locket-trigger-area { position:relative; overflow:hidden; border-radius:28px; background:linear-gradient(145deg,#ff4da6,#ffadd8,#ff85c2); background-size:200% 200%; animation:shimmer 3s linear infinite; padding:28px 20px; text-align:center; cursor:pointer; margin-bottom:16px; box-shadow:0 8px 32px rgba(255,77,166,.4); }
+.locket-trigger-ring { width:80px; height:80px; border-radius:50%; background:rgba(255,255,255,.25); border:3px solid rgba(255,255,255,.6); margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-size:38px; box-shadow:0 0 0 8px rgba(255,255,255,.12),0 0 0 16px rgba(255,255,255,.06); animation:heartbeat 2s ease-in-out infinite; }
+.locket-trigger-label { font-family:var(--font-title); font-size:20px; font-weight:800; color:#fff; }
+.locket-trigger-sub { font-size:13px; color:rgba(255,255,255,.85); font-weight:600; margin-top:4px; }
+.locket-slot-pills { display:flex; gap:8px; justify-content:center; margin-top:14px; }
+.slot-pill { padding:6px 14px; border-radius:50px; font-size:12px; font-weight:700; background:rgba(255,255,255,.2); color:#fff; border:1.5px solid rgba(255,255,255,.4); cursor:pointer; transition:all .2s; }
+.slot-pill.done { background:rgba(255,255,255,.9); color:var(--p5); border-color:transparent; }
+.slot-pill.active { background:#fff; color:var(--p6); border-color:transparent; box-shadow:0 2px 10px rgba(0,0,0,.15); }
 
-.btn-pink {
-  width: 100%;
-  padding: 14px;
-  border-radius: 50px;
-  border: none;
-  background: linear-gradient(135deg, #ff4da6, #ff85c2);
-  color: #fff;
-  font-family: 'Nunito', 'Be Vietnam Pro', sans-serif;
-  font-size: 15px; font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 6px 20px rgba(255,77,166,0.4);
-  transition: all 0.2s;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-}
-.btn-pink:active { transform: scale(0.97); box-shadow: 0 2px 10px rgba(255,77,166,0.3); }
-.btn-outline {
-  width: 100%;
-  padding: 12px;
-  border-radius: 50px;
-  border: 2px solid var(--pink4);
-  background: #fff;
-  color: var(--pink5);
-  font-family: 'Nunito', 'Be Vietnam Pro', sans-serif;
-  font-size: 14px; font-weight: 800;
-  cursor: pointer;
-  transition: all 0.2s;
-  margin-top: 8px;
-}
+/* ── FEED ── */
+.feed-section { background:#fff; border-radius:28px; margin-bottom:16px; overflow:hidden; box-shadow:0 4px 20px rgba(255,77,166,.1); }
+.feed-date-header { padding:14px 16px 6px; font-family:var(--font-title); font-size:17px; font-weight:800; color:var(--p6); display:flex; align-items:center; gap:8px; }
+.feed-row { display:flex; gap:3px; padding:0 3px 3px; }
+.feed-photo { flex:1; aspect-ratio:1; border-radius:16px; overflow:hidden; background:var(--p2); position:relative; cursor:pointer; transition:transform .15s; }
+.feed-photo:active { transform:scale(.97); }
+.feed-photo img { width:100%; height:100%; object-fit:cover; }
+.feed-photo-empty { width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:28px; gap:4px; }
+.feed-photo-empty span { font-size:11px; color:var(--p4); font-weight:700; }
+.feed-user-tag { position:absolute; bottom:6px; right:6px; background:rgba(0,0,0,.45); color:#fff; font-size:10px; font-weight:700; padding:3px 8px; border-radius:50px; }
+.slot-tag { position:absolute; top:6px; left:6px; background:rgba(255,77,166,.85); color:#fff; font-size:10px; font-weight:800; padding:3px 8px; border-radius:50px; }
 
-/* ── PLACE ── */
-.place-form {
-  background: #fff;
-  border-radius: 24px;
-  padding: 20px;
-  box-shadow: 0 4px 20px rgba(255,77,166,0.12);
-  margin-bottom: 16px;
-}
-.place-form h3 {
-  font-family: 'Nunito', 'Be Vietnam Pro', sans-serif; font-weight: 900;
-  font-size: 20px; color: var(--pink6);
-  margin-bottom: 14px;
-}
-.form-label {
-  font-size: 12px; font-weight: 800;
-  color: var(--pink5);
-  text-transform: uppercase; letter-spacing: 0.5px;
-  margin-bottom: 6px; display: block;
-}
-.form-input, .form-textarea, .form-select {
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: 14px;
-  border: 2px solid var(--pink2);
-  font-family: 'Nunito', 'Be Vietnam Pro', sans-serif;
-  font-size: 14px;
-  color: #333;
-  background: var(--pink1);
-  margin-bottom: 12px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-.form-input:focus, .form-textarea:focus, .form-select:focus {
-  border-color: var(--pink4);
-  background: #fff;
-}
-.form-textarea { min-height: 80px; resize: none; }
+/* ── PLACES ── */
+.place-form { background:#fff; border-radius:24px; padding:20px; box-shadow:0 4px 20px rgba(255,77,166,.12); margin-bottom:16px; }
+.place-form h3 { font-family:var(--font-title); font-size:18px; font-weight:800; color:var(--p6); margin-bottom:14px; }
+.form-label { font-size:12px; font-weight:700; color:var(--p5); text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; display:block; }
+.form-input,.form-textarea,.form-select { width:100%; padding:12px 14px; border-radius:14px; border:2px solid var(--p2); font-family:var(--font); font-size:14px; color:#333; background:var(--p1); margin-bottom:12px; outline:none; transition:border-color .2s; }
+.form-input:focus,.form-textarea:focus,.form-select:focus { border-color:var(--p4); background:#fff; }
+.form-textarea { min-height:80px; resize:none; }
+.place-item { background:#fff; border-radius:18px; padding:14px 16px; margin-bottom:10px; box-shadow:0 3px 14px rgba(255,77,166,.1); display:flex; gap:12px; align-items:flex-start; }
+.place-emoji { width:44px; height:44px; border-radius:14px; background:linear-gradient(135deg,var(--p2),var(--p3)); display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
+.place-info-name { font-size:15px; font-weight:700; color:#2d1b36; }
+.place-info-note { font-size:12px; color:#888; margin-top:2px; }
+.place-info-meta { font-size:11px; color:var(--p4); font-weight:700; margin-top:4px; }
 
-/* ── GALLERY ── */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-  margin-bottom: 16px;
-}
-.gallery-item {
-  aspect-ratio: 1;
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--pink2);
-  position: relative;
-}
-.gallery-item img { width:100%; height:100%; object-fit:cover; }
-.gallery-badge {
-  position: absolute; top: 4px; right: 4px;
-  background: rgba(255,77,166,0.9);
-  color: #fff;
-  font-size: 9px; font-weight: 800;
-  padding: 2px 6px; border-radius: 50px;
-}
-.gallery-empty {
-  grid-column: 1/-1;
-  text-align: center;
-  padding: 40px 20px;
-  color: var(--pink4);
-  font-weight: 700;
-  font-size: 14px;
-}
+/* ── BUTTONS ── */
+.btn-pink { width:100%; padding:14px; border-radius:50px; border:none; background:linear-gradient(135deg,#ff4da6,#ff85c2); color:#fff; font-family:var(--font-title); font-size:15px; font-weight:800; cursor:pointer; box-shadow:0 6px 20px rgba(255,77,166,.4); transition:all .2s; display:flex; align-items:center; justify-content:center; gap:8px; }
+.btn-pink:active { transform:scale(.97); box-shadow:0 2px 10px rgba(255,77,166,.3); }
+.btn-outline { width:100%; padding:12px; border-radius:50px; border:2px solid var(--p4); background:#fff; color:var(--p5); font-family:var(--font-title); font-size:14px; font-weight:700; cursor:pointer; transition:all .2s; margin-top:8px; }
 
-/* ── PLACES LIST ── */
-.place-item {
-  background: #fff;
-  border-radius: 18px;
-  padding: 14px 16px;
-  margin-bottom: 10px;
-  box-shadow: 0 3px 14px rgba(255,77,166,0.1);
-  display: flex; gap: 12px; align-items: flex-start;
-}
-.place-emoji {
-  width: 44px; height: 44px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, var(--pink2), var(--pink3));
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px; flex-shrink: 0;
-}
-.place-info-name { font-size: 15px; font-weight: 800; color: #2d1b36; }
-.place-info-note { font-size: 12px; color: #888; margin-top: 2px; }
-.place-info-date { font-size: 11px; color: var(--pink4); font-weight: 700; margin-top: 4px; }
-
-/* ── MUSIC BTN ── */
-.music-fab {
-  position: fixed;
-  bottom: 86px; right: 16px;
-  width: 50px; height: 50px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #ff4da6, #ff85c2);
-  box-shadow: 0 4px 20px rgba(255,77,166,0.5);
-  border: none; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px;
-  z-index: 100;
-  animation: float 3s ease-in-out infinite;
-  transition: transform 0.2s;
-}
-.music-fab:active { transform: scale(0.9); }
+/* ── SETUP ── */
+.setup-card { background:#fff; border-radius:24px; padding:20px; box-shadow:0 4px 20px rgba(255,77,166,.12); margin-bottom:16px; }
+.setup-card h3 { font-family:var(--font-title); font-size:18px; font-weight:800; color:var(--p6); margin-bottom:12px; }
+.setup-card p { font-size:13px; color:#666; line-height:1.6; margin-bottom:8px; }
+.tag { display:inline-block; padding:3px 10px; border-radius:50px; font-size:11px; font-weight:700; background:var(--p2); color:var(--p6); margin:2px; }
 
 /* ── TOAST ── */
-.toast {
-  position: fixed;
-  bottom: 100px; left: 50%; transform: translateX(-50%);
-  background: linear-gradient(135deg, #ff4da6, #ff85c2);
-  color: #fff;
-  padding: 12px 24px;
-  border-radius: 50px;
-  font-weight: 800; font-size: 14px;
-  z-index: 999;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s;
-  white-space: nowrap;
-  box-shadow: 0 6px 24px rgba(255,77,166,0.5);
-  max-width: 90vw; text-align: center;
-}
-.toast.show { opacity: 1; }
+.toast { position:fixed; bottom:100px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#ff4da6,#ff85c2); color:#fff; padding:12px 24px; border-radius:50px; font-weight:800; font-size:14px; z-index:999; opacity:0; pointer-events:none; transition:opacity .3s; white-space:nowrap; box-shadow:0 6px 24px rgba(255,77,166,.5); max-width:90vw; text-align:center; }
+.toast.show { opacity:1; }
 
-/* ── SECTION TITLE ── */
-.sec-title {
-  font-family: 'Nunito', 'Be Vietnam Pro', sans-serif; font-weight: 900;
-  font-size: 22px;
-  background: linear-gradient(135deg, #ff4da6, #c8266f);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 14px;
-  margin-top: 16px;
-}
+/* ── PHOTO VIEWER ── */
+.photo-viewer { display:none; position:fixed; inset:0; z-index:600; background:rgba(0,0,0,.95); align-items:center; justify-content:center; flex-direction:column; }
+.photo-viewer.open { display:flex; }
+.photo-viewer img { max-width:100%; max-height:80vh; border-radius:20px; object-fit:contain; }
+.photo-viewer-close { position:absolute; top:52px; right:20px; width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,.15); border:none; color:#fff; font-size:22px; cursor:pointer; }
+.photo-viewer-meta { margin-top:16px; text-align:center; color:rgba(255,255,255,.7); font-size:13px; font-weight:700; }
 
-/* ── SHINE STARS ── */
-.stars-row {
-  display: flex; justify-content: center; gap: 6px;
-  margin: 6px 0;
-}
-.star { font-size: 16px; animation: blink 1.5s ease-in-out infinite; }
-.star:nth-child(2) { animation-delay: 0.3s; }
-.star:nth-child(3) { animation-delay: 0.6s; }
+/* ── RIPPLE ── */
+.ripple-container { position:relative; overflow:hidden; }
+.ripple { position:absolute; border-radius:50%; background:rgba(255,255,255,.4); animation:ripple .6s ease-out forwards; pointer-events:none; }
 
-/* ── SETUP CARD ── */
-.setup-card {
-  background: #fff;
-  border-radius: 24px;
-  padding: 20px;
-  box-shadow: 0 4px 20px rgba(255,77,166,0.12);
-  margin-bottom: 16px;
-}
-.setup-card h3 {
-  font-family: 'Fredoka One', cursive;
-  font-size: 18px; color: var(--pink6);
-  margin-bottom: 12px;
-}
-.setup-card p {
-  font-size: 13px; color: #666; line-height: 1.6;
-  margin-bottom: 8px;
-}
-.setup-card code {
-  display: block;
-  background: var(--pink1);
-  border-radius: 10px;
-  padding: 10px 12px;
-  font-size: 12px;
-  color: var(--deep);
-  margin: 6px 0;
-  word-break: break-all;
-  border: 1px solid var(--pink2);
-}
-.tag {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 50px;
-  font-size: 11px; font-weight: 800;
-  background: var(--pink2);
-  color: var(--pink6);
-  margin: 2px;
-}
+/* ── STARS ROW ── */
+.stars-row { display:flex; justify-content:center; gap:6px; margin:6px 0; }
+.star { font-size:16px; animation:blink 1.5s ease-in-out infinite; }
+.star:nth-child(2) { animation-delay:.3s; }
+.star:nth-child(3) { animation-delay:.6s; }
 
-/* ── LOCKET CAMERA OVERLAY ── */
-.locket-overlay {
-  display: none;
-  position: fixed; inset: 0; z-index: 500;
-  background: #000;
-  flex-direction: column;
-}
-.locket-overlay.open { display: flex; }
-
-.locket-viewfinder {
-  flex: 1; position: relative; overflow: hidden;
-  background: #111;
-}
-.locket-viewfinder video {
-  width: 100%; height: 100%; object-fit: cover;
-}
-.locket-viewfinder canvas { display: none; }
-
-/* Circle shutter */
-.locket-shutter-wrap {
-  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
-  display: flex; align-items: center; gap: 32px;
-}
-.locket-shutter {
-  width: 74px; height: 74px; border-radius: 50%;
-  background: #fff;
-  border: 4px solid rgba(255,255,255,0.4);
-  box-shadow: 0 0 0 3px #fff, 0 0 0 6px rgba(255,255,255,0.3);
-  cursor: pointer; transition: transform 0.1s;
-  position: relative;
-}
-.locket-shutter::after {
-  content: '';
-  position: absolute; inset: 6px; border-radius: 50%;
-  background: linear-gradient(135deg, #ff4da6, #ffadd8);
-  opacity: 0;
-  transition: opacity 0.15s;
-}
-.locket-shutter:active { transform: scale(0.9); }
-.locket-shutter:active::after { opacity: 1; }
-
-.locket-flip {
-  width: 44px; height: 44px; border-radius: 50%;
-  background: rgba(255,255,255,0.18); border: 2px solid rgba(255,255,255,0.35);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px; cursor: pointer; color: #fff;
-  backdrop-filter: blur(4px);
-}
-.locket-gallery-pick {
-  width: 44px; height: 44px; border-radius: 12px;
-  background: rgba(255,255,255,0.18); border: 2px solid rgba(255,255,255,0.35);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px; cursor: pointer; color: #fff;
-  backdrop-filter: blur(4px); overflow: hidden;
-}
-.locket-gallery-pick img { width:100%;height:100%;object-fit:cover;border-radius:10px; }
-
-/* Top bar of overlay */
-.locket-topbar {
-  position: absolute; top: 0; left: 0; right: 0;
-  padding: 52px 20px 16px;
-  display: flex; align-items: center; justify-content: space-between;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.55), transparent);
-  z-index: 2;
-}
-.locket-slot-badge {
-  background: rgba(255,77,166,0.85);
-  color: #fff; font-weight: 800; font-size: 13px;
-  padding: 6px 14px; border-radius: 50px;
-  backdrop-filter: blur(4px);
-}
-.locket-close {
-  width: 36px; height: 36px; border-radius: 50%;
-  background: rgba(0,0,0,0.35); border: none;
-  color: #fff; font-size: 20px; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  backdrop-filter: blur(4px);
-}
-
-/* Preview before confirm */
-.locket-preview {
-  display: none; position: absolute; inset: 0; z-index: 10;
-  background: #000;
-}
-.locket-preview.show { display: flex; flex-direction: column; }
-.locket-preview img {
-  flex: 1; width: 100%; object-fit: cover;
-}
-.locket-preview-bar {
-  padding: 20px 24px 40px;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-  position: absolute; bottom: 0; left: 0; right: 0;
-  display: flex; gap: 12px;
-}
-.btn-confirm {
-  flex: 1; padding: 14px;
-  border-radius: 50px; border: none;
-  background: linear-gradient(135deg, #ff4da6, #ff85c2);
-  color: #fff; font-family: 'Nunito',sans-serif;
-  font-size: 15px; font-weight: 800; cursor: pointer;
-  box-shadow: 0 4px 20px rgba(255,77,166,0.5);
-}
-.btn-retake {
-  flex: 1; padding: 14px;
-  border-radius: 50px; border: 2px solid rgba(255,255,255,0.5);
-  background: transparent;
-  color: #fff; font-family: 'Nunito',sans-serif;
-  font-size: 15px; font-weight: 800; cursor: pointer;
-}
-
-/* ── LOCKET FEED ── */
-.feed-section {
-  background: #fff;
-  border-radius: 28px;
-  margin-bottom: 0;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(255,77,166,0.1);
-}
-.feed-date-header {
-  padding: 14px 16px 6px;
-  font-family: 'Fredoka One', cursive;
-  font-size: 17px;
-  color: var(--pink6);
-  display: flex; align-items: center; gap: 8px;
-}
-.feed-row {
-  display: flex; gap: 3px;
-  padding: 0 3px 3px;
-}
-.feed-photo {
-  flex: 1; aspect-ratio: 1;
-  border-radius: 16px; overflow: hidden;
-  background: var(--pink2);
-  position: relative; cursor: pointer;
-}
-.feed-photo img { width:100%;height:100%;object-fit:cover; }
-.feed-photo-empty {
-  width: 100%; height: 100%;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  font-size: 28px; gap: 4px;
-}
-.feed-photo-empty span { font-size: 11px; color: var(--pink4); font-weight: 700; }
-.feed-slot-tag {
-  position: absolute; top: 6px; left: 6px;
-  background: rgba(255,77,166,0.85);
-  color: #fff; font-size: 10px; font-weight: 800;
-  padding: 3px 8px; border-radius: 50px;
-}
-.feed-user-tag {
-  position: absolute; bottom: 6px; right: 6px;
-  background: rgba(0,0,0,0.45);
-  color: #fff; font-size: 10px; font-weight: 700;
-  padding: 3px 8px; border-radius: 50px;
-  backdrop-filter: blur(4px);
-}
-
-/* Camera trigger button at top of checkin section */
-.locket-trigger-area {
-  position: relative; overflow: hidden;
-  border-radius: 28px;
-  background: linear-gradient(145deg, #ff4da6, #ffadd8, #ff85c2);
-  background-size: 200% 200%;
-  animation: shimmer 3s linear infinite;
-  padding: 28px 20px;
-  text-align: center; cursor: pointer;
-  margin-bottom: 16px;
-  box-shadow: 0 8px 32px rgba(255,77,166,0.4);
-}
-.locket-trigger-ring {
-  width: 80px; height: 80px; border-radius: 50%;
-  background: rgba(255,255,255,0.25);
-  border: 3px solid rgba(255,255,255,0.6);
-  margin: 0 auto 12px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 38px;
-  box-shadow: 0 0 0 8px rgba(255,255,255,0.12), 0 0 0 16px rgba(255,255,255,0.06);
-  animation: heartbeat 2s ease-in-out infinite;
-}
-.locket-trigger-label {
-  font-family: 'Fredoka One', cursive;
-  font-size: 22px; color: #fff;
-  text-shadow: 0 2px 8px rgba(140,0,86,0.3);
-}
-.locket-trigger-sub {
-  font-size: 13px; color: rgba(255,255,255,0.85); font-weight: 700;
-  margin-top: 4px;
-}
-.locket-slot-pills {
-  display: flex; gap: 8px; justify-content: center; margin-top: 14px;
-}
-.slot-pill {
-  padding: 6px 14px; border-radius: 50px;
-  font-size: 12px; font-weight: 800;
-  background: rgba(255,255,255,0.2);
-  color: #fff; border: 1.5px solid rgba(255,255,255,0.4);
-  cursor: pointer; transition: all 0.2s;
-}
-.slot-pill.done {
-  background: rgba(255,255,255,0.9);
-  color: var(--pink5); border-color: transparent;
-}
-.slot-pill.active {
-  background: #fff;
-  color: var(--pink6); border-color: transparent;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-}
-
-/* Fullscreen photo viewer */
-.photo-viewer {
-  display: none; position: fixed; inset: 0; z-index: 600;
-  background: rgba(0,0,0,0.95);
-  align-items: center; justify-content: center;
-  flex-direction: column;
-}
-.photo-viewer.open { display: flex; }
-.photo-viewer img { max-width: 100%; max-height: 80vh; border-radius: 20px; object-fit: contain; }
-.photo-viewer-close {
-  position: absolute; top: 52px; right: 20px;
-  width: 40px; height: 40px; border-radius: 50%;
-  background: rgba(255,255,255,0.15); border: none;
-  color: #fff; font-size: 22px; cursor: pointer;
-}
-.photo-viewer-meta {
-  margin-top: 16px; text-align: center;
-  color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 700;
-}
-
+/* ── THO SCRATCH EFFECT ── */
+.scratch-hearts { position:absolute; pointer-events:none; z-index:20; }
+.scratch-heart { position:absolute; font-size:20px; animation:floatHeart 1.2s ease-out forwards; }
+@keyframes floatHeart { 0%{transform:translateY(0) scale(0);opacity:1} 100%{transform:translateY(-80px) scale(1.2);opacity:0} }
 </style>
 </head>
 <body>
 
-<!-- Sparkle BG -->
+<!-- LOGIN SCREEN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-logo">🐾</div>
+  <div class="login-title">Thọ & Thailand</div>
+  <div class="login-sub">An × Hiền · Bangkok × Pattaya 🇹🇭</div>
+  <div class="login-card">
+    <h3>Đăng nhập nào! 💗</h3>
+    <input class="login-input" id="loginId" placeholder="Tên đăng nhập" type="text" autocomplete="username">
+    <input class="login-input" id="loginPass" placeholder="Mật khẩu" type="password" autocomplete="current-password">
+    <button class="login-btn" onclick="doLogin()">Vào thôi! 🐾</button>
+    <div class="login-err" id="loginErr"></div>
+  </div>
+</div>
+
+<!-- SPARKLE BG -->
 <div class="sparkle-bg" id="sparkleBg"></div>
 
 <!-- HEADER -->
 <div class="header">
+  <div class="header-user">
+    <div class="user-badge" id="userBadge">...</div>
+    <button class="logout-btn" onclick="doLogout()" title="Đăng xuất">↩</button>
+  </div>
   <div class="header-title">🐾 Thọ & Thailand ✈️</div>
   <div class="header-sub">An × Hiền · Bangkok × Pattaya</div>
-  <div class="header-date" id="headerDate"></div>
-  <div class="stars-row">
-    <span class="star">✨</span><span class="star">💗</span><span class="star">✨</span>
-  </div>
+  <div class="stars-row"><span class="star">✨</span><span class="star">💗</span><span class="star">✨</span></div>
 </div>
 
 <!-- COUNTDOWN -->
@@ -812,57 +237,52 @@ body {
 
 <!-- NAV -->
 <div class="nav">
-  <button class="nav-btn active" onclick="showSection('tho')">🐾 Thọ</button>
-  <button class="nav-btn" onclick="showSection('checkin')">📸 Checkin</button>
-  <button class="nav-btn" onclick="showSection('places')">📍 Địa điểm</button>
-  <button class="nav-btn" onclick="showSection('gallery')">🖼️ Album</button>
-  <button class="nav-btn" onclick="showSection('setup')">⚙️ Cài đặt</button>
+  <button class="nav-btn active" onclick="showSection('tho',this)">🐾 Thọ</button>
+  <button class="nav-btn" onclick="showSection('checkin',this)">📸 Checkin</button>
+  <button class="nav-btn" onclick="showSection('places',this)">📍 Địa điểm</button>
+  <button class="nav-btn" onclick="showSection('setup',this)">⚙️</button>
 </div>
 
-<!-- ─────────────── THỌ SECTION ─────────────── -->
+<!-- ── THỌ ── -->
 <div class="section active" id="sec-tho">
   <div class="tho-card">
     <div class="tho-stage-label" id="thoStageLabel">🌱 Puppy bé xíu</div>
-    <div class="tho-canvas">
+    <div class="tho-canvas" id="thoCanvas" onclick="scratchTho(event)">
       <svg id="thoSvg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="200" height="200"></svg>
     </div>
     <div class="tho-name">🐾 Thọ</div>
     <div class="tho-mood" id="thoMood">Đang chờ ăn sáng... 🥺</div>
-    <div class="hunger-bar-wrap">
-      <div class="hunger-bar" id="hungerBar" style="width:25%"></div>
-    </div>
+    <div class="hunger-bar-wrap"><div class="hunger-bar" id="hungerBar" style="width:0%"></div></div>
     <div class="tho-hunger">
-      <div class="meal-dot" id="dot-morning" title="Sáng">🌅</div>
-      <div class="meal-dot" id="dot-afternoon" title="Chiều">☀️</div>
-      <div class="meal-dot" id="dot-evening" title="Tối">🌙</div>
-      <div class="meal-dot" id="dot-place" title="Địa điểm">📍</div>
+      <div class="meal-dot" id="dot-morning">🌅</div>
+      <div class="meal-dot" id="dot-afternoon">☀️</div>
+      <div class="meal-dot" id="dot-evening">🌙</div>
+      <div class="meal-dot" id="dot-place-an">🍜</div>
+      <div class="meal-dot" id="dot-place-hien">🍜</div>
     </div>
-    <p style="font-size:12px;color:#bbb;margin-top:4px;">Sáng · Chiều · Tối · Địa điểm</p>
+    <p style="font-size:11px;color:#bbb;margin-top:4px;">Sáng · Chiều · Tối · 📍An · 📍Hiền</p>
+    <p style="font-size:10px;color:#dbb;margin-top:2px;">(Địa điểm: cả 2 note mới tính 1 bữa cho Thọ)</p>
   </div>
-
   <div class="tho-card" style="padding:14px 16px;">
     <div style="display:flex;gap:12px;align-items:center;">
       <div style="font-size:32px;">📅</div>
       <div>
-        <div style="font-size:13px;font-weight:800;color:#2d1b36;">Hôm nay ngày thứ</div>
-        <div style="font-family:'Fredoka One';font-size:28px;color:var(--pink5);" id="dayCount">--</div>
+        <div style="font-size:13px;font-weight:700;color:#2d1b36;">Hôm nay ngày thứ</div>
+        <div style="font-family:var(--font-title);font-size:28px;font-weight:800;color:var(--p5);" id="dayCount">--</div>
       </div>
       <div style="margin-left:auto;text-align:right;">
-        <div style="font-size:13px;font-weight:800;color:#2d1b36;">Tổng bữa ăn</div>
-        <div style="font-family:'Fredoka One';font-size:28px;color:var(--pink5);" id="totalMeals">0</div>
+        <div style="font-size:13px;font-weight:700;color:#2d1b36;">Tổng bữa ăn</div>
+        <div style="font-family:var(--font-title);font-size:28px;font-weight:800;color:var(--p5);" id="totalMeals">0</div>
       </div>
     </div>
   </div>
 </div>
 
-
-<!-- ─────────────── CHECKIN SECTION ─────────────── -->
+<!-- ── CHECKIN ── -->
 <div class="section" id="sec-checkin">
-
-  <!-- Locket-style trigger button -->
   <div class="locket-trigger-area" onclick="openCamera(null)">
     <div class="locket-trigger-ring">📸</div>
-    <div class="locket-trigger-label">Chụp cho Thọ ăn!</div>
+    <div class="locket-trigger-label" id="triggerLabel">Chụp cho Thọ ăn!</div>
     <div class="locket-trigger-sub" id="triggerSub">Tap để mở camera ✨</div>
     <div class="locket-slot-pills">
       <div class="slot-pill" id="pill-morning" onclick="event.stopPropagation();openCamera('morning')">🌅 Sáng</div>
@@ -870,65 +290,17 @@ body {
       <div class="slot-pill" id="pill-evening" onclick="event.stopPropagation();openCamera('evening')">🌙 Tối</div>
     </div>
   </div>
-
-  <!-- Feed title -->
   <div class="sec-title">💗 Feed An × Hiền</div>
-
-  <!-- Daily feed groups (rendered by JS) -->
   <div id="locketFeed"></div>
-
 </div>
 
-<!-- ── LOCKET CAMERA OVERLAY ── -->
-<div class="locket-overlay" id="locketOverlay">
-  <div class="locket-viewfinder" id="locketViewfinder">
-    <video id="cameraVideo" autoplay playsinline muted></video>
-    <canvas id="cameraCanvas"></canvas>
-
-    <!-- Top bar -->
-    <div class="locket-topbar">
-      <div class="locket-slot-badge" id="overlaySlotBadge">🌅 Bữa sáng</div>
-      <button class="locket-close" onclick="closeCamera()">✕</button>
-    </div>
-
-    <!-- Bottom controls -->
-    <div class="locket-shutter-wrap">
-      <div class="locket-gallery-pick" id="galleryPickBtn" onclick="triggerGalleryPick()">
-        🖼️
-      </div>
-      <div class="locket-shutter" onclick="capturePhoto()"></div>
-      <div class="locket-flip" onclick="flipCamera()">🔄</div>
-    </div>
-
-    <!-- Preview overlay -->
-    <div class="locket-preview" id="locketPreview">
-      <img id="previewImg" src="" alt="">
-      <div class="locket-preview-bar">
-        <button class="btn-retake" onclick="retakePhoto()">↩️ Chụp lại</button>
-        <button class="btn-confirm" onclick="confirmPhoto()">🐾 Cho Thọ ăn!</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Hidden file input for gallery pick -->
-<input type="file" accept="image/*" id="galleryFileInput" style="display:none" onchange="handleGalleryPick(event)">
-
-<!-- Fullscreen photo viewer -->
-<div class="photo-viewer" id="photoViewer">
-  <button class="photo-viewer-close" onclick="closeViewer()">✕</button>
-  <img id="viewerImg" src="" alt="">
-  <div class="photo-viewer-meta" id="viewerMeta"></div>
-</div>
-
-
-<!-- ─────────────── PLACES SECTION ─────────────── -->
+<!-- ── PLACES ── -->
 <div class="section" id="sec-places">
   <div class="sec-title">📍 Địa điểm hôm nay</div>
-
   <div class="place-form">
-    <h3>Cho Thọ ăn bữa địa điểm 🗺️</h3>
-    <label class="form-label">Tên quán/địa điểm *</label>
+    <h3 id="placeFormTitle">Cho Thọ ăn bữa địa điểm 🗺️</h3>
+    <div id="placeAlreadyDone" style="display:none;background:var(--p1);border-radius:12px;padding:12px;margin-bottom:12px;font-size:13px;color:var(--p6);font-weight:700;text-align:center;">✅ Bạn đã note địa điểm hôm nay rồi!<br>Thọ đã được ăn bữa này 🐾</div>
+    <label class="form-label">Tên quán / địa điểm *</label>
     <input class="form-input" id="placeName" placeholder="VD: Chatuchak Weekend Market" type="text">
     <label class="form-label">Loại</label>
     <select class="form-select" id="placeType">
@@ -944,75 +316,65 @@ body {
       <option value="Pattaya">🌊 Pattaya</option>
     </select>
     <label class="form-label">Ghi chú</label>
-    <textarea class="form-textarea" id="placeNote" placeholder="Ăn ngon không? Làm gì ở đó? Rating của em?"></textarea>
+    <textarea class="form-textarea" id="placeNote" placeholder="Ăn ngon không? Làm gì ở đó? Rating?"></textarea>
     <button class="btn-pink" onclick="savePlace()">📍 Lưu & cho Thọ ăn!</button>
   </div>
-
   <div class="sec-title" style="margin-top:8px">🗺️ Đã ghé qua</div>
   <div id="placesList"></div>
 </div>
 
-<!-- ─────────────── GALLERY SECTION ─────────────── -->
-<div class="section" id="sec-gallery">
-  <div class="sec-title">🖼️ Album An × Hiền</div>
-  <div class="gallery-grid" id="galleryGrid">
-    <div class="gallery-empty">📸 Chưa có ảnh nào.<br>Checkin để điền vào album nhé!</div>
-  </div>
-</div>
-
-<!-- ─────────────── SETUP SECTION ─────────────── -->
+<!-- ── SETUP ── -->
 <div class="section" id="sec-setup">
   <div class="sec-title">⚙️ Cài đặt</div>
-
   <div class="setup-card">
     <h3>🗂️ Google Sheet</h3>
-    <p>Paste Google Sheet ID vào đây để lưu data:</p>
-    <input class="form-input" id="sheetIdInput" placeholder="1IlpRaWnhjfKiY6xQFlXjOJmGngt33jsaKbB5S_-Bka8" value="1IlpRaWnhjfKiY6xQFlXjOJmGngt33jsaKbB5S_-Bka8" type="text">
-    <p style="font-size:11px;color:#aaa;margin-top:-8px;margin-bottom:10px;">Lấy ID từ URL: docs.google.com/spreadsheets/d/<b>[ID này]</b>/edit</p>
-    <button class="btn-pink" onclick="saveSheetId()">💾 Lưu Sheet ID</button>
-    <p style="margin-top:14px;font-size:12px;color:#888;">Cấu trúc Sheet cần có 3 tab:</p>
+    <p>Sheet ID đã được cài sẵn.</p>
     <span class="tag">checkins</span><span class="tag">places</span><span class="tag">stats</span>
-    <code>checkins: date | slot | photo_b64 | timestamp</code>
-    <code>places: date | name | type | city | note | timestamp</code>
-    <code>stats: date | meals_fed | tho_stage</code>
   </div>
-
-  <div class="setup-card">
-    <h3>🤖 Telegram Bot</h3>
-    <p>Nhập Bot Token để nhận remind giờ cho Thọ ăn:</p>
-    <input class="form-input" id="tgTokenInput" placeholder="8670770445:AAFDRK7Di0s-WZP3JhGFmPp5UjAWVYjoh08" value="8670770445:AAFDRK7Di0s-WZP3JhGFmPp5UjAWVYjoh08" type="text">
-    <input class="form-input" id="tgChatIdInput" placeholder="Chat ID của bạn" type="text">
-    <button class="btn-pink" onclick="saveTgConfig()">📲 Lưu Telegram Config</button>
-    <p style="margin-top:10px;font-size:12px;color:#888;">
-      Tạo bot tại @BotFather → lấy Token<br>
-      Chat ID: nhắn /start cho @userinfobot<br>
-      <b>Khánh An:</b> @khanhanka · <b>Thúy Hiền:</b> @lalabeo<br><span style='color:var(--pink4);font-size:11px;'>✅ Đã cấu hình sẵn!</span>
-    </p>
-  </div>
-
-  <div class="setup-card">
-    <h3>📱 Lịch nhắc nhở</h3>
-    <p>Thọ sẽ nhắc ăn vào:</p>
-    <span class="tag">🌅 6:30 sáng</span>
-    <span class="tag">☀️ 12:30 trưa</span>
-    <span class="tag">🌙 18:30 tối</span>
-    <span class="tag">📍 20:00 địa điểm</span>
-    <p style="margin-top:10px;font-size:12px;color:#888;">
-      Nếu quên → Thọ sẽ gửi tin: <i>"Thọ đang đói rồi... 🥺 chưa cho ăn sáng nè!"</i>
-    </p>
-    <button class="btn-pink" style="margin-top:12px" onclick="requestNotification()">🔔 Bật thông báo</button>
-  </div>
-
   <div class="setup-card">
     <h3>💗 Chuyến đi</h3>
-    <p><b>An:</b> Khánh An &nbsp; <b>Hiền:</b> Thúy Hiền</p>
-    <p><b>Bay:</b> 17/06/2026</p>
-    <p><b>Điểm đến:</b> Bangkok · Pattaya, Thailand 🇹🇭</p>
+    <p><b>An:</b> Khánh An (@khanhanka)</p>
+    <p><b>Hiền:</b> Thúy Hiền (@lalabeo)</p>
+    <p><b>Bay:</b> 17/06/2026 🇹🇭</p>
+  </div>
+  <div class="setup-card">
+    <h3>🗑️ Reset dữ liệu</h3>
+    <p>Xóa toàn bộ ảnh và checkin để bắt đầu lại.</p>
+    <button class="btn-pink" onclick="resetAllData()" style="background:linear-gradient(135deg,#ff6b6b,#ff4444);">🗑️ Reset tất cả</button>
   </div>
 </div>
 
-<!-- MUSIC FAB -->
-<button class="music-fab" id="musicFab" onclick="toggleMusic()" title="Nhạc nền">🎵</button>
+<!-- CAMERA OVERLAY -->
+<div class="locket-overlay" id="locketOverlay">
+  <div class="locket-viewfinder">
+    <video id="cameraVideo" autoplay playsinline muted></video>
+    <canvas id="cameraCanvas"></canvas>
+    <div class="locket-topbar">
+      <div class="locket-slot-badge" id="overlaySlotBadge">🌅 Bữa sáng</div>
+      <button class="locket-close" onclick="closeCamera()">✕</button>
+    </div>
+    <div class="locket-shutter-wrap">
+      <div class="locket-gallery-pick" onclick="triggerGalleryPick()">🖼️</div>
+      <div class="locket-shutter" onclick="capturePhoto()"></div>
+      <div class="locket-flip" onclick="flipCamera()">🔄</div>
+    </div>
+    <div class="locket-preview" id="locketPreview">
+      <img id="previewImg" src="" alt="">
+      <div class="locket-preview-bar">
+        <button class="btn-retake" onclick="retakePhoto()">↩️ Chụp lại</button>
+        <button class="btn-confirm" onclick="confirmPhoto()">🐾 Cho Thọ ăn!</button>
+      </div>
+    </div>
+  </div>
+</div>
+<input type="file" accept="image/*" id="galleryFileInput" style="display:none" onchange="handleGalleryPick(event)">
+
+<!-- PHOTO VIEWER -->
+<div class="photo-viewer" id="photoViewer">
+  <button class="photo-viewer-close" onclick="closeViewer()">✕</button>
+  <img id="viewerImg" src="" alt="">
+  <div class="photo-viewer-meta" id="viewerMeta"></div>
+</div>
 
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
@@ -1023,94 +385,114 @@ body {
 </audio>
 
 <script>
-// ── GOOGLE SHEET CONFIG ──
-const SHEET_API = 'https://sheets.googleapis.com/v4/spreadsheets';
-let SHEET_ID = localStorage.getItem('tho_sheet_id') || '1IlpRaWnhjfKiY6xQFlXjOJmGngt33jsaKbB5S_-Bka8';
-let TG_TOKEN = localStorage.getItem('tho_tg_token') || '8670770445:AAFDRK7Di0s-WZP3JhGFmPp5UjAWVYjoh08';
-let TG_CHAT  = localStorage.getItem('tho_tg_chat') || '';
+// ── ACCOUNTS ──
+const ACCOUNTS = {
+  'chongemhien': { pass:'19011011', name:'Khánh An', user:'An', tg:'@khanhanka' },
+  'voanhan':     { pass:'19011011', name:'Thúy Hiền', user:'Hiền', tg:'@lalabeo' },
+};
+
+let currentUser = null; // 'An' or 'Hiền'
+let currentAcc  = null;
+
+// ── AUTH ──
+function doLogin() {
+  const id   = document.getElementById('loginId').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  const acc  = ACCOUNTS[id];
+  if (!acc || acc.pass !== pass) {
+    document.getElementById('loginErr').textContent = '❌ Sai tài khoản hoặc mật khẩu!';
+    playSfx('error');
+    return;
+  }
+  currentUser = acc.user;
+  currentAcc  = acc;
+  localStorage.setItem('tho_user', id);
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('userBadge').textContent = acc.name + ' 💗';
+  playSfx('login');
+  initApp();
+}
+function doLogout() {
+  playSfx('click');
+  localStorage.removeItem('tho_user');
+  currentUser = null; currentAcc = null;
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('loginId').value = '';
+  document.getElementById('loginPass').value = '';
+  document.getElementById('loginErr').textContent = '';
+}
+function tryAutoLogin() {
+  const saved = localStorage.getItem('tho_user');
+  if (saved && ACCOUNTS[saved]) {
+    document.getElementById('loginId').value = saved;
+    const acc = ACCOUNTS[saved];
+    currentUser = acc.user;
+    currentAcc  = acc;
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('userBadge').textContent = acc.name + ' 💗';
+    initApp();
+  }
+}
+
+// ── CONFIG ──
+const SHEET_ID  = '1IlpRaWnhjfKiY6xQFlXjOJmGngt33jsaKbB5S_-Bka8';
+const TG_TOKEN  = '8670770445:AAFDRK7Di0s-WZP3JhGFmPp5UjAWVYjoh08';
+const TG_CHAT_AN   = '8683665534';
+const TG_CHAT_HIEN = '';
 
 // ── STATE ──
-let todayKey = getTodayKey();
-let state = loadState();
-let musicPlaying = false;
+let todayKey = new Date().toISOString().split('T')[0];
+let state    = loadState();
 
 // ── INIT ──
-document.addEventListener('DOMContentLoaded', () => {
+function initApp() {
   generateSparkles();
   updateCountdown();
   setInterval(updateCountdown, 1000);
   renderTho();
-  updateSlotStatus();
-  renderGallery();
+  updateThoMood();
   renderLocketFeed();
   updatePills();
   renderPlaces();
-  updateThoMood();
-  document.getElementById('headerDate').textContent = new Date().toLocaleDateString('vi-VN', {weekday:'long',day:'2-digit',month:'2-digit',year:'numeric'});
-  document.getElementById('sheetIdInput').value = SHEET_ID || '1IlpRaWnhjfKiY6xQFlXjOJmGngt33jsaKbB5S_-Bka8';
-  document.getElementById('tgTokenInput').value = TG_TOKEN || '8670770445:AAFDRK7Di0s-WZP3JhGFmPp5UjAWVYjoh08';
-  // Auto-save defaults if not set
-  if (!localStorage.getItem('tho_sheet_id')) localStorage.setItem('tho_sheet_id', '1IlpRaWnhjfKiY6xQFlXjOJmGngt33jsaKbB5S_-Bka8');
-  if (!localStorage.getItem('tho_tg_token')) localStorage.setItem('tho_tg_token', '8670770445:AAFDRK7Di0s-WZP3JhGFmPp5UjAWVYjoh08');
-  document.getElementById('tgChatIdInput').value = TG_CHAT;
-  // Auto-remind check every minute
-  // Chạy mỗi phút, logic bên trong tự xử lý hourly remind
-setInterval(checkRemind, 60000);
-// Chạy ngay lần đầu sau 5 giây load xong
-setTimeout(checkRemind, 5000);
-});
+  updatePlaceForm();
+  setInterval(checkRemind, 60000);
+  setTimeout(checkRemind, 3000);
+  // Auto-play music
+  setTimeout(() => {
+    const audio = document.getElementById('bgMusic');
+    audio.volume = 0.35;
+    audio.play().catch(() => {
+      document.addEventListener('touchstart', () => audio.play(), { once: true });
+    });
+  }, 800);
+}
 
 // ── SPARKLES ──
 function generateSparkles() {
   const bg = document.getElementById('sparkleBg');
-  const colors = ['#ff4da6','#ffadd8','#ff85c2','#fff','#ffdd00','#ffb3d9'];
-  for (let i = 0; i < 35; i++) {
+  if (bg.children.length > 5) return;
+  const colors = ['#ff4da6','#ffadd8','#ff85c2','#fff','#ffdd00'];
+  for (let i=0;i<30;i++) {
     const sp = document.createElement('div');
-    sp.className = 'sp';
-    const size = Math.random() * 10 + 4;
-    sp.style.cssText = `
-      width:${size}px;height:${size}px;
-      left:${Math.random()*100}%;
-      background:${colors[Math.floor(Math.random()*colors.length)]};
-      animation-duration:${Math.random()*8+6}s;
-      animation-delay:${Math.random()*8}s;
-      opacity:0;
-    `;
+    const size = Math.random()*10+4;
+    sp.style.cssText = `position:absolute;width:${size}px;height:${size}px;left:${Math.random()*100}%;border-radius:50%;background:${colors[Math.floor(Math.random()*colors.length)]};animation:spFloat ${Math.random()*8+6}s linear ${Math.random()*8}s infinite;opacity:0;`;
     bg.appendChild(sp);
   }
-  // glitter stars
-  for (let i = 0; i < 20; i++) {
-    const star = document.createElement('div');
-    star.style.cssText = `
-      position:absolute;
-      left:${Math.random()*100}%;
-      top:${Math.random()*100}%;
-      font-size:${Math.random()*14+8}px;
-      animation: blink ${Math.random()*2+1.5}s ease-in-out infinite;
-      animation-delay:${Math.random()*3}s;
-      pointer-events:none;
-    `;
-    star.textContent = ['✨','💫','⭐','🌟','💗'][Math.floor(Math.random()*5)];
-    bg.appendChild(star);
+  for (let i=0;i<15;i++) {
+    const s = document.createElement('div');
+    s.style.cssText = `position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;font-size:${Math.random()*14+8}px;animation:blink ${Math.random()*2+1.5}s ${Math.random()*3}s ease-in-out infinite;pointer-events:none;`;
+    s.textContent = ['✨','💫','⭐','🌟','💗'][Math.floor(Math.random()*5)];
+    bg.appendChild(s);
   }
 }
 
 // ── COUNTDOWN ──
 function updateCountdown() {
   const target = new Date('2026-06-17T00:00:00+07:00');
-  const now = new Date();
-  let diff = target - now;
-  if (diff < 0) {
-    document.getElementById('cdDays').textContent = '🎉';
-    document.getElementById('cdHours').textContent = '0';
-    document.getElementById('cdMins').textContent = '0';
-    document.getElementById('cdSecs').textContent = '0';
-    return;
-  }
-  const d = Math.floor(diff/86400000);
-  diff %= 86400000;
-  const h = Math.floor(diff/3600000);
-  diff %= 3600000;
+  let diff = target - new Date();
+  if (diff < 0) { ['cdDays','cdHours','cdMins','cdSecs'].forEach((id,i) => document.getElementById(id).textContent = i===0?'🎉':'0'); return; }
+  const d = Math.floor(diff/86400000); diff %= 86400000;
+  const h = Math.floor(diff/3600000);  diff %= 3600000;
   const m = Math.floor(diff/60000);
   const s = Math.floor((diff%60000)/1000);
   document.getElementById('cdDays').textContent  = String(d).padStart(2,'0');
@@ -1119,721 +501,447 @@ function updateCountdown() {
   document.getElementById('cdSecs').textContent  = String(s).padStart(2,'0');
 }
 
-// ── STATE MANAGEMENT ──
-function getTodayKey() {
-  return new Date().toISOString().split('T')[0];
-}
+// ── STATE ──
 function loadState() {
-  const saved = localStorage.getItem('tho_state');
-  const base = { checkins:{}, places:[], totalMeals:0, photos:[] };
-  if (!saved) return base;
-  try { return { ...base, ...JSON.parse(saved) }; } catch(e) { return base; }
+  try { return JSON.parse(localStorage.getItem('tho_state_v2')||'{"checkins":{},"places":[],"photos":[],"totalMeals":0}'); }
+  catch(e) { return {checkins:{},places:[],photos:[],totalMeals:0}; }
 }
-function saveState() {
-  localStorage.setItem('tho_state', JSON.stringify(state));
+function saveState() { localStorage.setItem('tho_state_v2', JSON.stringify(state)); }
+
+function resetAllData() {
+  if (!confirm('Reset toàn bộ ảnh và checkin? Không hoàn tác được nhé!')) return;
+  state = {checkins:{},places:[],photos:[],totalMeals:0};
+  saveState();
+  renderTho(); updateThoMood(); renderLocketFeed(); updatePills(); renderPlaces();
+  showToast('✅ Đã reset! Bắt đầu mới nào 🐾');
+  playSfx('reset');
 }
 
-// ── THO DRAW ──
+// ── SOUND EFFECTS ──
+let audioCtx = null;
+function getCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+  return audioCtx;
+}
+function playSfx(type) {
+  try {
+    const ctx = getCtx();
+    if (ctx.state === 'suspended') ctx.resume();
+    const now = ctx.currentTime;
+    const sfx = {
+      click:   [[440,0.08],[550,0.06]],
+      feed:    [[523,0.15],[659,0.15],[784,0.15],[1047,0.12]],
+      login:   [[523,0.1],[659,0.1],[784,0.1],[1047,0.1],[1319,0.1]],
+      error:   [[220,0.15],[196,0.15]],
+      scratch: [[800,0.08],[600,0.06],[900,0.05]],
+      place:   [[659,0.12],[880,0.12],[1109,0.1]],
+      reset:   [[440,0.08],[330,0.08]],
+      nav:     [[660,0.06],[880,0.05]],
+    };
+    const notes = sfx[type] || sfx.click;
+    notes.forEach(([freq,vol],i) => {
+      const osc  = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.frequency.value = freq;
+      osc.type = type==='error' ? 'sawtooth' : 'sine';
+      const t = now + i*0.13;
+      gain.gain.setValueAtTime(vol, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t+0.25);
+      osc.start(t); osc.stop(t+0.3);
+    });
+  } catch(e) {}
+}
+
+// ── THO SCRATCH ──
+function scratchTho(e) {
+  playSfx('scratch');
+  const canvas = document.getElementById('thoCanvas');
+  const rect   = canvas.getBoundingClientRect();
+  const cx = e.clientX - rect.left;
+  const cy = e.clientY - rect.top;
+  const emojis = ['💗','✨','🌟','💕','⭐','🎀'];
+  for (let i=0; i<5; i++) {
+    setTimeout(() => {
+      const h = document.createElement('div');
+      h.style.cssText = `position:fixed;left:${e.clientX + (Math.random()-0.5)*40}px;top:${e.clientY}px;font-size:${16+Math.random()*12}px;pointer-events:none;z-index:9999;animation:floatHeart 1.2s ease-out forwards;`;
+      h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 1200);
+    }, i*80);
+  }
+  // Jiggle tho
+  const svg = document.getElementById('thoCanvas');
+  svg.style.animation = 'scratch .4s ease';
+  setTimeout(() => svg.style.animation = 'float 3s ease-in-out infinite', 400);
+  showToast('Thọ: "gãi nữa đi! 🥺💗"', 1500);
+}
+
+// ── THO RENDER ──
 function getThoStage() {
   const start = new Date('2026-06-17');
-  const now = new Date();
-  const days = Math.max(0, Math.floor((now - start)/86400000));
+  const days  = Math.max(0, Math.floor((new Date()-start)/86400000));
   if (days < 6)  return 'baby';
   if (days < 12) return 'teen';
   return 'adult';
 }
-function renderTho() {
-  const stage = getThoStage();
-  const svg = document.getElementById('thoSvg');
-  const meals = getTodayMeals();
-  const isHungry = meals === 0;
-  const isHappy  = meals >= 3;
-
-  const stageLabels = { baby:'🌱 Puppy bé xíu', teen:'🌸 Puppy đang lớn', adult:'👑 Cún trưởng thành' };
-  document.getElementById('thoStageLabel').textContent = stageLabels[stage];
-
-  // Scale params by stage
-  const s = stage === 'baby' ? 0.65 : stage === 'teen' ? 0.82 : 1.0;
-  const cx = 100, cy = 108;
-  const bodyR = 52 * s;
-  const headR = 42 * s;
-  const earW  = 22 * s, earH = 30 * s;
-
-  // Colors — cream/gold puppy
-  const bodyFill  = '#fff5e0';
-  const darkFill  = '#c8935a';
-  const noseFill  = '#2a1a0e';
-  const eyeFill   = '#1a0a04';
-  const cheekFill = 'rgba(255,107,160,0.55)';
-  const mouthCol  = '#9b4c2a';
-  const blushCol  = isHungry ? '#aaa' : '#ff7bbf';
-  const collar    = '#ff4da6';
-
-  svg.innerHTML = `
-  <defs>
-    <radialGradient id="bodyG" cx="38%" cy="30%" r="65%">
-      <stop offset="0" stop-color="#fff8ee"/>
-      <stop offset="0.7" stop-color="${bodyFill}"/>
-      <stop offset="1" stop-color="#e8c49a"/>
-    </radialGradient>
-    <radialGradient id="earG" cx="40%" cy="25%" r="70%">
-      <stop offset="0" stop-color="#f4c9a0"/>
-      <stop offset="1" stop-color="${darkFill}"/>
-    </radialGradient>
-    <radialGradient id="noseG" cx="35%" cy="30%" r="60%">
-      <stop offset="0" stop-color="#4a2a14"/>
-      <stop offset="1" stop-color="${noseFill}"/>
-    </radialGradient>
-  </defs>
-
-  <!-- Shadow -->
-  <ellipse cx="${cx}" cy="${cy+bodyR+6}" rx="${bodyR*0.8}" ry="${7*s}" fill="rgba(0,0,0,0.08)"/>
-
-  <!-- Body -->
-  <ellipse cx="${cx}" cy="${cy+bodyR*0.3}" rx="${bodyR*0.9}" ry="${bodyR*0.85}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="1"/>
-
-  <!-- Tail -->
-  <path d="M ${cx+bodyR*0.75} ${cy+bodyR*0.2} Q ${cx+bodyR*1.3} ${cy-bodyR*0.3} ${cx+bodyR*1.1} ${cy-bodyR*0.75}"
-    fill="none" stroke="${darkFill}" stroke-width="${8*s}" stroke-linecap="round"
-    style="transform-origin:${cx+bodyR*0.75}px ${cy+bodyR*0.2}px; animation:wag 0.8s ease-in-out infinite"/>
-
-  <!-- Legs -->
-  <rect x="${cx-bodyR*0.55}" y="${cy+bodyR*0.6}" width="${14*s}" height="${22*s}" rx="${7*s}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8"/>
-  <rect x="${cx-bodyR*0.15}" y="${cy+bodyR*0.65}" width="${14*s}" height="${20*s}" rx="${7*s}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8"/>
-  <rect x="${cx+bodyR*0.05}" y="${cy+bodyR*0.65}" width="${14*s}" height="${20*s}" rx="${7*s}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8"/>
-  <rect x="${cx+bodyR*0.4}" y="${cy+bodyR*0.6}" width="${14*s}" height="${22*s}" rx="${7*s}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8"/>
-
-  <!-- Ears (floppy) -->
-  <ellipse cx="${cx-headR*0.75}" cy="${cy-headR*0.4}" rx="${earW*0.55}" ry="${earH*0.7}" fill="url(#earG)" transform="rotate(-15,${cx-headR*0.75},${cy-headR*0.4})"/>
-  <ellipse cx="${cx+headR*0.75}" cy="${cy-headR*0.4}" rx="${earW*0.55}" ry="${earH*0.7}" fill="url(#earG)" transform="rotate(15,${cx+headR*0.75},${cy-headR*0.4})"/>
-
-  <!-- Head -->
-  <circle cx="${cx}" cy="${cy-headR*0.2}" r="${headR}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="1"/>
-
-  <!-- Eye whites -->
-  <ellipse cx="${cx-headR*0.38}" cy="${cy-headR*0.18}" rx="${10*s}" ry="${13*s}" fill="#fff"/>
-  <ellipse cx="${cx+headR*0.38}" cy="${cy-headR*0.18}" rx="${10*s}" ry="${13*s}" fill="#fff"/>
-
-  <!-- Pupils -->
-  <circle cx="${cx-headR*0.35}" cy="${cy-headR*0.12}" r="${7*s}" fill="${eyeFill}"/>
-  <circle cx="${cx+headR*0.35}" cy="${cy-headR*0.12}" r="${7*s}" fill="${eyeFill}"/>
-  <!-- Gleam -->
-  <circle cx="${cx-headR*0.28}" cy="${cy-headR*0.2}" r="${2.5*s}" fill="#fff"/>
-  <circle cx="${cx+headR*0.42}" cy="${cy-headR*0.2}" r="${2.5*s}" fill="#fff"/>
-
-  <!-- Happy / sad eyes -->
-  ${isHungry ? `<path d="M ${cx-headR*0.48} ${cy-headR*0.32} Q ${cx-headR*0.35} ${cy-headR*0.42} ${cx-headR*0.22} ${cy-headR*0.32}" fill="none" stroke="#c8935a" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M ${cx+headR*0.22} ${cy-headR*0.32} Q ${cx+headR*0.35} ${cy-headR*0.42} ${cx+headR*0.48} ${cy-headR*0.32}" fill="none" stroke="#c8935a" stroke-width="1.5" stroke-linecap="round"/>` : ''}
-  
-  <!-- Nose -->
-  <ellipse cx="${cx}" cy="${cy+headR*0.2}" rx="${10*s}" ry="${7*s}" fill="url(#noseG)"/>
-  <ellipse cx="${cx-3*s}" cy="${cy+headR*0.16}" rx="${2.5*s}" ry="${1.5*s}" fill="rgba(255,255,255,0.35)"/>
-
-  <!-- Mouth -->
-  ${isHappy ?
-    `<path d="M ${cx-9*s} ${cy+headR*0.38} Q ${cx} ${cy+headR*0.58} ${cx+9*s} ${cy+headR*0.38}" fill="none" stroke="${mouthCol}" stroke-width="${2*s}" stroke-linecap="round"/>
-     <path d="M ${cx-4*s} ${cy+headR*0.5} Q ${cx} ${cy+headR*0.62} ${cx+4*s} ${cy+headR*0.5}" fill="#ff7070" opacity="0.5"/>` :
-    isHungry ?
-    `<path d="M ${cx-9*s} ${cy+headR*0.48} Q ${cx} ${cy+headR*0.38} ${cx+9*s} ${cy+headR*0.48}" fill="none" stroke="${mouthCol}" stroke-width="${2*s}" stroke-linecap="round"/>` :
-    `<path d="M ${cx-8*s} ${cy+headR*0.42} Q ${cx} ${cy+headR*0.54} ${cx+8*s} ${cy+headR*0.42}" fill="none" stroke="${mouthCol}" stroke-width="${2*s}" stroke-linecap="round"/>`
-  }
-
-  <!-- Blush -->
-  <ellipse cx="${cx-headR*0.62}" cy="${cy+headR*0.24}" rx="${12*s}" ry="${7*s}" fill="${blushCol}" opacity="0.55"/>
-  <ellipse cx="${cx+headR*0.62}" cy="${cy+headR*0.24}" rx="${12*s}" ry="${7*s}" fill="${blushCol}" opacity="0.55"/>
-
-  <!-- Collar -->
-  <rect x="${cx-bodyR*0.55}" y="${cy+bodyR*0.02}" width="${bodyR*1.1}" height="${8*s}" rx="${4*s}" fill="${collar}" opacity="0.9"/>
-  <circle cx="${cx}" cy="${cy+bodyR*0.1}" r="${5*s}" fill="#ffdd00" stroke="${collar}" stroke-width="1"/>
-
-  <!-- Paw (wave if fed) -->
-  ${meals > 0 ? `<ellipse cx="${cx-bodyR*0.82}" cy="${cy-bodyR*0.05}" rx="${14*s}" ry="${12*s}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8" style="animation:paw 1s ease-in-out infinite"/>
-  <circle cx="${cx-bodyR*0.82-5*s}" cy="${cy-bodyR*0.14}" r="${4*s}" fill="#f4c9a0"/>
-  <circle cx="${cx-bodyR*0.82+1*s}" cy="${cy-bodyR*0.16}" r="${4*s}" fill="#f4c9a0"/>` : ''}
-
-  <!-- Hunger tears if 0 meals -->
-  ${isHungry ? `<path d="M ${cx-headR*0.32} ${cy-headR*0.05} Q ${cx-headR*0.36} ${cy+headR*0.08} ${cx-headR*0.3} ${cy+headR*0.16}" fill="#a0c8ff" opacity="0.7"/>` : ''}
-  `;
-}
-
-// ── MEALS ──
-function getTodayKey() {
-  return new Date().toISOString().split('T')[0];
-}
 function getTodayMeals() {
-  const today = state.checkins[todayKey] || {};
-  let count = 0;
-  ['morning','afternoon','evening','place'].forEach(s => { if(today[s]) count++; });
+  const today = state.checkins[todayKey]||{};
+  let count = ['morning','afternoon','evening'].filter(s=>today[s]).length;
+  // Place counts as 1 only when BOTH An and Hiền have noted
+  if (today['place-an'] && today['place-hien']) count += 1;
   return count;
+}
+function renderTho() {
+  const stage  = getThoStage();
+  const meals  = getTodayMeals();
+  const hungry = meals===0, happy = meals>=3;
+  const labels = {baby:'🌱 Puppy bé xíu',teen:'🌸 Puppy đang lớn',adult:'👑 Cún trưởng thành'};
+  document.getElementById('thoStageLabel').textContent = labels[stage];
+  const s  = stage==='baby'?.65:stage==='teen'?.82:1.0;
+  const cx = 100, cy = 108;
+  const bR = 52*s, hR = 42*s;
+  const blink2 = hungry ? `<path d="M ${cx-hR*.48} ${cy-hR*.32} Q ${cx-hR*.35} ${cy-hR*.42} ${cx-hR*.22} ${cy-hR*.32}" fill="none" stroke="#c8935a" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M ${cx+hR*.22} ${cy-hR*.32} Q ${cx+hR*.35} ${cy-hR*.42} ${cx+hR*.48} ${cy-hR*.32}" fill="none" stroke="#c8935a" stroke-width="1.5" stroke-linecap="round"/>` : '';
+  const mouth = happy
+    ? `<path d="M ${cx-9*s} ${cy+hR*.38} Q ${cx} ${cy+hR*.58} ${cx+9*s} ${cy+hR*.38}" fill="none" stroke="#9b4c2a" stroke-width="${2*s}" stroke-linecap="round"/>`
+    : hungry
+    ? `<path d="M ${cx-9*s} ${cy+hR*.48} Q ${cx} ${cy+hR*.38} ${cx+9*s} ${cy+hR*.48}" fill="none" stroke="#9b4c2a" stroke-width="${2*s}" stroke-linecap="round"/>`
+    : `<path d="M ${cx-8*s} ${cy+hR*.42} Q ${cx} ${cy+hR*.54} ${cx+8*s} ${cy+hR*.42}" fill="none" stroke="#9b4c2a" stroke-width="${2*s}" stroke-linecap="round"/>`;
+  const blush = hungry ? 'rgba(180,180,180,0.5)' : 'rgba(255,107,160,0.55)';
+  const paw = meals>0 ? `<ellipse cx="${cx-bR*.82}" cy="${cy-bR*.05}" rx="${14*s}" ry="${12*s}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8" style="animation:paw 1s ease-in-out infinite"/>
+  <circle cx="${cx-bR*.88}" cy="${cy-bR*.16}" r="${4*s}" fill="#f4c9a0"/><circle cx="${cx-bR*.76}" cy="${cy-bR*.17}" r="${4*s}" fill="#f4c9a0"/>` : '';
+  const tear = hungry ? `<path d="M ${cx-hR*.32} ${cy-hR*.05} Q ${cx-hR*.36} ${cy+hR*.08} ${cx-hR*.3} ${cy+hR*.16}" fill="#a0c8ff" opacity="0.7"/>` : '';
+  document.getElementById('thoSvg').innerHTML = `
+  <defs>
+    <radialGradient id="bodyG" cx="38%" cy="30%" r="65%"><stop offset="0" stop-color="#fff8ee"/><stop offset=".7" stop-color="#fff5e0"/><stop offset="1" stop-color="#e8c49a"/></radialGradient>
+    <radialGradient id="earG" cx="40%" cy="25%" r="70%"><stop offset="0" stop-color="#f4c9a0"/><stop offset="1" stop-color="#c8935a"/></radialGradient>
+  </defs>
+  <ellipse cx="${cx}" cy="${cy+bR+6}" rx="${bR*.8}" ry="${7*s}" fill="rgba(0,0,0,0.08)"/>
+  <ellipse cx="${cx}" cy="${cy+bR*.3}" rx="${bR*.9}" ry="${bR*.85}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="1"/>
+  <path d="M ${cx+bR*.75} ${cy+bR*.2} Q ${cx+bR*1.3} ${cy-bR*.3} ${cx+bR*1.1} ${cy-bR*.75}" fill="none" stroke="#c8935a" stroke-width="${8*s}" stroke-linecap="round" style="transform-origin:${cx+bR*.75}px ${cy+bR*.2}px;animation:wag .8s ease-in-out infinite"/>
+  <rect x="${cx-bR*.55}" y="${cy+bR*.6}" width="${14*s}" height="${22*s}" rx="${7*s}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8"/>
+  <rect x="${cx-bR*.15}" y="${cy+bR*.65}" width="${14*s}" height="${20*s}" rx="${7*s}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8"/>
+  <rect x="${cx+bR*.05}" y="${cy+bR*.65}" width="${14*s}" height="${20*s}" rx="${7*s}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8"/>
+  <rect x="${cx+bR*.4}" y="${cy+bR*.6}" width="${14*s}" height="${22*s}" rx="${7*s}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8"/>
+  <ellipse cx="${cx-hR*.75}" cy="${cy-hR*.4}" rx="${12*s}" ry="${21*s}" fill="url(#earG)" transform="rotate(-15,${cx-hR*.75},${cy-hR*.4})"/>
+  <ellipse cx="${cx+hR*.75}" cy="${cy-hR*.4}" rx="${12*s}" ry="${21*s}" fill="url(#earG)" transform="rotate(15,${cx+hR*.75},${cy-hR*.4})"/>
+  <circle cx="${cx}" cy="${cy-hR*.2}" r="${hR}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="1"/>
+  <ellipse cx="${cx-hR*.38}" cy="${cy-hR*.18}" rx="${10*s}" ry="${13*s}" fill="#fff"/>
+  <ellipse cx="${cx+hR*.38}" cy="${cy-hR*.18}" rx="${10*s}" ry="${13*s}" fill="#fff"/>
+  <circle cx="${cx-hR*.35}" cy="${cy-hR*.12}" r="${7*s}" fill="#1a0a04"/>
+  <circle cx="${cx+hR*.35}" cy="${cy-hR*.12}" r="${7*s}" fill="#1a0a04"/>
+  <circle cx="${cx-hR*.28}" cy="${cy-hR*.2}" r="${2.5*s}" fill="#fff"/>
+  <circle cx="${cx+hR*.42}" cy="${cy-hR*.2}" r="${2.5*s}" fill="#fff"/>
+  ${blink2}
+  <ellipse cx="${cx}" cy="${cy+hR*.2}" rx="${10*s}" ry="${7*s}" fill="#2a1a0e"/>
+  <ellipse cx="${cx-3*s}" cy="${cy+hR*.16}" rx="${2.5*s}" ry="${1.5*s}" fill="rgba(255,255,255,.35)"/>
+  ${mouth}
+  <ellipse cx="${cx-hR*.62}" cy="${cy+hR*.24}" rx="${12*s}" ry="${7*s}" fill="${blush}" opacity="0.55"/>
+  <ellipse cx="${cx+hR*.62}" cy="${cy+hR*.24}" rx="${12*s}" ry="${7*s}" fill="${blush}" opacity="0.55"/>
+  <rect x="${cx-bR*.55}" y="${cy+bR*.02}" width="${bR*1.1}" height="${8*s}" rx="${4*s}" fill="#ff4da6" opacity="0.9"/>
+  <circle cx="${cx}" cy="${cy+bR*.1}" r="${5*s}" fill="#ffdd00" stroke="#ff4da6" stroke-width="1"/>
+  ${paw}${tear}`;
 }
 function updateThoMood() {
   const meals = getTodayMeals();
-  const moods = [
-    'Bụng đói lắm... 🥺 Cho Thọ ăn với!',
-    'Dạ dày còn 1 bữa... cảm ơn cậu 🥺💗',
-    'Thọ no 50%! Hạnh phúc lắm 🐾',
-    'Ăn 3 bữa rồi! Thọ béo dần 🐾💗',
-    'Bốn bữa! Thọ mập mạp hạnh phúc tột đỉnh! ✨🐾'
-  ];
-  document.getElementById('thoMood').textContent = moods[Math.min(meals, 4)];
-  document.getElementById('hungerBar').style.width = `${Math.min(meals/4*100, 100)}%`;
-  document.getElementById('totalMeals').textContent = state.totalMeals || 0;
-
-  const today = state.checkins[todayKey] || {};
-  ['morning','afternoon','evening','place'].forEach(slot => {
-    const dot = document.getElementById(`dot-${slot}`);
-    if (dot) {
-      dot.classList.toggle('fed', !!today[slot]);
-    }
-  });
-
-  // Day count
-  const start = new Date('2026-06-17');
-  const now = new Date();
-  const days = Math.floor((now - start)/86400000);
-  document.getElementById('dayCount').textContent = days >= 0 ? `${days+1} / 17` : '--';
-}
-
-// ── SLOT STATUS ──
-function getCurrentSlot() {
-  const h = new Date().getHours();
-  if (h >= 6  && h < 12) return 'morning';
-  if (h >= 12 && h < 18) return 'afternoon';
-  if (h >= 18 && h < 24) return 'evening';
-  return null;
-}
-function updateSlotStatus() {
-  const today = state.checkins[todayKey] || {};
-  const current = getCurrentSlot();
+  const moods = ['Bụng đói lắm... 🥺 Cho Thọ ăn với!','Được 1 bữa rồi... cảm ơn cậu 🥺💗','No được 50%! Hạnh phúc lắm 🐾','Ăn 3 bữa rồi! Thọ béo dần 🐾💗','Bốn bữa đủ cả! Thọ no căng và hạnh phúc tột đỉnh ✨🐾💗'];
+  document.getElementById('thoMood').textContent = moods[Math.min(meals,5)];
+  document.getElementById('hungerBar').style.width = Math.min(meals/4*100,100)+'%';
+  document.getElementById('totalMeals').textContent = state.totalMeals||0;
+  const today = state.checkins[todayKey]||{};
   ['morning','afternoon','evening'].forEach(slot => {
-    const el = document.getElementById(`status-${slot}`);
-    const card = document.getElementById(`slot-${slot}`);
-    if (!el) return;
-    if (today[slot]) {
-      el.className = 'slot-status status-done';
-      el.textContent = '✅ Xong!';
-      card.classList.add('done');
-    } else if (slot === current) {
-      el.className = 'slot-status status-active';
-      el.textContent = '⏰ Đến giờ!';
-    } else {
-      el.className = 'slot-status status-waiting';
-      el.textContent = 'Chờ...';
-    }
+    const dot = document.getElementById('dot-'+slot);
+    if (dot) dot.classList.toggle('fed', !!today[slot]);
   });
+  // Place dot: fed only when BOTH An and Hiền have noted
+  const dotAn   = document.getElementById('dot-place-an');
+  const dotHien = document.getElementById('dot-place-hien');
+  const anDone   = !!today['place-an'];
+  const hienDone = !!today['place-hien'];
+  if (dotAn)   dotAn.classList.toggle('fed', anDone);
+  if (dotHien) dotHien.classList.toggle('fed', hienDone);
+  const start = new Date('2026-06-17');
+  const days  = Math.floor((new Date()-start)/86400000);
+  document.getElementById('dayCount').textContent = days>=0 ? `${days+1} / 17` : '--';
 }
 
-// ── PHOTO HANDLING ──
-function triggerPhoto(slot) {
-  document.getElementById(`photoInput-${slot}`).click();
+// ── CAMERA ──
+let cameraStream=null, facingMode='user', currentSlot=null, capturedDataUrl=null;
+const SLOT_INFO = {
+  morning:   {label:'🌅 Bữa sáng',   emoji:'🌅'},
+  afternoon: {label:'☀️ Bữa chiều',  emoji:'☀️'},
+  evening:   {label:'🌙 Bữa tối',    emoji:'🌙'},
+};
+function getActiveSlot() {
+  const h = new Date().getHours();
+  if (h>=6 && h<12) return 'morning';
+  if (h>=12 && h<18) return 'afternoon';
+  return 'evening';
 }
-function handlePhoto(event, slot) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    const dataUrl = e.target.result;
-    document.getElementById(`photoImg-${slot}`).src = dataUrl;
-    document.getElementById(`photoImg-${slot}`).style.display = 'block';
-    document.getElementById(`placeholder-${slot}`).style.display = 'none';
-    document.getElementById(`feedBtn-${slot}`).style.display = 'flex';
-    // Store temp
-    if (!state._temp) state._temp = {};
-    state._temp[slot] = dataUrl;
-  };
-  reader.readAsDataURL(file);
+async function openCamera(slot) {
+  currentSlot = slot || getActiveSlot();
+  document.getElementById('overlaySlotBadge').textContent = SLOT_INFO[currentSlot].label;
+  document.getElementById('locketOverlay').classList.add('open');
+  document.getElementById('locketPreview').classList.remove('show');
+  playSfx('click');
+  await startCameraStream();
+}
+async function startCameraStream() {
+  if (cameraStream) { cameraStream.getTracks().forEach(t=>t.stop()); cameraStream=null; }
+  try {
+    cameraStream = await navigator.mediaDevices.getUserMedia({video:{facingMode,width:{ideal:1080},height:{ideal:1080}},audio:false});
+    document.getElementById('cameraVideo').srcObject = cameraStream;
+  } catch(e) { showToast('📷 Không mở được camera. Thử chọn ảnh từ album!'); closeCamera(); }
+}
+function flipCamera() { facingMode = facingMode==='user'?'environment':'user'; playSfx('click'); startCameraStream(); }
+function capturePhoto() {
+  playSfx('feed');
+  const video=document.getElementById('cameraVideo'), canvas=document.getElementById('cameraCanvas');
+  const size = Math.min(video.videoWidth,video.videoHeight);
+  canvas.width=canvas.height=size;
+  const ctx=canvas.getContext('2d');
+  const ox=(video.videoWidth-size)/2, oy=(video.videoHeight-size)/2;
+  ctx.drawImage(video,ox,oy,size,size,0,0,size,size);
+  capturedDataUrl = canvas.toDataURL('image/jpeg',0.82);
+  showPreview(capturedDataUrl);
+}
+function showPreview(dataUrl) { document.getElementById('previewImg').src=dataUrl; document.getElementById('locketPreview').classList.add('show'); }
+function retakePhoto() { playSfx('click'); document.getElementById('locketPreview').classList.remove('show'); capturedDataUrl=null; }
+function confirmPhoto() { if(!capturedDataUrl) return; finalSaveMeal(currentSlot,capturedDataUrl); closeCamera(); }
+function triggerGalleryPick() { playSfx('click'); document.getElementById('galleryFileInput').click(); }
+function handleGalleryPick(e) {
+  const file=e.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=ev=>{ capturedDataUrl=ev.target.result; showPreview(capturedDataUrl); };
+  reader.readAsDataURL(file); e.target.value='';
+}
+function closeCamera() {
+  document.getElementById('locketOverlay').classList.remove('open');
+  if (cameraStream) { cameraStream.getTracks().forEach(t=>t.stop()); cameraStream=null; }
+  capturedDataUrl=null;
 }
 
 // ── SAVE MEAL ──
-function saveMeal(slot) {
-  const photoData = state._temp && state._temp[slot];
-  if (!photoData) { showToast('📷 Chưa có ảnh rồi!'); return; }
-
-  if (!state.checkins[todayKey]) state.checkins[todayKey] = {};
-  state.checkins[todayKey][slot] = { photo: photoData, time: new Date().toISOString() };
-  state.totalMeals = (state.totalMeals||0) + 1;
-
-  // Add to photos array
-  if (!state.photos) state.photos = [];
-  state.photos.push({ slot, date: todayKey, photo: photoData, time: new Date().toISOString() });
-
-  saveState();
-  renderTho();
-  updateThoMood();
-  updateSlotStatus();
-  renderGallery();
-  document.getElementById(`feedBtn-${slot}`).style.display = 'none';
-  document.getElementById(`slot-${slot}`).classList.add('done');
-
-  const msgs = { morning:'🌅 Thọ đã ăn sáng rồi!', afternoon:'☀️ Thọ đã ăn trưa ngon lành!', evening:'🌙 Thọ no bữa tối rồi!' };
-  showToast((msgs[slot]||'🐾 Thọ được ăn rồi!') + ' +1 bữa 💗');
-  playFeedSound();
-
-  // Save to GSheet
-  if (SHEET_ID) saveToSheet('checkins', { date:todayKey, slot, photo_b64:'[base64]', timestamp:new Date().toISOString() });
-}
-
-// ── SAVE PLACE ──
-function savePlace() {
-  const name = document.getElementById('placeName').value.trim();
-  if (!name) { showToast('📍 Nhập tên địa điểm trước nha!'); return; }
-  const type = document.getElementById('placeType').value;
-  const city = document.getElementById('placeCity').value;
-  const note = document.getElementById('placeNote').value.trim();
-
-  const place = { name, type, city, note, date: todayKey, time: new Date().toISOString() };
-  state.places.push(place);
-
-  if (!state.checkins[todayKey]) state.checkins[todayKey] = {};
-  if (!state.checkins[todayKey].place) {
-    state.checkins[todayKey].place = { name, time: new Date().toISOString() };
-    state.totalMeals = (state.totalMeals||0) + 1;
-    showToast(`📍 Lưu "${name}" rồi! Thọ được ăn bữa địa điểm 🐾`);
-    playFeedSound();
-  } else {
-    showToast(`📍 Đã lưu "${name}"! (Địa điểm hôm nay đã tính rồi)`);
-  }
-
-  saveState();
-  renderTho();
-  updateThoMood();
-  renderPlaces();
-  document.getElementById('placeName').value = '';
-  document.getElementById('placeNote').value = '';
-
-  if (SHEET_ID) saveToSheet('places', place);
-}
-
-// ── RENDER PLACES ──
-function renderPlaces() {
-  const list = document.getElementById('placesList');
-  if (!state.places || state.places.length === 0) {
-    list.innerHTML = '<p style="text-align:center;color:#bbb;padding:20px;font-size:14px;">Chưa có địa điểm nào.<br>Note địa điểm để cho Thọ ăn! 🗺️</p>';
-    return;
-  }
-  const icons = { food:'🍜', activity:'🎡', cafe:'☕', shopping:'🛍️', beach:'🏖️' };
-  list.innerHTML = [...state.places].reverse().map(p => `
-    <div class="place-item">
-      <div class="place-emoji">${icons[p.type]||'📍'}</div>
-      <div>
-        <div class="place-info-name">${p.name}</div>
-        <div class="place-info-note">${p.city} · ${p.note||''}</div>
-        <div class="place-info-date">${p.date}</div>
-      </div>
-    </div>
-  `).join('');
-}
-
-// ── RENDER GALLERY ──
-function renderGallery() {
-  const grid = document.getElementById('galleryGrid');
-  if (!state.photos || state.photos.length === 0) {
-    grid.innerHTML = '<div class="gallery-empty">📸 Chưa có ảnh nào.<br>Checkin để điền vào album nhé!</div>';
-    return;
-  }
-  const slotBadge = { morning:'🌅', afternoon:'☀️', evening:'🌙' };
-  grid.innerHTML = [...state.photos].reverse().map(p => `
-    <div class="gallery-item">
-      <img src="${p.photo}" alt="" loading="lazy">
-      <div class="gallery-badge">${slotBadge[p.slot]||'📸'}</div>
-    </div>
-  `).join('');
-}
-
-// ── MUSIC ──
-function toggleMusic() {
-  const audio = document.getElementById('bgMusic');
-  const fab = document.getElementById('musicFab');
-  if (musicPlaying) {
-    audio.pause();
-    fab.textContent = '🎵';
-    musicPlaying = false;
-  } else {
-    audio.play().catch(()=>{});
-    fab.textContent = '🔊';
-    musicPlaying = true;
-  }
-}
-
-function playFeedSound() {
-  try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const notes = [523, 659, 784, 1047];
-    notes.forEach((freq, i) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain); gain.connect(ctx.destination);
-      osc.frequency.value = freq;
-      osc.type = 'sine';
-      gain.gain.setValueAtTime(0.15, ctx.currentTime + i*0.12);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i*0.12 + 0.25);
-      osc.start(ctx.currentTime + i*0.12);
-      osc.stop(ctx.currentTime + i*0.12 + 0.3);
-    });
-  } catch(e) {}
-}
-
-// ── TOAST ──
-function showToast(msg, dur=3000) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), dur);
-}
-
-// ── NAVIGATION ──
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(`sec-${id}`).classList.add('active');
-  event.currentTarget.classList.add('active');
-  if (id === 'tho') { renderTho(); updateThoMood(); }
-  if (id === 'gallery') renderGallery();
-  if (id === 'places') renderPlaces();
-}
-
-// ── REMIND CHECK (mỗi tiếng 1 lần cho đến khi checkin) ──
-function checkRemind() {
-  const today = state.checkins[todayKey] || {};
-  const now = new Date();
-  const h = now.getHours();
-
-  // Định nghĩa window giờ + slot tương ứng
-  const windows = [
-    { start:6,  end:12, slot:'morning',   msgs:[
-      '🌅 Thọ đói sáng rồi! Checkin ảnh để cho Thọ ăn nào 🐾',
-      '🌅 Ơ kìa! Thọ nhịn sáng tới giờ rồi đó 😢',
-      '🌅 Bụng Thọ đang kêu réo đây này... 🥺 Sáng chưa ăn gì hết!',
-      '🌅 Thọ ngồi chờ từ sáng đến giờ... 🐾💔',
-    ]},
-    { start:12, end:18, slot:'afternoon', msgs:[
-      '☀️ Trưa rồi! Thọ chờ ăn chiều nãy giờ 🐾',
-      '☀️ Nắng to lắm mà Thọ vẫn chưa có ăn chiều 😢',
-      '☀️ Thọ đang nằm dài vì đói chiều... 🥺 Checkin đi!',
-      '☀️ Thọ thấy mình đang ăn mà Thọ chưa được ăn... 🐾💔',
-    ]},
-    { start:18, end:24, slot:'evening',   msgs:[
-      '🌙 Tối rồi! Cho Thọ ăn tối với nào 🐾',
-      '🌙 Thọ buồn ngủ mà chưa được ăn tối... 😢',
-      '🌙 Đêm xuống rồi Thọ vẫn đói 🥺 Checkin ảnh tối đi!',
-      '🌙 Thọ sắp ngủ mà bụng trống không... 🐾💔',
-    ]},
-    { start:19, end:24, slot:'place',     msgs:[
-      '📍 Hôm nay đi đâu ăn gì chưa note cho Thọ biết với? 🗺️',
-      '📍 Thọ muốn biết hôm nay đi đâu! Note địa điểm điiiii 🐾',
-      '📍 Địa điểm hôm nay đâu rồi? Thọ đói bữa địa điểm lắm! 🥺',
-    ]},
-  ];
-
-  windows.forEach(w => {
-    if (h < w.start || h >= w.end) return;       // ngoài khung giờ
-    if (today[w.slot]) return;                    // đã checkin rồi
-    // Chọn msg theo số tiếng đã trôi qua trong window
-    const hoursIn = h - w.start;
-    const msg = w.msgs[Math.min(hoursIn, w.msgs.length - 1)];
-    showToast(msg, 6000);
-    if (TG_TOKEN && TG_CHAT) sendTg(msg);
-  });
-}
-
-// ── TELEGRAM ──
-const TG_USERS = { an: '@khanhanka', hien: '@lalabeo' };
-async function sendTg(msg) {
-  if (!TG_TOKEN || !TG_CHAT) return;
-  try {
-    await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: TG_CHAT, text: msg })
-    });
-  } catch(e) {}
-}
-
-// ── SETUP SAVES ──
-function saveSheetId() {
-  SHEET_ID = document.getElementById('sheetIdInput').value.trim();
-  localStorage.setItem('tho_sheet_id', SHEET_ID);
-  showToast('✅ Sheet ID đã lưu!');
-}
-function saveTgConfig() {
-  TG_TOKEN = document.getElementById('tgTokenInput').value.trim();
-  TG_CHAT  = document.getElementById('tgChatIdInput').value.trim();
-  localStorage.setItem('tho_tg_token', TG_TOKEN);
-  localStorage.setItem('tho_tg_chat', TG_CHAT);
-  showToast('✅ Telegram đã lưu!');
-}
-
-// ── GOOGLE SHEET SAVE ──
-async function saveToSheet(tab, data) {
-  if (!SHEET_ID) return;
-  const vals = Object.values(data).map(v => typeof v === 'string' ? v.substring(0,500) : v);
-  try {
-    await fetch(`${SHEET_API}/${SHEET_ID}/values/${tab}!A1:append?valueInputOption=RAW&key=YOUR_API_KEY`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ values: [vals] })
-    });
-  } catch(e) {}
-}
-
-function requestNotification() {
-  if ('Notification' in window) {
-    Notification.requestPermission().then(p => {
-      showToast(p === 'granted' ? '🔔 Đã bật thông báo!' : '❌ Chưa bật được, thử lại nhé!');
-    });
-  } else {
-    showToast('📲 Dùng trên Safari iOS để bật notify nhé!');
-  }
-}
-
-
-// ── LOCKET CAMERA STATE ──
-let cameraStream = null;
-let facingMode = 'user'; // front cam default
-let currentSlot = null;
-let capturedDataUrl = null;
-
-const SLOT_INFO = {
-  morning:   { label:'🌅 Bữa sáng',   hours:[6,12],  emoji:'🌅' },
-  afternoon: { label:'☀️ Bữa chiều',  hours:[12,18], emoji:'☀️' },
-  evening:   { label:'🌙 Bữa tối',    hours:[18,24], emoji:'🌙' },
-};
-
-function getActiveSlot() {
-  const h = new Date().getHours();
-  if (h >= 6  && h < 12) return 'morning';
-  if (h >= 12 && h < 18) return 'afternoon';
-  if (h >= 18)           return 'evening';
-  return 'morning';
-}
-
-async function openCamera(slot) {
-  currentSlot = slot || getActiveSlot();
-  const info = SLOT_INFO[currentSlot];
-  document.getElementById('overlaySlotBadge').textContent = info.label;
-  document.getElementById('locketOverlay').classList.add('open');
-  document.getElementById('locketPreview').classList.remove('show');
-  await startCameraStream();
-}
-
-async function startCameraStream() {
-  if (cameraStream) {
-    cameraStream.getTracks().forEach(t => t.stop());
-    cameraStream = null;
-  }
-  try {
-    cameraStream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode, width:{ideal:1080}, height:{ideal:1080} },
-      audio: false
-    });
-    document.getElementById('cameraVideo').srcObject = cameraStream;
-  } catch(e) {
-    showToast('📷 Không mở được camera. Thử chọn ảnh từ album nhé!');
-    closeCamera();
-  }
-}
-
-function flipCamera() {
-  facingMode = facingMode === 'user' ? 'environment' : 'user';
-  startCameraStream();
-}
-
-function capturePhoto() {
-  const video  = document.getElementById('cameraVideo');
-  const canvas = document.getElementById('cameraCanvas');
-  const size   = Math.min(video.videoWidth, video.videoHeight);
-  canvas.width = canvas.height = size;
-  const ctx = canvas.getContext('2d');
-  // Center crop square
-  const ox = (video.videoWidth  - size) / 2;
-  const oy = (video.videoHeight - size) / 2;
-  ctx.drawImage(video, ox, oy, size, size, 0, 0, size, size);
-  // Mirror if front cam
-  if (facingMode === 'user') {
-    ctx.save();
-    ctx.scale(-1,1);
-    ctx.drawImage(canvas, -size, 0);
-    ctx.restore();
-    ctx.save();
-    ctx.scale(-1,1);
-    ctx.drawImage(canvas, -size, 0);
-    ctx.restore();
-  }
-  capturedDataUrl = canvas.toDataURL('image/jpeg', 0.82);
-  showPreview(capturedDataUrl);
-}
-
-function showPreview(dataUrl) {
-  document.getElementById('previewImg').src = dataUrl;
-  document.getElementById('locketPreview').classList.add('show');
-}
-
-function retakePhoto() {
-  document.getElementById('locketPreview').classList.remove('show');
-  capturedDataUrl = null;
-}
-
-function confirmPhoto() {
-  if (!capturedDataUrl) return;
-  finalSaveMeal(currentSlot, capturedDataUrl);
-  closeCamera();
-}
-
-function triggerGalleryPick() {
-  document.getElementById('galleryFileInput').click();
-}
-function handleGalleryPick(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    capturedDataUrl = ev.target.result;
-    showPreview(capturedDataUrl);
-  };
-  reader.readAsDataURL(file);
-  e.target.value = '';
-}
-
-function closeCamera() {
-  document.getElementById('locketOverlay').classList.remove('open');
-  if (cameraStream) {
-    cameraStream.getTracks().forEach(t => t.stop());
-    cameraStream = null;
-  }
-  capturedDataUrl = null;
-}
-
-// ── SAVE MEAL (unified) ──
 function finalSaveMeal(slot, photoDataUrl) {
-  if (!state.checkins[todayKey]) state.checkins[todayKey] = {};
-  if (state.checkins[todayKey][slot]) {
-    // Update existing
-    state.checkins[todayKey][slot].photo = photoDataUrl;
-    state.checkins[todayKey][slot].time  = new Date().toISOString();
-  } else {
-    state.checkins[todayKey][slot] = { photo: photoDataUrl, time: new Date().toISOString() };
-    state.totalMeals = (state.totalMeals||0) + 1;
-  }
-
-  // Photos array — update or push
-  if (!state.photos) state.photos = [];
-  const existIdx = state.photos.findIndex(p => p.date === todayKey && p.slot === slot && p.user === 'An');
-  const photoEntry = { slot, date: todayKey, photo: photoDataUrl, time: new Date().toISOString(), user:'An' };
-  if (existIdx >= 0) state.photos[existIdx] = photoEntry;
-  else state.photos.push(photoEntry);
-
+  if (!state.checkins[todayKey]) state.checkins[todayKey]={};
+  const isNew = !state.checkins[todayKey][slot];
+  state.checkins[todayKey][slot] = {photo:photoDataUrl, time:new Date().toISOString(), user:currentUser};
+  if (isNew) state.totalMeals = (state.totalMeals||0)+1;
+  if (!state.photos) state.photos=[];
+  const idx = state.photos.findIndex(p=>p.date===todayKey&&p.slot===slot&&p.user===currentUser);
+  const entry = {slot,date:todayKey,photo:photoDataUrl,time:new Date().toISOString(),user:currentUser};
+  if (idx>=0) state.photos[idx]=entry; else state.photos.push(entry);
   saveState();
-  renderTho();
-  updateThoMood();
-  renderLocketFeed();
-  updatePills();
-  playFeedSound();
-  const msgs = { morning:'🌅 Thọ ăn sáng rồi!', afternoon:'☀️ Thọ ăn chiều rồi!', evening:'🌙 Thọ no bữa tối!' };
+  renderTho(); updateThoMood(); renderLocketFeed(); updatePills();
+  playSfx('feed');
+  const msgs={morning:'🌅 Thọ ăn sáng rồi!',afternoon:'☀️ Thọ ăn chiều rồi!',evening:'🌙 Thọ no bữa tối!'};
   showToast((msgs[slot]||'🐾 Cho Thọ ăn!') + ' +1 bữa 💗');
 }
 
-// ── UPDATE PILLS ──
+// ── PILLS ──
 function updatePills() {
-  const today = state.checkins[todayKey] || {};
-  const cur = getActiveSlot();
-  ['morning','afternoon','evening'].forEach(slot => {
-    const pill = document.getElementById('pill-' + slot);
-    if (!pill) return;
+  const today=state.checkins[todayKey]||{}, cur=getActiveSlot();
+  ['morning','afternoon','evening'].forEach(slot=>{
+    const pill=document.getElementById('pill-'+slot); if(!pill) return;
     pill.classList.remove('done','active');
     if (today[slot]) pill.classList.add('done');
-    else if (slot === cur) pill.classList.add('active');
+    else if (slot===cur) pill.classList.add('active');
   });
-  // Update trigger sub text
-  const meals = getTodayMeals();
-  const sub = document.getElementById('triggerSub');
+  const sub=document.getElementById('triggerSub');
   if (sub) {
-    const curInfo = SLOT_INFO[cur];
-    const done = today[cur];
-    sub.textContent = done
-      ? `✅ ${curInfo.label} đã xong · ${meals}/3 bữa hôm nay`
-      : `⏰ Đến giờ ${curInfo.label.toLowerCase()} rồi!`;
+    const meals=['morning','afternoon','evening'].filter(s=>today[s]).length;
+    sub.textContent = today[cur] ? `✅ ${SLOT_INFO[cur].label} xong rồi · ${meals}/3 bữa` : `⏰ Đến giờ ${SLOT_INFO[cur].label.toLowerCase()}!`;
   }
 }
 
-// ── LOCKET FEED RENDER ──
+// ── FEED ──
 function renderLocketFeed() {
-  const feed = document.getElementById('locketFeed');
-  if (!feed) return;
-
-  // Group photos by date
-  const photos = state.photos || [];
-  const byDate = {};
-  photos.forEach(p => {
-    if (!byDate[p.date]) byDate[p.date] = {};
-    const key = p.slot + '_' + (p.user||'An');
-    byDate[p.date][key] = p;
-  });
-
-  // Also include today even if no photos yet
-  if (!byDate[todayKey]) byDate[todayKey] = {};
-
-  const dates = Object.keys(byDate).sort((a,b) => b.localeCompare(a));
-
-  const slotOrder = ['morning','afternoon','evening'];
-  const slotEmoji = { morning:'🌅', afternoon:'☀️', evening:'🌙' };
-  const slotLabel = { morning:'Sáng', afternoon:'Chiều', evening:'Tối' };
-
-  const dateLabel = (d) => {
-    if (d === todayKey) return '🌸 Hôm nay';
-    const dt = new Date(d);
-    return dt.toLocaleDateString('vi-VN', {weekday:'short', day:'2-digit', month:'2-digit'});
-  };
-
-  feed.innerHTML = dates.map(date => {
-    const dayData = byDate[date];
-    const rows = slotOrder.map(slot => {
-      // An's photo (user='An') and Hien's placeholder
-      const anKey   = slot + '_An';
-      const hienKey = slot + '_Hiền';
-      const anPhoto   = dayData[anKey];
-      const hienPhoto = dayData[hienKey];
-
-      const anCell = anPhoto
-        ? `<div class="feed-photo" onclick="openViewer('${anPhoto.photo}','${slotLabel[slot]} · An · ${date}')">
-             <img src="${anPhoto.photo}" alt="">
-             <div class="slot-tag" style="position:absolute;top:6px;left:6px;background:rgba(255,77,166,0.85);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:50px;">${slotEmoji[slot]}</div>
-             <div class="feed-user-tag">An 💗</div>
-           </div>`
-        : `<div class="feed-photo" onclick="openCamera('${slot}')">
-             <div class="feed-photo-empty">${slotEmoji[slot]}<span>An · ${slotLabel[slot]}</span></div>
-           </div>`;
-
-      const hienCell = hienPhoto
-        ? `<div class="feed-photo" onclick="openViewer('${hienPhoto.photo}','${slotLabel[slot]} · Hiền · ${date}')">
-             <img src="${hienPhoto.photo}" alt="">
-             <div style="position:absolute;top:6px;left:6px;background:rgba(255,77,166,0.85);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:50px;">${slotEmoji[slot]}</div>
-             <div class="feed-user-tag">Hiền 💗</div>
-           </div>`
-        : `<div class="feed-photo" style="border:2px dashed var(--pink3)">
-             <div class="feed-photo-empty">💤<span>Hiền · ${slotLabel[slot]}</span></div>
-           </div>`;
-
+  const feed=document.getElementById('locketFeed'); if(!feed) return;
+  const photos=state.photos||[];
+  const byDate={};
+  photos.forEach(p=>{ if(!byDate[p.date]) byDate[p.date]={}; byDate[p.date][p.slot+'_'+p.user]=p; });
+  if (!byDate[todayKey]) byDate[todayKey]={};
+  const dates=Object.keys(byDate).sort((a,b)=>b.localeCompare(a));
+  const slotOrder=['morning','afternoon','evening'];
+  const slotEmoji={morning:'🌅',afternoon:'☀️',evening:'🌙'};
+  const slotLabel={morning:'Sáng',afternoon:'Chiều',evening:'Tối'};
+  const dateLabel=d=>{ if(d===todayKey) return '🌸 Hôm nay'; const dt=new Date(d); return dt.toLocaleDateString('vi-VN',{weekday:'short',day:'2-digit',month:'2-digit'}); };
+  feed.innerHTML = dates.map(date=>{
+    const dd=byDate[date];
+    const rows=slotOrder.map(slot=>{
+      const anP=dd[slot+'_An'], hienP=dd[slot+'_Hiền'];
+      // An cell — only An can tap to open camera
+      const anTap = currentUser==='An' ? `onclick="openCamera('${slot}')"` : `onclick="showToast('📸 Đây là ảnh của An!')"`;
+      const hienTap = currentUser==='Hiền' ? `onclick="openCamera('${slot}')"` : `onclick="showToast('📸 Đây là ảnh của Hiền!')"`;
+      const anCell = anP
+        ? `<div class="feed-photo" onclick="openViewer('${anP.photo}','${slotLabel[slot]} · An · ${date}')">`+
+          `<img src="${anP.photo}" alt=""><div class="slot-tag">${slotEmoji[slot]}</div><div class="feed-user-tag">An 💗</div></div>`
+        : `<div class="feed-photo" style="border:2px dashed var(--p3)" ${currentUser==='An'?`onclick="openCamera('${slot}')"`:''}>`+
+          `<div class="feed-photo-empty">${slotEmoji[slot]}<span>An · ${slotLabel[slot]}</span></div></div>`;
+      const hienCell = hienP
+        ? `<div class="feed-photo" onclick="openViewer('${hienP.photo}','${slotLabel[slot]} · Hiền · ${date}')">`+
+          `<img src="${hienP.photo}" alt=""><div class="slot-tag">${slotEmoji[slot]}</div><div class="feed-user-tag">Hiền 💗</div></div>`
+        : `<div class="feed-photo" style="border:2px dashed var(--p3)" ${currentUser==='Hiền'?`onclick="openCamera('${slot}')"`:''}>`+
+          `<div class="feed-photo-empty">${slotEmoji[slot]}<span>Hiền · ${slotLabel[slot]}</span></div></div>`;
       return `<div class="feed-row">${anCell}${hienCell}</div>`;
     }).join('');
-
-    return `
-      <div class="feed-section" style="margin-bottom:16px;">
-        <div class="feed-date-header">${dateLabel(date)}</div>
-        ${rows}
-      </div>`;
+    return `<div class="feed-section"><div class="feed-date-header">${dateLabel(date)}</div>${rows}</div>`;
   }).join('');
 }
 
-// ── PHOTO VIEWER ──
-function openViewer(src, meta) {
-  document.getElementById('viewerImg').src = src;
-  document.getElementById('viewerMeta').textContent = meta;
-  document.getElementById('photoViewer').classList.add('open');
+// ── PLACES ──
+function updatePlaceForm() {
+  const today=state.checkins[todayKey]||{};
+  const mySlot = currentUser==='An' ? 'place-an' : 'place-hien';
+  const myDone   = !!today['place-an'];
+  const hienDone = !!today['place-hien'];
+  const iDone = !!today[mySlot];
+
+  // Show/hide already done notice
+  document.getElementById('placeAlreadyDone').style.display = iDone ? 'block' : 'none';
+
+  // Update title
+  document.getElementById('placeFormTitle').textContent = iDone
+    ? `✅ ${currentUser} đã note rồi!`
+    : `📍 ${currentUser} note địa điểm nào!`;
+
+  // Update status banner
+  let statusHtml = '<div style="display:flex;gap:8px;margin-bottom:12px;">';
+  statusHtml += `<div style="flex:1;padding:8px 12px;border-radius:12px;background:${myDone?'#fff0f7':'#f5f5f5'};border:2px solid ${myDone?'var(--p4)':'#ddd'};text-align:center;">`;
+  statusHtml += `<div style="font-size:18px;">${myDone?'✅':'⏳'}</div>`;
+  statusHtml += `<div style="font-size:11px;font-weight:700;color:${myDone?'var(--p5)':'#999'};">An</div>`;
+  if (today['place-an']) statusHtml += `<div style="font-size:10px;color:#aaa;">${today['place-an'].name||''}</div>`;
+  statusHtml += '</div>';
+  statusHtml += `<div style="flex:1;padding:8px 12px;border-radius:12px;background:${hienDone?'#f5f0ff':'#f5f5f5'};border:2px solid ${hienDone?'#a855f7':'#ddd'};text-align:center;">`;
+  statusHtml += `<div style="font-size:18px;">${hienDone?'✅':'⏳'}</div>`;
+  statusHtml += `<div style="font-size:11px;font-weight:700;color:${hienDone?'#a855f7':'#999'};">Hiền</div>`;
+  if (today['place-hien']) statusHtml += `<div style="font-size:10px;color:#aaa;">${today['place-hien'].name||''}</div>`;
+  statusHtml += '</div></div>';
+
+  // Inject status into form
+  let statusEl = document.getElementById('placeStatusBanner');
+  if (!statusEl) {
+    statusEl = document.createElement('div');
+    statusEl.id = 'placeStatusBanner';
+    const form = document.querySelector('.place-form');
+    form.insertBefore(statusEl, form.querySelector('label'));
+  }
+  statusEl.innerHTML = statusHtml;
+
+  // Both done = Thọ được ăn!
+  const bothDone = myDone && hienDone;
+  const dot = document.getElementById('dot-place-an');
+  if (dot) dot.classList.toggle('fed', bothDone);
 }
-function closeViewer() {
-  document.getElementById('photoViewer').classList.remove('open');
+function savePlace() {
+  const name=document.getElementById('placeName').value.trim();
+  if (!name) { showToast('📍 Nhập tên địa điểm trước nha!'); playSfx('error'); return; }
+  const type=document.getElementById('placeType').value;
+  const city=document.getElementById('placeCity').value;
+  const note=document.getElementById('placeNote').value.trim();
+  const userSlot = currentUser==='An' ? 'place-an' : 'place-hien';
+  if (!state.checkins[todayKey]) state.checkins[todayKey]={};
+
+  const wasAnDone   = !!state.checkins[todayKey]['place-an'];
+  const wasHienDone = !!state.checkins[todayKey]['place-hien'];
+  const wasBothDone = wasAnDone && wasHienDone;
+
+  const place = {name,type,city,note,date:todayKey,time:new Date().toISOString(),user:currentUser};
+  state.places.push(place);
+  state.checkins[todayKey][userSlot] = {name,time:new Date().toISOString()};
+
+  const nowAnDone   = !!state.checkins[todayKey]['place-an'];
+  const nowHienDone = !!state.checkins[todayKey]['place-hien'];
+  const nowBothDone = nowAnDone && nowHienDone;
+
+  // Count meal only when BOTH done for the first time
+  if (nowBothDone && !wasBothDone) {
+    state.totalMeals = (state.totalMeals||0)+1;
+    showToast(`🎉 Cả An và Hiền đều note rồi! Thọ được ăn bữa địa điểm 🐾💗`);
+    playSfx('feed');
+  } else if (!wasBothDone) {
+    const other = currentUser==='An' ? 'Hiền' : 'An';
+    showToast(`📍 ${currentUser} đã note! Chờ ${other} note nữa là Thọ ăn 🐾`);
+    playSfx('place');
+  } else {
+    showToast(`📍 Đã lưu thêm địa điểm của ${currentUser}!`);
+    playSfx('place');
+  }
+
+  saveState(); renderTho(); updateThoMood(); renderPlaces(); updatePlaceForm();
+  document.getElementById('placeName').value=''; document.getElementById('placeNote').value='';
+}
+function renderPlaces() {
+  const list=document.getElementById('placesList');
+  if (!state.places||!state.places.length) { list.innerHTML='<p style="text-align:center;color:#bbb;padding:20px;font-size:14px;">Chưa có địa điểm nào 🗺️</p>'; return; }
+  const icons={food:'🍜',activity:'🎡',cafe:'☕',shopping:'🛍️',beach:'🏖️'};
+  const userColor={An:'#ff4da6',Hiền:'#a855f7'};
+  list.innerHTML=[...state.places].reverse().map(p=>`
+    <div class="place-item">
+      <div class="place-emoji">${icons[p.type]||'📍'}</div>
+      <div style="flex:1">
+        <div class="place-info-name">${p.name}</div>
+        <div class="place-info-note">${p.city}${p.note?' · '+p.note:''}</div>
+        <div class="place-info-meta">${p.date} · <span style="color:${userColor[p.user]||'#ff4da6'};font-weight:800;">${p.user}</span></div>
+      </div>
+    </div>`).join('');
 }
 
+// ── PHOTO VIEWER ──
+function openViewer(src,meta) { playSfx('click'); document.getElementById('viewerImg').src=src; document.getElementById('viewerMeta').textContent=meta; document.getElementById('photoViewer').classList.add('open'); }
+function closeViewer() { playSfx('click'); document.getElementById('photoViewer').classList.remove('open'); }
+
+// ── TOAST ──
+function showToast(msg,dur=3000) {
+  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
+  clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),dur);
+}
+
+// ── NAV ──
+function showSection(id,btn) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  if(btn) btn.classList.add('active');
+  playSfx('nav');
+  if(id==='tho') { renderTho(); updateThoMood(); }
+  if(id==='checkin') { renderLocketFeed(); updatePills(); }
+  if(id==='places') { renderPlaces(); updatePlaceForm(); }
+}
+
+// ── REMIND ──
+function checkRemind() {
+  if (!currentUser) return;
+  const today=state.checkins[todayKey]||{}, h=new Date().getHours();
+  const windows=[
+    {start:6,end:12,slot:'morning',msgs:['🌅 Thọ đói sáng rồi! Checkin ảnh nào 🐾','🌅 Thọ nhịn sáng tới giờ rồi đó 😢','🌅 Bụng Thọ kêu réo... Sáng chưa ăn gì! 🥺']},
+    {start:12,end:18,slot:'afternoon',msgs:['☀️ Trưa rồi! Thọ chờ ăn chiều 🐾','☀️ Nắng to mà Thọ chưa ăn chiều 😢','☀️ Thọ nằm dài vì đói chiều... 🥺']},
+    {start:18,end:24,slot:'evening',msgs:['🌙 Tối rồi! Cho Thọ ăn tối với 🐾','🌙 Thọ buồn ngủ mà chưa được ăn 😢','🌙 Đêm xuống rồi Thọ vẫn đói 🥺']},
+    {start:19,end:24,slot:'place-'+(currentUser==='An'?'an':'hien'),msgs:['📍 Note địa điểm hôm nay chưa? Thọ cần cả 2 người note mới ăn đc 🗺️','📍 Thọ muốn biết đi đâu! Note địa điểm điiiii 🐾','📍 Địa điểm đâu rồi? Thọ đói bữa này lắm 🥺']},
+  ];
+  windows.forEach(w=>{
+    if (today[w.slot]||h<w.start||h>=w.end) return;
+    const msg=w.msgs[Math.min(h-w.start,w.msgs.length-1)];
+    showToast(msg,5000); playSfx('error');
+  });
+}
+
+// ── BOOT ──
+document.addEventListener('DOMContentLoaded', ()=>{
+  // Add ripple to all buttons
+  document.querySelectorAll('button,.btn-pink,.btn-outline,.nav-btn,.login-btn').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+      const r=document.createElement('span'); r.className='ripple';
+      const rect=btn.getBoundingClientRect();
+      const size=Math.max(rect.width,rect.height);
+      r.style.cssText=`width:${size}px;height:${size}px;left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px;`;
+      btn.style.position='relative'; btn.style.overflow='hidden';
+      btn.appendChild(r); setTimeout(()=>r.remove(),600);
+    });
+  });
+  tryAutoLogin();
+});
 </script>
 </body>
 </html>
