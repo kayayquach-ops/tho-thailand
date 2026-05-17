@@ -356,6 +356,12 @@ body{font-family:var(--font);background:var(--p1);min-height:100vh;overflow-x:hi
     <p>🕐 Remind theo giờ Việt Nam (UTC+7)</p>
   </div>
   <div class="setup-card">
+    <h3>🔍 Debug</h3>
+    <button class="btn-pink" onclick="showDebug()" style="margin-bottom:8px">🔍 Xem trạng thái</button>
+    <div id="debugBox" style="display:none;background:var(--p1);border-radius:12px;padding:12px;font-size:11px;color:#333;word-break:break-all;margin-top:8px;max-height:200px;overflow-y:auto"></div>
+    <button class="btn-pink" onclick="forceSyncNow()" style="margin-top:8px;background:linear-gradient(135deg,#a855f7,#c084fc)">🔄 Sync ngay</button>
+  </div>
+  <div class="setup-card">
     <h3>🗑️ Reset dữ liệu</h3>
     <button class="btn-pink" onclick="resetAllData()" style="background:linear-gradient(135deg,#ff6b6b,#ff4444)">🗑️ Reset tất cả</button>
   </div>
@@ -698,8 +704,22 @@ async function openCamera(slot){
 }
 async function startCameraStream(){
   if(cameraStream){cameraStream.getTracks().forEach(t=>t.stop());cameraStream=null;}
-  try{cameraStream=await navigator.mediaDevices.getUserMedia({video:{facingMode,width:{ideal:1080},height:{ideal:1080}},audio:false});document.getElementById('cameraVideo').srcObject=cameraStream;}
-  catch(e){showToast('📷 Không mở được camera. Thử chọn từ album!');closeCamera();}
+  try {
+    cameraStream = await navigator.mediaDevices.getUserMedia({
+      video: {facingMode, width:{ideal:1080}, height:{ideal:1080}}, audio:false
+    });
+    document.getElementById('cameraVideo').srcObject = cameraStream;
+  } catch(e) {
+    console.log('Camera err:', e.name, e.message);
+    // Thử lại với constraint đơn giản hơn
+    try {
+      cameraStream = await navigator.mediaDevices.getUserMedia({video:true, audio:false});
+      document.getElementById('cameraVideo').srcObject = cameraStream;
+    } catch(e2) {
+      showToast('📷 Camera bị chặn. Vào Settings cho phép Camera rồi thử lại!', 4000);
+      closeCamera();
+    }
+  }
 }
 function flipCamera(){facingMode=facingMode==='user'?'environment':'user';playSfx('click');startCameraStream();}
 function capturePhoto(){
@@ -1012,45 +1032,105 @@ function checkRemind(){
 // ══════════════════════════════════════
 // TELEGRAM
 // ══════════════════════════════════════
-async function notifyTg(chatId,msg){
-  if(!chatId||!TG_TOKEN) return;
-  try{await fetch('https://api.telegram.org/bot'+TG_TOKEN+'/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:chatId,text:msg})});}
-  catch(e){}
+async function notifyTg(chatId, msg) {
+  if (!chatId || !TG_TOKEN) return;
+  const url = 'https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage';
+  const body = JSON.stringify({chat_id: chatId, text: msg});
+  try {
+    // Try fetch first
+    const res = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body});
+    const data = await res.json();
+    if (!data.ok) console.log('TG err:', data.description);
+    else console.log('TG sent to', chatId.slice(0,4)+'***');
+  } catch(e) {
+    // Fallback sendBeacon
+    try { navigator.sendBeacon(url + '?chat_id=' + chatId + '&text=' + encodeURIComponent(msg)); }
+    catch(e2) { console.log('TG failed:', e2); }
+  }
 }
 
 // ══════════════════════════════════════
 // SYNC (Google Apps Script)
 // ══════════════════════════════════════
-async function syncUpload(entry){
-  if(!APPS_SCRIPT_URL) return;
-  try{await fetch(APPS_SCRIPT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'write',...entry}),mode:'no-cors'});}
-  catch(e){}
+// Compress ảnh xuống 400px để fit vào Sheet cell
+async function compressPhoto(dataUrl, maxSize=400) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const ratio = Math.min(maxSize/img.width, maxSize/img.height, 1);
+      canvas.width  = Math.round(img.width  * ratio);
+      canvas.height = Math.round(img.height * ratio);
+      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+      resolve(canvas.toDataURL('image/jpeg', 0.65));
+    };
+    img.onerror = () => resolve(dataUrl);
+    img.src = dataUrl;
+  });
 }
-async function syncDownload(){
-  if(!APPS_SCRIPT_URL) return;
-  try{
-    const res=await fetch(APPS_SCRIPT_URL+'?action=read',{cache:'no-store'});
-    const rows=await res.json();
-    if(!rows||!rows.length) return;
-    let changed=false;
-    rows.forEach(row=>{
-      if(!row.photo||!row.slot||!row.user||row.date<START_DATE) return;
-      if(!state.checkins[row.date]) state.checkins[row.date]={};
-      if(row.type==='photo'){
-        const key=row.slot+'_'+row.user;
-        if(!state.photos) state.photos=[];
-        const exists=state.photos.find(p=>p.date===row.date&&p.slot===row.slot&&p.user===row.user);
-        if(!exists){state.photos.push({slot:row.slot,date:row.date,photo:row.photo,time:row.time,user:row.user});state.checkins[row.date][key]={photo:row.photo,time:row.time,user:row.user};changed=true;}
-      } else if(row.type==='place'){
-        const key=row.user==='An'?'place-an':'place-hien';
-        if(!state.checkins[row.date][key]){state.checkins[row.date][key]={name:row.place_name||'',time:row.time};state.places=state.places||[];if(!state.places.find(p=>p.date===row.date&&p.user===row.user&&p.name===row.place_name))state.places.push({name:row.place_name||'',type:row.place_type||'food',city:row.city||'Bangkok',note:row.note||'',date:row.date,time:row.time,user:row.user});changed=true;}
+
+async function syncUpload(entry) {
+  if (!APPS_SCRIPT_URL) return;
+  try {
+    // Compress photo nếu có
+    const payload = {...entry};
+    if (payload.photo && payload.photo.startsWith('data:')) {
+      payload.photo = await compressPhoto(payload.photo, 400);
+    }
+    payload.action = 'write';
+    // Dùng form-data để tránh CORS preflight
+    const form = new FormData();
+    form.append('payload', JSON.stringify(payload));
+    await fetch(APPS_SCRIPT_URL, { method:'POST', body: form, mode:'no-cors' });
+  } catch(e) { console.log('sync upload err:', e); }
+}
+async function syncDownload() {
+  if (!APPS_SCRIPT_URL) return;
+  try {
+    const res = await fetch(APPS_SCRIPT_URL + '?action=read&t=' + Date.now(), {cache:'no-store'});
+    if (!res.ok) { console.log('Sync HTTP err:', res.status); return; }
+    const rows = await res.json();
+    if (!Array.isArray(rows) || !rows.length) return;
+    let changed = false;
+    rows.forEach(row => {
+      if (!row.user || !row.date || row.date < START_DATE) return;
+      if (!state.checkins[row.date]) state.checkins[row.date] = {};
+      if (row.type === 'photo') {
+        if (!row.slot) return;
+        const key = row.slot + '_' + row.user;
+        if (!state.photos) state.photos = [];
+        const exists = state.photos.find(p => p.date===row.date && p.slot===row.slot && p.user===row.user);
+        if (!exists && row.photo) {
+          state.photos.push({slot:row.slot, date:row.date, photo:row.photo, time:row.time||'', user:row.user});
+          state.checkins[row.date][key] = {photo:row.photo, time:row.time||'', user:row.user};
+          changed = true;
+        }
+      } else if (row.type === 'place') {
+        const key = row.user === 'An' ? 'place-an' : 'place-hien';
+        if (!state.checkins[row.date][key]) {
+          state.checkins[row.date][key] = {name: row.place_name||'', time: row.time||''};
+          state.places = state.places || [];
+          if (!state.places.find(p => p.date===row.date && p.user===row.user && p.name===row.place_name)) {
+            state.places.push({name:row.place_name||'', type:row.place_type||'food', city:row.city||'Bangkok', note:row.note||'', date:row.date, time:row.time||'', user:row.user});
+          }
+          changed = true;
+        }
       }
     });
-    if(changed){recalcTotalMeals();saveState();renderAll();console.log('Synced!');}
-  }catch(e){}
+    if (changed) {
+      recalcTotalMeals(); saveState(); renderAll();
+      console.log('✅ Synced', rows.length, 'rows');
+    }
+  } catch(e) { console.log('Sync download err:', e); }
 }
 let _syncInterval=null;
-function startSync(){syncDownload();if(_syncInterval) clearInterval(_syncInterval);_syncInterval=setInterval(syncDownload,30000);}
+function startSync(){
+  // Sync ngay, sau đó mỗi 20 giây
+  syncDownload();
+  setTimeout(syncDownload, 5000); // sync lại sau 5s phòng lần đầu chậm
+  if(_syncInterval) clearInterval(_syncInterval);
+  _syncInterval=setInterval(syncDownload,20000);
+}
 
 // ══════════════════════════════════════
 // SETUP
@@ -1112,6 +1192,47 @@ function showSection(id,btn){
 // BOOT
 // ══════════════════════════════════════
 document.addEventListener('DOMContentLoaded',()=>{tryAutoLogin();});
+
+function showDebug() {
+  const box = document.getElementById('debugBox');
+  box.style.display = box.style.display === 'none' ? 'block' : 'none';
+  const photos = state.photos || [];
+  const checkins = state.checkins || {};
+  const today = checkins[todayKey] || {};
+  const lines = [
+    '👤 User: ' + (currentUser || 'chưa login'),
+    '📅 Today: ' + todayKey,
+    '🖼️ Tổng ảnh: ' + photos.length,
+    '🐻 Ảnh An: ' + photos.filter(p=>p.user==='An').length,
+    '🐰 Ảnh Hiền: ' + photos.filter(p=>p.user==='Hiền').length,
+    '🌅 Sáng An: ' + (today['morning_An']?'✅':'❌'),
+    '🌅 Sáng Hiền: ' + (today['morning_Hiền']?'✅':'❌'),
+    '☀️ Chiều An: ' + (today['afternoon_An']?'✅':'❌'),
+    '☀️ Chiều Hiền: ' + (today['afternoon_Hiền']?'✅':'❌'),
+    '🌙 Tối An: ' + (today['evening_An']?'✅':'❌'),
+    '🌙 Tối Hiền: ' + (today['evening_Hiền']?'✅':'❌'),
+    '📍 Địa điểm An: ' + (today['place-an']?'✅':'❌'),
+    '📍 Địa điểm Hiền: ' + (today['place-hien']?'✅':'❌'),
+    '🔄 Script URL: ' + (APPS_SCRIPT_URL ? '✅ có' : '❌ chưa set'),
+    '💾 Total meals: ' + (state.totalMeals||0),
+  ];
+  // Show last 3 photos
+  if (photos.length > 0) {
+    lines.push('--- 3 ảnh gần nhất ---');
+    [...photos].reverse().slice(0,3).forEach(p => {
+      lines.push(p.user + ' · ' + p.slot + ' · ' + p.date);
+    });
+  }
+  box.innerHTML = lines.join('<br>');
+}
+
+async function forceSyncNow() {
+  showToast('🔄 Đang sync...', 2000);
+  await syncDownload();
+  showToast('✅ Sync xong!', 2000);
+  showDebug();
+}
+
 </script>
 </body>
 </html>
