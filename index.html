@@ -9,12 +9,10 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
   --p1:#fff0f7;--p2:#ffd6ee;--p3:#ffadd8;--p4:#ff7bbf;--p5:#ff4da6;--p6:#d4006e;
-  --gold:#ffdd00;
   --font:'Quicksand','Baloo 2',system-ui,sans-serif;
   --font-title:'Baloo 2','Quicksand',system-ui,sans-serif;
 }
 body{font-family:var(--font);background:var(--p1);min-height:100vh;overflow-x:hidden}
-
 @keyframes spFloat{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:.8}100%{transform:translateY(-20vh) scale(1.5) rotate(360deg);opacity:0}}
 @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
 @keyframes heartbeat{0%,100%{transform:scale(1)}15%{transform:scale(1.15)}30%{transform:scale(1)}45%{transform:scale(1.08)}}
@@ -28,15 +26,15 @@ body{font-family:var(--font);background:var(--p1);min-height:100vh;overflow-x:hi
 @keyframes floatHeart{0%{transform:translateY(0) scale(0);opacity:1}100%{transform:translateY(-80px) scale(1.2);opacity:0}}
 @keyframes popIn{0%{transform:scale(0) rotate(-10deg);opacity:0}70%{transform:scale(1.15) rotate(3deg)}100%{transform:scale(1) rotate(0);opacity:1}}
 @keyframes feedCelebrate{0%{transform:scale(1)}20%{transform:scale(1.2) rotate(-3deg)}40%{transform:scale(.95) rotate(3deg)}60%{transform:scale(1.1)}80%{transform:scale(.98)}100%{transform:scale(1)}}
-@keyframes ripple{0%{transform:scale(1);opacity:.6}100%{transform:scale(2.8);opacity:0}}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 
-/* PICK SCREEN */
+/* PICK */
 .pick-screen{position:fixed;inset:0;z-index:999;background:linear-gradient(145deg,#ff4da6,#ffadd8,#ff85c2,#ff4da6);background-size:400% 400%;animation:shimmer 4s linear infinite;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px}
 .pick-logo{font-size:80px;animation:float 3s ease-in-out infinite;margin-bottom:8px}
 .pick-title{font-family:var(--font-title);font-size:32px;font-weight:800;color:#fff;text-shadow:0 2px 12px rgba(140,0,86,.4);margin-bottom:4px}
 .pick-sub{font-size:14px;color:rgba(255,255,255,.85);font-weight:600;margin-bottom:8px}
 .pick-hint{font-size:13px;color:rgba(255,255,255,.75);font-weight:600;margin-bottom:28px}
-.pick-btn{width:100%;max-width:300px;padding:18px 24px;border-radius:20px;border:none;background:rgba(255,255,255,.2);color:#fff;font-family:var(--font-title);font-size:17px;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.15);transition:transform .15s;display:flex;align-items:center;gap:14px;margin-bottom:14px;backdrop-filter:blur(8px);border:2px solid rgba(255,255,255,.4)}
+.pick-btn{width:100%;max-width:300px;padding:18px 24px;border-radius:20px;border:2px solid rgba(255,255,255,.4);background:rgba(255,255,255,.2);color:#fff;font-family:var(--font-title);font-size:17px;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.15);transition:transform .15s;display:flex;align-items:center;gap:14px;margin-bottom:14px;backdrop-filter:blur(8px)}
 .pick-btn:active{transform:scale(.96)}
 .pick-btn-hien{background:rgba(168,85,247,.35);border-color:rgba(168,85,247,.5)}
 
@@ -73,20 +71,26 @@ body{font-family:var(--font);background:var(--p1);min-height:100vh;overflow-x:hi
 /* THỌ */
 .tho-card{background:#fff;border-radius:28px;padding:20px;box-shadow:0 6px 32px rgba(255,77,166,.18);text-align:center;margin-bottom:16px}
 .tho-stage-label{font-size:12px;color:var(--p4);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
-.tho-canvas{width:200px;height:200px;margin:0 auto 12px;animation:float 3s ease-in-out infinite;cursor:pointer;position:relative;display:block}
+.tho-canvas{width:200px;height:200px;margin:0 auto 12px;animation:float 3s ease-in-out infinite;cursor:pointer;display:block}
 .tho-name{font-family:var(--font-title);font-size:26px;font-weight:800;background:linear-gradient(135deg,#ff4da6,#c8266f);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .tho-mood{font-size:14px;font-weight:700;color:var(--p6);margin-top:4px}
 .hunger-bar-wrap{margin:8px 16px;background:var(--p2);border-radius:50px;height:12px;overflow:hidden}
 .hunger-bar{height:100%;border-radius:50px;background:linear-gradient(90deg,#ff4da6,#ffadd8,#ff4da6);background-size:200% 100%;animation:shimmer 2s linear infinite;transition:width .8s ease}
 .tho-hunger{display:flex;gap:8px;justify-content:center;margin:12px 0}
-.meal-dot{width:38px;height:38px;border-radius:50%;border:3px solid var(--p3);display:flex;align-items:center;justify-content:center;font-size:16px;background:#fff;transition:all .4s;position:relative}
+.meal-dot{width:38px;height:38px;border-radius:50%;border:3px solid var(--p3);display:flex;align-items:center;justify-content:center;font-size:16px;background:#fff;transition:all .4s}
 .meal-dot.fed{background:linear-gradient(135deg,#ff4da6,#ffadd8);border-color:var(--p5);box-shadow:0 0 16px rgba(255,77,166,.5);animation:bounce .6s ease}
 .meal-dot.half{opacity:.5;border-color:var(--p4)}
 
-/* CELEBRATE OVERLAY */
-.celebrate-overlay{display:none;position:fixed;inset:0;z-index:800;pointer-events:none;align-items:center;justify-content:center;flex-direction:column}
+/* UPLOAD PROGRESS */
+.upload-overlay{display:none;position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.7);align-items:center;justify-content:center;flex-direction:column;gap:16px}
+.upload-overlay.show{display:flex}
+.upload-spinner{width:60px;height:60px;border:4px solid rgba(255,255,255,.2);border-top-color:#ff4da6;border-radius:50%;animation:spin .8s linear infinite}
+.upload-text{color:#fff;font-family:var(--font-title);font-size:16px;font-weight:700}
+
+/* CELEBRATE */
+.celebrate-overlay{display:none;position:fixed;inset:0;z-index:800;pointer-events:none;align-items:center;justify-content:center}
 .celebrate-overlay.show{display:flex}
-.celebrate-msg{background:linear-gradient(135deg,#ff4da6,#ff85c2);color:#fff;font-family:var(--font-title);font-size:22px;font-weight:800;padding:20px 32px;border-radius:28px;text-align:center;box-shadow:0 12px 40px rgba(255,77,166,.5);animation:popIn .4s ease both}
+.celebrate-msg{background:linear-gradient(135deg,#ff4da6,#ff85c2);color:#fff;font-family:var(--font-title);font-size:20px;font-weight:800;padding:20px 32px;border-radius:28px;text-align:center;box-shadow:0 12px 40px rgba(255,77,166,.5);animation:popIn .4s ease both;max-width:80vw}
 
 /* CAMERA */
 .locket-overlay{display:none;position:fixed;inset:0;z-index:500;background:#000;flex-direction:column}
@@ -109,7 +113,7 @@ body{font-family:var(--font);background:var(--p1);min-height:100vh;overflow-x:hi
 .btn-confirm{flex:1;padding:14px;border-radius:50px;border:none;background:linear-gradient(135deg,#ff4da6,#ff85c2);color:#fff;font-family:var(--font-title);font-size:15px;font-weight:800;cursor:pointer}
 .btn-retake{flex:1;padding:14px;border-radius:50px;border:2px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-family:var(--font-title);font-size:15px;font-weight:800;cursor:pointer}
 
-/* CHECKIN TRIGGER */
+/* TRIGGER */
 .locket-trigger-area{position:relative;overflow:hidden;border-radius:28px;background:linear-gradient(145deg,#ff4da6,#ffadd8,#ff85c2);background-size:200% 200%;animation:shimmer 3s linear infinite;padding:28px 20px;text-align:center;cursor:pointer;margin-bottom:16px;box-shadow:0 8px 32px rgba(255,77,166,.4)}
 .locket-trigger-ring{width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.25);border:3px solid rgba(255,255,255,.6);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:38px;box-shadow:0 0 0 8px rgba(255,255,255,.12),0 0 0 16px rgba(255,255,255,.06);animation:heartbeat 2s ease-in-out infinite}
 .locket-trigger-label{font-family:var(--font-title);font-size:20px;font-weight:800;color:#fff}
@@ -117,12 +121,12 @@ body{font-family:var(--font);background:var(--p1);min-height:100vh;overflow-x:hi
 .locket-slot-pills{display:flex;gap:8px;justify-content:center;margin-top:14px}
 .slot-pill{padding:6px 14px;border-radius:50px;font-size:12px;font-weight:700;background:rgba(255,255,255,.2);color:#fff;border:1.5px solid rgba(255,255,255,.4);cursor:pointer;transition:all .2s}
 .slot-pill.done{background:rgba(255,255,255,.9);color:var(--p5);border-color:transparent}
-.slot-pill.half{background:rgba(255,255,255,.5);color:#fff;border-color:rgba(255,255,255,.6)}
+.slot-pill.half{background:rgba(255,255,255,.5);color:#fff}
 .slot-pill.active{background:#fff;color:var(--p6);border-color:transparent;box-shadow:0 2px 10px rgba(0,0,0,.15)}
 
 /* FEED */
 .feed-section{background:#fff;border-radius:28px;margin-bottom:16px;overflow:hidden;box-shadow:0 4px 20px rgba(255,77,166,.1)}
-.feed-date-header{padding:14px 16px 6px;font-family:var(--font-title);font-size:17px;font-weight:800;color:var(--p6);display:flex;align-items:center;gap:8px}
+.feed-date-header{padding:14px 16px 6px;font-family:var(--font-title);font-size:17px;font-weight:800;color:var(--p6)}
 .feed-row{display:flex;gap:3px;padding:0 3px 3px}
 .feed-photo{flex:1;aspect-ratio:1;border-radius:16px;overflow:hidden;background:var(--p2);position:relative;cursor:pointer;transition:transform .15s}
 .feed-photo:active{transform:scale(.97)}
@@ -153,67 +157,57 @@ body{font-family:var(--font);background:var(--p1);min-height:100vh;overflow-x:hi
 .stat-box{flex:1;background:#fff;border-radius:16px;padding:12px;text-align:center;box-shadow:0 3px 14px rgba(255,77,166,.1)}
 .stat-num{font-family:var(--font-title);font-size:26px;font-weight:800;color:var(--p5)}
 .stat-label{font-size:11px;color:#999;font-weight:700}
-.filter-btn{padding:6px 14px;border-radius:50px;border:2px solid var(--p3);background:#fff;color:var(--p5);font-family:var(--font-title);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
+.filter-btn{padding:6px 14px;border-radius:50px;border:2px solid var(--p3);background:#fff;color:var(--p5);font-family:var(--font-title);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
 .filter-btn.active{background:linear-gradient(135deg,#ff4da6,#ff85c2);color:#fff;border-color:transparent}
 
 /* BUTTONS */
 .btn-pink{width:100%;padding:14px;border-radius:50px;border:none;background:linear-gradient(135deg,#ff4da6,#ff85c2);color:#fff;font-family:var(--font-title);font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 6px 20px rgba(255,77,166,.4);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
 .btn-pink:active{transform:scale(.97)}
-.btn-outline{width:100%;padding:12px;border-radius:50px;border:2px solid var(--p4);background:#fff;color:var(--p5);font-family:var(--font-title);font-size:14px;font-weight:700;cursor:pointer;margin-top:8px}
 
 /* SETUP */
 .setup-card{background:#fff;border-radius:24px;padding:20px;box-shadow:0 4px 20px rgba(255,77,166,.12);margin-bottom:16px}
 .setup-card h3{font-family:var(--font-title);font-size:18px;font-weight:800;color:var(--p6);margin-bottom:12px}
-.setup-card p{font-size:13px;color:#666;line-height:1.6;margin-bottom:8px}
-.tag{display:inline-block;padding:3px 10px;border-radius:50px;font-size:11px;font-weight:700;background:var(--p2);color:var(--p6);margin:2px}
+.setup-card p{font-size:13px;color:#666;line-height:1.6;margin-bottom:6px}
 
 /* TOAST */
 .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#ff4da6,#ff85c2);color:#fff;padding:12px 24px;border-radius:50px;font-weight:800;font-size:14px;z-index:999;opacity:0;pointer-events:none;transition:opacity .3s;white-space:nowrap;box-shadow:0 6px 24px rgba(255,77,166,.5);max-width:90vw;text-align:center}
 .toast.show{opacity:1}
 
-/* PHOTO VIEWER */
+/* VIEWER */
 .photo-viewer{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.95);align-items:center;justify-content:center;flex-direction:column}
 .photo-viewer.open{display:flex}
 .photo-viewer img{max-width:100%;max-height:80vh;border-radius:20px;object-fit:contain}
 .photo-viewer-close{position:absolute;top:52px;right:20px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:22px;cursor:pointer}
 .photo-viewer-meta{margin-top:16px;text-align:center;color:rgba(255,255,255,.7);font-size:13px;font-weight:700}
 
-/* SPARKLE BG */
 .sparkle-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 </style>
 </head>
 <body>
 
-<!-- PICK SCREEN -->
+<!-- PICK -->
 <div class="pick-screen" id="pickScreen">
   <div class="pick-logo">🐾</div>
   <div class="pick-title">Thọ & Thailand</div>
   <div class="pick-sub">An x Hiền · Bangkok x Pattaya 🇹🇭</div>
-  <div class="pick-hint">Bạn là ai? Chọn 1 lần thôi nhé! 💗</div>
+  <div class="pick-hint">Bạn là ai? Chọn 1 lần thôi nhé 💗</div>
   <button class="pick-btn" onclick="pickUser('An')">
     <span style="font-size:40px">🐻</span>
-    <div style="text-align:left">
-      <div>Khánh An</div>
-      <div style="font-size:12px;opacity:.8;font-weight:600">@khanhanka · 🇰🇷 Hàn Quốc</div>
-    </div>
+    <div style="text-align:left"><div>Khánh An</div><div style="font-size:12px;opacity:.8;font-weight:600">@khanhanka · 🇰🇷</div></div>
   </button>
   <button class="pick-btn pick-btn-hien" onclick="pickUser('Hiền')">
     <span style="font-size:40px">🐰</span>
-    <div style="text-align:left">
-      <div>Thúy Hiền</div>
-      <div style="font-size:12px;opacity:.8;font-weight:600">@lalabeo · 🇻🇳 Việt Nam</div>
-    </div>
+    <div style="text-align:left"><div>Thúy Hiền</div><div style="font-size:12px;opacity:.8;font-weight:600">@lalabeo · 🇻🇳</div></div>
   </button>
 </div>
 
-<!-- SPARKLE BG -->
 <div class="sparkle-bg" id="sparkleBg"></div>
 
 <!-- HEADER -->
 <div class="header">
   <div class="header-user">
     <div class="user-badge" id="userBadge">...</div>
-    <button class="logout-btn" onclick="doLogout()" title="Đổi người">🔄</button>
+    <button class="logout-btn" onclick="doLogout()">🔄</button>
   </div>
   <div class="header-title">🐾 Thọ & Thailand ✈️</div>
   <div class="header-sub">An × Hiền · Bangkok × Pattaya</div>
@@ -251,10 +245,10 @@ body{font-family:var(--font);background:var(--p1);min-height:100vh;overflow-x:hi
     <div class="tho-mood" id="thoMood">Đang chờ cả 2 checkin... 🥺</div>
     <div class="hunger-bar-wrap"><div class="hunger-bar" id="hungerBar" style="width:0%"></div></div>
     <div class="tho-hunger">
-      <div class="meal-dot" id="dot-morning" title="Sáng">🌅</div>
-      <div class="meal-dot" id="dot-afternoon" title="Chiều">☀️</div>
-      <div class="meal-dot" id="dot-evening" title="Tối">🌙</div>
-      <div class="meal-dot" id="dot-place" title="Địa điểm">📍</div>
+      <div class="meal-dot" id="dot-morning">🌅</div>
+      <div class="meal-dot" id="dot-afternoon">☀️</div>
+      <div class="meal-dot" id="dot-evening">🌙</div>
+      <div class="meal-dot" id="dot-place">📍</div>
     </div>
     <p style="font-size:10px;color:#ccc;margin-top:2px">Cả 2 checkin mới tính 1 bữa cho Thọ 🐾</p>
   </div>
@@ -277,7 +271,7 @@ body{font-family:var(--font);background:var(--p1);min-height:100vh;overflow-x:hi
 <div class="section" id="sec-checkin">
   <div class="locket-trigger-area" onclick="openCamera(null)">
     <div class="locket-trigger-ring">📸</div>
-    <div class="locket-trigger-label" id="triggerLabel">Chụp cho Thọ ăn!</div>
+    <div class="locket-trigger-label">Chụp cho Thọ ăn!</div>
     <div class="locket-trigger-sub" id="triggerSub">Tap để mở camera ✨</div>
     <div class="locket-slot-pills">
       <div class="slot-pill" id="pill-morning" onclick="event.stopPropagation();openCamera('morning')">🌅 Sáng</div>
@@ -343,23 +337,17 @@ body{font-family:var(--font);background:var(--p1);min-height:100vh;overflow-x:hi
 <div class="section" id="sec-setup">
   <div class="sec-title">⚙️ Cài đặt</div>
   <div class="setup-card">
-    <h3>🔄 Sync ảnh giữa 2 máy</h3>
-    <p>Paste Apps Script URL để 2 máy thấy ảnh nhau:</p>
-    <input class="form-input" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/..." type="text" style="font-size:11px">
-    <button class="btn-pink" onclick="saveScriptUrl()">💾 Lưu URL</button>
-  </div>
-  <div class="setup-card">
     <h3>💗 Chuyến đi</h3>
     <p>🐻 Khánh An · @khanhanka · 🇰🇷 Hàn Quốc</p>
     <p>🐰 Thúy Hiền · @lalabeo · 🇻🇳 Việt Nam</p>
     <p>✈️ Bay: 17/06/2026 · Bangkok & Pattaya 🇹🇭</p>
     <p>🕐 Remind theo giờ Việt Nam (UTC+7)</p>
+    <p>☁️ Ảnh lưu trên Cloudinary · Data trên Google Sheet</p>
   </div>
   <div class="setup-card">
     <h3>🔍 Debug</h3>
     <button class="btn-pink" onclick="showDebug()" style="margin-bottom:8px">🔍 Xem trạng thái</button>
-    <div id="debugBox" style="display:none;background:var(--p1);border-radius:12px;padding:12px;font-size:11px;color:#333;word-break:break-all;margin-top:8px;max-height:200px;overflow-y:auto"></div>
-    <button class="btn-pink" onclick="forceSyncNow()" style="margin-top:8px;background:linear-gradient(135deg,#a855f7,#c084fc)">🔄 Sync ngay</button>
+    <div id="debugBox" style="display:none;background:var(--p1);border-radius:12px;padding:12px;font-size:11px;color:#333;line-height:1.8;margin-top:8px;max-height:240px;overflow-y:auto"></div>
   </div>
   <div class="setup-card">
     <h3>🗑️ Reset dữ liệu</h3>
@@ -392,11 +380,17 @@ body{font-family:var(--font);background:var(--p1);min-height:100vh;overflow-x:hi
 </div>
 <input type="file" accept="image/*" id="galleryFileInput" style="display:none" onchange="handleGalleryPick(event)">
 
-<!-- PHOTO VIEWER -->
+<!-- VIEWER -->
 <div class="photo-viewer" id="photoViewer">
   <button class="photo-viewer-close" onclick="closeViewer()">✕</button>
   <img id="viewerImg" src="" alt="">
   <div class="photo-viewer-meta" id="viewerMeta"></div>
+</div>
+
+<!-- UPLOAD OVERLAY -->
+<div class="upload-overlay" id="uploadOverlay">
+  <div class="upload-spinner"></div>
+  <div class="upload-text">Đang upload ảnh... 🐾</div>
 </div>
 
 <!-- CELEBRATE -->
@@ -413,79 +407,63 @@ body{font-family:var(--font);background:var(--p1);min-height:100vh;overflow-x:hi
 </audio>
 
 <script>
-// ══════════════════════════════════════
+// ══════════════════════════════
 // CONFIG
-// ══════════════════════════════════════
+// ══════════════════════════════
+const CLOUD_NAME   = 'dkmqw57r1';
+const CLOUDINARY_UPLOAD_PRESET = 'tho_thailand'; // unsigned preset
+const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/' + CLOUD_NAME + '/image/upload';
+const SHEET_SCRIPT = 'https://script.google.com/macros/s/AKfycbwHszQj7rOjYPUm82g3EnY4FBpQ1r3jjNwABXXr6P2q89ssFctSRP-kr6afgFMWyn6m/exec';
 const TG_TOKEN     = '8670770445:AAFDRK7Di0s-WZP3JhGFmPp5UjAWVYjoh08';
 const TG_CHAT_AN   = '8683665534';
 const TG_CHAT_HIEN = '7237573793';
-const SHEET_ID     = '1IlpRaWnhjfKiY6xQFlXjOJmGngt33jsaKbB5S_-Bka8';
-const START_DATE   = '2026-05-17'; // bắt đầu từ ngày này
-const TRIP_DATE    = '2026-06-17'; // ngày bay
+const START_DATE   = '2026-05-17';
+const TRIP_DATE    = '2026-06-17';
 
 const USERS = {
-  'An':   { name:'Khánh An',  emoji:'🐻', chat: TG_CHAT_AN   },
-  'Hiền': { name:'Thúy Hiền', emoji:'🐰', chat: TG_CHAT_HIEN },
+  'An':   { name:'Khánh An',  emoji:'🐻', chat: TG_CHAT_AN },
+  'Hi\u1EC1n': { name:'Thúy Hiền', emoji:'🐰', chat: TG_CHAT_HIEN },
 };
 
-let currentUser = null;
-let APPS_SCRIPT_URL = localStorage.getItem('tho_script_url') || 'https://script.google.com/macros/s/AKfycbySnZzzLsu_QVSs5vNJWbtqvNFvlpHTl5wpjQAxI0Y2NBvkHC5CR6o63jJo1XnL7dPe/exec';
-
-// ══════════════════════════════════════
-// TIMEZONE VN (UTC+7) — dùng cho mọi thứ
-// ══════════════════════════════════════
-function getVNDate() {
-  const now = new Date();
-  return new Date(now.getTime() + (7*60 + now.getTimezoneOffset()) * 60000);
-}
-function getVNHour()   { return getVNDate().getHours(); }
+// ══════════════════════════════
+// TIMEZONE VN (UTC+7)
+// ══════════════════════════════
+function getVNDate(){ return new Date(Date.now() + (7*60 + new Date().getTimezoneOffset())*60000); }
+function getVNHour(){ return getVNDate().getHours(); }
 function getVNDateStr(){ return getVNDate().toISOString().split('T')[0]; }
-
 let todayKey = getVNDateStr();
 
-// ══════════════════════════════════════
-// STATE
-// ══════════════════════════════════════
-function loadState() {
-  try {
-    const s = JSON.parse(localStorage.getItem('tho_v3') || '{}');
-    return Object.assign({checkins:{},places:[],photos:[],totalMeals:0}, s);
-  } catch(e) { return {checkins:{},places:[],photos:[],totalMeals:0}; }
+// ══════════════════════════════
+// STATE (localStorage = cache only)
+// ══════════════════════════════
+function loadState(){
+  try{ return Object.assign({checkins:{},places:[],photos:[],totalMeals:0}, JSON.parse(localStorage.getItem('tho_v4')||'{}')); }
+  catch(e){ return {checkins:{},places:[],photos:[],totalMeals:0}; }
 }
-function saveState() { localStorage.setItem('tho_v3', JSON.stringify(state)); }
-
+function saveState(){ localStorage.setItem('tho_v4', JSON.stringify(state)); }
 let state = loadState();
+let currentUser = null;
 
-// Clear data before START_DATE
-(function(){
-  let changed = false;
-  if (state.photos) { const f = state.photos.filter(p=>p.date>=START_DATE); if(f.length!==state.photos.length){state.photos=f;changed=true;} }
-  if (state.places) { const f = state.places.filter(p=>p.date>=START_DATE); if(f.length!==state.places.length){state.places=f;changed=true;} }
-  if (state.checkins) { Object.keys(state.checkins).forEach(d=>{if(d<START_DATE){delete state.checkins[d];changed=true;}}); }
-  if (changed) saveState();
-})();
-
-// ══════════════════════════════════════
+// ══════════════════════════════
 // AUTH
-// ══════════════════════════════════════
-function pickUser(user) {
+// ══════════════════════════════
+function pickUser(user){
   currentUser = user;
   localStorage.setItem('tho_who', user);
   document.getElementById('pickScreen').style.display = 'none';
-  const u = USERS[user];
-  document.getElementById('userBadge').textContent = u.emoji + ' ' + u.name;
+  document.getElementById('userBadge').textContent = USERS[user].emoji + ' ' + USERS[user].name;
   playSfx('login');
   initApp();
 }
-function doLogout() {
-  if (!confirm('Đổi người dùng? Máy này sẽ hỏi lại.')) return;
+function doLogout(){
+  if(!confirm('Đổi người dùng? Máy này sẽ hỏi lại.')) return;
   localStorage.removeItem('tho_who');
   currentUser = null;
   document.getElementById('pickScreen').style.display = 'flex';
 }
-function tryAutoLogin() {
+function tryAutoLogin(){
   const saved = localStorage.getItem('tho_who');
-  if (saved && USERS[saved]) {
+  if(saved && USERS[saved]){
     currentUser = saved;
     document.getElementById('pickScreen').style.display = 'none';
     document.getElementById('userBadge').textContent = USERS[saved].emoji + ' ' + USERS[saved].name;
@@ -493,692 +471,570 @@ function tryAutoLogin() {
   }
 }
 
-// ══════════════════════════════════════
+// ══════════════════════════════
 // INIT
-// ══════════════════════════════════════
-function initApp() {
+// ══════════════════════════════
+function initApp(){
   generateSparkles();
   updateCountdown(); setInterval(updateCountdown, 1000);
-  // Refresh todayKey lúc 0h VN
-  setInterval(()=>{ const k=getVNDateStr(); if(k!==todayKey){todayKey=k;renderAll();} }, 60000);
+  setInterval(function(){ var k=getVNDateStr(); if(k!==todayKey){todayKey=k;renderAll();} }, 60000);
   renderAll();
-  startSync();
+  syncFromSheet(); // load ảnh ngay khi vào
+  setInterval(syncFromSheet, 20000); // auto sync mỗi 20s
   setInterval(checkRemind, 60000);
   setTimeout(checkRemind, 5000);
-  // Auto music
-  setTimeout(()=>{
-    const a=document.getElementById('bgMusic'); a.volume=0.3;
-    a.play().catch(()=>document.addEventListener('touchstart',()=>a.play(),{once:true}));
+  setTimeout(function(){
+    var a=document.getElementById('bgMusic'); a.volume=0.3;
+    a.play().catch(function(){ document.addEventListener('touchstart',function(){ a.play(); },{once:true}); });
   }, 800);
-  if (APPS_SCRIPT_URL) document.getElementById('scriptUrlInput').value = APPS_SCRIPT_URL;
 }
-function renderAll() {
-  renderTho(); updateThoMood(); renderLocketFeed(); updatePills(); renderPlaces(); updatePlaceForm(); renderAlbum();
+function renderAll(){
+  renderTho(); updateThoMood(); renderLocketFeed(); updatePills();
+  renderPlaces(); updatePlaceForm(); renderAlbum();
 }
 
-// ══════════════════════════════════════
+// ══════════════════════════════
 // SPARKLES
-// ══════════════════════════════════════
-function generateSparkles() {
-  const bg=document.getElementById('sparkleBg');
-  if (bg.children.length>5) return;
-  const cols=['#ff4da6','#ffadd8','#ff85c2','#fff','#ffdd00'];
-  for(let i=0;i<30;i++){const d=document.createElement('div');const sz=Math.random()*10+4;d.style.cssText=`position:absolute;width:${sz}px;height:${sz}px;left:${Math.random()*100}%;border-radius:50%;background:${cols[~~(Math.random()*5)]};animation:spFloat ${Math.random()*8+6}s linear ${Math.random()*8}s infinite;opacity:0`;bg.appendChild(d);}
-  for(let i=0;i<15;i++){const s=document.createElement('div');s.style.cssText=`position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;font-size:${Math.random()*14+8}px;animation:blink ${Math.random()*2+1.5}s ${Math.random()*3}s ease-in-out infinite;pointer-events:none`;s.textContent=['✨','💫','⭐','🌟','💗'][~~(Math.random()*5)];bg.appendChild(s);}
+// ══════════════════════════════
+function generateSparkles(){
+  var bg=document.getElementById('sparkleBg');
+  if(bg.children.length>5) return;
+  var cols=['#ff4da6','#ffadd8','#ff85c2','#fff','#ffdd00'];
+  for(var i=0;i<30;i++){var d=document.createElement('div');var sz=Math.random()*10+4;d.style.cssText='position:absolute;width:'+sz+'px;height:'+sz+'px;left:'+Math.random()*100+'%;border-radius:50%;background:'+cols[Math.floor(Math.random()*5)]+';animation:spFloat '+(Math.random()*8+6)+'s linear '+(Math.random()*8)+'s infinite;opacity:0';bg.appendChild(d);}
+  for(var j=0;j<15;j++){var s=document.createElement('div');s.style.cssText='position:absolute;left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;font-size:'+(Math.random()*14+8)+'px;animation:blink '+(Math.random()*2+1.5)+'s '+(Math.random()*3)+'s ease-in-out infinite;pointer-events:none';s.textContent=['✨','💫','⭐','🌟','💗'][Math.floor(Math.random()*5)];bg.appendChild(s);}
 }
 
-// ══════════════════════════════════════
+// ══════════════════════════════
 // COUNTDOWN
-// ══════════════════════════════════════
-function updateCountdown() {
-  let diff = new Date(TRIP_DATE+'T00:00:00+07:00') - new Date();
-  if (diff<0) { document.getElementById('cdDays').textContent='🎉';['cdHours','cdMins','cdSecs'].forEach(id=>document.getElementById(id).textContent='0'); return; }
-  const d=Math.floor(diff/86400000); diff%=86400000;
-  const h=Math.floor(diff/3600000);  diff%=3600000;
-  const m=Math.floor(diff/60000);
-  const s=Math.floor((diff%60000)/1000);
-  document.getElementById('cdDays').textContent =String(d).padStart(2,'0');
+// ══════════════════════════════
+function updateCountdown(){
+  var diff = new Date(TRIP_DATE+'T00:00:00+07:00') - new Date();
+  if(diff<0){document.getElementById('cdDays').textContent='🎉';['cdHours','cdMins','cdSecs'].forEach(function(id){document.getElementById(id).textContent='0';});return;}
+  var d=Math.floor(diff/86400000);diff%=86400000;
+  var h=Math.floor(diff/3600000);diff%=3600000;
+  var m=Math.floor(diff/60000);
+  var s=Math.floor((diff%60000)/1000);
+  document.getElementById('cdDays').textContent=String(d).padStart(2,'0');
   document.getElementById('cdHours').textContent=String(h).padStart(2,'0');
-  document.getElementById('cdMins').textContent =String(m).padStart(2,'0');
-  document.getElementById('cdSecs').textContent =String(s).padStart(2,'0');
+  document.getElementById('cdMins').textContent=String(m).padStart(2,'0');
+  document.getElementById('cdSecs').textContent=String(s).padStart(2,'0');
 }
 
-// ══════════════════════════════════════
-// MEAL LOGIC — cả 2 mới tính
-// ══════════════════════════════════════
-function bothDoneForSlot(slot, day) {
-  day = day || (state.checkins[todayKey]||{});
-  const an   = day[slot+'_An'];
-  const hien = day[slot+'_Hiền'];
-  return !!(an && hien && !an.skip && !hien.skip);
+// ══════════════════════════════
+// CLOUDINARY UPLOAD
+// ══════════════════════════════
+async function uploadToCloudinary(dataUrl){
+  var blob = dataURLtoBlob(dataUrl);
+  var fd = new FormData();
+  fd.append('file', blob, 'photo.jpg');
+  fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+  fd.append('folder', 'tho_thailand');
+  var res = await fetch(CLOUDINARY_URL, {method:'POST', body:fd});
+  var data = await res.json();
+  if(data.secure_url) return data.secure_url;
+  throw new Error(data.error ? data.error.message : 'Upload failed');
 }
-function getTodayMeals() {
-  const day = state.checkins[todayKey]||{};
-  let n = 0;
-  ['morning','afternoon','evening'].forEach(s=>{ if(bothDoneForSlot(s,day)) n++; });
-  if (day['place-an'] && day['place-hien']) n++;
+function dataURLtoBlob(dataUrl){
+  var arr=dataUrl.split(','), mime=arr[0].match(/:(.*?);/)[1];
+  var bstr=atob(arr[1]), n=bstr.length, u8=new Uint8Array(n);
+  for(var i=0;i<n;i++) u8[i]=bstr.charCodeAt(i);
+  return new Blob([u8],{type:mime});
+}
+
+// ══════════════════════════════
+// SHEET SYNC
+// ══════════════════════════════
+async function writeToSheet(entry){
+  try{
+    await fetch(SHEET_SCRIPT, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(entry),
+      mode:'no-cors'
+    });
+  }catch(e){ console.log('Sheet write err:',e); }
+}
+
+async function syncFromSheet(){
+  try{
+    var res = await fetch(SHEET_SCRIPT+'?action=read&t='+Date.now(), {cache:'no-store'});
+    if(!res.ok) return;
+    var rows = await res.json();
+    if(!Array.isArray(rows)||!rows.length) return;
+    var changed = false;
+    rows.forEach(function(row){
+      if(!row.user||!row.date||row.date<START_DATE) return;
+      if(!state.checkins[row.date]) state.checkins[row.date]={};
+      if(row.type==='photo' && row.photo_url && row.slot){
+        var key=row.slot+'_'+row.user;
+        var exists=state.photos.find(function(p){return p.date===row.date&&p.slot===row.slot&&p.user===row.user;});
+        if(!exists){
+          state.photos.push({slot:row.slot,date:row.date,photo:row.photo_url,time:row.time||'',user:row.user});
+          state.checkins[row.date][key]={photo:row.photo_url,time:row.time||'',user:row.user};
+          changed=true;
+        }
+      } else if(row.type==='place' && row.place_name){
+        var pkey=row.user==='An'?'place-an':'place-hien';
+        if(!state.checkins[row.date][pkey]){
+          state.checkins[row.date][pkey]={name:row.place_name,time:row.time||''};
+          if(!state.places.find(function(p){return p.date===row.date&&p.user===row.user&&p.name===row.place_name;}))
+            state.places.push({name:row.place_name,type:row.place_type||'food',city:row.city||'Bangkok',note:row.note||'',date:row.date,time:row.time||'',user:row.user});
+          changed=true;
+        }
+      }
+    });
+    if(changed){ recalcTotalMeals(); saveState(); renderAll(); console.log('Synced!'); }
+  }catch(e){ console.log('Sync err:',e); }
+}
+
+// ══════════════════════════════
+// MEAL LOGIC
+// ══════════════════════════════
+function bothDone(slot, day){
+  day = day||(state.checkins[todayKey]||{});
+  var an=day[slot+'_An'], hi=day[slot+'_Hiền'];
+  return !!(an&&hi&&!an.skip&&!hi.skip);
+}
+function getTodayMeals(){
+  var day=state.checkins[todayKey]||{}, n=0;
+  ['morning','afternoon','evening'].forEach(function(s){ if(bothDone(s,day)) n++; });
+  if(day['place-an']&&day['place-hien']) n++;
   return n;
 }
-function recalcTotalMeals() {
-  let total = 0;
-  Object.keys(state.checkins).forEach(date=>{
-    const day = state.checkins[date];
-    ['morning','afternoon','evening'].forEach(s=>{ if(bothDoneForSlot(s,day)) total++; });
-    if (day['place-an']&&day['place-hien']) total++;
+function recalcTotalMeals(){
+  var total=0;
+  Object.keys(state.checkins).forEach(function(date){
+    var day=state.checkins[date];
+    ['morning','afternoon','evening'].forEach(function(s){ if(bothDone(s,day)) total++; });
+    if(day['place-an']&&day['place-hien']) total++;
   });
-  state.totalMeals = total;
+  state.totalMeals=total;
 }
 
-// ══════════════════════════════════════
-// THỌ RENDER
-// ══════════════════════════════════════
-function getThoStage() {
-  const days = Math.max(0, Math.floor((new Date()-new Date(TRIP_DATE))/86400000));
-  return days<6?'baby':days<12?'teen':'adult';
-}
-function renderTho() {
-  const stage=getThoStage(), meals=getTodayMeals();
-  const hungry=meals===0, happy=meals>=3;
-  const labels={baby:'🌱 Puppy bé xíu',teen:'🌸 Puppy đang lớn',adult:'👑 Cún trưởng thành'};
+// ══════════════════════════════
+// THỌ
+// ══════════════════════════════
+function getThoStage(){var d=Math.max(0,Math.floor((new Date()-new Date(TRIP_DATE))/86400000));return d<6?'baby':d<12?'teen':'adult';}
+function renderTho(){
+  var stage=getThoStage(),meals=getTodayMeals(),hungry=meals===0,happy=meals>=3;
+  var labels={baby:'🌱 Puppy bé xíu',teen:'🌸 Puppy đang lớn',adult:'👑 Cún trưởng thành'};
   document.getElementById('thoStageLabel').textContent=labels[stage];
-  const s=stage==='baby'?.65:stage==='teen'?.82:1, cx=100, cy=108, bR=52*s, hR=42*s;
-  const blush=hungry?'rgba(180,180,180,0.5)':'rgba(255,107,160,0.55)';
-  const mouth=happy
-    ?`<path d="M ${cx-9*s} ${cy+hR*.38} Q ${cx} ${cy+hR*.58} ${cx+9*s} ${cy+hR*.38}" fill="none" stroke="#9b4c2a" stroke-width="${2*s}" stroke-linecap="round"/>`
-    :hungry
-    ?`<path d="M ${cx-9*s} ${cy+hR*.48} Q ${cx} ${cy+hR*.38} ${cx+9*s} ${cy+hR*.48}" fill="none" stroke="#9b4c2a" stroke-width="${2*s}" stroke-linecap="round"/>`
-    :`<path d="M ${cx-8*s} ${cy+hR*.42} Q ${cx} ${cy+hR*.54} ${cx+8*s} ${cy+hR*.42}" fill="none" stroke="#9b4c2a" stroke-width="${2*s}" stroke-linecap="round"/>`;
-  const brow=hungry?`<path d="M ${cx-hR*.48} ${cy-hR*.32} Q ${cx-hR*.35} ${cy-hR*.42} ${cx-hR*.22} ${cy-hR*.32}" fill="none" stroke="#c8935a" stroke-width="1.5" stroke-linecap="round"/><path d="M ${cx+hR*.22} ${cy-hR*.32} Q ${cx+hR*.35} ${cy-hR*.42} ${cx+hR*.48} ${cy-hR*.32}" fill="none" stroke="#c8935a" stroke-width="1.5" stroke-linecap="round"/>`:'';
-  const tear=hungry?`<path d="M ${cx-hR*.32} ${cy-hR*.05} Q ${cx-hR*.36} ${cy+hR*.08} ${cx-hR*.3} ${cy+hR*.16}" fill="#a0c8ff" opacity="0.7"/>`:'';
-  const paw=meals>0?`<ellipse cx="${cx-bR*.82}" cy="${cy-bR*.05}" rx="${14*s}" ry="${12*s}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8" style="animation:paw 1s ease-in-out infinite"/><circle cx="${cx-bR*.88}" cy="${cy-bR*.16}" r="${4*s}" fill="#f4c9a0"/><circle cx="${cx-bR*.76}" cy="${cy-bR*.17}" r="${4*s}" fill="#f4c9a0"/>`:'';
-  document.getElementById('thoSvg').innerHTML=`
-  <defs>
-    <radialGradient id="bodyG" cx="38%" cy="30%" r="65%"><stop offset="0" stop-color="#fff8ee"/><stop offset=".7" stop-color="#fff5e0"/><stop offset="1" stop-color="#e8c49a"/></radialGradient>
-    <radialGradient id="earG" cx="40%" cy="25%" r="70%"><stop offset="0" stop-color="#f4c9a0"/><stop offset="1" stop-color="#c8935a"/></radialGradient>
-  </defs>
-  <ellipse cx="${cx}" cy="${cy+bR+6}" rx="${bR*.8}" ry="${7*s}" fill="rgba(0,0,0,0.08)"/>
-  <ellipse cx="${cx}" cy="${cy+bR*.3}" rx="${bR*.9}" ry="${bR*.85}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="1"/>
-  <path d="M ${cx+bR*.75} ${cy+bR*.2} Q ${cx+bR*1.3} ${cy-bR*.3} ${cx+bR*1.1} ${cy-bR*.75}" fill="none" stroke="#c8935a" stroke-width="${8*s}" stroke-linecap="round" style="transform-origin:${cx+bR*.75}px ${cy+bR*.2}px;animation:wag .8s ease-in-out infinite"/>
-  <rect x="${cx-bR*.55}" y="${cy+bR*.6}" width="${14*s}" height="${22*s}" rx="${7*s}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8"/>
-  <rect x="${cx-bR*.15}" y="${cy+bR*.65}" width="${14*s}" height="${20*s}" rx="${7*s}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8"/>
-  <rect x="${cx+bR*.05}" y="${cy+bR*.65}" width="${14*s}" height="${20*s}" rx="${7*s}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8"/>
-  <rect x="${cx+bR*.4}" y="${cy+bR*.6}" width="${14*s}" height="${22*s}" rx="${7*s}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8"/>
-  <ellipse cx="${cx-hR*.75}" cy="${cy-hR*.4}" rx="${12*s}" ry="${21*s}" fill="url(#earG)" transform="rotate(-15,${cx-hR*.75},${cy-hR*.4})"/>
-  <ellipse cx="${cx+hR*.75}" cy="${cy-hR*.4}" rx="${12*s}" ry="${21*s}" fill="url(#earG)" transform="rotate(15,${cx+hR*.75},${cy-hR*.4})"/>
-  <circle cx="${cx}" cy="${cy-hR*.2}" r="${hR}" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="1"/>
-  <ellipse cx="${cx-hR*.38}" cy="${cy-hR*.18}" rx="${10*s}" ry="${13*s}" fill="#fff"/>
-  <ellipse cx="${cx+hR*.38}" cy="${cy-hR*.18}" rx="${10*s}" ry="${13*s}" fill="#fff"/>
-  <circle cx="${cx-hR*.35}" cy="${cy-hR*.12}" r="${7*s}" fill="#1a0a04"/>
-  <circle cx="${cx+hR*.35}" cy="${cy-hR*.12}" r="${7*s}" fill="#1a0a04"/>
-  <circle cx="${cx-hR*.28}" cy="${cy-hR*.2}" r="${2.5*s}" fill="#fff"/>
-  <circle cx="${cx+hR*.42}" cy="${cy-hR*.2}" r="${2.5*s}" fill="#fff"/>
-  ${brow}
-  <ellipse cx="${cx}" cy="${cy+hR*.2}" rx="${10*s}" ry="${7*s}" fill="#2a1a0e"/>
-  <ellipse cx="${cx-3*s}" cy="${cy+hR*.16}" rx="${2.5*s}" ry="${1.5*s}" fill="rgba(255,255,255,.35)"/>
-  ${mouth}
-  <ellipse cx="${cx-hR*.62}" cy="${cy+hR*.24}" rx="${12*s}" ry="${7*s}" fill="${blush}" opacity="0.55"/>
-  <ellipse cx="${cx+hR*.62}" cy="${cy+hR*.24}" rx="${12*s}" ry="${7*s}" fill="${blush}" opacity="0.55"/>
-  <rect x="${cx-bR*.55}" y="${cy+bR*.02}" width="${bR*1.1}" height="${8*s}" rx="${4*s}" fill="#ff4da6" opacity="0.9"/>
-  <circle cx="${cx}" cy="${cy+bR*.1}" r="${5*s}" fill="#ffdd00" stroke="#ff4da6" stroke-width="1"/>
-  ${paw}${tear}`;
+  var s=stage==='baby'?.65:stage==='teen'?.82:1,cx=100,cy=108,bR=52*s,hR=42*s;
+  var blush=hungry?'rgba(180,180,180,0.5)':'rgba(255,107,160,0.55)';
+  var mouth=happy?'<path d="M '+(cx-9*s)+' '+(cy+hR*.38)+' Q '+cx+' '+(cy+hR*.58)+' '+(cx+9*s)+' '+(cy+hR*.38)+'" fill="none" stroke="#9b4c2a" stroke-width="'+(2*s)+'" stroke-linecap="round"/>':hungry?'<path d="M '+(cx-9*s)+' '+(cy+hR*.48)+' Q '+cx+' '+(cy+hR*.38)+' '+(cx+9*s)+' '+(cy+hR*.48)+'" fill="none" stroke="#9b4c2a" stroke-width="'+(2*s)+'" stroke-linecap="round"/>':'<path d="M '+(cx-8*s)+' '+(cy+hR*.42)+' Q '+cx+' '+(cy+hR*.54)+' '+(cx+8*s)+' '+(cy+hR*.42)+'" fill="none" stroke="#9b4c2a" stroke-width="'+(2*s)+'" stroke-linecap="round"/>';
+  var brow=hungry?'<path d="M '+(cx-hR*.48)+' '+(cy-hR*.32)+' Q '+(cx-hR*.35)+' '+(cy-hR*.42)+' '+(cx-hR*.22)+' '+(cy-hR*.32)+'" fill="none" stroke="#c8935a" stroke-width="1.5" stroke-linecap="round"/><path d="M '+(cx+hR*.22)+' '+(cy-hR*.32)+' Q '+(cx+hR*.35)+' '+(cy-hR*.42)+' '+(cx+hR*.48)+' '+(cy-hR*.32)+'" fill="none" stroke="#c8935a" stroke-width="1.5" stroke-linecap="round"/>':'';
+  var tear=hungry?'<path d="M '+(cx-hR*.32)+' '+(cy-hR*.05)+' Q '+(cx-hR*.36)+' '+(cy+hR*.08)+' '+(cx-hR*.3)+' '+(cy+hR*.16)+'" fill="#a0c8ff" opacity="0.7"/>':'';
+  var paw=meals>0?'<ellipse cx="'+(cx-bR*.82)+'" cy="'+(cy-bR*.05)+'" rx="'+(14*s)+'" ry="'+(12*s)+'" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8" style="animation:paw 1s ease-in-out infinite"/><circle cx="'+(cx-bR*.88)+'" cy="'+(cy-bR*.16)+'" r="'+(4*s)+'" fill="#f4c9a0"/><circle cx="'+(cx-bR*.76)+'" cy="'+(cy-bR*.17)+'" r="'+(4*s)+'" fill="#f4c9a0"/>':'';
+  document.getElementById('thoSvg').innerHTML='<defs><radialGradient id="bodyG" cx="38%" cy="30%" r="65%"><stop offset="0" stop-color="#fff8ee"/><stop offset=".7" stop-color="#fff5e0"/><stop offset="1" stop-color="#e8c49a"/></radialGradient><radialGradient id="earG" cx="40%" cy="25%" r="70%"><stop offset="0" stop-color="#f4c9a0"/><stop offset="1" stop-color="#c8935a"/></radialGradient></defs><ellipse cx="'+cx+'" cy="'+(cy+bR+6)+'" rx="'+(bR*.8)+'" ry="'+(7*s)+'" fill="rgba(0,0,0,0.08)"/><ellipse cx="'+cx+'" cy="'+(cy+bR*.3)+'" rx="'+(bR*.9)+'" ry="'+(bR*.85)+'" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="1"/><path d="M '+(cx+bR*.75)+' '+(cy+bR*.2)+' Q '+(cx+bR*1.3)+' '+(cy-bR*.3)+' '+(cx+bR*1.1)+' '+(cy-bR*.75)+'" fill="none" stroke="#c8935a" stroke-width="'+(8*s)+'" stroke-linecap="round" style="transform-origin:'+(cx+bR*.75)+'px '+(cy+bR*.2)+'px;animation:wag .8s ease-in-out infinite"/><rect x="'+(cx-bR*.55)+'" y="'+(cy+bR*.6)+'" width="'+(14*s)+'" height="'+(22*s)+'" rx="'+(7*s)+'" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8"/><rect x="'+(cx-bR*.15)+'" y="'+(cy+bR*.65)+'" width="'+(14*s)+'" height="'+(20*s)+'" rx="'+(7*s)+'" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8"/><rect x="'+(cx+bR*.05)+'" y="'+(cy+bR*.65)+'" width="'+(14*s)+'" height="'+(20*s)+'" rx="'+(7*s)+'" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8"/><rect x="'+(cx+bR*.4)+'" y="'+(cy+bR*.6)+'" width="'+(14*s)+'" height="'+(22*s)+'" rx="'+(7*s)+'" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="0.8"/><ellipse cx="'+(cx-hR*.75)+'" cy="'+(cy-hR*.4)+'" rx="'+(12*s)+'" ry="'+(21*s)+'" fill="url(#earG)" transform="rotate(-15,'+(cx-hR*.75)+','+(cy-hR*.4)+')"/><ellipse cx="'+(cx+hR*.75)+'" cy="'+(cy-hR*.4)+'" rx="'+(12*s)+'" ry="'+(21*s)+'" fill="url(#earG)" transform="rotate(15,'+(cx+hR*.75)+','+(cy-hR*.4)+')"/><circle cx="'+cx+'" cy="'+(cy-hR*.2)+'" r="'+hR+'" fill="url(#bodyG)" stroke="#e8c49a" stroke-width="1"/><ellipse cx="'+(cx-hR*.38)+'" cy="'+(cy-hR*.18)+'" rx="'+(10*s)+'" ry="'+(13*s)+'" fill="#fff"/><ellipse cx="'+(cx+hR*.38)+'" cy="'+(cy-hR*.18)+'" rx="'+(10*s)+'" ry="'+(13*s)+'" fill="#fff"/><circle cx="'+(cx-hR*.35)+'" cy="'+(cy-hR*.12)+'" r="'+(7*s)+'" fill="#1a0a04"/><circle cx="'+(cx+hR*.35)+'" cy="'+(cy-hR*.12)+'" r="'+(7*s)+'" fill="#1a0a04"/><circle cx="'+(cx-hR*.28)+'" cy="'+(cy-hR*.2)+'" r="'+(2.5*s)+'" fill="#fff"/><circle cx="'+(cx+hR*.42)+'" cy="'+(cy-hR*.2)+'" r="'+(2.5*s)+'" fill="#fff"/>'+brow+'<ellipse cx="'+cx+'" cy="'+(cy+hR*.2)+'" rx="'+(10*s)+'" ry="'+(7*s)+'" fill="#2a1a0e"/><ellipse cx="'+(cx-3*s)+'" cy="'+(cy+hR*.16)+'" rx="'+(2.5*s)+'" ry="'+(1.5*s)+'" fill="rgba(255,255,255,.35)"/>'+mouth+'<ellipse cx="'+(cx-hR*.62)+'" cy="'+(cy+hR*.24)+'" rx="'+(12*s)+'" ry="'+(7*s)+'" fill="'+blush+'" opacity="0.55"/><ellipse cx="'+(cx+hR*.62)+'" cy="'+(cy+hR*.24)+'" rx="'+(12*s)+'" ry="'+(7*s)+'" fill="'+blush+'" opacity="0.55"/><rect x="'+(cx-bR*.55)+'" y="'+(cy+bR*.02)+'" width="'+(bR*1.1)+'" height="'+(8*s)+'" rx="'+(4*s)+'" fill="#ff4da6" opacity="0.9"/><circle cx="'+cx+'" cy="'+(cy+bR*.1)+'" r="'+(5*s)+'" fill="#ffdd00" stroke="#ff4da6" stroke-width="1"/>'+paw+tear;
 }
-function updateThoMood() {
-  const meals=getTodayMeals();
-  const moods=['Đang đói lắm... 🥺 Cả 2 checkin đi nào!','Được 1 bữa rồi! Cảm ơn cả 2 🥺💗','No được 50%! Hạnh phúc lắm 🐾','Ăn 3 bữa rồi! Thọ béo dần 🐾💗','Bốn bữa đủ! Thọ no căng và hạnh phúc ✨🐾💗'];
+function updateThoMood(){
+  var meals=getTodayMeals();
+  var moods=['Đang đói lắm... 🥺 Cả 2 checkin đi nào!','Được 1 bữa rồi! Cảm ơn cả 2 🥺💗','No được 50%! Hạnh phúc lắm 🐾','Ăn 3 bữa rồi! Thọ béo dần 🐾💗','Bốn bữa đủ! Thọ no căng ✨🐾💗'];
   document.getElementById('thoMood').textContent=moods[Math.min(meals,4)];
   document.getElementById('hungerBar').style.width=Math.min(meals/4*100,100)+'%';
   document.getElementById('totalMeals').textContent=state.totalMeals||0;
-  const start=new Date(TRIP_DATE), days=Math.floor((new Date()-start)/86400000);
+  var start=new Date(TRIP_DATE),days=Math.floor((new Date()-start)/86400000);
   document.getElementById('dayCount').textContent=days>=0?(days+1)+' / 17':'--';
-  // Update dots
-  const day=state.checkins[todayKey]||{};
-  ['morning','afternoon','evening'].forEach(slot=>{
-    const dot=document.getElementById('dot-'+slot); if(!dot) return;
-    const an=day[slot+'_An'], hien=day[slot+'_Hiền'];
-    const both=an&&hien&&!an.skip&&!hien.skip;
-    const one=(an||hien)&&!both;
-    dot.classList.toggle('fed',!!both);
-    dot.classList.toggle('half',!!one);
+  var day=state.checkins[todayKey]||{};
+  ['morning','afternoon','evening'].forEach(function(slot){
+    var dot=document.getElementById('dot-'+slot); if(!dot) return;
+    var an=day[slot+'_An'],hi=day[slot+'_Hiền'];
+    var bd=an&&hi&&!an.skip&&!hi.skip, one=(an||hi)&&!bd;
+    dot.classList.toggle('fed',!!bd); dot.classList.toggle('half',!!one);
   });
-  const dotP=document.getElementById('dot-place');
-  if(dotP){
-    const bothP=day['place-an']&&day['place-hien'];
-    const oneP=(day['place-an']||day['place-hien'])&&!bothP;
-    dotP.classList.toggle('fed',!!bothP);
-    dotP.classList.toggle('half',!!oneP);
-  }
+  var dp=document.getElementById('dot-place');
+  if(dp){var bp=day['place-an']&&day['place-hien'],op=(day['place-an']||day['place-hien'])&&!bp;dp.classList.toggle('fed',!!bp);dp.classList.toggle('half',!!op);}
 }
-
-// ══════════════════════════════════════
-// SCRATCH THỌ
-// ══════════════════════════════════════
-function scratchTho(e) {
+function scratchTho(e){
   playSfx('scratch');
-  const emojis=['💗','✨','🌟','💕','⭐','🎀'];
-  for(let i=0;i<5;i++) setTimeout(()=>{
-    const h=document.createElement('div');
-    h.style.cssText=`position:fixed;left:${e.clientX+(Math.random()-.5)*40}px;top:${e.clientY}px;font-size:${16+Math.random()*12}px;pointer-events:none;z-index:9999;animation:floatHeart 1.2s ease-out forwards`;
-    h.textContent=emojis[~~(Math.random()*emojis.length)];
-    document.body.appendChild(h); setTimeout(()=>h.remove(),1200);
-  },i*80);
-  const c=document.getElementById('thoCanvas');
+  var emojis=['💗','✨','🌟','💕','⭐','🎀'];
+  for(var i=0;i<5;i++){(function(i){setTimeout(function(){
+    var h=document.createElement('div');
+    h.style.cssText='position:fixed;left:'+(e.clientX+(Math.random()-.5)*40)+'px;top:'+e.clientY+'px;font-size:'+(16+Math.random()*12)+'px;pointer-events:none;z-index:9999;animation:floatHeart 1.2s ease-out forwards';
+    h.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    document.body.appendChild(h);setTimeout(function(){h.remove();},1200);
+  },i*80);})(i);}
+  var c=document.getElementById('thoCanvas');
   c.style.animation='scratch .4s ease';
-  setTimeout(()=>c.style.animation='float 3s ease-in-out infinite',400);
+  setTimeout(function(){c.style.animation='float 3s ease-in-out infinite';},400);
   showToast('Thọ: "gãi nữa đi! 🥺💗"',1500);
 }
 
-// ══════════════════════════════════════
+// ══════════════════════════════
 // CAMERA
-// ══════════════════════════════════════
-let cameraStream=null, facingMode='user', currentSlot=null, capturedDataUrl=null;
-const SLOT_INFO={morning:{label:'🌅 Bữa sáng'},afternoon:{label:'☀️ Bữa chiều'},evening:{label:'🌙 Bữa tối'}};
-function getActiveSlot(){const h=getVNHour();return h>=6&&h<12?'morning':h>=12&&h<18?'afternoon':'evening';}
+// ══════════════════════════════
+var cameraStream=null,facingMode='user',currentSlot=null,capturedDataUrl=null;
+var SLOT_INFO={morning:{label:'🌅 Bữa sáng'},afternoon:{label:'☀️ Bữa chiều'},evening:{label:'🌙 Bữa tối'}};
+var SLOT_WINDOWS={morning:[6,12],afternoon:[12,18],evening:[18,24]};
+function getActiveSlot(){var h=getVNHour();return h>=6&&h<12?'morning':h>=12&&h<18?'afternoon':'evening';}
+
 async function openCamera(slot){
-  const activeSlot = getActiveSlot();
-  const requestedSlot = slot || activeSlot;
-
-  // Kiểm tra slot hợp lệ
-  const slotWindows = {morning:[6,12], afternoon:[12,18], evening:[18,24]};
-  const [start, end] = slotWindows[requestedSlot];
-  const h = getVNHour();
-  const isCurrentSlot = h >= start && h < end;
-  const day = state.checkins[todayKey] || {};
-  const myKey = requestedSlot + '_' + currentUser;
-  const alreadyDone = day[myKey] && !day[myKey].skip;
-
-  // Không phải giờ này VÀ chưa checkin lần nào → không cho up
-  if (!isCurrentSlot && !alreadyDone) {
-    const slotLabel = {morning:'sáng (6h-12h)', afternoon:'chiều (12h-18h)', evening:'tối (18h-24h)'};
-    showToast('⏰ Chưa đến giờ bữa ' + slotLabel[requestedSlot] + ' nha!', 3000);
-    playSfx('error');
-    return;
+  var active=getActiveSlot();
+  var target=slot||active;
+  var w=SLOT_WINDOWS[target];
+  var h=getVNHour();
+  var isTime=h>=w[0]&&h<w[1];
+  var day=state.checkins[todayKey]||{};
+  var myKey=target+'_'+currentUser;
+  var alreadyDone=day[myKey]&&!day[myKey].skip;
+  if(!isTime&&!alreadyDone){
+    var labels={morning:'sáng (6h-12h)',afternoon:'chiều (12h-18h)',evening:'tối (18h-24h)'};
+    showToast('⏰ Chưa đến giờ bữa '+labels[target]+' nha!',3000);
+    playSfx('error'); return;
   }
-
-  currentSlot = requestedSlot;
-  document.getElementById('overlaySlotBadge').textContent = SLOT_INFO[currentSlot].label +
-    (alreadyDone && !isCurrentSlot ? ' (up bù)' : '');
+  currentSlot=target;
+  document.getElementById('overlaySlotBadge').textContent=SLOT_INFO[target].label+(alreadyDone&&!isTime?' (up bù)':'');
   document.getElementById('locketOverlay').classList.add('open');
   document.getElementById('locketPreview').classList.remove('show');
   playSfx('click');
-  await startCameraStream();
+  await startCam();
 }
-async function startCameraStream(){
-  if(cameraStream){cameraStream.getTracks().forEach(t=>t.stop());cameraStream=null;}
-  try {
-    cameraStream = await navigator.mediaDevices.getUserMedia({
-      video: {facingMode, width:{ideal:1080}, height:{ideal:1080}}, audio:false
-    });
-    document.getElementById('cameraVideo').srcObject = cameraStream;
-  } catch(e) {
-    console.log('Camera err:', e.name, e.message);
-    // Thử lại với constraint đơn giản hơn
-    try {
-      cameraStream = await navigator.mediaDevices.getUserMedia({video:true, audio:false});
-      document.getElementById('cameraVideo').srcObject = cameraStream;
-    } catch(e2) {
-      showToast('📷 Camera bị chặn. Vào Settings cho phép Camera rồi thử lại!', 4000);
-      closeCamera();
-    }
+async function startCam(){
+  if(cameraStream){cameraStream.getTracks().forEach(function(t){t.stop();});cameraStream=null;}
+  try{
+    cameraStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:facingMode,width:{ideal:1080},height:{ideal:1080}},audio:false});
+    document.getElementById('cameraVideo').srcObject=cameraStream;
+  }catch(e){
+    try{cameraStream=await navigator.mediaDevices.getUserMedia({video:true,audio:false});document.getElementById('cameraVideo').srcObject=cameraStream;}
+    catch(e2){showToast('📷 Camera bị chặn. Vào Settings cho phép Camera!',4000);closeCamera();}
   }
 }
-function flipCamera(){facingMode=facingMode==='user'?'environment':'user';playSfx('click');startCameraStream();}
+function flipCamera(){facingMode=facingMode==='user'?'environment':'user';playSfx('click');startCam();}
 function capturePhoto(){
   playSfx('feed');
-  const v=document.getElementById('cameraVideo'),c=document.getElementById('cameraCanvas');
-  const sz=Math.min(v.videoWidth,v.videoHeight);c.width=c.height=sz;
-  const ctx=c.getContext('2d');
-  ctx.drawImage(v,(v.videoWidth-sz)/2,(v.videoHeight-sz)/2,sz,sz,0,0,sz,sz);
+  var v=document.getElementById('cameraVideo'),c=document.getElementById('cameraCanvas');
+  var sz=Math.min(v.videoWidth,v.videoHeight);c.width=c.height=sz;
+  c.getContext('2d').drawImage(v,(v.videoWidth-sz)/2,(v.videoHeight-sz)/2,sz,sz,0,0,sz,sz);
   capturedDataUrl=c.toDataURL('image/jpeg',.82);
-  showPreview(capturedDataUrl);
+  document.getElementById('previewImg').src=capturedDataUrl;
+  document.getElementById('locketPreview').classList.add('show');
 }
-function showPreview(d){document.getElementById('previewImg').src=d;document.getElementById('locketPreview').classList.add('show');}
 function retakePhoto(){playSfx('click');document.getElementById('locketPreview').classList.remove('show');capturedDataUrl=null;}
-function confirmPhoto(){if(!capturedDataUrl) return;finalSaveMeal(currentSlot,capturedDataUrl);closeCamera();}
+function confirmPhoto(){if(!capturedDataUrl) return;closeCamera();finalSaveMeal(currentSlot,capturedDataUrl);}
 function triggerGalleryPick(){playSfx('click');document.getElementById('galleryFileInput').click();}
-function handleGalleryPick(e){const f=e.target.files[0];if(!f) return;const r=new FileReader();r.onload=ev=>{capturedDataUrl=ev.target.result;showPreview(capturedDataUrl);};r.readAsDataURL(f);e.target.value='';}
-function closeCamera(){document.getElementById('locketOverlay').classList.remove('open');if(cameraStream){cameraStream.getTracks().forEach(t=>t.stop());cameraStream=null;}capturedDataUrl=null;}
+function handleGalleryPick(e){var f=e.target.files[0];if(!f) return;var r=new FileReader();r.onload=function(ev){capturedDataUrl=ev.target.result;document.getElementById('previewImg').src=capturedDataUrl;document.getElementById('locketPreview').classList.add('show');};r.readAsDataURL(f);e.target.value='';}
+function closeCamera(){document.getElementById('locketOverlay').classList.remove('open');if(cameraStream){cameraStream.getTracks().forEach(function(t){t.stop();});cameraStream=null;}capturedDataUrl=null;}
 
-// ══════════════════════════════════════
-// SAVE MEAL
-// ══════════════════════════════════════
-function finalSaveMeal(slot, photo) {
-  if(!state.checkins[todayKey]) state.checkins[todayKey]={};
-  const day=state.checkins[todayKey];
-  const key=slot+'_'+currentUser;
-  day[key]={photo,time:new Date().toISOString(),user:currentUser};
-  if(!state.photos) state.photos=[];
-  const idx=state.photos.findIndex(p=>p.date===todayKey&&p.slot===slot&&p.user===currentUser);
-  const entry={slot,date:todayKey,photo,time:new Date().toISOString(),user:currentUser};
-  if(idx>=0) state.photos[idx]=entry; else state.photos.push(entry);
-
-  const wasBoth=bothDoneForSlot(slot);
-  // Check if NOW both done (after saving)
-  const anKey=slot+'_An', hienKey=slot+'_Hiền';
-  const nowBoth=!!(day[anKey]&&day[hienKey]);
-
-  if(nowBoth&&!wasBoth) {
-    // First time both done — count meal + celebrate
-    recalcTotalMeals();
+// ══════════════════════════════
+// SAVE MEAL — upload Cloudinary → Sheet → notify
+// ══════════════════════════════
+async function finalSaveMeal(slot, dataUrl){
+  // Show upload spinner
+  document.getElementById('uploadOverlay').classList.add('show');
+  showToast('📤 Đang upload ảnh...', 10000);
+  try {
+    // 1. Upload lên Cloudinary
+    var photoUrl = await uploadToCloudinary(dataUrl);
+    // 2. Lưu vào Sheet
+    await writeToSheet({action:'write',type:'photo',date:todayKey,slot:slot,user:currentUser,photo_url:photoUrl,time:new Date().toISOString()});
+    // 3. Cập nhật local state
+    if(!state.checkins[todayKey]) state.checkins[todayKey]={};
+    var day=state.checkins[todayKey];
+    var key=slot+'_'+currentUser;
+    var wasOtherDone=!!(currentUser==='An'?day[slot+'_Hiền']:day[slot+'_An']);
+    day[key]={photo:photoUrl,time:new Date().toISOString(),user:currentUser};
+    var exists=state.photos.findIndex(function(p){return p.date===todayKey&&p.slot===slot&&p.user===currentUser;});
+    var entry={slot:slot,date:todayKey,photo:photoUrl,time:new Date().toISOString(),user:currentUser};
+    if(exists>=0) state.photos[exists]=entry; else state.photos.push(entry);
+    var nowBoth=!!(day[slot+'_An']&&day[slot+'_Hiền']);
+    if(nowBoth) recalcTotalMeals();
     saveState();
-    const slotLabel={morning:'bữa sáng',afternoon:'bữa chiều',evening:'bữa tối'};
-    showCelebrate('🎉 Thọ được ăn ' + slotLabel[slot] + '! 🐾💗');
-    playSfx('feed');
-    notifyTg(USERS[currentUser==='An'?'Hiền':'An'].chat,
-      USERS[currentUser].emoji+' '+currentUser+' vừa checkin! Cả 2 xong '+slotLabel[slot]+', Thọ được ăn rồi 🐾💗');
-    notifyTg(USERS[currentUser].chat, '✅ Cả 2 đã checkin '+slotLabel[slot]+'! Thọ no bụng rồi 🐾💗');
-  } else {
-    saveState();
-    const other=currentUser==='An'?'Hiền':'An';
-    const slotLabel={morning:'sáng',afternoon:'chiều',evening:'tối'};
-    playSfx('place');
-    showToast('📸 '+currentUser+' đã checkin! Chờ '+other+' checkin bữa '+slotLabel[slot]+' nhé 🐾');
-    notifyTg(USERS[other].chat,
-      USERS[currentUser].emoji+' '+currentUser+' vừa checkin bữa '+slotLabel[slot]+'! Đến lượt '+other+' nè 📸');
-  }
-  renderTho(); updateThoMood(); renderLocketFeed(); updatePills(); renderAlbum();
-  syncUpload({type:'photo',date:todayKey,slot,user:currentUser,photo,time:new Date().toISOString()});
-}
-
-// ══════════════════════════════════════
-// CELEBRATE ANIMATION
-// ══════════════════════════════════════
-function showCelebrate(msg) {
-  const el=document.getElementById('celebrateOverlay');
-  document.getElementById('celebrateMsg').textContent=msg;
-  el.classList.add('show');
-  // Shower of hearts
-  for(let i=0;i<12;i++) setTimeout(()=>{
-    const h=document.createElement('div');
-    h.style.cssText=`position:fixed;left:${Math.random()*100}vw;top:${Math.random()*50+20}vh;font-size:${20+Math.random()*20}px;pointer-events:none;z-index:9999;animation:floatHeart ${1+Math.random()}s ease-out forwards`;
-    h.textContent=['💗','✨','🌟','💕','🎉','🐾'][~~(Math.random()*6)];
-    document.body.appendChild(h); setTimeout(()=>h.remove(),2000);
-  },i*100);
-  // Animate Thọ
-  const c=document.getElementById('thoCanvas');
-  c.style.animation='feedCelebrate .6s ease';
-  setTimeout(()=>c.style.animation='float 3s ease-in-out infinite',700);
-  setTimeout(()=>el.classList.remove('show'),3000);
-}
-
-// ══════════════════════════════════════
-// PILLS
-// ══════════════════════════════════════
-function updatePills(){
-  const day=state.checkins[todayKey]||{}, cur=getActiveSlot();
-  const h=getVNHour();
-  const slotWindows={morning:[6,12],afternoon:[12,18],evening:[18,24]};
-  ['morning','afternoon','evening'].forEach(slot=>{
-    const pill=document.getElementById('pill-'+slot); if(!pill) return;
-    pill.classList.remove('done','half','active');
-    pill.style.opacity='1'; pill.style.cursor='pointer';
-    const myKey=slot+'_'+currentUser;
-    const otherKey=slot+'_'+(currentUser==='An'?'Hiền':'An');
-    const iDone=day[myKey]&&!day[myKey].skip;
-    const bothDone=day[myKey]&&day[otherKey]&&!day[myKey].skip;
-    const [s,e]=slotWindows[slot];
-    const isTime=h>=s&&h<e;
-
-    if(bothDone) pill.classList.add('done');
-    else if(iDone) pill.classList.add('half');
-    else if(slot===cur) pill.classList.add('active');
-
-    // Dim pill nếu chưa đến giờ VÀ chưa có ảnh (không cho up trước)
-    if(!isTime&&!iDone) {
-      pill.style.opacity='0.35';
-      pill.style.cursor='not-allowed';
+    document.getElementById('uploadOverlay').classList.remove('show');
+    // 4. UI + celebrate
+    var slotLabel={morning:'bữa sáng',afternoon:'bữa chiều',evening:'bữa tối'};
+    var other=currentUser==='An'?'Hi\u1EC1n':'An';
+    if(nowBoth&&!wasOtherDone){
+      showCelebrate('🎉 Thọ được ăn '+slotLabel[slot]+'! 🐾💗');
+      playSfx('feed');
+      notifyTg(USERS[other].chat, USERS[currentUser].emoji+' '+currentUser+' vừa checkin! Cả 2 xong '+slotLabel[slot]+', Thọ được ăn rồi 🐾💗');
+      notifyTg(USERS[currentUser].chat, '✅ Cả 2 đã checkin '+slotLabel[slot]+'! Thọ no bụng 🐾💗');
+    } else if(nowBoth) {
+      showToast('✅ Đã cập nhật ảnh '+slotLabel[slot]+'!');
+      playSfx('place');
+    } else {
+      showToast('📸 '+currentUser+' đã checkin! Chờ '+other+' checkin '+slotLabel[slot]+' nhé 🐾');
+      playSfx('place');
+      notifyTg(USERS[other].chat, USERS[currentUser].emoji+' '+currentUser+' vừa checkin '+slotLabel[slot]+'! Đến lượt '+other+' nè 📸');
     }
-  });
-  const day2=state.checkins[todayKey]||{};
-  const cur2=getActiveSlot();
-  const myKey=cur2+'_'+currentUser;
-  const otherKey=cur2+'_'+(currentUser==='An'?'Hiền':'An');
-  const sub=document.getElementById('triggerSub');
-  if(sub){
-    const slotTimes={morning:'6h-12h',afternoon:'12h-18h',evening:'18h-24h'};
-    if(day2[myKey]&&!day2[myKey].skip&&day2[otherKey]) sub.textContent='✅ Cả 2 đã checkin! Thọ no 🐾';
-    else if(day2[myKey]&&!day2[myKey].skip) sub.textContent='✅ '+currentUser+' xong! Chờ '+(currentUser==='An'?'Hiền':'An')+' checkin 📸';
-    else sub.textContent='⏰ '+SLOT_INFO[cur2].label+' ('+slotTimes[cur2]+') · Tap để checkin!';
+    renderAll();
+  } catch(err) {
+    document.getElementById('uploadOverlay').classList.remove('show');
+    console.log('Upload err:', err);
+    showToast('❌ Upload lỗi: '+err.message, 4000);
+    playSfx('error');
   }
 }
 
-// ══════════════════════════════════════
-// FEED
-// ══════════════════════════════════════
-function renderLocketFeed(){
-  const feed=document.getElementById('locketFeed'); if(!feed) return;
-  const photos=state.photos||[];
-  const byDate={};
-  photos.forEach(p=>{if(!byDate[p.date]) byDate[p.date]={};byDate[p.date][p.slot+'_'+p.user]=p;});
-  if(!byDate[todayKey]) byDate[todayKey]={};
-  const dates=Object.keys(byDate).sort((a,b)=>b.localeCompare(a));
-  const SE={morning:'🌅',afternoon:'☀️',evening:'🌙'}, SL={morning:'Sáng',afternoon:'Chiều',evening:'Tối'};
-  const dl=d=>d===todayKey?'🌸 Hôm nay':new Date(d).toLocaleDateString('vi-VN',{weekday:'short',day:'2-digit',month:'2-digit'});
-  feed.innerHTML=dates.map(date=>{
-    const dd=byDate[date];
-    const rows=['morning','afternoon','evening'].map(slot=>{
-      const anP=dd[slot+'_An'], hienP=dd[slot+'_Hiền'];
-      const anCell=anP
-        ?`<div class="feed-photo" onclick="openViewer('${anP.photo}','${SL[slot]} · An · ${date}')"><img src="${anP.photo}" alt=""><div class="slot-tag">${SE[slot]}</div><div class="feed-user-tag">🐻 An</div></div>`
-        :`<div class="feed-photo" style="border:2px dashed var(--p3)" onclick="${currentUser==='An'?`openCamera('${slot}')`:''}" ><div class="feed-photo-empty">${SE[slot]}<span>An${currentUser!=='An'?' ⏳':''}</span>${currentUser==='An'?'<span style=\'font-size:9px;color:rgba(255,255,255,.7)\'>tap để checkin</span>':''}</div></div>`;
-      const hienCell=hienP
-        ?`<div class="feed-photo" onclick="openViewer('${hienP.photo}','${SL[slot]} · Hiền · ${date}')"><img src="${hienP.photo}" alt=""><div class="slot-tag">${SE[slot]}</div><div class="feed-user-tag">🐰 Hiền</div></div>`
-        :`<div class="feed-photo" style="border:2px dashed var(--p3)" onclick="${currentUser==='Hiền'?`openCamera('${slot}')`:''}" ><div class="feed-photo-empty">${SE[slot]}<span>Hiền${currentUser!=='Hiền'?' ⏳':''}</span>${currentUser==='Hiền'?'<span style=\'font-size:9px;color:rgba(255,255,255,.7)\'>tap để checkin</span>':''}</div></div>`;
-      return `<div class="feed-row">${anCell}${hienCell}</div>`;
-    }).join('');
-    return `<div class="feed-section"><div class="feed-date-header">${dl(date)}</div>${rows}</div>`;
-  }).join('');
-}
-
-// ══════════════════════════════════════
-// PLACES
-// ══════════════════════════════════════
-function updatePlaceForm(){
-  const day=state.checkins[todayKey]||{};
-  const mySlot=currentUser==='An'?'place-an':'place-hien';
-  const anDone=!!day['place-an'], hienDone=!!day['place-hien'], iDone=!!day[mySlot];
-  document.getElementById('placeAlreadyDone').style.display=iDone?'block':'none';
-  document.getElementById('placeFormTitle').textContent=iDone?'✅ '+currentUser+' đã note rồi!':'📍 Note địa điểm nào!';
-  let html='<div style="display:flex;gap:8px;margin-bottom:12px">';
-  html+=`<div style="flex:1;padding:8px;border-radius:12px;background:${anDone?'#fff0f7':'#f5f5f5'};border:2px solid ${anDone?'var(--p4)':'#ddd'};text-align:center"><div style="font-size:18px">${anDone?'✅':'⏳'}</div><div style="font-size:11px;font-weight:700;color:${anDone?'var(--p5)':'#999'}">🐻 An</div>${day['place-an']?`<div style="font-size:10px;color:#aaa">${day['place-an'].name||''}</div>`:''}</div>`;
-  html+=`<div style="flex:1;padding:8px;border-radius:12px;background:${hienDone?'#f5f0ff':'#f5f5f5'};border:2px solid ${hienDone?'#a855f7':'#ddd'};text-align:center"><div style="font-size:18px">${hienDone?'✅':'⏳'}</div><div style="font-size:11px;font-weight:700;color:${hienDone?'#a855f7':'#999'}">🐰 Hiền</div>${day['place-hien']?`<div style="font-size:10px;color:#aaa">${day['place-hien'].name||''}</div>`:''}</div>`;
-  html+='</div>';
-  document.getElementById('placeStatusBanner').innerHTML=html;
-}
-function savePlace(){
-  const name=document.getElementById('placeName').value.trim();
+// ══════════════════════════════
+// SAVE PLACE
+// ══════════════════════════════
+async function savePlace(){
+  var name=document.getElementById('placeName').value.trim();
   if(!name){showToast('📍 Nhập tên địa điểm trước nha!');playSfx('error');return;}
-  const type=document.getElementById('placeType').value;
-  const city=document.getElementById('placeCity').value;
-  const note=document.getElementById('placeNote').value.trim();
-  const mySlot=currentUser==='An'?'place-an':'place-hien';
+  var type=document.getElementById('placeType').value;
+  var city=document.getElementById('placeCity').value;
+  var note=document.getElementById('placeNote').value.trim();
+  var mySlot=currentUser==='An'?'place-an':'place-hien';
   if(!state.checkins[todayKey]) state.checkins[todayKey]={};
-  const day=state.checkins[todayKey];
-  const wasAnDone=!!day['place-an'], wasHienDone=!!day['place-hien'];
-  day[mySlot]={name,time:new Date().toISOString()};
-  state.places=state.places||[];
-  state.places.push({name,type,city,note,date:todayKey,time:new Date().toISOString(),user:currentUser});
-  const nowBoth=!!day['place-an']&&!!day['place-hien'];
-  const wasBoth=wasAnDone&&wasHienDone;
+  var day=state.checkins[todayKey];
+  var wasAnDone=!!day['place-an'],wasHienDone=!!day['place-hien'];
+  day[mySlot]={name:name,time:new Date().toISOString()};
+  state.places.push({name:name,type:type,city:city,note:note,date:todayKey,time:new Date().toISOString(),user:currentUser});
+  var nowBoth=!!day['place-an']&&!!day['place-hien'];
+  var wasBoth=wasAnDone&&wasHienDone;
+  recalcTotalMeals(); saveState();
+  await writeToSheet({action:'write',type:'place',date:todayKey,user:currentUser,place_name:name,place_type:type,city:city,note:note,time:new Date().toISOString()});
+  var other=currentUser==='An'?'Hi\u1EC1n':'An';
   if(nowBoth&&!wasBoth){
-    recalcTotalMeals();
-    saveState();
     showCelebrate('🎉 Cả 2 note địa điểm! Thọ được ăn 🐾🗺️');
     playSfx('feed');
-    const other=currentUser==='An'?'Hiền':'An';
-    notifyTg(USERS[other].chat, USERS[currentUser].emoji+' '+currentUser+' vừa note địa điểm! Cả 2 xong rồi, Thọ được ăn bữa địa điểm 🐾🗺️');
-    notifyTg(USERS[currentUser].chat,'✅ Cả 2 đã note địa điểm! Thọ no bụng 🐾💗');
-  } else {
-    saveState();
-    const other=currentUser==='An'?'Hiền':'An';
+    notifyTg(USERS[other].chat, USERS[currentUser].emoji+' '+currentUser+' vừa note địa điểm! Cả 2 xong, Thọ được ăn 🐾🗺️');
+    notifyTg(USERS[currentUser].chat, '✅ Cả 2 đã note địa điểm! Thọ no bụng 🐾💗');
+  } else if(!wasBoth){
     showToast('📍 '+currentUser+' đã note! Chờ '+other+' note nữa là Thọ ăn 🐾');
     playSfx('place');
-    notifyTg(USERS[other].chat, USERS[currentUser].emoji+' '+currentUser+' vừa note "'+name+'"! '+other+' note nữa là Thọ ăn nha 📍');
+    notifyTg(USERS[other].chat, USERS[currentUser].emoji+" "+currentUser+" vừa note ["+name+"]! "+other+" note nữa là Thọ ăn nha 📍");
+  } else {
+    showToast('📍 Đã lưu thêm địa điểm!'); playSfx('place');
   }
-  renderTho(); updateThoMood(); renderPlaces(); updatePlaceForm();
-  syncUpload({type:'place',date:todayKey,user:currentUser,place_name:name,place_type:type,city,note,time:new Date().toISOString()});
+  renderAll();
   document.getElementById('placeName').value='';
   document.getElementById('placeNote').value='';
 }
-function renderPlaces(){
-  const list=document.getElementById('placesList');
-  if(!state.places||!state.places.length){list.innerHTML='<p style="text-align:center;color:#bbb;padding:20px;font-size:14px">Chưa có địa điểm nào 🗺️</p>';return;}
-  const icons={food:'🍜',activity:'🎡',cafe:'☕',shopping:'🛍️',beach:'🏖️'};
-  const uc={An:'#ff4da6',Hiền:'#a855f7'};
-  list.innerHTML=[...state.places].reverse().map(p=>`
-    <div class="place-item">
-      <div class="place-emoji">${icons[p.type]||'📍'}</div>
-      <div style="flex:1"><div style="font-size:15px;font-weight:700;color:#2d1b36">${p.name}</div>
-      <div style="font-size:12px;color:#888">${p.city}${p.note?' · '+p.note:''}</div>
-      <div style="font-size:11px;color:${uc[p.user]||'var(--p4)'};font-weight:700;margin-top:4px">${p.date} · ${USERS[p.user]?USERS[p.user].emoji:''} ${p.user}</div></div>
-    </div>`).join('');
+
+// ══════════════════════════════
+// PILLS & UI
+// ══════════════════════════════
+function updatePills(){
+  var day=state.checkins[todayKey]||{},cur=getActiveSlot(),h=getVNHour();
+  ['morning','afternoon','evening'].forEach(function(slot){
+    var pill=document.getElementById('pill-'+slot); if(!pill) return;
+    pill.classList.remove('done','half','active');
+    pill.style.opacity='1';
+    var myKey=slot+'_'+currentUser,otherKey=slot+'_'+(currentUser==='An'?'Hi\u1EC1n':'An');
+    var iDone=day[myKey]&&!day[myKey].skip,bd=iDone&&day[otherKey];
+    var w=SLOT_WINDOWS[slot];
+    if(bd) pill.classList.add('done');
+    else if(iDone) pill.classList.add('half');
+    else if(slot===cur) pill.classList.add('active');
+    if(!iDone&&!(h>=w[0]&&h<w[1])) pill.style.opacity='0.35';
+  });
+  var day2=state.checkins[todayKey]||{},cur2=getActiveSlot();
+  var myK=cur2+'_'+currentUser,otherK=cur2+'_'+(currentUser==='An'?'Hi\u1EC1n':'An');
+  var sub=document.getElementById('triggerSub');
+  if(sub){
+    var times={morning:'6h-12h',afternoon:'12h-18h',evening:'18h-24h'};
+    if(day2[myK]&&!day2[myK].skip&&day2[otherK]) sub.textContent='✅ Cả 2 đã checkin! Thọ no 🐾';
+    else if(day2[myK]&&!day2[myK].skip) sub.textContent='✅ '+currentUser+' xong! Chờ '+(currentUser==='An'?'Hi\u1EC1n':'An')+' checkin 📸';
+    else sub.textContent='⏰ '+SLOT_INFO[cur2].label+' ('+times[cur2]+') · Tap checkin!';
+  }
 }
 
-// ══════════════════════════════════════
+// ══════════════════════════════
+// FEED
+// ══════════════════════════════
+function renderLocketFeed(){
+  var feed=document.getElementById('locketFeed'); if(!feed) return;
+  var photos=state.photos||[];
+  var byDate={};
+  photos.forEach(function(p){if(!byDate[p.date]) byDate[p.date]={};byDate[p.date][p.slot+'_'+p.user]=p;});
+  if(!byDate[todayKey]) byDate[todayKey]={};
+  var dates=Object.keys(byDate).sort(function(a,b){return b.localeCompare(a);});
+  var SE={morning:'🌅',afternoon:'☀️',evening:'🌙'};
+  var SL={morning:'Sáng',afternoon:'Chiều',evening:'Tối'};
+  var HIEN='Hi\u1EC1n';
+  var html='';
+  dates.forEach(function(date){
+    var dd=byDate[date];
+    var dateLabel=date===todayKey?'🌸 Hôm nay':new Date(date).toLocaleDateString('vi-VN',{weekday:'short',day:'2-digit',month:'2-digit'});
+    var rowsHtml='';
+    ['morning','afternoon','evening'].forEach(function(slot){
+      var anP=dd[slot+'_An'];
+      var hiP=dd[slot+'_'+HIEN];
+      var anDiv=document.createElement('div');
+      anDiv.className='feed-photo';
+      if(anP){
+        anDiv.style.cssText='';
+        anDiv.innerHTML='<img src="'+anP.photo+'" alt=""><div class="slot-tag">'+SE[slot]+'</div><div class="feed-user-tag">🐻 An</div>';
+        (function(url,label){anDiv.onclick=function(){openViewer(url,label);};})(anP.photo,SL[slot]+' · An · '+date);
+      } else {
+        anDiv.style.border='2px dashed var(--p3)';
+        anDiv.innerHTML='<div class="feed-photo-empty">'+SE[slot]+'<span>An'+(currentUser!=='An'?' ⏳':'')+'</span></div>';
+        if(currentUser==='An')(function(s){anDiv.onclick=function(){openCamera(s);};})(slot);
+      }
+      var hiDiv=document.createElement('div');
+      hiDiv.className='feed-photo';
+      if(hiP){
+        hiDiv.innerHTML='<img src="'+hiP.photo+'" alt=""><div class="slot-tag">'+SE[slot]+'</div><div class="feed-user-tag">🐰 Hi&#7873;n</div>';
+        (function(url,label){hiDiv.onclick=function(){openViewer(url,label);};})(hiP.photo,SL[slot]+' · Hi\u1EC1n · '+date);
+      } else {
+        hiDiv.style.border='2px dashed var(--p3)';
+        hiDiv.innerHTML='<div class="feed-photo-empty">'+SE[slot]+'<span>Hi&#7873;n'+(currentUser!==HIEN?' ⏳':'')+'</span></div>';
+        if(currentUser===HIEN)(function(s){hiDiv.onclick=function(){openCamera(s);};})(slot);
+      }
+      var row=document.createElement('div');
+      row.className='feed-row';
+      row.appendChild(anDiv); row.appendChild(hiDiv);
+      rowsHtml+=row.outerHTML;
+    });
+    html+='<div class="feed-section"><div class="feed-date-header">'+dateLabel+'</div>'+rowsHtml+'</div>';
+  });
+  feed.innerHTML=html;
+  // Re-attach onclick events (outerHTML loses them)
+  feed.querySelectorAll('.feed-photo').forEach(function(el){
+    var img=el.querySelector('img');
+    var meta=el.querySelector('.feed-user-tag');
+    var slot=el.querySelector('.slot-tag');
+    if(img&&meta&&slot){
+      var url=img.src;
+      var label=el.querySelector('.feed-user-tag').textContent;
+      el.onclick=function(){openViewer(url,label);};
+    }
+  });
+}
+
+// ══════════════════════════════
+// PLACES
+// ══════════════════════════════
+function updatePlaceForm(){
+  var day=state.checkins[todayKey]||{};
+  var mySlot=currentUser==='An'?'place-an':'place-hien';
+  var anDone=!!day['place-an'],hiDone=!!day['place-hien'],iDone=!!day[mySlot];
+  document.getElementById('placeAlreadyDone').style.display=iDone?'block':'none';
+  document.getElementById('placeFormTitle').textContent=iDone?'✅ '+currentUser+' đã note rồi!':'📍 Note địa điểm nào!';
+  var html='<div style="display:flex;gap:8px;margin-bottom:12px">';
+  html+='<div style="flex:1;padding:8px;border-radius:12px;background:'+(anDone?'#fff0f7':'#f5f5f5')+';border:2px solid '+(anDone?'var(--p4)':'#ddd')+';text-align:center"><div style="font-size:18px">'+(anDone?'✅':'⏳')+'</div><div style="font-size:11px;font-weight:700;color:'+(anDone?'var(--p5)':'#999')+'">🐻 An</div>'+(day['place-an']?'<div style="font-size:10px;color:#aaa">'+(day['place-an'].name||'')+'</div>':'')+'</div>';
+  html+='<div style="flex:1;padding:8px;border-radius:12px;background:'+(hiDone?'#f5f0ff':'#f5f5f5')+';border:2px solid '+(hiDone?'#a855f7':'#ddd')+';text-align:center"><div style="font-size:18px">'+(hiDone?'✅':'⏳')+'</div><div style="font-size:11px;font-weight:700;color:'+(hiDone?'#a855f7':'#999')+'">🐰 Hiền</div>'+(day['place-hien']?'<div style="font-size:10px;color:#aaa">'+(day['place-hien'].name||'')+'</div>':'')+'</div>';
+  html+='</div>';
+  document.getElementById('placeStatusBanner').innerHTML=html;
+}
+function renderPlaces(){
+  var list=document.getElementById('placesList');
+  if(!state.places||!state.places.length){list.innerHTML='<p style="text-align:center;color:#bbb;padding:20px;font-size:14px">Chưa có địa điểm nào 🗺️</p>';return;}
+  var icons={food:'🍜',activity:'🎡',cafe:'☕',shopping:'🛍️',beach:'🏖️'};
+  var uc={An:'#ff4da6',Hiền:'#a855f7'};
+  list.innerHTML=state.places.slice().reverse().map(function(p){return '<div class="place-item"><div class="place-emoji">'+(icons[p.type]||'📍')+'</div><div style="flex:1"><div style="font-size:15px;font-weight:700;color:#2d1b36">'+p.name+'</div><div style="font-size:12px;color:#888">'+p.city+(p.note?' · '+p.note:'')+'</div><div style="font-size:11px;color:'+(uc[p.user]||'var(--p4)')+';font-weight:700;margin-top:4px">'+p.date+' · '+(USERS[p.user]?USERS[p.user].emoji:'')+' '+p.user+'</div></div></div>';}).join('');
+}
+
+// ══════════════════════════════
 // ALBUM
-// ══════════════════════════════════════
-let albumFilter='all', viewerIdx=0;
+// ══════════════════════════════
+var albumFilter='all',viewerIdx=0;
 function renderAlbum(){
-  const grid=document.getElementById('albumGrid'); if(!grid) return;
-  const photos=state.photos||[];
-  const anC=photos.filter(p=>p.user==='An').length;
-  const hC=photos.filter(p=>p.user==='Hiền').length;
+  var grid=document.getElementById('albumGrid'); if(!grid) return;
+  var photos=state.photos||[];
+  var anC=photos.filter(function(p){return p.user==='An';}).length;
+  var hC=photos.filter(function(p){return p.user==='Hi\u1EC1n';}).length;
   document.getElementById('albumCountAn').textContent=anC;
   document.getElementById('albumCountHien').textContent=hC;
   document.getElementById('albumCountAll').textContent=photos.length;
-  let filtered=[...photos];
-  if(albumFilter==='An'||albumFilter==='Hiền') filtered=photos.filter(p=>p.user===albumFilter);
-  else if(['morning','afternoon','evening'].includes(albumFilter)) filtered=photos.filter(p=>p.slot===albumFilter);
-  filtered.sort((a,b)=>b.time.localeCompare(a.time));
+  var filtered=photos.slice();
+  if(albumFilter==='An'||albumFilter==='Hi\u1EC1n') filtered=photos.filter(function(p){return p.user===albumFilter;});
+  else if(['morning','afternoon','evening'].indexOf(albumFilter)>=0) filtered=photos.filter(function(p){return p.slot===albumFilter;});
+  filtered.sort(function(a,b){return b.time.localeCompare(a.time);});
   window._albumFiltered=filtered;
   if(!filtered.length){grid.innerHTML='<div class="album-empty">📸 Chưa có ảnh nào</div>';return;}
-  const SE={morning:'🌅',afternoon:'☀️',evening:'🌙'};
-  const UE={An:'🐻',Hiền:'🐰'};
-  grid.innerHTML=filtered.map((p,i)=>`
-    <div class="album-item" onclick="openAlbumPhoto(${i})">
-      <img src="${p.photo}" alt="" loading="lazy">
-      <div class="album-item-badge">${SE[p.slot]||''} ${p.date.slice(5)}</div>
-      <div class="album-item-user">${UE[p.user]||'📸'}</div>
-    </div>`).join('');
+  var SE={morning:'🌅',afternoon:'☀️',evening:'🌙'},UE={An:'🐻',Hiền:'🐰'};
+  grid.innerHTML=filtered.map(function(p,i){return '<div class="album-item" onclick="openAlbumPhoto('+i+')"><img src="'+p.photo+'" alt="" loading="lazy"><div class="album-item-badge">'+(SE[p.slot]||'')+' '+p.date.slice(5)+'</div><div class="album-item-user">'+(UE[p.user]||'📸')+'</div></div>';}).join('');
 }
-function filterAlbum(f,btn){
-  albumFilter=f;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  playSfx('nav'); renderAlbum();
-}
+function filterAlbum(f,btn){albumFilter=f;document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});if(btn) btn.classList.add('active');playSfx('nav');renderAlbum();}
 function openAlbumPhoto(i){viewerIdx=i;showViewerPhoto(i);document.getElementById('photoViewer').classList.add('open');}
 function showViewerPhoto(i){
-  const photos=window._albumFiltered||[]; if(!photos[i]) return;
-  const p=photos[i];
+  var photos=window._albumFiltered||[]; if(!photos[i]) return;
+  var p=photos[i],SL={morning:'Sáng',afternoon:'Chiều',evening:'Tối'};
   document.getElementById('viewerImg').src=p.photo;
-  document.getElementById('viewerMeta').textContent=(USERS[p.user]?USERS[p.user].emoji:'')+ ' '+p.user+' · '+{morning:'Sáng',afternoon:'Chiều',evening:'Tối'}[p.slot]+' · '+p.date+' ('+( i+1)+'/'+(photos.length)+')';
+  document.getElementById('viewerMeta').textContent=(USERS[p.user]?USERS[p.user].emoji:'')+' '+p.user+' · '+(SL[p.slot]||'')+' · '+p.date+' ('+(i+1)+'/'+(photos.length)+')';
 }
 function openViewer(src,meta){playSfx('click');document.getElementById('viewerImg').src=src;document.getElementById('viewerMeta').textContent=meta;document.getElementById('photoViewer').classList.add('open');}
 function closeViewer(){playSfx('click');document.getElementById('photoViewer').classList.remove('open');}
-// Swipe viewer
-let _swipeX=0;
-document.addEventListener('touchstart',e=>{_swipeX=e.touches[0].clientX;},{passive:true});
-document.addEventListener('touchend',e=>{
+var _sx=0;
+document.addEventListener('touchstart',function(e){_sx=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',function(e){
   if(!document.getElementById('photoViewer').classList.contains('open')) return;
-  const dx=e.changedTouches[0].clientX-_swipeX;
-  if(Math.abs(dx)<50) return;
-  const photos=window._albumFiltered||[];
+  var dx=e.changedTouches[0].clientX-_sx; if(Math.abs(dx)<50) return;
+  var photos=window._albumFiltered||[];
   if(dx<0&&viewerIdx<photos.length-1){viewerIdx++;showViewerPhoto(viewerIdx);playSfx('nav');}
   else if(dx>0&&viewerIdx>0){viewerIdx--;showViewerPhoto(viewerIdx);playSfx('nav');}
 },{passive:true});
 
-// ══════════════════════════════════════
-// REMIND — giờ VN, 1 tiếng/lần checkin, 2 tiếng/lần địa điểm
-// ══════════════════════════════════════
-const _remindFired={};
+// ══════════════════════════════
+// CELEBRATE
+// ══════════════════════════════
+function showCelebrate(msg){
+  var el=document.getElementById('celebrateOverlay');
+  document.getElementById('celebrateMsg').textContent=msg;
+  el.classList.add('show');
+  for(var i=0;i<12;i++){(function(i){setTimeout(function(){
+    var h=document.createElement('div');
+    h.style.cssText='position:fixed;left:'+Math.random()*100+'vw;top:'+(Math.random()*50+20)+'vh;font-size:'+(20+Math.random()*20)+'px;pointer-events:none;z-index:9999;animation:floatHeart '+(1+Math.random())+'s ease-out forwards';
+    h.textContent=['💗','✨','🌟','💕','🎉','🐾'][Math.floor(Math.random()*6)];
+    document.body.appendChild(h);setTimeout(function(){h.remove();},2000);
+  },i*100);})(i);}
+  var c=document.getElementById('thoCanvas');
+  c.style.animation='feedCelebrate .6s ease';
+  setTimeout(function(){c.style.animation='float 3s ease-in-out infinite';},700);
+  setTimeout(function(){el.classList.remove('show');},3500);
+}
+
+// ══════════════════════════════
+// REMIND
+// ══════════════════════════════
+var _remindFired={};
 function checkRemind(){
   if(!currentUser) return;
-  const day=state.checkins[todayKey]||{}, h=getVNHour(), dateH=todayKey+'_'+h;
-
-  // Checkin slots — remind mỗi tiếng nếu chưa xong
-  const photoSlots=[
-    {start:6,end:12,slot:'morning'},
-    {start:12,end:18,slot:'afternoon'},
-    {start:18,end:24,slot:'evening'},
-  ];
-  photoSlots.forEach(w=>{
-    if(h<w.start||h>=w.end) return;
-    const myKey=w.slot+'_'+currentUser;
-    if(day[myKey]&&!day[myKey].skip) return; // đã checkin rồi
-    const fKey='photo_'+w.slot+'_'+dateH;
-    if(_remindFired[fKey]) return;
-    _remindFired[fKey]=true;
-    const offset=Math.min(h-w.start,2);
-    const msgs={morning:['🌅 Thọ đói sáng rồi! Checkin ảnh nào 🐾','🌅 Ơ kìa! Thọ nhịn sáng tới giờ rồi 😢','🌅 Bụng Thọ kêu réo... Sáng chưa ăn gì! 🥺'],afternoon:['☀️ Trưa rồi! Thọ chờ ăn chiều 🐾','☀️ Nắng to mà Thọ chưa ăn chiều 😢','☀️ Thọ nằm dài vì đói chiều... 🥺'],evening:['🌙 Tối rồi! Cho Thọ ăn tối với 🐾','🌙 Thọ buồn ngủ mà chưa được ăn 😢','🌙 Đêm xuống rồi Thọ vẫn đói 🥺']};
-    showToast(msgs[w.slot][offset],5000); playSfx('error');
+  var day=state.checkins[todayKey]||{},h=getVNHour(),dh=todayKey+'_'+h;
+  var photoSlots=[{s:6,e:12,slot:'morning'},{s:12,e:18,slot:'afternoon'},{s:18,e:24,slot:'evening'}];
+  photoSlots.forEach(function(w){
+    if(h<w.s||h>=w.e) return;
+    var myK=w.slot+'_'+currentUser;
+    if(day[myK]&&!day[myK].skip) return;
+    var fk='p_'+w.slot+'_'+dh; if(_remindFired[fk]) return;
+    _remindFired[fk]=true;
+    var off=Math.min(h-w.s,2);
+    var m={morning:['🌅 Thọ đói sáng rồi! Checkin ảnh nào 🐾','🌅 Thọ nhịn sáng tới giờ rồi đó 😢','🌅 Bụng Thọ kêu réo... Sáng chưa ăn gì! 🥺'],afternoon:['☀️ Trưa rồi! Thọ chờ ăn chiều 🐾','☀️ Nắng to mà Thọ chưa ăn chiều 😢','☀️ Thọ nằm dài vì đói chiều... 🥺'],evening:['🌙 Tối rồi! Cho Thọ ăn tối với 🐾','🌙 Thọ buồn ngủ mà chưa được ăn 😢','🌙 Đêm xuống rồi Thọ vẫn đói 🥺']};
+    showToast(m[w.slot][off],5000);playSfx('error');
   });
-
-  // Địa điểm — remind mỗi 2 tiếng từ 19h nếu chưa xong
-  if(h>=19&&h<24){
-    const myPlaceKey=currentUser==='An'?'place-an':'place-hien';
-    if(!day[myPlaceKey]){
-      const even2h=h%2===1; // chạy ở giờ lẻ (19,21,23)
-      const fKey='place_'+dateH;
-      if(even2h&&!_remindFired[fKey]){
-        _remindFired[fKey]=true;
-        const pMsgs=['📍 Note địa điểm hôm nay chưa? Thọ cần cả 2 mới ăn đc 🗺️','📍 Thọ muốn biết đi đâu! Note địa điểm điiiii 🐾','📍 Địa điểm đâu rồi? Thọ đói bữa này lắm 🥺'];
-        const pm=pMsgs[Math.min(Math.floor((h-19)/2),2)];
-        showToast(pm,5000); playSfx('error');
-      }
-    }
+  if(h>=19&&h<24&&h%2===1){
+    var pk=currentUser==='An'?'place-an':'place-hien';
+    if(!day[pk]){var fk2='place_'+dh;if(!_remindFired[fk2]){_remindFired[fk2]=true;var pm=['📍 Note địa điểm hôm nay chưa? Cả 2 note mới ăn đc 🗺️','📍 Thọ muốn biết đi đâu! Note điiiii 🐾','📍 Địa điểm đâu rồi? Thọ đói bữa này lắm 🥺'];showToast(pm[Math.min(Math.floor((h-19)/2),2)],5000);playSfx('error');}}
   }
 }
 
-// ══════════════════════════════════════
+// ══════════════════════════════
 // TELEGRAM
-// ══════════════════════════════════════
-async function notifyTg(chatId, msg) {
-  if (!chatId || !TG_TOKEN) return;
-  const url = 'https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage';
-  const body = JSON.stringify({chat_id: chatId, text: msg});
-  try {
-    // Try fetch first
-    const res = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body});
-    const data = await res.json();
-    if (!data.ok) console.log('TG err:', data.description);
-    else console.log('TG sent to', chatId.slice(0,4)+'***');
-  } catch(e) {
-    // Fallback sendBeacon
-    try { navigator.sendBeacon(url + '?chat_id=' + chatId + '&text=' + encodeURIComponent(msg)); }
-    catch(e2) { console.log('TG failed:', e2); }
-  }
+// ══════════════════════════════
+async function notifyTg(chatId,msg){
+  if(!chatId||!TG_TOKEN) return;
+  try{await fetch('https://api.telegram.org/bot'+TG_TOKEN+'/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:chatId,text:msg})});}
+  catch(e){}
 }
 
-// ══════════════════════════════════════
-// SYNC (Google Apps Script)
-// ══════════════════════════════════════
-// Compress ảnh xuống 400px để fit vào Sheet cell
-async function compressPhoto(dataUrl, maxSize=400) {
-  return new Promise(resolve => {
-    const img = new Image();
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      const ratio = Math.min(maxSize/img.width, maxSize/img.height, 1);
-      canvas.width  = Math.round(img.width  * ratio);
-      canvas.height = Math.round(img.height * ratio);
-      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-      resolve(canvas.toDataURL('image/jpeg', 0.65));
-    };
-    img.onerror = () => resolve(dataUrl);
-    img.src = dataUrl;
-  });
-}
-
-async function syncUpload(entry) {
-  if (!APPS_SCRIPT_URL) return;
-  try {
-    // Compress photo nếu có
-    const payload = {...entry};
-    if (payload.photo && payload.photo.startsWith('data:')) {
-      payload.photo = await compressPhoto(payload.photo, 400);
-    }
-    payload.action = 'write';
-    // Dùng form-data để tránh CORS preflight
-    const form = new FormData();
-    form.append('payload', JSON.stringify(payload));
-    await fetch(APPS_SCRIPT_URL, { method:'POST', body: form, mode:'no-cors' });
-  } catch(e) { console.log('sync upload err:', e); }
-}
-async function syncDownload() {
-  if (!APPS_SCRIPT_URL) return;
-  try {
-    const res = await fetch(APPS_SCRIPT_URL + '?action=read&t=' + Date.now(), {cache:'no-store'});
-    if (!res.ok) { console.log('Sync HTTP err:', res.status); return; }
-    const rows = await res.json();
-    if (!Array.isArray(rows) || !rows.length) return;
-    let changed = false;
-    rows.forEach(row => {
-      if (!row.user || !row.date || row.date < START_DATE) return;
-      if (!state.checkins[row.date]) state.checkins[row.date] = {};
-      if (row.type === 'photo') {
-        if (!row.slot) return;
-        const key = row.slot + '_' + row.user;
-        if (!state.photos) state.photos = [];
-        const exists = state.photos.find(p => p.date===row.date && p.slot===row.slot && p.user===row.user);
-        if (!exists && row.photo) {
-          state.photos.push({slot:row.slot, date:row.date, photo:row.photo, time:row.time||'', user:row.user});
-          state.checkins[row.date][key] = {photo:row.photo, time:row.time||'', user:row.user};
-          changed = true;
-        }
-      } else if (row.type === 'place') {
-        const key = row.user === 'An' ? 'place-an' : 'place-hien';
-        if (!state.checkins[row.date][key]) {
-          state.checkins[row.date][key] = {name: row.place_name||'', time: row.time||''};
-          state.places = state.places || [];
-          if (!state.places.find(p => p.date===row.date && p.user===row.user && p.name===row.place_name)) {
-            state.places.push({name:row.place_name||'', type:row.place_type||'food', city:row.city||'Bangkok', note:row.note||'', date:row.date, time:row.time||'', user:row.user});
-          }
-          changed = true;
-        }
-      }
-    });
-    if (changed) {
-      recalcTotalMeals(); saveState(); renderAll();
-      console.log('✅ Synced', rows.length, 'rows');
-    }
-  } catch(e) { console.log('Sync download err:', e); }
-}
-let _syncInterval=null;
-function startSync(){
-  // Sync ngay, sau đó mỗi 20 giây
-  syncDownload();
-  setTimeout(syncDownload, 5000); // sync lại sau 5s phòng lần đầu chậm
-  if(_syncInterval) clearInterval(_syncInterval);
-  _syncInterval=setInterval(syncDownload,20000);
-}
-
-// ══════════════════════════════════════
-// SETUP
-// ══════════════════════════════════════
-function saveScriptUrl(){
-  const url=document.getElementById('scriptUrlInput').value.trim();
-  if(!url){showToast('❌ Nhập URL trước nha!');return;}
-  APPS_SCRIPT_URL=url; localStorage.setItem('tho_script_url',url);
-  showToast('✅ Đã lưu! Bắt đầu sync...');playSfx('login');startSync();
-}
-function resetAllData(){
-  if(!confirm('Reset toàn bộ? Không hoàn tác được!')) return;
-  state={checkins:{},places:[],photos:[],totalMeals:0}; saveState();
-  renderAll(); showToast('✅ Đã reset! 🐾'); playSfx('reset');
-}
-
-// ══════════════════════════════════════
+// ══════════════════════════════
 // SOUND
-// ══════════════════════════════════════
-let _audioCtx=null;
-function getCtx(){if(!_audioCtx) _audioCtx=new(window.AudioContext||window.webkitAudioContext)();return _audioCtx;}
+// ══════════════════════════════
+var _actx=null;
+function getCtx(){if(!_actx) _actx=new(window.AudioContext||window.webkitAudioContext)();return _actx;}
 function playSfx(type){
   try{
-    const ctx=getCtx(); if(ctx.state==='suspended') ctx.resume();
-    const now=ctx.currentTime;
-    const sfxMap={click:[[440,.08],[550,.06]],feed:[[523,.15],[659,.15],[784,.15],[1047,.12]],login:[[523,.1],[659,.1],[784,.1],[1047,.1],[1319,.1]],error:[[220,.15],[196,.15]],scratch:[[800,.08],[600,.06],[900,.05]],place:[[659,.12],[880,.12],[1109,.1]],reset:[[440,.08],[330,.08]],nav:[[660,.06],[880,.05]]};
-    const notes=sfxMap[type]||sfxMap.click;
-    notes.forEach(([freq,vol],i)=>{
-      const osc=ctx.createOscillator(), gain=ctx.createGain();
-      osc.connect(gain); gain.connect(ctx.destination);
-      osc.frequency.value=freq; osc.type=type==='error'?'sawtooth':'sine';
-      const t=now+i*.13;
-      gain.gain.setValueAtTime(vol,t); gain.gain.exponentialRampToValueAtTime(.001,t+.25);
-      osc.start(t); osc.stop(t+.3);
-    });
+    var ctx=getCtx();if(ctx.state==='suspended') ctx.resume();
+    var now=ctx.currentTime;
+    var sfx={click:[[440,.08],[550,.06]],feed:[[523,.15],[659,.15],[784,.15],[1047,.12]],login:[[523,.1],[659,.1],[784,.1],[1047,.1],[1319,.1]],error:[[220,.15],[196,.15]],scratch:[[800,.08],[600,.06],[900,.05]],place:[[659,.12],[880,.12],[1109,.1]],nav:[[660,.06],[880,.05]]};
+    var notes=sfx[type]||sfx.click;
+    notes.forEach(function(n,i){var osc=ctx.createOscillator(),gain=ctx.createGain();osc.connect(gain);gain.connect(ctx.destination);osc.frequency.value=n[0];osc.type=type==='error'?'sawtooth':'sine';var t=now+i*.13;gain.gain.setValueAtTime(n[1],t);gain.gain.exponentialRampToValueAtTime(.001,t+.25);osc.start(t);osc.stop(t+.3);});
   }catch(e){}
 }
 
-// ══════════════════════════════════════
-// MISC UI
-// ══════════════════════════════════════
-function showToast(msg,dur=3000){
-  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
-  clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),dur);
+// ══════════════════════════════
+// MISC
+// ══════════════════════════════
+function showToast(msg,dur){
+  dur=dur||3000;
+  var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show');},dur);
 }
 function showSection(id,btn){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');});
   document.getElementById('sec-'+id).classList.add('active');
   if(btn) btn.classList.add('active');
   playSfx('nav');
@@ -1187,52 +1043,25 @@ function showSection(id,btn){
   if(id==='checkin'){renderLocketFeed();updatePills();}
   if(id==='places'){renderPlaces();updatePlaceForm();}
 }
+function showDebug(){
+  var box=document.getElementById('debugBox');
+  box.style.display=box.style.display==='none'?'block':'none';
+  var photos=state.photos||[];
+  var day=state.checkins[todayKey]||{};
+  var lines=['👤 User: '+(currentUser||'?'),'📅 Today: '+todayKey,'🖼️ Tổng ảnh: '+photos.length,'🐻 An: '+photos.filter(function(p){return p.user==='An';}).length,'🐰 Hiền: '+photos.filter(function(p){return p.user==='Hi\u1EC1n';}).length,'---','🌅 Sáng An: '+(day['morning_An']?'✅':'❌'),'🌅 Sáng Hiền: '+(day['morning_Hiền']?'✅':'❌'),'☀️ Chiều An: '+(day['afternoon_An']?'✅':'❌'),'☀️ Chiều Hiền: '+(day['afternoon_Hiền']?'✅':'❌'),'🌙 Tối An: '+(day['evening_An']?'✅':'❌'),'🌙 Tối Hiền: '+(day['evening_Hiền']?'✅':'❌'),'📍 An: '+(day['place-an']?'✅':'❌'),'📍 Hiền: '+(day['place-hien']?'✅':'❌'),'---','☁️ Cloudinary: ✅','📊 Sheet: ✅'];
+  if(photos.length>0){lines.push('--- Ảnh gần nhất ---');photos.slice().reverse().slice(0,3).forEach(function(p){lines.push(p.user+' · '+p.slot+' · '+p.date);});}
+  box.innerHTML=lines.join('<br>');
+}
+function resetAllData(){
+  if(!confirm('Reset toàn bộ? Không hoàn tác được!')) return;
+  state={checkins:{},places:[],photos:[],totalMeals:0};saveState();
+  renderAll();showToast('✅ Đã reset! 🐾');playSfx('error');
+}
 
-// ══════════════════════════════════════
+// ══════════════════════════════
 // BOOT
-// ══════════════════════════════════════
-document.addEventListener('DOMContentLoaded',()=>{tryAutoLogin();});
-
-function showDebug() {
-  const box = document.getElementById('debugBox');
-  box.style.display = box.style.display === 'none' ? 'block' : 'none';
-  const photos = state.photos || [];
-  const checkins = state.checkins || {};
-  const today = checkins[todayKey] || {};
-  const lines = [
-    '👤 User: ' + (currentUser || 'chưa login'),
-    '📅 Today: ' + todayKey,
-    '🖼️ Tổng ảnh: ' + photos.length,
-    '🐻 Ảnh An: ' + photos.filter(p=>p.user==='An').length,
-    '🐰 Ảnh Hiền: ' + photos.filter(p=>p.user==='Hiền').length,
-    '🌅 Sáng An: ' + (today['morning_An']?'✅':'❌'),
-    '🌅 Sáng Hiền: ' + (today['morning_Hiền']?'✅':'❌'),
-    '☀️ Chiều An: ' + (today['afternoon_An']?'✅':'❌'),
-    '☀️ Chiều Hiền: ' + (today['afternoon_Hiền']?'✅':'❌'),
-    '🌙 Tối An: ' + (today['evening_An']?'✅':'❌'),
-    '🌙 Tối Hiền: ' + (today['evening_Hiền']?'✅':'❌'),
-    '📍 Địa điểm An: ' + (today['place-an']?'✅':'❌'),
-    '📍 Địa điểm Hiền: ' + (today['place-hien']?'✅':'❌'),
-    '🔄 Script URL: ' + (APPS_SCRIPT_URL ? '✅ có' : '❌ chưa set'),
-    '💾 Total meals: ' + (state.totalMeals||0),
-  ];
-  // Show last 3 photos
-  if (photos.length > 0) {
-    lines.push('--- 3 ảnh gần nhất ---');
-    [...photos].reverse().slice(0,3).forEach(p => {
-      lines.push(p.user + ' · ' + p.slot + ' · ' + p.date);
-    });
-  }
-  box.innerHTML = lines.join('<br>');
-}
-
-async function forceSyncNow() {
-  showToast('🔄 Đang sync...', 2000);
-  await syncDownload();
-  showToast('✅ Sync xong!', 2000);
-  showDebug();
-}
-
+// ══════════════════════════════
+document.addEventListener('DOMContentLoaded',function(){tryAutoLogin();});
 </script>
 </body>
 </html>
