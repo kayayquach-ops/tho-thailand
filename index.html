@@ -677,7 +677,11 @@ async function openCamera(slot){
   var day=state.checkins[todayKey]||{};
   var myKey=target+'_'+currentUser;
   var alreadyDone=day[myKey]&&!day[myKey].skip;
-  if(!isTime&&!alreadyDone){
+  // Chỉ chặn slot TƯƠNG LAI, còn slot quá khứ (lỡ) thì cho up bù
+  var slotOrder=['morning','afternoon','evening'];
+  var targetIdx=slotOrder.indexOf(target);
+  var curIdx=slotOrder.indexOf(active);
+  if(targetIdx>curIdx&&!alreadyDone){
     var labels={morning:'sáng (6h-12h)',afternoon:'chiều (12h-18h)',evening:'tối (18h-24h)'};
     showToast('⏰ Chưa đến giờ bữa '+labels[target]+' nha!',3000);
     playSfx('error'); return;
@@ -710,7 +714,12 @@ function capturePhoto(){
   document.getElementById('locketPreview').classList.add('show');
 }
 function retakePhoto(){playSfx('click');document.getElementById('locketPreview').classList.remove('show');capturedDataUrl=null;}
-function confirmPhoto(){if(!capturedDataUrl) return;closeCamera();finalSaveMeal(currentSlot,capturedDataUrl);}
+function confirmPhoto(){
+  if(!capturedDataUrl) return;
+  var slot=currentSlot, dataUrl=capturedDataUrl; // save before close
+  closeCamera();
+  finalSaveMeal(slot, dataUrl);
+}
 function triggerGalleryPick(){playSfx('click');document.getElementById('galleryFileInput').click();}
 function handleGalleryPick(e){var f=e.target.files[0];if(!f) return;var r=new FileReader();r.onload=function(ev){capturedDataUrl=ev.target.result;document.getElementById('previewImg').src=capturedDataUrl;document.getElementById('locketPreview').classList.add('show');};r.readAsDataURL(f);e.target.value='';}
 function closeCamera(){document.getElementById('locketOverlay').classList.remove('open');if(cameraStream){cameraStream.getTracks().forEach(function(t){t.stop();});cameraStream=null;}capturedDataUrl=null;}
@@ -1004,9 +1013,16 @@ function checkRemind(){
 // TELEGRAM
 // ══════════════════════════════
 async function notifyTg(chatId,msg){
-  if(!chatId||!TG_TOKEN) return;
-  try{await fetch('https://api.telegram.org/bot'+TG_TOKEN+'/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:chatId,text:msg})});}
-  catch(e){}
+  if(!chatId) return;
+  // Gửi qua Apps Script để tránh CORS
+  try{
+    await fetch(SHEET_SCRIPT,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'notify',chat_id:chatId,text:msg,tg_token:TG_TOKEN}),
+      mode:'no-cors'
+    });
+  }catch(e){ console.log('TG err:',e); }
 }
 
 // ══════════════════════════════
